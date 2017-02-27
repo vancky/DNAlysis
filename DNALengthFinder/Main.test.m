@@ -5,14 +5,14 @@ Config
 %% Make sure we can use the functions
 addpath ./Functions/Util
 addpath ./Functions
-
+addpath ./Functions/gaussmlev2
 
 %%
 r=3;                    % Rolling ball radius
 tic
 parfor i=1:config.NumberOfMeasurements
     loadImgOutput{i,1}=LoadImg(config.OutputCd,config.MatlabCd,i);                       %Loads images
-    [filtImgOutput{i,1}]=FiltImg(loadImgOutput{i,1},r); 
+    filtImgOutput{i,1}=FiltImg(loadImgOutput{i,1},r); 
     beamshapeCorrectionOutput{i,1}=BeamshapeCorrection(loadImgOutput{i,1});
     spotFinderOutput{i,1}=SpotFinder(filtImgOutput{i,1});
 end

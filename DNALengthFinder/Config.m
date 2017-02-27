@@ -1,7 +1,7 @@
 % Input configuration
 
 % Please fill in these two lines :)
-config.MatlabCd= {'K:\bn\nd\Shared\JaspervdAuweraert\Matlab\DNALengthFinder' };    % The directory where the matlab files are located
+config.MatlabCd= {'K:\bn\nd\Shared\JaspervdAuweraert\Git\DNAlysis\DNALengthFinder'};    % The directory where the matlab files are located
 config.ImageCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul'};               % The directory where the images to analyze are located
 % All set? Don't worry about the lines below. You can run the Main file now!
 
