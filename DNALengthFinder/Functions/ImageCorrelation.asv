@@ -1,7 +1,6 @@
 function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N )
-    %Correlates the DNA strands between images.
-    
-    for k=1:(N-1)                           %loop to evaluate the distance between the rectangles
+        
+    for k=1:(N-1)                           %lo
         L1=length(dnaFinderBoxes{k});       %number of DNA strands in the k-th measurement
         L2=length(dnaFinderBoxes{k+1});     %number of DNA strands in the k+1-th measurement
         for j=1:L1
@@ -12,8 +11,6 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N )
             end
         end
     end
-    
-    
-    
+
 end
 

@@ -39,8 +39,8 @@ for i=1:config.NumberOfMeasurements
 end
 
 %% image correlation
-                                                
-imageCorrelationOutput=ImageCorrelation(dnaFinderBoxes, 3);                                 %Correlate the analysed results from different flow velocities
+                                               
+imageCorrelation=ImageCorrelation(dnaFinderBoxes, config.NumberOfMeasurements);                                 %Correlate the analysed results from different flow velocities
                     
 %%
 parfor j=1:config.NumberOfMeasurements
