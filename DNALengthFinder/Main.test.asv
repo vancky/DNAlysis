@@ -22,19 +22,17 @@ for i=1:config.NumberOfMeasurements
     figure
     subplot(2,2,1), imshow(loadImgOutput{i,1},[]), title('Original Image')
     subplot(2,2,2), imshow(filtImgOutput{i,1},[]), title('Filtered Image')
-    subplot(2,2,3), imshow(spotFinderOutput{i,1},[]), title('spotfinder')
+    subplot(2,2,3), imshow(logicOutput{i,1},[]), title('spotfinder')
     subplot(2,2,4), imshow(dnaFinderOutput{i,1},[]), title('DNA finder')
 end
 %%
-for i=1:config.NumberOfMeasurements
-    [spotFinderOutput{i,1}]=SpotFinder2(filtImgOutput{i,1});                        %Finds all bright fluorescent spots 
+for i=1:9
+    [logicOutput{i,1} , spotFinderOutput{i,1}]=SpotFinder(filtImgOutput{i,1});                        %Finds all bright fluorescent spots 
     figure
-    [dnaFinderOutput{i,1} dnaFinderBoxes{i,1}]=DnaFinder(spotFinderOutput{i,1}); 
-    subplot(1,2,2), imshow(filtImgOutput{i,1},[]), title('Filtered Image with found DNA')
-    for j=1:length(dnaFinderBoxes{i})
-        rectangle('position',dnaFinderBoxes{i}(j).BoundingBox,'EdgeColor','r')
-    end
-    subplot(1,2,1), imshow(loadImgOutput{i,1},[]), title('Original Image')
+   
+    dnaFinderOutput{i,1}=DnaFinder(logicOutput{i,1}); 
+    subplot(1,2,1), imshow(spotFinderOutput{i,1},[]), title('Filtered Image')
+    subplot(1,2,2), imshow(logicOutput{i,1},[]), title('spotfinder')
 end
 
 %%

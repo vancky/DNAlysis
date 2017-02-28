@@ -1,0 +1,9 @@
+function [ output_args ] = DnaFinder( logicOutput )
+%DNAFINDER Finds strands of DNA based on connected region analysis
+%   bwconncomp finds 
+    cc = bwconncomp(logicOutput); 
+    stats = regionprops(cc, 'Area','Eccentricity'); 
+    idx = find([stats.Area] > 150 & [stats.Eccentricity] > 0.8); 
+    DNA = ismember(labelmatrix(cc), idx);
+end
+
