@@ -11,10 +11,11 @@ addpath ./Functions/gaussmlev2
 r=3;                    % Rolling ball radius
 tic
 parfor i=1:config.NumberOfMeasurements
-    loadImgOutput{i,1}=LoadImg(config.OutputCd,config.MatlabCd,i);                       %Loads images
-    filtImgOutput{i,1}=FiltImg(loadImgOutput{i,1},r); 
-    beamshapeCorrectionOutput{i,1}=BeamshapeCorrection(loadImgOutput{i,1});
-    spotFinderOutput{i,1}=SpotFinder(filtImgOutput{i,1});
+    loadImgOutput{i,1}=LoadImg(config.OutputCd,config.MatlabCd,i);                    %Loads images
+    filtImgOutput{i,1}=FiltImg(loadImgOutput{i,1},r);                                 %Filter the images
+    beamshapeCorrectionOutput{i,1}=BeamshapeCorrection(loadImgOutput{i,1});           %Correct for beamshape
+    spotFinderOutput{i,1}=SpotFinder(filtImgOutput{i,1});                             %Finds all bright fluorescent spots 
+    [dnaFinderOutput{i,1} dnaFinderBoxes{i,1}]=DnaFinder(spotFinderOutput{i,1});      %Look for groups of fluorescent spots, these are the DNA strands
 end
 toc
 %% Test to visualize the filters
@@ -27,8 +28,8 @@ for i=1:config.NumberOfMeasurements
 end
 %%
 for i=1:config.NumberOfMeasurements
-    [spotFinderOutput{i,1}]=SpotFinder2(filtImgOutput{i,1});                        %Finds all bright fluorescent spots 
-    figure
+    [spotFinderOutput{i,1}]=SpotFinder2(filtImgOutput{i,1});                        
+    figure 
     [dnaFinderOutput{i,1} dnaFinderBoxes{i,1}]=DnaFinder(spotFinderOutput{i,1}); 
     subplot(1,2,2), imshow(filtImgOutput{i,1},[]), title('Filtered Image with found DNA')
     for j=1:length(dnaFinderBoxes{i})
@@ -37,11 +38,9 @@ for i=1:config.NumberOfMeasurements
     subplot(1,2,1), imshow(loadImgOutput{i,1},[]), title('Original Image')
 end
 
-%%
-parfor i=1:10                                  
-                                     %Look for groups of fluorescent spots, these are the DNA strands
-imageCorrelation(f);                                  %Correlate the analysed results from different flow velocities
-end
+%% image correlation
+                                                
+imageCorrelationOutput=ImageCorrelation(dnaFinderBoxes, 3);                                 %Correlate the analysed results from different flow velocities
                     
 %%
 parfor j=1:config.NumberOfMeasurements

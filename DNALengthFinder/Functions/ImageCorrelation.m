@@ -1,7 +1,10 @@
-function [ output_args ] = imageCorrelation( input_args )
-%IMAGECORRELATION Summary of this function goes here
-%   Detailed explanation goes here
+function [ output_args ] = ImageCorrelation( dnaFinderBoxes ,N )
+    
 
+    
+    for k=1:(N-1)
+        dnaFinderBoxes{k,1}()=dnaFinderBoxes{k+1,1};
+    end
 
 end
 
