@@ -41,7 +41,7 @@ end
 
 %% image correlation
                                                
-imageCorrelation=ImageCorrelation(dnaFinderBoxes, config.NumberOfMeasurements);                                 %Correlate the analysed results from different flow velocities
+imageCorrelation=ImageCorrelation(dnaFinderBoxes, config.NumberOfMeasurements, config.OutputVelocity);                                 %Correlate the analysed results from different flow velocities
                     
 %%
 parfor j=1:config.NumberOfMeasurements
@@ -51,6 +51,6 @@ end
 %% Remove the added paths for completeness sake
 
 rmpath ./Functions
-rmdpath ./Functions/Util
+rmpath ./Functions/Util
 rmpath ./Functions/Filters
 rmpath ./Functions/gaussmlev2

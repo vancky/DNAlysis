@@ -1,6 +1,6 @@
 clear all; clc; close all
 
-Config
+config = Config();
 
 %% Initialize ouput arrays
 
