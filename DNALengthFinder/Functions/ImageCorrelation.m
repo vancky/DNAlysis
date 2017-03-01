@@ -13,7 +13,7 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N, outputVeloc
             end
         end
         [minimum,imageCorrelation.index{k,1}]=min(imageCorrelation.distance{k,1},[],2);
-        imageCorrelation.matchDna{k,1}=minimum<3;                             %if the distance is smaller than 3, the DNA segments match
+        imageCorrelation.matchDna{k,1}=minimum<5;                             %if the distance is smaller than 3, the DNA segments match
         imageCorrelation.indexCorrect{k,1}=imageCorrelation.index{k,1}.*(imageCorrelation.matchDna{k,1});                    %Find the indexes of the correct DNA.
         
     end
