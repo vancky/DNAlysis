@@ -14,36 +14,41 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N, outputVeloc
         end
         [minimum,imageCorrelation.index{k,1}]=min(imageCorrelation.distance{k,1},[],2);
         imageCorrelation.matchDna{k,1}=minimum<3;                             %if the distance is smaller than 3, the DNA segments match
-        imageCorrelation.indexCorrect{k,1}=imageCorrelation.index{k,1}(imageCorrelation.matchDna{k,1});                    %Find the indexes of the correct DNA.
+        imageCorrelation.indexCorrect{k,1}=imageCorrelation.index{k,1}.*(imageCorrelation.matchDna{k,1});                    %Find the indexes of the correct DNA.
         
     end
     L3=12;
-    for l=2:N     % build matrix with index numbers
-            for p=1:L3
-            imageCorrelation.indexMatrix(:,1)=1:L3;
-            imageCorrelation.indexMatrix(p,l)=imageCorrelation.index{l-1,1}(imageCorrelation.indexMatrix(p,l-1));
-            end           
+    for l=2:N                 % build matrix with index numbers for all the strands at the first image
+           for p=1:L3
+              imageCorrelation.indexMatrix(:,1)=1:L3;
+              if imageCorrelation.indexMatrix(p,l-1)==0               % if we encounter a mismatch, the remaining index values are set to zero
+                imageCorrelation.indexMatrix(p,l)=0;  
+              else
+                imageCorrelation.indexMatrix(p,l)=imageCorrelation.indexCorrect{l-1,1}(imageCorrelation.indexMatrix(p,l-1));
+              end
+           end           
     end
     
+
     for h=1:N-1
-        for k=1:L3
-           % if imageCorrelation.matchDna{h,1}(imageCorrelation.indexMatrix(k,h))==1
-                imageCorrelation.lengthDiff(k,h+1)=dnaFinderBoxes{h+1,1}(imageCorrelation.indexMatrix(k,h+1)).BoundingBox(3)-dnaFinderBoxes{h,1}(imageCorrelation.indexMatrix(k,h)).BoundingBox(3);
-          %  else
-           %     imageCorrelation.length(k,h)=0;
-           % end
-           imageCorrelation.lengthDiff(k,1)=dnaFinderBoxes{1,1}(k).BoundingBox(3);
+        for k=1:L3           
+            imageCorrelation.length(k,1)=dnaFinderBoxes{1,1}(k).BoundingBox(3);    
+            if imageCorrelation.indexMatrix(k,h+1) == 0
+                imageCorrelation.length(k,h+1)=0;
+            else
+                imageCorrelation.length(k,h+1)=dnaFinderBoxes{h+1,1}(imageCorrelation.indexMatrix(k,h+1)).BoundingBox(3);
+            end
         end
         
     end
     
-    imageCorrelation.length=(50/512)*cumsum(imageCorrelation.lengthDiff,2);     % the length of the DNA strands (note conversion from pix to um)
+    %imageCorrelation.length=cumsum(imageCorrelation.lengthDiff,2);     % the length of the DNA strands (note conversion from pix to um)
     
     figure
     ylabel('Dna length (um)')  
     xlabel('Flow velocity (ul/min)')
     hold on
-    for g=1:N
+    for g=1:L3
         plot(outputVelocity,imageCorrelation.length(g,:))
       
     end
