@@ -3,8 +3,9 @@ clear all; clc; close all
 Config
 
 %% Make sure we can use the functions
-addpath ./Functions/Util
 addpath ./Functions
+addpath ./Functions/Util
+addpath ./Functions/Filters
 addpath ./Functions/gaussmlev2
 
 %%
@@ -48,5 +49,8 @@ parfor j=1:config.NumberOfMeasurements
 end
 
 %% Remove the added paths for completeness sake
-rmpath ./Functions/Util
+
 rmpath ./Functions
+rmdpath ./Functions/Util
+rmpath ./Functions/Filters
+rmpath ./Functions/gaussmlev2

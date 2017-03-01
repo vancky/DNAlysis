@@ -1,7 +1,9 @@
 function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N )
     %Correlates the DNA strands between images.
-    
+    maxDna=max(cellfun('size', dnaFinderBoxes, 1));     %image with largest number of DNA strands detected
+    imageCorrelation.indexCorrect=zeros(maxDna,N);
     for k=1:(N-1)                           %loop to evaluate the distance between the rectangles
+        clear matchDna indexCorrect index minimum
         L1=length(dnaFinderBoxes{k});       %number of DNA strands in the k-th measurement
         L2=length(dnaFinderBoxes{k+1});     %number of DNA strands in the k+1-th measurement
         for j=1:L1
@@ -11,6 +13,10 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N )
                 imageCorrelation.distance{k,1}=sqrt(imageCorrelation.diffx{k,1}.^2+imageCorrelation.diffy{k,1}.^2);
             end
         end
+        [minimum,index]=min(imageCorrelation.distance{k,1},[],2);
+        matchDna=minimum<3;                             %if the distance is smaller than 3, the DNA segments match
+        imageCorrelation.indexCorrect(k)=index(matchDna);                    %Find the indexes of the correct DNA.
+        
     end
     
     
