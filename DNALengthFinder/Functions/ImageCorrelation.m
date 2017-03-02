@@ -42,7 +42,7 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinderBoxes ,N, outputVeloc
         
     end
     
-    %imageCorrelation.length=cumsum(imageCorrelation.lengthDiff,2);     % the length of the DNA strands (note conversion from pix to um)
+    imageCorrelation.length=(50/512)*imageCorrelation.length;     % the length of the DNA strands (note conversion from pix to um)
     
     figure
     ylabel('Dna length (um)')  

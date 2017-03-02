@@ -1,7 +1,7 @@
-function [ logic ] = SpotFinder2( filtImgOutput )
+function [ logic ] = SpotFinder2( filtImgOutput , treshold )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
     image=double(filtImgOutput);
-    logic=filtImgOutput>2;   
+    logic=filtImgOutput>treshold;   
 end
 

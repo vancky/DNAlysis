@@ -1,4 +1,4 @@
-function [config] = config()    
+ 
     % Input configuration
     % README!
     % ------------Formalisms------------------------------------
@@ -53,4 +53,3 @@ function [config] = config()
     config.NumberOfMeasurements=length(config.OutputVelocity);
     config.Cmap=[];                                                  %Usually obtained from [A,cmap]=imread(..), but for this case it is just an empty matrix.
     
-    end
