@@ -1,6 +1,10 @@
 clear all; clc; close all
 
-Config
+% The Config.m file contains all parameters which you can adjust.
+% Please open it and set the correct directories, parameters, etc.
+
+config=Config();                                    
+config=ConfigFunction(config); 
 
 %% Make sure we can use the functions
 addpath ./Functions
@@ -9,15 +13,14 @@ addpath ./Functions/Filters
 addpath ./Functions/gaussmlev2
 
 %%
-r=3;                    % Rolling ball radius
-treshold=3;             % Spot finder treshold
+
 tic
 parfor i=1:config.NumberOfMeasurements
-   % loadImgOutput{i,1}=LoadImg(config.OutputCd,config.MatlabCd,i);                    %Loads images
-    filterImage{i,1}=FilterImage(loadImgOutput{i,1},r);                                 %Filter the images
+    loadImgOutput{i,1}=LoadImg(config.OutputCd,config.MatlabCd,i);                    %Loads images
+    %filterImage{i,1}=FilterImage(loadImgOutput{i,1},r);                                 %Filter the images
     %beamshapeCorrectionOutput{i,1}=BeamshapeCorrection(loadImgOutput{i,1});           %Correct for beamshape
-    spotFinderOutput{i,1}=SpotFinder2(filtImgOutput{i,1}, treshold);                             %Finds all bright fluorescent spots 
-    [dnaFinderOutput{i,1} dnaFinderBoxes{i,1}]=DnaFinder(spotFinderOutput{i,1});      %Look for groups of fluorescent spots, these are the DNA strands
+    %spotFinderOutput{i,1}=SpotFinder2(filtImgOutput{i,1}, treshold);                             %Finds all bright fluorescent spots 
+    %[dnaFinderOutput{i,1} dnaFinderBoxes{i,1}]=DnaFinder(spotFinderOutput{i,1});      %Look for groups of fluorescent spots, these are the DNA strands
 end
 toc
 %% Test to visualize the filters

@@ -1,9 +1,0 @@
-function [ output_args ] = BallFilter( input_args )
-%BALLFILTER Summary of this function goes here
-%   Detailed explanation goes here
-
-    b=fspecial('disk', ballRad);
-    ballFilt= imfilter(loadImgOutput,b,'replicate');
-
-end
-

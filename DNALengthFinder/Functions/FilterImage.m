@@ -1,4 +1,4 @@
-function [ filterImage ] = FilterImage( inputImage,ballRad )
+function [ filterImage ] = FilterImage( beamshapeCorrection , config )
     %IMAGEFILTER Filters Images using roling ball and average value filter
     %Step 1 apply rolling ball (disk) filter
     %Step 2 apply avg filter on roll ball filt -> we do this to correct for
@@ -34,9 +34,13 @@ function [ filterImage ] = FilterImage( inputImage,ballRad )
 
     %% Protocol 3
     
-    filterImage.gaussianFilter=GaussianFilter(inputImage, 11, 5, 6, 3, 4, 2);
-    filterImage.averageFilter=AverageFilter(filterImage.gaussianFilter.outputImage);
-    %filterImage.gaussianFilter=GaussianFilter(filterImage.averageFilter.outputImage, 11, 5, 6, 3, 4, 2);
-    filterImage.outputImage=filterImage.averageFilter;
+    %filterImage.gaussianFilter=GaussianFilter(loadImage.image, 11, 5, 6, 3, 4, 2);
+    %filterImage.averageFilter=AverageFilter(filterImage.gaussianFilter.outputImage);
+    %filterImage.outputImage=filterImage.averageFilter;
+    
+    %% Protocol 4
+    
+    filterImage.ballFilter=BallFilter(beamshapeCorrection.correctImage, config.ballRad);
+    filterImage.outputImage=filterImage.ballFilter;
 end
 

@@ -1,8 +1,0 @@
-function [ squareFilter ] = SquareFilter( inputImage )
-    %SQUAREFILTER Summary of this function goes here
-    %   Detailed explanation goes here
-    square=inputImage.^2;
-    squareFilter.meanFilter=MeanFilter(square, 5);
-    double(squareFilter.meanFil)
-end
-
