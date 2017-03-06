@@ -19,7 +19,7 @@ parfor i=1:config.NumberOfMeasurements
 end
 toc
 %% Visualization test, delete later!
-for i=1:3 %config.numberOfMeasurements
+for i=1:config.numberOfMeasurements
     figure
     subplot(2,2,1), imshow(loadImage{i,1}.image,[]), title('Original Image')
     subplot(2,2,2), imshow(filterImage{i,1}.outputImage,[]), title('Filtered Image')
@@ -28,7 +28,7 @@ for i=1:3 %config.numberOfMeasurements
 end
 
 %%  DNA boxes Visualisation, DELETE LATER!
-for i=1:3 %config.numberOfMeasurements
+for i=1:config.numberOfMeasurements
     figure 
     subplot(1,2,2), imshow(filterImage{i,1}.outputImage,[]), title('Filtered Image with found DNA')
     for j=1:length(dnaFinder{i,1}.goodBoxes)

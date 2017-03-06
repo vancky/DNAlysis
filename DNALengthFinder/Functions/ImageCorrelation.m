@@ -6,7 +6,7 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
     for k=1:(N-1)                           %loop to evaluate the distance between the rectangles
         clear matchDna minimum
         L1=length(dnaFinder{k,1}.goodBoxes);       %number of DNA strands in the k-th measurement
-        L2=length(dnaFinder{k+1}.goodBoxes);     %number of DNA strands in the k+1-th measurement
+        L2=length(dnaFinder{k+1,1}.goodBoxes);     %number of DNA strands in the k+1-th measurement
         for j=1:L1
             for i=1:L2
                 imageCorrelation.diffx{k,1}(j,i)=dnaFinder{k,1}.goodBoxes(j).BoundingBox(1)-dnaFinder{k+1,1}.goodBoxes(i).BoundingBox(1);  %Compare x-position of box j in measurement k with all boxes i in measurement k+1
@@ -14,7 +14,7 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
                 imageCorrelation.distance{k,1}=sqrt(imageCorrelation.diffx{k,1}.^2+imageCorrelation.diffy{k,1}.^2);
             end
         end
-        [minimum,imageCorrelation.index{k,1}]=min(imageCorrelation.distance{k,1},[],2);
+        [minimum, imageCorrelation.index{k,1}]=min(imageCorrelation.distance{k,1},[],2);
         imageCorrelation.matchDna{k,1}=minimum<5;                             %if the distance is smaller than 3, the DNA segments match
         imageCorrelation.indexCorrect{k,1}=imageCorrelation.index{k,1}.*(imageCorrelation.matchDna{k,1});                    %Find the indexes of the correct DNA.
         

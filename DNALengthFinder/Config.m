@@ -1,4 +1,4 @@
-function [config] = Config()
+function [config] = Config(config)
     
     % README!
     % ------------Naming Formalisms----------------------------------------
@@ -11,7 +11,6 @@ function [config] = Config()
     %----------------------------------------------------------------------
     
     %----------------------------Configuration-----------------------------
-    
     % Set the directory where the matlab files are located
     config.matlabCd= {'H:\Git\DNAlysis\DNALengthFinder'};
     % Set the directory where the images to analyze are located (one folder

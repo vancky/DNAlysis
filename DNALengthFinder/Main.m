@@ -2,13 +2,14 @@ clear all; clc; close all
 
 % The Config.m file contains all parameters which you can adjust.
 % Please open it and set the correct directories, parameters, etc.
-
-config=Config();                                    
+config=struct();            
+config=Config(config);                                    
 config=ConfigFunction(config); 
 
 %% Load the Images into Matlab
+
 loadBeamshape=LoadBeamshape(config);
-parfor i=1:config.numberofMeasurements
+parfor i=1:config.numberOfMeasurements
     loadImage{i,1}=LoadImage(config, i);
 end
 
@@ -24,6 +25,4 @@ imageCorrelation=ImageCorrelation(dnaFinder, config.numberOfMeasurements, config
 
 %% Visualise the results
 
-for i=1:config.numberOfMeasurements
-   visualization(loadImgOutput, config.OutputVelocity, i ,config.Cmap);
-end
+Visualization(loadImage, dnaFinder, filterImage, spotFinder, config);
