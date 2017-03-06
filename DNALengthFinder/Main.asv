@@ -6,19 +6,46 @@ clear all; clc; close all
 config=Config();                                    
 config=ConfigFunction(config); 
 
-%%
-tic
-parfor i=1:config.numberOfMeasurements
-    loadImage{i,1}=LoadImage(config, i);                       %Loads images
-    filterImage{i,1}=FilterImage(loadImgOutput{i,1},config.ballRad); 
-    %beamshapeCorrectionOutput{i,1}=BeamshapeCorrection(loadImgOutput{i,1});
-    %spotFinder(d(i));
-    %dnaFinder(e(i));
-    %imageCorrelation(f);
-    
+%% Load the Images into Matlab
+loadBeamshape=LoadBeamshape(config);
+parfor i=1:config.numberofMeasurements
+    loadImage{i,1}=LoadImage(config, i);
 end
-toc
 
+%% Perform the Analysis
+
+parfor i=1:config.numberOfMeasurements
+    beamshapeCorrection{i,1}=BeamshapeCorrection( loadBeamshape , loadImage{i,1} );
+    filterImage{i,1}=FilterImage(beamshapeCorrection{i,1},config); 
+    spotFinder{i,1}=SpotFinder(filterImage{i,1}.outputImage, config);
+    dnaFinder{i,1}=DnaFinder(spotFinder{i,1}.logic, config);
+    %imageCorrelation(f);
+end
+
+
+%% Visualization test, delete later!
+for i=1:config.NumberOfMeasurements
+    figure
+    subplot(2,2,1), imshow(loadImgOutput{i,1},[]), title('Original Image')
+    subplot(2,2,2), imshow(filterImage{i,1}.outputImage,[]), title('Filtered Image')
+    subplot(2,2,3), imshow(spotFinderOutput{i,1},[]), title('spotfinder')
+    subplot(2,2,4), imshow(dnaFinderOutput{i,1},[]), title('DNA finder')
+end
+
+%%  DNA boxes Visualisation, DELETE LATER!
+for i=1:config.numberOfMeasurements
+    figure 
+    subplot(1,2,2), imshow(filterImage{i,1}.outputImage,[]), title('Filtered Image with found DNA')
+    for j=1:length(dnaFinder{i,1}.goodBoxes)
+        rectangle('position',dnaFinder{i,1}.goodBoxes(j).BoundingBox,'EdgeColor','r')
+    end
+    subplot(1,2,1), imshow(loadImage{i,1}.image,[]), title('Original Image')
+    for j=1:length(dnaFinder{i,1}.goodBoxes)
+        rectangle('position',dnaFinder{i,1}.goodBoxes(j).BoundingBox,'EdgeColor','r')
+    end
+end
+
+%%
 for i=1:config.numberOfMeasurements
    visualization(loadImgOutput, config.OutputVelocity, i ,config.Cmap);
 end

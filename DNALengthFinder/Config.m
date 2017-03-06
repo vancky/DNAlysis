@@ -21,8 +21,9 @@ function [config] = Config()
     config.beamshapeCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul\AM16-012-YOYO_CAL01_shotnoise'};
     %----------------------------Parameters--------------------------------
     
-    config.ballRad=3;                       % Rolling ball radius
-    config.spotFinderTreshold=3;            % Spot finder treshold
-    
+    config.ballRad=3;                        % Rolling ball radius for Image Filter
+    config.spotFinderThreshold=3;            % Spot finder threshold
+    config.AreaThreshold= 50;                % Area threshold in DNA finder   
+    config.EccentricityThreshold= 0.8;       % Eccentricity threshold in DNA finder
     % All set? You can run the Main file now!
 end

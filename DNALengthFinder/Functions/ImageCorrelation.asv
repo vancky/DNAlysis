@@ -10,7 +10,7 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
         for j=1:L1
             for i=1:L2
                 imageCorrelation.diffx{k,1}(j,i)=dnaFinder{k,1}.goodBoxes(j).BoundingBox(1)-dnaFinder{k+1,1}.goodBoxes(i).BoundingBox(1);  %Compare x-position of box j in measurement k with all boxes i in measurement k+1
-                imageCorrelation.diffy{k,1}(j,i)=dnaFinder{k,1}.goodBoxes(j).BoundingBox(2)-dnaFinder{k+1,1}.goodBoxes(i).BoundingBox(2);  %Compare y-position of box j in measurement k with all boxes i in measurement k+1
+                imageCorrelation.diffy{k,1}(j,i)=dnaFinder{k,1}.goodBoxes(j).BoundingBox(2)-dnaFinder{k+1,1}.goodBoxes{k+1}(i).BoundingBox(2);  %Compare y-position of box j in measurement k with all boxes i in measurement k+1
                 imageCorrelation.distance{k,1}=sqrt(imageCorrelation.diffx{k,1}.^2+imageCorrelation.diffy{k,1}.^2);
             end
         end
@@ -31,13 +31,13 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
     end
     
 
-    for h=1:N-1                     % make a matrix with the length of the DNA strands
+    for h=1:N-1
         for k=1:L3           
-            imageCorrelation.length(k,1)=dnaFinder{1,1}.goodBoxes(k).BoundingBox(3);    
+            imageCorrelation.length(k,1)=dnaFinderBoxes{1,1}(k).BoundingBox(3);    
             if imageCorrelation.indexMatrix(k,h+1) == 0
                 imageCorrelation.length(k,h+1)=0;
             else
-                imageCorrelation.length(k,h+1)=dnaFinder{h+1,1}.goodBoxes(imageCorrelation.indexMatrix(k,h+1)).BoundingBox(3);
+                imageCorrelation.length(k,h+1)=dnaFinderBoxes{h+1,1}(imageCorrelation.indexMatrix(k,h+1)).BoundingBox(3);
             end
         end
         
