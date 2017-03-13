@@ -1,6 +1,6 @@
 function [ spotFinder ] = SpotFinder( filtImgOutput , config )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+    %SPOTFINDER - finds groups of spots
+    %We define spots simply by setting an intensity threshold.
     image=double(filtImgOutput);
     spotFinder.logic=filtImgOutput>config.spotFinderThreshold;   
 end

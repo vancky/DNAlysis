@@ -1,5 +1,7 @@
-function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
+function [ imageCorrelation ] = ImageCorrelation( dnaFinder , config )
     %Correlates the DNA strands between images.
+    N=config.numberOfMeasurements;
+    outputVelocity=config.outputVelocity;
     
     L3=length(dnaFinder{1,1}.goodBoxes);
 
@@ -40,13 +42,12 @@ function [ imageCorrelation ] = ImageCorrelation( dnaFinder ,N, outputVelocity )
                 imageCorrelation.length(k,h+1)=dnaFinder{h+1,1}.goodBoxes(imageCorrelation.indexMatrix(k,h+1)).BoundingBox(3);
             end
         end
-        
     end
     
-    imageCorrelation.length=(50/512)*imageCorrelation.length;     % the length of the DNA strands (note conversion from pix to um)
+    imageCorrelation.length=config.pixelSize*imageCorrelation.length;     % the length of the DNA strands (note conversion from pix to um)
     
     figure
-    ylabel('Dna length (um)')  
+    ylabel(sprintf('Dna length [%s]', config.lengthUnit))  
     xlabel('Flow velocity (ul/min)')
     hold on
     for g=1:L3

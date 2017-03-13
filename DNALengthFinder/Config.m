@@ -8,6 +8,7 @@ function [config] = Config(config)
     %----------------------------------------------------------------------
     % gaussmlev2 is an external matlab script, see 
     % http://www.nature.com/nmeth/journal/v7/n5/abs/nmeth.1449.html
+    % at this moment it is NOT used yet!
     %----------------------------------------------------------------------
     
     %----------------------------Configuration-----------------------------
@@ -24,5 +25,8 @@ function [config] = Config(config)
     config.spotFinderThreshold=3;            % Spot finder threshold
     config.AreaThreshold= 50;                % Area threshold in DNA finder   
     config.EccentricityThreshold= 0.8;       % Eccentricity threshold in DNA finder
+    
+    config.pixelSize=40/512 ;                 % Length per pixel, for instance 40/512 um/pix
+    config.lengthUnit = 'um';                % The length unit in the pictures
     % All set? You can run the Main file now!
 end

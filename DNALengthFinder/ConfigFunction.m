@@ -20,10 +20,14 @@ function [ config ] = ConfigFunction( config)
     for j=1:(numberOfFolders-1)                   %Loop where the user can choose subfolders to analyse
         % we use j+1 in listOfFolderNames, because j=1 is the root directory.
         % (this is also the reason for the config.numberOfFolders-1 in the for loop)
-        prompt = {strcat(listOfFolderNames{j+1},sprintf('\nThe following subfolder was found.'),sprintf('\nDo you want to analyse this folder? (Type 1 for yes or 0 for no)')), 'What was the fluid velocity in this measurement? (use a dot to separate i.e. 9.9, the unit is ul/min)'};  
+        %prompt = {strcat(listOfFolderNames{j+1},sprintf('\nThe following subfolder was found.'),sprintf('\nDo you want to analyse this folder? (Type 1 for yes or 0 for no)')), 'What was the fluid velocity in this measurement? (use a dot to separate i.e. 9.9, the unit is ul/min)'};  
+        prompt = {sprintf('%s%s%s', listOfFolderNames{j+1}, ...
+            '\nThe following subfolder was found.', ...
+             '\nDo you want to analyse this folder? (Type 1 for yes or 0 for no)'), ...
+             sprintf('What was the fluid velocity in this measurement? (use a dot to separate i.e. 9.9, the unit is ul/min)')};  
         dlgTitle = 'Choose subfolders to analyse';
         numLines = 1;
-        defaultAns = {'','9.9'};
+        defaultAns = {'0','9.9'};
         ans{j} = inputdlg(prompt,dlgTitle,numLines,defaultAns);   
             if str2double(cell2mat(ans{j}(1)))==1
                 config.subImageCd{j}=listOfFolderNames{j+1};

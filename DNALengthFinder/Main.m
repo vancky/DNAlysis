@@ -21,7 +21,7 @@ parfor i=1:config.numberOfMeasurements
     spotFinder{i,1}=SpotFinder(filterImage{i,1}.outputImage, config);
     dnaFinder{i,1}=DnaFinder(spotFinder{i,1}.logic, config);
 end
-imageCorrelation=ImageCorrelation(dnaFinder, config.numberOfMeasurements, config.outputVelocity);
+imageCorrelation=ImageCorrelation(dnaFinder, config);
 
 %% Visualise the results
 
