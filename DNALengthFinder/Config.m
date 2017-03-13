@@ -1,16 +1,5 @@
 function [config] = Config(config)
     
-    % README!
-    % ------------Naming Formalisms----------------------------------------
-    % Functions are CamelCase
-    % Variables, etc. are camelCased
-    % Finally, structs are camelCase.camelCase
-    %----------------------------------------------------------------------
-    % gaussmlev2 is an external matlab script, see 
-    % http://www.nature.com/nmeth/journal/v7/n5/abs/nmeth.1449.html
-    % at this moment it is NOT used yet!
-    %----------------------------------------------------------------------
-    
     %----------------------------Configuration-----------------------------
     % Set the directory where the matlab files are located
     config.matlabCd= {'H:\Git\DNAlysis\DNALengthFinder'};
