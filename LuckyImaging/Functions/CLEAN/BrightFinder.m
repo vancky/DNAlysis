@@ -22,6 +22,7 @@ function [ brightFinder ] = BrightFinder( image , config )
      halfPatchSize=config.brightFinderSize;             % actually this is half of the patch size
      
      brightFinder.matrix=mirrorImage(rowIndex:rowIndex+2*halfPatchSize,colIndex:colIndex+2*halfPatchSize);
-     
+     brightFinder.rowIndex=rowIndex;
+     brightFinder.colIndex=colIndex;
 end
 

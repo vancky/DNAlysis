@@ -8,5 +8,6 @@ function [ config ] = ConfigFunction( config )
     % Add the neccesary paths so that we can use the functions
     addpath ./Functions;
     addpath ./Functions/Util;
+    addpath ./Functions/CLEAN;
 end
 

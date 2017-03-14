@@ -11,12 +11,12 @@ config=ConfigFunction(config);
 importImages=ImportImages(config);
 
 %%  CLEAN Algorithm and lucky Imaging for each individual image
-
-%for i=1:importImages.numFiles
-    clean=CLEAN(importImages.image{1}, config);
+tic
+for i=1:100
+    clean{i}=CLEAN(importImages.image{i}, config);
     %lucky=Lucky(clean, config);
-%end
-
+end
+toc
 
 %% Stack all the images
 

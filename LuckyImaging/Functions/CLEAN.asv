@@ -8,9 +8,8 @@ function [ clean] = CLEAN( image, config )
     image=double(image);
     threshold=250;
     count=1;
-    
-    clean.imageGaussian=0;
-    while threshold>=200
+    tic
+    while threshold>=180
            
             clean.brightFinder=BrightFinder( image, config );
             threshold=clean.brightFinder.value;
@@ -24,10 +23,10 @@ function [ clean] = CLEAN( image, config )
             
             clean.generateGaussianMask=GenerateGaussianMask(config, clean.brightFinder ,clean.fitGaussian.fit);
             image=image-clean.generateGaussianMask.mask;
-            clean.imageGaussian=clean.imageGaussian+clean.generateGaussianMask.mask;
+            imageGaussian=imageGaussian+clean.generateGaussianMask.mask;
             count=count+1;
     end
     clean.image=image;
-   
+    toc
 end
 
