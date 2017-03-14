@@ -9,8 +9,10 @@ function [ config ] = Config( config )
     
     %----------------------------Parameters--------------------------------
     
-    config.brightFinderSize= 12;    % Half size of the patch where we are going to fit Gaussians, choose an odd number!
+    config.brightFinderSize= 12;    % Half size  of the patch where we are going to fit Gaussians.
                                     % For instance if the patch is 25x25 choose 12
     config.imageSize=512;           % Size of the image files (we assume a square so 512x512)
+    config.initialGuess= [13 , 13, 0.1 , 1]; % initial guessing parameters to fit Gaussian
+                                             % [mu_x, mu_y, sigma , scalingfactor]   
 end
 

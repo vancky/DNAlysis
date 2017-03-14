@@ -3,16 +3,22 @@ clear all; clc; close all
 % The Config.m file contains all parameters which you can adjust.
 % Please open it and set the correct directories, parameters, etc.
 config=struct();            
-config=Config(config);                                    
-config=ConfigFunction(config); 
+config=Config(config);
+config=ConfigFunction(config);
+
 %% Import Images
 
-%parfor i=1:config.#
-    loadImage=ImportImage();
-    brightFinder=BrightFinder();
-    fitGaussian=FitGaussian();
-    generateGaussianMask=GenerateGaussian();   
+importImages=ImportImages(config);
+
+%%  CLEAN Algorithm and lucky 
+
+%for i=1:importImages.numFiles
+    clean=CLEAN(importImages{1}, config);
+    %lucky=Lucky(clean, config);
 %end
+
+%%
+
 
 
 

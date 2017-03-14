@@ -10,19 +10,16 @@ config=ConfigFunction(config);
 
 importImages=ImportImages(config);
 
-%%  CLEAN Algorithm
+%%  CLEAN Algorithm and lucky Imaging for each individual image
 
 %for i=1:importImages.numFiles
-    brightFinder=BrightFinder(importImages);
-%end
-
-%   fitGaussian=FitGaussian();
-%   generateGaussianMask=GenerateGaussianMask();   
+    clean=CLEAN(importImages.image{1}, config);
+    %lucky=Lucky(clean, config);
 %end
 
 
+%% Stack all the images
 
 
-
-%%
+%% Visualization
 

@@ -1,32 +1,26 @@
 function [ brightFinder ] = BrightFinder( image , config )
      % BrightFinder - Finds the brightest spot in an image
+     % Finds the brightest spot in an image, then extracts a submatrix 
+     % centered around this point from the original image. The size of this
+     % submatrix is given by config.brightFinderSize, if this para
     
+     imageSize=config.imageSize;
      [brightFinder.value,brightFinder.index]=max(image(:));     % obtain the value of the brightest spot and the index
      
-     rowIndex=mod(brightFinder.index,config.imageSize(1));      % find the row of the index
+     
+     rowIndex=mod(brightFinder.index,imageSize);      % find the row of the index
      if rowIndex==0                                             % our numbers range 1-512 so replace 0 by 512
-         rowIndex=config.imageSize(1);
+         rowIndex=imageSize;
      end
-     colIndex=ceil(brightFinder.index/config.imageSize(2));                     % find the column of the index
+     colIndex=ceil(brightFinder.index/imageSize);                     % find the column of the index
      
-     % We still have to account for when the spot is near the edges! I guess
-     % mirroring the 12 nearest data points is the easiest. So create a
-     % 536*536 matrix
+     % We still have to account for when the spot is near the edges!
+     % We do this by mirroring the edges with the function MirrorImage
      
-     mirrorImage(1:12,1:12)=rot90(image(1:12,1:12),2); %topleft corner
-     mirrorImage(525:536,1:12)=rot90(image(501:512,1:12),2); %bottom left corner
-     mirrorImage(1:12,525:536)=rot90(image(1:12,501:512),2); %top right corner
-     mirrorImage(525:536,525:536)=rot90(image(501:512,501:512),2);  %bottom right corner
-     mirrorImage(13:524,1:12)=fliplr(image(:,1:12));   %left side
-     mirrorImage(13:524,525:536)=fliplr(image(:,501:512));   %left side
+     mirrorImage=MirrorImage(image,imageSize,config.brightFinderSize);
+     halfPatchSize=config.brightFinderSize;             % actually this is half of the patch size
      
-     
-     mirrorImage(13:524,13:524)=image;
-     
-     patchSize=config.brightFinderSize;
-     brightFinder.matrix=image(rowIndex-patchSize:rowIndex+patchSize,colIndex-patchSize:colIndex+patchSize);
-    
-     
-
+     brightFinder.matrix=mirrorImage(rowIndex:rowIndex+2*halfPatchSize,colIndex:colIndex+2*halfPatchSize);
+   
 end
 
