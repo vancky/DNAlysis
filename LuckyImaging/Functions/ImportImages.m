@@ -6,10 +6,10 @@ function [ importImage ] = ImportImages( config )
     importImage=struct();
     cd(config.imageCd{1});                        % Sets image folder
     directory = dir('*cam0*.tiff');               % Labels all the tiffFiles with cam0 in the current directory
-    numFiles = length(directory);                 % Number of individual image
+    importImage.numFiles = length(directory);                 % Number of individual image
     
-    parfor k = 1:numFiles  
-        importImage(k).image=imread(directory(k).name);             %Import the images
+    for k = 1:importImage.numFiles  
+        importImage.image{k}=imread(directory(k).name);             %Import the images
     end
     
     cd(config.matlabCd{1})                                  %Resets the cd to the matlab script location

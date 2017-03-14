@@ -8,11 +8,13 @@ config=ConfigFunction(config);
 
 %% Import Images
 
-importImage=ImportImage(config);
+importImages=ImportImages(config);
 
 %%  CLEAN Algorithm
 
-brightFinder=BrightFinder();
+%for i=1:importImages.numFiles
+    brightFinder=BrightFinder(importImages);
+%end
 
 %   fitGaussian=FitGaussian();
 %   generateGaussianMask=GenerateGaussianMask();   

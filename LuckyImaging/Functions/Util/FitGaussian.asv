@@ -1,0 +1,19 @@
+function [ fit ] = FitGaussian( xGuess,yGuess,sigmaGuess, x_dim, y_dim, steps )
+    %FITGAUSSIAN Summary of this function goes here
+    %   Detailed explanation goes here
+  
+    x=linspace(1,x_dim,steps);
+    y=linspace(1,y_dim,steps);
+    
+    [X,Y]=meshgrid(x,y);
+    data=GaussianFunction(3,3,10,2,2,1,1);
+    
+
+    gaussianFunction = @(mu_x,mu_y,sigma) (1/(2*pi*sigma^2))*exp(-((X-mu_x).^2/sigma+(Y-mu_y).^2/sigma^2)/2*sigma^2)-data;
+    
+    x0= [xGuess,yGuess,sigmaGuess];
+        
+    fit=lsqnonlin(gaussianFunction,x0);
+    
+end
+
