@@ -5,7 +5,7 @@ function [config] = Config(config)
     config.matlabCd= {'H:\Git\DNAlysis\DNALengthFinder'};
     % Set the directory where the images to analyze are located (one folder
     % containing subfolders with different measurements).
-    config.imageCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul'};
+    config.imageCd={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\170314_125117'};
     % Set the directory where the beamshape image is located.
     config.beamshapeCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul\AM16-012-YOYO_CAL01_shotnoise'};
     %----------------------------Parameters--------------------------------

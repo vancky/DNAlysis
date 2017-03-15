@@ -9,13 +9,15 @@ config=ConfigFunction(config);
 %% Import Images
 loadBeamshape=LoadBeamshape(config);
 importImages=ImportImages(config);
-for i=1:300
-    beamshapeCorrection.image{i}=BeamshapeCorrection(loadBeamshape,importImages.image{i});
+stackImages=StackImages(importImages, config);
+
+for i=1:10
+    beamshapeCorrection.image{i}=BeamshapeCorrection(loadBeamshape,stackImages.image{i});
 end
 %%  CLEAN Algorithm and lucky Imaging for each individual image
 tic
-for i=1:1
-    clean{i}=CLEAN(beamshapeCorrection.image{i}, config);
+for i=1:10
+    clean{i}=CLEAN(beamshapeCorrection.image{i}, config ,i);
     %lucky=Lucky(clean, config);
 end
 toc
