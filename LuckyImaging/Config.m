@@ -5,8 +5,10 @@ function [ config ] = Config( config )
     config.matlabCd= {'H:\Git\DNAlysis\LuckyImaging'};
     % Set the directory where the images to analyze are located (one folder
     % containing subfolders with different measurements).
-    config.imageCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul\AM16-012-YOYO_CAL01_01'};
-    
+    config.imageCd={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\161118_091516\AM16-012-YOYO_CAL01_01'};
+    % Set the directory where the beamshape image is located.
+    config.beamshapeCd={'K:\bn\nd\Shared\JaspervdAuweraert\Data\Feb0to1ul\AM16-012-YOYO_CAL01_shotnoise'};
+ 
     %----------------------------Parameters--------------------------------
     
     config.brightFinderSize= 12;    % Half size  of the patch where we are going to fit Gaussians.
@@ -14,5 +16,6 @@ function [ config ] = Config( config )
     config.imageSize=512;           % Size of the image files (we assume a square so 512x512)
     config.initialGuess= [13 , 13, 0.1 , 1]; % initial guessing parameters to fit Gaussian
                                              % [mu_x, mu_y, sigma , scaleValue ]   
+    config.cleanThreshold=50;                % threshold for the clean algorithm
 end
 
