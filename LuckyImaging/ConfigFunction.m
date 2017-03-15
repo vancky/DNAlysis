@@ -10,5 +10,6 @@ function [ config ] = ConfigFunction( config )
     addpath ./Functions/Util;
     addpath ./Functions/CLEAN;
     addpath ./Functions/Filters;
+    addpath ./Functions/Lucky;
 end
 

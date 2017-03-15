@@ -11,13 +11,14 @@ function [ config ] = Config( config )
  
     %----------------------------Parameters--------------------------------
     
-    config.brightFinderSize= 12;    % Half size  of the patch where we are going to fit Gaussians.
+    config.brightFinderSize= 6;    % Half size  of the patch where we are going to fit Gaussians.
                                     % For instance if the patch is 25x25 choose 12
     config.imageSize=512;           % Size of the image files (we assume a square so 512x512)
-    config.initialGuess= [13 , 13, 0.1 , 1]; % initial guessing parameters to fit Gaussian
+    config.initialGuess= [7 , 7, 0.1 , 1]; % initial guessing parameters to fit Gaussian
                                              % [mu_x, mu_y, sigma , scaleValue ]   
     config.cleanThreshold=8;                % threshold for the clean algorithm
     config.dataType=('uint16');
     config.stackSize=30; 
+    config.luckyThreshold=400;
 end
 

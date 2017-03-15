@@ -1,8 +1,8 @@
-function [ beamshapeCorrection ] = BeamshapeCorrection( loadBeamshape , importImage)
+function [ beamshapeCorrection ] = BeamshapeCorrection( beamshape , image)
     %BEAMSHAPECORRECTION Corrects for the beamshape profile.
     %This function simply substracts the beamshape profile from the image
     
-    beamshapeCorrection=importImage-loadBeamshape.ballFilt;
+    beamshapeCorrection=image-beamshape;
 
 end
 

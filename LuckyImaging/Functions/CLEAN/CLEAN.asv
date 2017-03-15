@@ -11,7 +11,7 @@ function [ clean] = CLEAN( image, config ,i )
     countAll=1;
     fprintf('image %d \n',i);
     clean.imageGaussian=0;
-    indexCheck = [0 , 0]; %initilize index check vector
+    clean.indexCheck{1,1} = [0 , 0]; %initilize index check vector
     
     
     while threshold>=config.cleanThreshold
@@ -23,24 +23,25 @@ function [ clean] = CLEAN( image, config ,i )
                 %Build the matrix with results [mu_x , mu_y , sigma,
                 %scaleValue] of the fitted Gaussians
 
-                clean.generateGaussianMask=GenerateGaussianMask(config, clean , indexCheck); % step 3
-                image=image-clean.generateGaussianMask.mask;                                                    % step 3
+             clean.generateGaussianMask=GenerateGaussianMask(config, clean , clean.indexCheck{1,cou}); % step 3
+             image=image-clean.generateGaussianMask.mask;                                                    % step 3
                 
                 
-            if indexCheck(1)==clean.brightFinder.rowIndex && indexCheck(2)==clean.brightFinder.colIndex
+            if clean.indexCheck{1,count}(1)==clean.brightFinder.rowIndex && clean.indexCheck{1,count}(2)==clean.brightFinder.colIndex
                 % if the spot is the same don't update anything
             else
                 if  clean.fitGaussian.exitflag ==0    % if the fit has failed don't update outputArray, imageGaussian.
 
                 else
-                    clean.outputArray{count}=clean.fitGaussian.fit;                     % update the output values
-                    clean.outputArray{count}(1)=clean.outputArray{count}(1)+clean.brightFinder.colIndex-(config.brightFinderSize+1);
-                    clean.outputArray{count}(2)=clean.outputArray{count}(2)+clean.brightFinder.rowIndex-(config.brightFinderSize+1);
+                    clean.outputArray{1,count}=clean.fitGaussian.fit;                     % update the output values
+                    clean.outputArray{2,count}=clean.fitGaussian.resnorm;
+                    clean.outputArray{1,count}(1)=clean.outputArray{1,count}(1)+clean.brightFinder.colIndex-(config.brightFinderSize+1);
+                    clean.outputArray{1,count}(2)=clean.outputArray{1,count}(2)+clean.brightFinder.rowIndex-(config.brightFinderSize+1);
                     clean.imageGaussian=clean.imageGaussian+clean.generateGaussianMask.mask;         %show output image
-                    count=count+1          % count of all 'good steps'
+                    count=count+1;          % count of all 'good steps'
                     config.initialGuess=clean.fitGaussian.fit;
                     
-                    indexCheck=[clean.brightFinder.rowIndex , clean.brightFinder.colIndex];   %update the indexChecker for the mask generation
+                    clean.indexCheck{1,count}=[clean.brightFinder.rowIndex , clean.brightFinder.colIndex];   %update the indexChecker for the mask generation
                     
                 end
             end
