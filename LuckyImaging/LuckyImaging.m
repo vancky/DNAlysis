@@ -19,7 +19,7 @@ for i=1:10
 end
 %%  CLEAN Algorithm and lucky Imaging for each individual image
 tic
-for i=1:2
+for i=1:1
     clean{i}=CLEAN(beamshapeCorrection.image{i}, config ,i);
 end
 toc

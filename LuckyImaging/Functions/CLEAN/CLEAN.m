@@ -11,7 +11,7 @@ function [ clean] = CLEAN( image, config ,i )
     countAll=1;
     fprintf('image %d \n',i);
     clean.imageGaussian=0;
-    
+    indexCheck=[0, 0]; %initialize index check vector
     
     while threshold>=config.cleanThreshold
            
@@ -33,7 +33,6 @@ function [ clean] = CLEAN( image, config ,i )
 
                 else
                     clean.outputArray{count}=clean.fitGaussian.fit;                     % update the output values
-                    clean.outputArray{count}=clean.fitGaussian.resnorm;
                     clean.outputArray{count}(1)=clean.outputArray{count}(1)+clean.brightFinder.colIndex-(config.brightFinderSize+1);
                     clean.outputArray{count}(2)=clean.outputArray{count}(2)+clean.brightFinder.rowIndex-(config.brightFinderSize+1);
                     clean.imageGaussian=clean.imageGaussian+clean.generateGaussianMask.mask;         %show output image

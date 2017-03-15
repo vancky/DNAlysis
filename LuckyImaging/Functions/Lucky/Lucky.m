@@ -2,7 +2,9 @@ function [ lucky ] = Lucky( clean, config )
     %Lucky Summary of this function goes here
     %   Detailed explanation goes here
     
-    for i=1:2
+    N=size(clean,2);
+    
+    for i=1:N
       lucky{i}.initLength=size(clean{i}.outputArray,2);
       count=1;
         for k=1:lucky{i}.initLength
@@ -16,7 +18,7 @@ function [ lucky ] = Lucky( clean, config )
     end
 
 
-     for i=1:2
+     for i=1:N
         lucky{i}.image=zeros(config.imageSize);
           for k=1:lucky{i}.finalLength
              
@@ -26,7 +28,7 @@ function [ lucky ] = Lucky( clean, config )
     
     
 %      lucky{1}.sumImages=zeros(config.imageSize,config.dataType);
-%      for i=1:2
+%      for i=1:N
 %          lucky{1}.sumImages=lucky{1}.sumImages+lucky{i}.image;
 %      end
     
