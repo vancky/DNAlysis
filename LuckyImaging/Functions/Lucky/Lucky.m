@@ -2,7 +2,7 @@ function [ lucky ] = Lucky( clean, config )
     %Lucky Summary of this function goes here
     %   Detailed explanation goes here
     
-    N=size(clean,2);
+    N=config.numStacks;
     
     for i=1:N
       lucky{i}.initLength=size(clean{i}.outputArray,2);

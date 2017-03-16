@@ -16,7 +16,7 @@ function [ clean] = CLEAN( image, config ,i )
     while threshold>=config.cleanThreshold
            
             clean.brightFinder=BrightFinder( image, config );               % step 1
-            threshold=clean.brightFinder.value;                              % update treshold value
+            threshold=clean.brightFinder.value;                             % update treshold value
             
             clean.fitGaussian=FitGaussian( config , clean.brightFinder.matrix, count); % step 2
                 %Build the matrix with results [mu_x , mu_y , sigma,

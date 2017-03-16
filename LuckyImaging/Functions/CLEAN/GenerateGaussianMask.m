@@ -17,7 +17,7 @@ function [ generateGaussianMask ] = GenerateGaussianMask( config, clean , indexC
     bigMask=zeros(domainSize+2*halfPatchSize);         % initiate the mask
     if  rowIndexCheck==rowIndex && colIndex == colIndexCheck      %found spot is the same, reject!
         gaussian = brightFinder.matrix;
-    else
+    else 
         if fitGaussian.exitflag ==0                     % if the fit has failed, simply set the mask to the patch itself, so that it will be removed.
             gaussian = brightFinder.matrix;
         else

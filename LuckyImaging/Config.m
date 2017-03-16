@@ -18,7 +18,7 @@ function [ config ] = Config( config )
                                              % [mu_x, mu_y, sigma , scaleValue ]   
     config.cleanThreshold=8;                % threshold for the clean algorithm
     config.dataType=('uint16');
-    config.stackSize=30; 
+    config.stackSize=10; 
     config.luckyThreshold=400;
 end
 
