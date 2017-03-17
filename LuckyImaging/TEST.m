@@ -1,14 +1,15 @@
-a=0; for i=1:30; a=a+clean{i}.imageGaussian; end
+figure
+a=0; for i=1:100; a=a+importImages.image{i}; end
 imshow(a,[])
 
-
-if 0
-    close all
+figure
+if 1
+  
     
     [x,y] = meshgrid( 1:512, 1:512 );
-    z = stackImages.image{2}.*0; 
-    for i=1:30
-        z = z + stackImages.image{i};
+    z = importImages.image{2}.*0; 
+    for i=1:100
+        z = z + importImages.image{i};
     end   
     z = double(z);
     z = z - mean(z(:)); 

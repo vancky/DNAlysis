@@ -13,6 +13,6 @@ function [ generateGaussian ] = GenerateGaussian( config, parameters )
     y=1:domainSize;
     [X,Y] = meshgrid(x,y);
     
-    generateGaussian=(scaleValue/(2*pi*sigma^2))*exp(-((X-mu_x).^2+(Y-mu_y).^2)/2*sigma^2);
+    generateGaussian= scaleValue*exp(-((X-mu_x).^2+(Y-mu_y).^2)/(2*sigma^2));
 end
 

@@ -1,15 +1,14 @@
-function [ clean] = CLEAN( image, config ,i )
+function [ clean] = Clean( image, config ,i )
     % CLEAN Algorithm
     % 1. Find brightest pixel in each image, extract nearby patch
     % 2. Fit 2D Gaussian to the patch
     % 3. Generate Gaussian mask from fitting parameters and substract from
     %    original image (IF fit has failed replace with background intensity)
     % 4. Repeat 1-3 until a treshold is reached
-    image=image;
+
     threshold=2*config.cleanThreshold;
     count=1;
     countAll=1;
-    fprintf('image %d \n',i);
     clean.imageGaussian=0;
     indexCheck=[0, 0]; %initialize index check vector
     
