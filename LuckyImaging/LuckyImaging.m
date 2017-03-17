@@ -33,19 +33,27 @@ fprintf('Rolling ball filter has been applied. \n');
 %%  CLEAN Algorithm and lucky Imaging for each individual image
 tic
 for i=1:config.numStacks
-    fprintf('Applying lucky image for each image. Progress %d/%d.\n', i, config.numStacks);
+    fprintf('Applying clean algorithm for each image. Progress %d/%d.\n', i, config.numStacks);
     clean{i}=Clean(rollingBallFilter.image{i}, config ,i);
 end
 toc
 
 %% Lucky Algorithm
-
-%  lucky=Lucky(clean, config);
-
+fprintf('applying lucky algorithm')
+tic
+lucky=Lucky(clean, config);
+toc
+fprintf('All set! \n')
 %% Stack all the images
 
+finalImage=0;
+
+for i=1:config.numStacks
+    finalImage=finalImage+lucky{i}.image;
+end
+    
 
 %% Visualisation
 
 Visualisation(rollingBallFilter,clean,config)
-
+figure; imshow(finalImage,[])

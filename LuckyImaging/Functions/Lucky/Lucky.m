@@ -8,9 +8,8 @@ function [ lucky ] = Lucky( clean, config )
       lucky{i}.initLength=size(clean{i}.outputArray,2);
       count=1;
         for k=1:lucky{i}.initLength
-            if 1 %clean{i}.outputArray{2,k}<config.luckyThreshold
+            if clean{i}.outputResnorm(k)<1000 %config.luckyThreshold
                lucky{i}.gaussians{1,count}=clean{i}.outputArray{1,k};
-               lucky{i}.index{1,count}=clean{i}.indexCheck{1,k+1};
                count=count+1;
             end
         end
@@ -19,18 +18,12 @@ function [ lucky ] = Lucky( clean, config )
 
 
      for i=1:N
+        fprintf('Generating Lucky Gaussians %d/%d. \n' , i , N )
         lucky{i}.image=zeros(config.imageSize);
           for k=1:lucky{i}.finalLength
-             
-              lucky{i}.image=lucky{i}.image+GenerateLuckyGaussian(config, lucky{i}.index{1,k}, lucky{i}.gaussians{1,k});  
+              lucky{i}.image=lucky{i}.image+GenerateLuckyGaussian(config, lucky{i}.gaussians{k});  
           end
      end
-    
-    
-%      lucky{1}.sumImages=zeros(config.imageSize,config.dataType);
-%      for i=1:N
-%          lucky{1}.sumImages=lucky{1}.sumImages+lucky{i}.image;
-%      end
     
 end
 

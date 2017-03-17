@@ -1,6 +1,6 @@
 function [ generateGaussian ] = GenerateGaussian( config, parameters ) 
     % GenerateGaussian  - generates a 2D Gaussian
-    % The parameter vector should contain [ mu_x , mu_y , sigma ]
+    % The parameter vector should contain [ mu_x , mu_y , sigma, scaleValue ]
        
     domainSize=2*config.brightFinderSize+1;     % the size of the patch
 

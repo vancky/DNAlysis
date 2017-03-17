@@ -14,23 +14,16 @@ function [ fitGaussian , config ] = FitGaussian( config, data ,count )
     % sigma, x(4) is the scaleValue
     gaussianFunction = @(x)  (x(4))*exp(-((X-x(1)).^2+(Y-x(2)).^2)/(2*x(3)^2));
     errorFunction = @(x) gaussianFunction(x) - double(data); 
-    
-    errorSum = @(x) sum(sum( (gaussianFunction(x) - double(data)).^2))/domainSize^2;
      
     %Vector containing all the guesses
     options = optimoptions(@lsqnonlin, 'Algorithm', 'trust-region-reflective', 'Display', 'none');
     lowerBound= [0, 0 , 0 , 0 ];             %lower bound on the fitting parameters
     upperBound= [25, 25, 1e4 , 1e4 ];        %upper bound on the fitting parameters
     
-    if 1
+    
         [fitGaussian.fit , fitGaussian.resnorm , fitGaussian.residual ,...
             fitGaussian.exitflag]=lsqnonlin(errorFunction,x0,lowerBound,upperBound,options);
-    else
-       [fitGaussian.fit , fitGaussian.resnorm , fitGaussian.residual ,...
-            fitGaussian.exitflag] = fminsearch( errorSum, x0); 
-     
-        fitGaussian.exitflag = 1;
-    end
+        
     if count == 1                   % sets the initial guess to the first (succesful) fitted gaussian
        config.initialGuess=fitGaussian.fit; 
     end

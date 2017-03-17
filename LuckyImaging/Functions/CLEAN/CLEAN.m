@@ -34,7 +34,9 @@ function [ clean] = Clean( image, config ,i )
                     clean.outputArray{count}=clean.fitGaussian.fit;                     % update the output values
                     clean.outputArray{count}(1)=clean.outputArray{count}(1)+clean.brightFinder.colIndex-(config.brightFinderSize+1);
                     clean.outputArray{count}(2)=clean.outputArray{count}(2)+clean.brightFinder.rowIndex-(config.brightFinderSize+1);
-                    clean.imageGaussian=clean.imageGaussian+clean.generateGaussianMask.mask;         %show output image
+                    clean.imageGaussian=clean.imageGaussian+clean.generateGaussianMask.mask; 
+                    clean.outputResnorm(count)=clean.fitGaussian.resnorm;
+                    %show output image
                     count=count+1;          % count of all 'good steps'
                     config.initialGuess=clean.fitGaussian.fit;
                     
