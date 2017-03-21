@@ -27,8 +27,6 @@ for i=1:config.numStacks
     rollingBallFilter.image{i}=RollingBallFilter(stackImages.image{i},30);
 end
 
-%IN THEORY WE DON'T NEED TO STACK IMAGES! SO WE SKIP THE FUNCTION FOR NOW.
-
 fprintf('Rolling ball filter has been applied. \n');
 %%  CLEAN Algorithm and lucky Imaging for each individual image
 tic
@@ -39,21 +37,22 @@ end
 toc
 
 %% Lucky Algorithm
-fprintf('applying lucky algorithm')
+fprintf('Applying lucky algorithm. \n')
 tic
 lucky=Lucky(clean, config);
 toc
-fprintf('All set! \n')
+
 %% Stack all the images
 
 finalImage=0;
-
+finalImageInverted=0;
 for i=1:config.numStacks
     finalImage=finalImage+lucky{i}.image;
+    finalImageInverted=finalImageInverted+lucky{i}.imageInverted;
 end
     
-
+fprintf('All set! \n')
 %% Visualisation
 
-Visualisation(rollingBallFilter,clean,config)
-figure; imshow(finalImage,[])
+Visualisation(rollingBallFilter,clean,config, finalImage, finalImageInverted)
+

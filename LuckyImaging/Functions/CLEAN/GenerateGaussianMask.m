@@ -16,15 +16,15 @@ function [ generateGaussianMask ] = GenerateGaussianMask( config, clean , indexC
     % make a big mask to make sure that patches near the edge don't cause trouble
     bigMask=zeros(domainSize+2*halfPatchSize);         % initiate the mask
     if  rowIndexCheck==rowIndex && colIndex == colIndexCheck      %found spot is the same, reject!
-        gaussian = brightFinder.matrix;
+        generateGaussianMask.gaussian = brightFinder.matrix;
     else 
         if fitGaussian.exitflag ==0                     % if the fit has failed, simply set the mask to the patch itself, so that it will be removed.
-            gaussian = brightFinder.matrix;
+            generateGaussianMask.gaussian = brightFinder.matrix;
         else
-            gaussian=GenerateGaussian(config, fitGaussian.fit);  % generate the Gaussian mask
+            generateGaussianMask.gaussian=GenerateGaussian(config, fitGaussian.fit);  % generate the Gaussian mask
         end
     end
-    bigMask(rowIndex:rowIndex+2*halfPatchSize, colIndex:colIndex+2*halfPatchSize)=gaussian; % add the Gaussian to the big mask
+    bigMask(rowIndex:rowIndex+2*halfPatchSize, colIndex:colIndex+2*halfPatchSize)=generateGaussianMask.gaussian; % add the Gaussian to the big mask
     
     % now retrieve the correct mask from the big mask
     
