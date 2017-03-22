@@ -1,11 +1,33 @@
-function [ helicase ] = SimulateHelicases( config )
+function [ output ] = SimulateHelicases( config )
     % Simulate Helicases - generate an individual helicase moving along several images
     %   Detailed explanation goes here
     
-    helicaseSize=config.helicase(1);            % size of the helicase
-    helicaseParameters=config.helicase(2:5);    % other helicase parameters
+    %Determine the helicase velocity in pixels/frame
+    velocity=config.helicaseVelocity*config.exposureTime*config.pixels/config.imageSize;
     
-    helicase=GenerateGaussian(helicaseSize, helicaseParameters);
+
+    % Generate a matrix with positions of the helicases
+    for i=1:config.numHelicases
+        % Generate a helicase at a random postion [X,Y]
+        helicase{i}.position= [ randi([1,config.pixels]) ; randi([1,config.pixels]) ];
+        for k=1:(config.numFrames-1)                       
+            helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+velocity;           % Update the X position
+            helicase{i}.position(2,k+1) = helicase{i}.position(2,k);                    % Update the Y position
+        end
+    end
+      
+    
+    for k=1:config.numFrames
+       sumImage=zeros( config.pixels , config.dataType );
+
+       for i=1:config.numHelicases 
+           helicase{i}.parameters(3:4)=config.helicase(1:2);                                   % set sigma and the scaleValue
+           helicase{i}.parameters(1:2)=helicase{i}.position(1:2,k);                            % Update the X,Y position
+           gaussian=uint16(GenerateGaussian(config.pixels, helicase{i}.parameters));           % Generate the helicase as gaussians, inputs are (size , [mu_x , mu_y , sigma , scaleValue])
+           sumImage=sumImage+gaussian;
+       end
+       output.image{k}=sumImage;
+    end
 
 end
 

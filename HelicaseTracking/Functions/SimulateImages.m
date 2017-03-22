@@ -1,11 +1,12 @@
-function [ simulateImages ] = SimulateImages( input_args )
+function [ simulateImages ] = SimulateImages( config )
     % Simulate Images - Simulates a set of images with helicases
     %   Detailed explanation goes here
     
     
-    noise=SimulateNoise();
-    helicases=SimulateHelicases();
+    %noise=SimulateNoise();
     
-    simulateImages.image=noise+helicases;
+    simulateImages.simulateHelicases = SimulateHelicases(config);
+    
+    %simulateImages.image=noise+helicases;
 end
 
