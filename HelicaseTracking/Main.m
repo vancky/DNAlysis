@@ -4,12 +4,12 @@ config=struct();
 config=Config(config);
 
 %%
-numSimulations=100;
+numSimulations=36;
 
 for i=1:numSimulations
     %% Simulate a set of images
     fprintf('Running simulations %d/%d.\n',i , numSimulations)
-    config.scaleValue=2+i;
+    config.scaleValue=4+i;
     simulateImages=SimulateImages(config);
     
 

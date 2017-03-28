@@ -16,8 +16,8 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
      
      figure
      hold on
-     plot(3:102, 1e9*avg);
-     plot(3:102, 1e9*maximum);
+     plot(5:40, 1e9*avg);
+     plot(5:40, 1e9*maximum);
      hold off
      title('Error due to limited photon count')
      legend('average error','maximum error')
