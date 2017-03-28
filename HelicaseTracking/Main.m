@@ -16,10 +16,9 @@ toc
     % 3. Make a big matrix with position of each individual helicase over time
     % 4. Obtain valuable information, such as velocity
 
-for i = 1:config.numFrames
-    helicaseFitter=HelicaseFitter(config, simulateImages.simulateHelicases.image{i});
-end
+helicaseFitter=HelicaseFitter(config, simulateImages);
 
+ 
 %% Visualisation
 
 Visualisation(config,simulateImages);
