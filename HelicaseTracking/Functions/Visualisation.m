@@ -1,12 +1,12 @@
-function [ output_args ] = Visualisation( config, simulateImages , helicaseFitter , analysis, avg, maximum )
+function [ output_args ] = Visualisation( config, simulateImages , helicaseFitter , analysis )
     %VISUALISATION Summary of this function goes here
     %   Detailed explanation goes here
 
      figure
      hold on
-     plot(1:config.numFrames, 1e9*analysis{1}.errorMeters(:,1))
-     plot(1:config.numFrames, 1e9*analysis{1}.errorMeters(:,2))
-     plot(1:config.numFrames, 1e9*analysis{1}.errorMeters(:,3))
+     plot(1:config.numFrames, 1e9*analysis.errorMeters(:,1))
+     plot(1:config.numFrames, 1e9*analysis.errorMeters(:,2))
+     plot(1:config.numFrames, 1e9*analysis.errorMeters(:,3))
      hold off
      title('Pixelation error')
      legend('x-error','y-error','absolute error')

@@ -17,9 +17,10 @@ function [ config ] = Config( config )
     config.waveLength=600e-9;               % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                  % Numerical factor which determines the width of the PSF
     config.sigma=config.waveLength/(2*pi*sqrt(2*config.numFactor));      %sigma used to generate the Gaussian, no need to edit!
-    config.scaleValue= 5;                  % the maximum pixel intensity used for simulating the helicases
-    config.fitSize= 4;             % Half size  of the patch where we are going to fit Gaussians.
+    config.scaleValue= 100;                  % the maximum pixel intensity used for simulating the helicases
+    config.fitSize= 5;                       % Half size  of the patch where we are going to fit Gaussians.
                                              % For instance if the patch is 25x25 choose 12
+                                             % A guideline for this is 3*sigma
     
     
     config.totalTime=50;                   % Total time in seconds

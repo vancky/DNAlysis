@@ -25,4 +25,4 @@ analysis=Analysis(config, simulateImages, helicaseFitter);
  
 %% Visualisation
 
-Visualisation(config,simulateImages , helicaseFitter, analysis, avg , maximum);
+Visualisation(config,simulateImages , helicaseFitter, analysis);
