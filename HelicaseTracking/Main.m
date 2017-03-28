@@ -4,7 +4,7 @@ config=struct();
 config=Config(config);
 
 %%
-numSimulations=36;
+numSimulations=96;
 
 for i=1:numSimulations
     %% Simulate a set of images
