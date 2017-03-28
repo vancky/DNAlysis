@@ -32,8 +32,8 @@ function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
     helicaseFitter.gaussmlev.LL=LL;
     helicaseFitter.gaussmlev.t=t;
     
-    % Compute the 'real spot locations'
+    % compute the fitted locations
     helicaseFitter.fitLocation= helicaseFitter.spotIndex+helicaseFitter.gaussmlev.P(:,1:2)-config.fitSize;
-    
+        
 end
 

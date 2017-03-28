@@ -18,7 +18,10 @@ toc
 
 helicaseFitter=HelicaseFitter(config, simulateImages);
 
+%% Analysis
+
+analysis=Analysis(config, simulateImages, helicaseFitter);
  
 %% Visualisation
 
-Visualisation(config,simulateImages , helicaseFitter);
+Visualisation(config,simulateImages , helicaseFitter, analysis);

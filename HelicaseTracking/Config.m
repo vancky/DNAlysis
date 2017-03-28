@@ -13,7 +13,7 @@ function [ config ] = Config( config )
     config.exposureTime=500e-3;              % Exposure time in seconds (time per frame)   
     config.dataType=('uint16');             % The data type of the images
     
-    config.helicaseVelocity=(3400e-9)/60;    % Velocity in m/s (based on kB/min)
+    config.helicaseVelocity=(340e-9)/60;    % Velocity in m/s (based on kB/min)
     config.waveLength=600e-9;               % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                  % Numerical factor which determines the width of the PSF
     config.sigma=config.waveLength/(2*pi*sqrt(2*config.numFactor));      %sigma used to generate the Gaussian, no need to edit!

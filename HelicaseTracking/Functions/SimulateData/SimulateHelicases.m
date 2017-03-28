@@ -13,9 +13,13 @@ function [ output ] = SimulateHelicases( config )
         for k=1:(config.numFrames-1)                       
             helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+velocity;           % Update the X position
             helicase{i}.position(2,k+1) = helicase{i}.position(2,k);                    % Update the Y position
+            
+            output.position{i}=helicase{i}.position';  
         end
+        
     end
-      
+    
+    
     
     for k=1:config.numFrames
        sumImage=zeros( config.pixels , config.dataType );
@@ -29,6 +33,6 @@ function [ output ] = SimulateHelicases( config )
        end
        output.image{k}=sumImage;
     end
-
+       
 end
 
