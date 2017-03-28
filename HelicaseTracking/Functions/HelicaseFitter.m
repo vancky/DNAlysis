@@ -13,7 +13,7 @@ function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
     
     % stacks the fluorecent spots into one big 3D matrix
     for i=1:N
-        brightFinder=BrightFinder( config, simulateImages.simulateHelicases.image{i} );
+        brightFinder=BrightFinder( config, simulateImages.noiseImage(:,:,i) );
         helicaseFitter.spots(:,:,i)= single(brightFinder.matrix);
         helicaseFitter.spotIndex(i,:)=[ brightFinder.rowIndex, brightFinder.colIndex ];  % index for the spots [Y,X]
     end

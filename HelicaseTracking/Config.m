@@ -22,6 +22,7 @@ function [ config ] = Config( config )
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
     
+    config.backgroundNoise=10;              %Intensity of background noise
     
     config.totalTime=50;                   % Total time in seconds
     config.numFrames=config.totalTime/config.exposureTime;   % Number of frames used in the simulation
@@ -30,6 +31,7 @@ function [ config ] = Config( config )
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
+    config.snRatio=(config.scaleValue-config.backgroundNoise)/sqrt(config.scaleValue+config.backgroundNoise);
     
     % Make sure we can use the functions
     addpath ./Functions

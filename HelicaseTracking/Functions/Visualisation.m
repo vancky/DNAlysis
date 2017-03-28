@@ -19,7 +19,7 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
        
        figure;
        
-       imshow(simulateImages.simulateHelicases.image{10*i},[])
+       imshow(simulateImages.noiseImage(:,:,10*i),[])
        hold on
        
        plot(xdot, ydot, 'r.' , 'MarkerSize' , 5);
