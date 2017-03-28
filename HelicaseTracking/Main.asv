@@ -3,15 +3,14 @@ clear all; clc; close all;
 config=struct();
 config=Config(config);
 
-%%
-numSimulations=100;
-
+numSimulations=10;
 for i=1:numSimulations
     %% Simulate a set of images
-    fprintf('Running simulations %d/%d.\n',i , numSimulations)
-    config.scaleValue=2+i;
+    fprintf('Running simulations %d %d.\n',i , numSimulations)
+    config.scaleValue=2+i
+    tic
     simulateImages=SimulateImages(config);
-    
+    toc
 
     %% Track the Helicases
 
@@ -25,11 +24,8 @@ for i=1:numSimulations
     %% Analysis
 
     analysis{i}=Analysis(config, simulateImages, helicaseFitter);
-    
-    avg(i)=mean(analysis{i}.errorMeters(:,3));
-    maximum(i)=max(analysis{i}.errorMeters(:,3));
 end
  
 %% Visualisation
 
-Visualisation(config,simulateImages , helicaseFitter, analysis, avg , maximum);
+Visualisation(config,simulateImages , helicaseFitter, analysis);

@@ -10,7 +10,7 @@ function [ analysis ] = Analysis( config, simulateImages, helicaseFitter  )
         
         
         analysis.errorPixels=realLocation-fittedLocation;
-        analysis.errorPixels(:,3)=sqrt(analysis.errorPixels(:,1).^2+analysis.errorPixels(:,2).^2)
+        analysis.errorPixels(:,3)=sqrt(analysis.errorPixels(:,1).^2+analysis.errorPixels(:,2).^2);
         analysis.errorMeters=analysis.errorPixels*config.pixelSize;
         
     end

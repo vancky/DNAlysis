@@ -4,15 +4,16 @@ function [ output ] = SimulateHelicases( config )
     
     %Determine the helicase velocity in pixels/frame
     velocity=config.helicaseVelocity*config.exposureTime*config.pixels/config.imageSize;
-    
+    xvelocity=velocity/sqrt(4/3);   
+    yvelocity=velocity/sqrt(4);
 
     % Generate a matrix with positions of the helicases
     for i=1:config.numHelicases
         % Generate a helicase at a random postion [X,Y]
-        helicase{i}.position= [ randi([1,config.pixels]) ; randi([1,config.pixels]) ];
+        helicase{i}.position= [ randi([1+10,config.pixels-10]) ; randi([1+10,config.pixels-10]) ];
         for k=1:(config.numFrames-1)                       
-            helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+velocity;           % Update the X position
-            helicase{i}.position(2,k+1) = helicase{i}.position(2,k);                    % Update the Y position
+            helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+velocity/sqrt(4/3);           % Update the X position
+            helicase{i}.position(2,k+1) = helicase{i}.position(2,k)+velocity/sqrt(4);                    % Update the Y position
             
             output.position{i}=helicase{i}.position';  
         end
