@@ -21,4 +21,4 @@ helicaseFitter=HelicaseFitter(config, simulateImages);
  
 %% Visualisation
 
-Visualisation(config,simulateImages);
+Visualisation(config,simulateImages , helicaseFitter);

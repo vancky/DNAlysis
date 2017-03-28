@@ -11,9 +11,11 @@ function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
     
     N=config.numFrames;
     
+    % stacks the fluorecent spots into one big 3D matrix
     for i=1:N
-        helicaseFitter.brightFinder=BrightFinder( config, simulateImages.simulateHelicases.image{i} );
-        helicaseFitter.A(:,:,i)= single(helicaseFitter.brightFinder.matrix);
+        brightFinder=BrightFinder( config, simulateImages.simulateHelicases.image{i} );
+        helicaseFitter.spots(:,:,i)= single(brightFinder.matrix);
+        helicaseFitter.spotIndex(i,:)=[ brightFinder.rowIndex, brightFinder.colIndex ];  % index for the spots [Y,X]
     end
 
     
@@ -23,12 +25,15 @@ function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
     
     %   Fit and calculate speed
     
-    [P , CRLB , LL , t]=gaussmlev2(helicaseFitter.A , PSFsigma, iterations, fittype);
+    [P , CRLB , LL , t]=gaussmlev2(helicaseFitter.spots , PSFsigma, iterations, fittype);
     
     helicaseFitter.gaussmlev.P=P;
     helicaseFitter.gaussmlev.CRLB=CRLB;
     helicaseFitter.gaussmlev.LL=LL;
     helicaseFitter.gaussmlev.t=t;
+    
+    % Compute the 'real spot locations'
+    helicaseFitter.fitLocation= helicaseFitter.spotIndex+helicaseFitter.gaussmlev.P(:,1:2)-config.fitSize;
     
 end
 

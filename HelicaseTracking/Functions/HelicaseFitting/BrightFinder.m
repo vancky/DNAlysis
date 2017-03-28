@@ -20,7 +20,7 @@ function [ brightFinder ] = BrightFinder( config, image  )
      
      %mirrorImage=MirrorImage(image,imageSize,config.brightFinderSize);
      %____MIRROR IMAGE CAUSES ERRORS!!! NOW WE USE ZERO VALUE OUTSIDE___
-     halfPatchSize=config.brightFinderSize;         % actually this is half of the patch size
+     halfPatchSize=config.fitSize;         % actually this is half of the patch size
      domainSize=config.pixels;
      bigImage=zeros(domainSize+2*halfPatchSize);         % initiate the mask
      bigImage( halfPatchSize+1:halfPatchSize+domainSize , halfPatchSize+1:halfPatchSize+domainSize)=image;

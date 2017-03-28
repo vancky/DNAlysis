@@ -1,0 +1,16 @@
+function [ output_args ] = Visualisation( config, simulateImages , helicaseFitter )
+    %VISUALISATION Summary of this function goes here
+    %   Detailed explanation goes here
+
+    for i=1:10
+       figure;
+       hold on
+       imshow(simulateImages.simulateHelicases.image{10*i},[])
+       xdot=helicaseFitter.fitLocation(10*i,1);
+       ydot=helicaseFitter.fitLocation(10*i,2);
+       plot(handles.pictureBox,xdot, ydot, 'r.');
+    %plot(xdot,ydot,'r.','MarkerSize',5)
+
+    end
+end
+
