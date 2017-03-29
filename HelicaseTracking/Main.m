@@ -25,10 +25,9 @@ helicaseFitter=HelicaseFitter(config, simulateImages);
 analysis=Analysis(config, simulateImages, helicaseFitter);
 
 fprintf('The signal to noise ratio is %d.\n', config.snRatio)
-fprintf('The maximum error %d.\n', max(analysis.errorMeters(:,3)))
-fprintf('The average error %d.\n', mean(analysis.errorMeters(:,3)))
-fprintf('The standard deviation %d.\n', std(analysis.errorMeters(:,3)))
+fprintf('The bias is %d.\n', analysis.bias)
+fprintf('The standard deviation %d.\n', analysis.std)
  
 %% Visualisation
 
-%Visualisation(config,simulateImages , helicaseFitter, analysis);
+Visualisation(config,simulateImages , helicaseFitter, analysis);

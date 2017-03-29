@@ -4,9 +4,15 @@ function [ brightFinder ] = BrightFinder( config, image  )
      % centered around this point from the original image. The size of this
      % submatrix is given by 2*config.brightFinderSize+1, if this parameter
      % is 12 for instance the patch will be 25x25.
-    
+     % NOTE: We use a convolution of the fitsize to make sure that at low SNR single
+     % poisson background dots will not be mistaken for the gaussian profile.
+     
+     fitSize=config.fitSize;            % half of the total patch
      imageSize=config.pixels;
-     [brightFinder.value,brightFinder.index]=max(image(:));     % obtain the value of the brightest spot and the index
+     C=1/(fitSize^2)*ones(fitSize);             %Matrix for convolution
+     imageConv=conv2( single(image), C , 'same');
+     
+     [brightFinder.value,brightFinder.index]=max(imageConv(:));     % obtain the value of the brightest spot and the index
      
      
      rowIndex=mod(brightFinder.index,imageSize);      % find the row of the index

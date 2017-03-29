@@ -31,7 +31,7 @@ function [ config ] = Config( config )
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
-    config.snRatio=(config.scaleValue)/sqrt(config.scaleValue+config.backgroundNoise);
+    config.snRatio=(config.scaleValue)/sqrt(config.scaleValue+2*config.backgroundNoise);
     
     % Make sure we can use the functions
     addpath ./Functions
