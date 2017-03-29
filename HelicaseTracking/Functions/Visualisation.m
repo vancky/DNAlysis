@@ -8,7 +8,7 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
      plot(1:config.numFrames, 1e9*analysis.errorMeters(:,2))
      plot(1:config.numFrames, 1e9*analysis.errorMeters(:,3))
      hold off
-     title('Pixelation error')
+     title(sprintf('Maximum photon count %d', config.scaleValue))
      legend('x-error','y-error','absolute error')
      xlabel('Frame')
      ylabel('Error (nm)')

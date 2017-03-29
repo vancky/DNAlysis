@@ -11,5 +11,6 @@ function [ simulateImages ] = SimulateImages( config )
         backgroundImage=simulateImages.simulateHelicases.image{i}+config.backgroundNoise;   %Image with constant 
         simulateImages.noiseImage(:,:,i)=imnoise(backgroundImage,'poisson');
     end
+
 end
 
