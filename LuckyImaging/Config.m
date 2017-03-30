@@ -2,7 +2,7 @@ function [ config ] = Config( config )
     
     %----------------------------Configuration-----------------------------
     % Set the directory where the matlab files are located
-    config.matlabCd= {'H:\Git\DNAlysis\LuckyImaging'};
+    config.matlabCd= {'D:\jvanderauweraert\Git\DNAlysis\LuckyImaging'};
     % Set the directory where the images to analyze are located (one folder
     % containing subfolders with different measurements).
     config.imageCd={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\170316_132720\DNA(TL16-071)yoyo488-pos2A'};

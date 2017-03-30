@@ -13,20 +13,8 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
 %         xlabel('Frame')
 %         ylabel('Error (nm)')
         
-        figure;
-        hold on
-        errorbar(post.snRatio, 1e9*post.biasAvg , 1e9*post.errorBias)
-        errorbar(post.snRatio, 1e9*post.sigmaAvg, 1e9*post.errorSigma)
-        hold off
-        title('Tracking Errors vs SNR')
-        legend('Bias','Standard deviation')
-        xlabel('Signal to Noise Ratio')
-        ylabel('Tracking Errors (nm)')
-        ylim([0 20])
-        xlim([0 30])
-        yticks([0 2 4 6 8 10 12 14 16 18 20])
-        grid
         
+    
 
 %         figure;
 %         hold on

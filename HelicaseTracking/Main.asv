@@ -7,7 +7,7 @@ S=30; %Total number of simulations
 
 for k=1:S
     fprintf('Overall Simulation %d/%d.\n',k,S)
-    N=29; % amount of SNR points
+    N=100; % amount of SNR points
     for i=1:N
         %% Simulate a set of images
         fprintf('Simulation progress %d/%d.\n',i,N)
@@ -52,7 +52,7 @@ end
     post.biasAvg=mean(post.bias,2);
     post.sigmaAvg=mean(post.sigma, 2);
     post.snRatio=snRatio;
-save('.\MatFiles\SnrErrorSimulations\Snr2to30','analysis','post');
+save('','analysis',)
 %%
 Visualisation(config,simulateImages , helicaseFitter, analysis , post);
 

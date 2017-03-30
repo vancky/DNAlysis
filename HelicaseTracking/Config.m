@@ -3,7 +3,7 @@ function [ config ] = Config( config )
     %   Detailed explanation goes here
     
     % Set the Matlab directory
-    config.matlabCd=('H:\git\DNAlysis\HelicaseTracking');
+    config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     
     
     % Set the parameters
