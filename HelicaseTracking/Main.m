@@ -3,15 +3,13 @@ clear all; clc; close all;
 config=struct();
 config=Config(config);
 
-N=100;
+N=901;
 for i=1:N
     %% Simulate a set of images
     fprintf('progress %d/%d.\n',i,N)
-    snRatio=linspace(2,30,N);
-    sn=snRatio(i);
-    config.scaleValue=.5*sn*(sn+sqrt(sn^2+8*config.backgroundNoise)); %Update the scaleValue
-    
-    
+    scaleValue=linspace(10,100,N);
+    config.scaleValue=scaleValue(i);  %Update the scaleValue  
+
     simulateImages=SimulateImages(config);
 
     %%
@@ -31,7 +29,6 @@ for i=1:N
 
     analysis{i}=Analysis(config, simulateImages, helicaseFitter);
     
-    fprintf('The signal to noise ratio is %d.\n', sn)
     fprintf('The bias is %d.\n', analysis{i}.bias)
     fprintf('The standard deviation %d.\n', analysis{i}.std)
 end
@@ -43,5 +40,5 @@ for i=1:N
     std(i)=analysis{i}.std;
     bias(i)=analysis{i}.bias;
 end
-Visualisation(config,simulateImages , helicaseFitter, analysis , snRatio, bias, std);
+Visualisation(config,simulateImages , helicaseFitter, analysis , bias, std, scaleValue);
 

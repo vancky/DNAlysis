@@ -33,6 +33,10 @@ function [ config ] = Config( config )
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
     config.snRatio=(config.scaleValue)/sqrt(config.scaleValue+2*config.backgroundNoise);
     
+    %config.scaleValue=.5*sn*(sn+sqrt(sn^2+8*config.backgroundNoise));
+    %This line is for when we set the SN ratio and want to know the
+    %scaleValue
+    
     % Make sure we can use the functions
     addpath ./Functions
     addpath ./Functions/SimulateData

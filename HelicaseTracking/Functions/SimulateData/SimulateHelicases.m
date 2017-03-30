@@ -10,10 +10,10 @@ function [ output ] = SimulateHelicases( config )
     % Generate a matrix with positions of the helicases
     for i=1:config.numHelicases
         % Generate a helicase at a random postion [X,Y]
-        helicase{i}.position= [ randi([1+10,config.pixels-10]) ; randi([1+10,config.pixels-10]) ];
+        helicase{i}.position= [ randi([1+10,config.pixels-10])+randn(1) ; randi([1+10,config.pixels-10])+randn(1) ];
         for k=1:(config.numFrames-1)                       
-            helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+velocity/sqrt(4/3);           % Update the X position
-            helicase{i}.position(2,k+1) = helicase{i}.position(2,k)+velocity/sqrt(4);                    % Update the Y position
+            helicase{i}.position(1,k+1) = helicase{i}.position(1,k)+xvelocity;           % Update the X position
+            helicase{i}.position(2,k+1) = helicase{i}.position(2,k)+yvelocity;                    % Update the Y position
             
             output.position{i}=helicase{i}.position';  
         end
