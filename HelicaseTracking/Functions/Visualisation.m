@@ -23,8 +23,9 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
         legend('Bias','Standard deviation')
         xlabel('Signal to Noise Ratio')
         ylabel('Tracking Errors (nm)')
-        ylim([0 20])
-        xlim([0 30])
+        ylim([0 15])
+        xlim([3 10])
+        yticks([0 2 4 6 8 10 12 14])
         grid
 %     for i=1:5
 %        ydot=helicaseFitter.fitLocation(10*i,1);
