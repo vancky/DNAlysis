@@ -8,8 +8,8 @@ function [ simulateImages ] = SimulateImages( config )
     
     for i=1:config.numFrames
        % fprintf('Adding noise. Progress %d/%d.\n', i, config.numFrames)
-        backgroundImage=simulateImages.simulateHelicases.image{i}+config.backgroundNoise;   %Image with constant 
-        simulateImages.noiseImage(:,:,i)=imnoise(backgroundImage,'poisson');
+        %backgroundImage=simulateImages.simulateHelicases.image{i}+config.backgroundNoise;   %Image with constant 
+        simulateImages.noiseImage(:,:,i)=simulateImages.simulateHelicases.image{i}; %imnoise(backgroundImage,'poisson');
     end
 
 end

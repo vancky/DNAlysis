@@ -3,17 +3,16 @@ clear all; clc; close all;
 config=struct();
 config=Config(config);
 
-S=30; %Total number of simulations
+S=10; %Total number of simulations
 
 for k=1:S
     fprintf('Overall Simulation %d/%d.\n',k,S)
-    N=29; % amount of SNR points
+    N=101; % amount of pixelation points
     for i=1:N
         %% Simulate a set of images
         fprintf('Simulation progress %d/%d.\n',i,N)
-        snRatio=linspace(2,30,N);
-        sn=snRatio(i);
-        config.scaleValue=.5*sn*(sn+sqrt(sn^2+8*config.backgroundNoise)); %Update the scaleValue 
+        sV=linspace(10,100,N);
+        config.scaleValue=sV(i);
         simulateImages=SimulateImages(config);
 
         %%

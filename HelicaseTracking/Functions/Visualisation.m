@@ -15,16 +15,16 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
         
         figure;
         hold on
-        errorbar(post.snRatio, 1e9*post.biasAvg , 1e9*post.errorBias)
-        errorbar(post.snRatio, 1e9*post.sigmaAvg, 1e9*post.errorSigma)
+        errorbar(post.scaleValue, 1e9*post.biasAvg , 1e9*post.errorBias)
+        errorbar(post.scaleValue, 1e9*post.sigmaAvg, 1e9*post.errorSigma)
         hold off
-        title('Tracking Errors vs SNR')
+        title('Error due to Pixelation in a Noiseless Environment')
         legend('Bias','Standard deviation')
         xlabel('Signal to Noise Ratio')
         ylabel('Tracking Errors (nm)')
-        ylim([0 20])
-        xlim([1.5 10])
-        yticks([0 2 4 6 8 10 12 14 16 18 20])
+        ylim([0 4])
+        xlim([10 100])
+        yticks([0 1  2 3 4])
         grid
         
 

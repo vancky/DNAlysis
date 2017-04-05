@@ -7,13 +7,12 @@ S=30; %Total number of simulations
 
 for k=1:S
     fprintf('Overall Simulation %d/%d.\n',k,S)
-    N=29; % amount of SNR points
+    N=91; % amount of pixelation points
     for i=1:N
         %% Simulate a set of images
         fprintf('Simulation progress %d/%d.\n',i,N)
-        snRatio=linspace(2,30,N);
-        sn=snRatio(i);
-        config.scaleValue=.5*sn*(sn+sqrt(sn^2+8*config.backgroundNoise)); %Update the scaleValue 
+        sV=linspace(10,100,N);
+        config.scaleValue=sV(i);
         simulateImages=SimulateImages(config);
 
         %%
@@ -47,12 +46,12 @@ for k=1:S
 end
 for i=1:N
     post.errorSigma(i)=std(post.sigma(i,:));
-    post.errorBias(i)=std(po  st.bias(i,:));
+    post.errorBias(i)=std(post.bias(i,:));
 end
     post.biasAvg=mean(post.bias,2);
     post.sigmaAvg=mean(post.sigma, 2);
-    post.snRatio=snRatio;
-save('.\MatFiles\SnrErrorSimulations\Snr2to30','analysis','post');
+    post.scaleValue=sV;
+save('.\MatFiles\SnrErrorSimulations\pixelation10to100','analysis','post');
 %%
 Visualisation(config,simulateImages , helicaseFitter, analysis , post);
 
