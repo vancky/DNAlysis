@@ -20,7 +20,7 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
         hold off
         title('Error due to Pixelation in a Noiseless Environment')
         legend('Bias','Standard deviation')
-        xlabel('Signal to Noise Ratio')
+        xlabel('Maximum Pixel Count')
         ylabel('Tracking Errors (nm)')
         ylim([0 4])
         xlim([10 100])
