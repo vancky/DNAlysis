@@ -23,7 +23,7 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
         xlabel('Signal to Noise Ratio')
         ylabel('Tracking Errors (nm)')
         ylim([0 20])
-        xlim([0 30])
+        xlim([1.5 10])
         yticks([0 2 4 6 8 10 12 14 16 18 20])
         grid
         

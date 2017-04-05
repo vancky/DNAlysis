@@ -47,7 +47,7 @@ for k=1:S
 end
 for i=1:N
     post.errorSigma(i)=std(post.sigma(i,:));
-    post.errorBias(i)=std(post.bias(i,:));
+    post.errorBias(i)=std(po  st.bias(i,:));
 end
     post.biasAvg=mean(post.bias,2);
     post.sigmaAvg=mean(post.sigma, 2);
