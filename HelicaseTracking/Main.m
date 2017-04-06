@@ -5,6 +5,7 @@ config=Config(config);
 
 %% 1. Beamshape Correction
 
+beamshapeCorrection=BeamshapeCorrection(config, images);
 
 %% 2. Color Correlation (cam0)
 

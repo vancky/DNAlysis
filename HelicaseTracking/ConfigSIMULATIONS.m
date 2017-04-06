@@ -1,7 +1,6 @@
-function [ config ] = Config( config )
-    %CONFIG Summary of this function goes here
-    %   Detailed explanation goes here
-    
+function [ config ] = ConfigSIMULATIONS( config )
+    % Config - File where the user can specify his/her preferences
+        
     % Set the Matlab directory
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170405_121201\DNAsytox-incubated-N-tirf-06');

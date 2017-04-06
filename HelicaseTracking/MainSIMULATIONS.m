@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 config=struct();
-config=Config(config);
+config=ConfigSIMULATIONS(config);
 
 
 
