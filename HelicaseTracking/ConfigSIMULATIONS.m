@@ -4,7 +4,7 @@ function [ config ] = Config( config )
     
     % Set the Matlab directory
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-    
+    config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170405_121201\DNAsytox-incubated-N-tirf-06');
     
     % Set the parameters
     
@@ -22,7 +22,7 @@ function [ config ] = Config( config )
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
     
-    config.backgroundNoise=5;              %Intensity of background noise
+    config.backgroundNoise=20;              %Intensity of background noise
     
     config.totalTime=50;                   % Total time in seconds
     config.numFrames=config.totalTime/config.exposureTime;   % Number of frames used in the simulation
