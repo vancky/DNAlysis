@@ -1,8 +1,7 @@
 function [ output ] = BeamshapeCorrection( config , images )
     % Beamshape Correction - Corrects for the beamshape profile
-    % 1.Analyses images with only the beamshape profile, generates a
-    %   normalized matrix with intensity values. 
-    % 2. Uses this matrix to correct the intensity of the other images.
+    % Please input the images as a 3D matrix, i.e. images(:,:,N) where N is
+    % the total number of images
     
     % Generates the matrix with the normalized beamshape
     

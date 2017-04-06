@@ -5,7 +5,7 @@ function [ config ] = Config( config )
     % Set the Matlab directory
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.beamshapeCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres488AfcontinuiosTrue');
-    config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW');
+    config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
     
     % Set the parameters
 
