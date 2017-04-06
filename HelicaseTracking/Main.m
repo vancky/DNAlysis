@@ -19,27 +19,20 @@ helicaseFitter=HelicaseFitter(config, simulateImages);
 
 %% Analysis
 
-analysis{i,k}=Analysis(config, simulateImages, helicaseFitter);
+analysis=Analysis(config, simulateImages, helicaseFitter);
 
-fprintf('The bias is %d.\n', analysis{i}.bias)
-fprintf('The standard deviation %d.\n', analysis{i,k}.std)
+fprintf('The bias is %d.\n', analysis.bias)
+fprintf('The standard deviation is %d.\n', analysis.std)
+fprintf('The SNR is %d.\n', config.snRatio)
 
 
     %% Visualisation
-for k=1:S
-     for i=1:N
-         post.sigma(i,k)=analysis{i,k}.std;
-         post.bias(i,k)=analysis{i,k}.bias;
-     end
-end
-for i=1:N
-    post.errorSigma(i)=std(post.sigma(i,:));
-    post.errorBias(i)=std(post.bias(i,:));
-end
-    post.biasAvg=mean(post.bias,2);
-    post.sigmaAvg=mean(post.sigma, 2);
 
-save('.\MatFiles\SnrErrorSimulations\pixelation10to100','analysis','post');
+post.sigma=analysis.std;
+post.bias=analysis.bias;
+
+post.biasAvg=mean(post.bias,2);
+post.sigmaAvg=mean(post.sigma, 2);
 
 %%
 Visualisation(config,simulateImages , helicaseFitter, analysis , post);

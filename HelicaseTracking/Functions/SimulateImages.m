@@ -4,7 +4,7 @@ function [ simulateImages ] = SimulateImages( config )
     
     fprintf('Simulating Helicases.\n')
     simulateImages.simulateHelicases = SimulateHelicases(config);                    %simulate images with the helicases
-    simulateImages.simulateDna=SimulateDna(config);
+    %simulateImages.simulateDna=SimulateDna(config);
     fprintf('Helicases simulated.\n')
     
     for i=1:config.numFrames
