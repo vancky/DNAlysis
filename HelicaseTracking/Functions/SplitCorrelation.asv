@@ -6,6 +6,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     
     % Split the image
     
+    numRows=size(inputImage,2);
     numColumns=size(inputImage,2);
     halfCol=numColumns/2;
     output.leftImage=inputImage(:,1:halfCol);
@@ -15,27 +16,12 @@ function [ output ] = SplitCorrelation( config, inputImage )
     [maxValue , output.maxIndex]=max(output.correlation(:));
     [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);
     
-    
-    % Compare the two images
-       figure;
-    hold on
-    l=imshow(image1,[]);
-    r=imshow(image2,[]);
-    hold off
-    
-    % Make sure that each image gets a checkerboard pattern, so that we can
-    % see the differences
-    blockSize
-    [numRows,numColumns] = size(image1);
-    P = ceil(numRows / blockSize);
-    Q = ceil(numColumns / blockSize);
-    pattern1 = checkerboard(blockSize, P, Q) > 0;
-    pattern2 = checkerboard(blockSize, P, Q) < 1;
-    pattern1 = pattern1(1:numRows, 1:numColumns);
-    pattern2 = pattern2(1:numRows, 1:numColumns);
-    set(l, 'AlphaData', pattern1);  
-    set(r, 'AlphaData', pattern2);
-    
+    output.rowIndex-halfCol;
+    output.colIndex-
+    % Compare the two original images
+    figure;
+    subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, 20); title('No correlation')
+    subplot(1,2,2); CompareSplit(output.leftImage, output.rightImage, 20); title('With correlation')
 %     numColumns=size(image,2);
 %     
 %     for i=1 : (numColumns-1)

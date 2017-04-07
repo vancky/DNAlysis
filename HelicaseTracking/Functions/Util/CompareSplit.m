@@ -7,7 +7,6 @@ function [ output ] = CompareSplit( image1, image2 , blockSize )
     
     % Display the two images in one image, fully overlapping.
 
-
     
     % Make sure that each image gets a checkerboard pattern, so that we can
     % see the differences
@@ -19,13 +18,8 @@ function [ output ] = CompareSplit( image1, image2 , blockSize )
     pattern1 = pattern1(1:numRows, 1:numColumns);
     pattern2 = pattern2(1:numRows, 1:numColumns);
         
-    figure;
-    hold on
-    set(imshow(image1,[]), 'AlphaData', pattern1);  
-    set(imshow(image2,[]), 'AlphaData', pattern2);
-    hold off
-
-
+    newImage=pattern1.*image1+pattern2.*image2;
+    imshow(newImage,[])
 
 end
 
