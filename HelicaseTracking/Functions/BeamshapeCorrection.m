@@ -4,17 +4,17 @@ function [ output ] = BeamshapeCorrection( config , images )
     % the total number of images
     
     % Generates the matrix with the normalized beamshape
-    
+    fprintf('Calculating the Beamshape.\n')
     [beamshape, test] =GenerateBeamshape(config); 
-    
+    fprintf('Beamshape calculated.\n')
     % Multiplies the normalized beamshape with the images
     
-    numImages=length(images);
-    output=zeros(config.pixels,config.pixels,numImages, config.dataType);
+    numImages=size(images,3);
+    output.image=zeros(config.pixels,config.pixels,numImages, class(images));
     
     for i=1:numImages
-       output(:,:,i)=images(:,:,i).*beamshape;
+       output.image(:,:,i)=double(images(:,:,i)).*beamshape;
     end
-
+    fprintf('Beamshape Corrected.\n')
 end
 

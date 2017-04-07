@@ -13,12 +13,12 @@ function [ importImages ] = ImportImages( config )
     
     for k = 1:numFiles0
         importImages.image0(:,:,k)=imread(directory0(k).name);             %Import the images from cam 0
-        importImages.sum0=importImages.sum0+uint32(importImages.image0(:,:,k));
+        importImages.sum0=importImages.sum0+double(importImages.image0(:,:,k));
     end
     
     for j = 1:numFiles1
         importImages.image1(:,:,j)=imread(directory1(j).name);             %Import the images from cam 1
-        importImages.sum1=importImages.sum1+uint32(importImages.image1(:,:,j));
+        importImages.sum1=importImages.sum1+double(importImages.image1(:,:,j));
     end
         
     cd(config.matlabCd)                                  %Resets the cd to the matlab script location

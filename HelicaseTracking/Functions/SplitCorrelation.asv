@@ -1,0 +1,46 @@
+function [ output ] = SplitCorrelation( config, inputImage )
+    % Split Correlation - Correlates one matrix containing two split images
+    % 1. Determine which part is the left and right image
+    % 2. Create two individual images
+    % 3. Correlate these images to find the correct position
+    
+    % Split the image
+    
+    numColumns=size(inputImage,2);
+    halfCol=numColumns/2;
+    output.leftImage=inputImage(:,1:halfCol);
+    output.rightImage=inputImage(:,halfCol+1:2*halfCol);
+    
+    output.correlation=conv2(output.leftImage,output.rightImage,'same');
+    [maxValue , output.maxIndex]=max(output.correlation(:));
+    [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);
+    
+    
+    % Compare the two images
+       figure;
+    hold on
+    l=imshow(image1,[]);
+    r=imshow(image2,[]);
+    hold off
+    
+    % Make sure that each image gets a checkerboard pattern, so that we can
+    % see the differences
+    blockSize
+    [numRows,numColumns] = size(image1);
+    P = ceil(numRows / blockSize);
+    Q = ceil(numColumns / blockSize);
+    pattern1 = checkerboard(blockSize, P, Q) > 0;
+    pattern2 = checkerboard(blockSize, P, Q) < 1;
+    pattern1 = pattern1(1:numRows, 1:numColumns);
+    pattern2 = pattern2(1:numRows, 1:numColumns);
+    set(l, 'AlphaData', pattern1);  
+    set(r, 'AlphaData', pattern2);
+    
+%     numColumns=size(image,2);
+%     
+%     for i=1 : (numColumns-1)
+%         output.diff(:,i)=max(image(:,i+1)-image(:,i) , image(:,i)-image(:,i+1));
+%     end
+%     output.meanDiff=mean(output.diff,1);
+end
+
