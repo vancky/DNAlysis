@@ -6,5 +6,5 @@ function [ outputImage ] = RollingBallFilter( inputImage , radius )
 
     filter=fspecial('disk', radius);
     background= imfilter(inputImage,filter,'replicate');
-    outputImage=inputImage-background;
+    outputImage=max(inputImage-background,0);
 end

@@ -6,6 +6,10 @@ function [ config ] = Config( config )
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.beamshapeCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres488AfcontinuiosTrue');
     config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
+    config.splitCorrelationCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
+    config.cameraCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW');
+    config.cameraCorrelationCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW');
+    config.cameraCorrelationCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW');
     
     % Set the parameters
 
@@ -13,6 +17,9 @@ function [ config ] = Config( config )
     config.imageSize=40e-6;                 % Size of the image in m
     config.dataType=('uint16');             % The data type of the images
      
+    
+    config.checkerBoardSize=20;             % Size for the blocks in the checkerboard pattern used to check if the correlation works.
+    
     % No need to edit anything below here!
       
     % Make sure we can use the functions

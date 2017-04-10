@@ -1,29 +1,33 @@
 function [ output ] = SplitCorrelation( config, inputImage )
     % Split Correlation - Correlates one matrix containing two split images
-    % 1. Determine which part is the left and right image
-    % 2. Create two individual images
-    % 3. Correlate these images to find the correct position
+    % 1. Split the image
+    % 2. Correlate the image, find where correlation is maximal
+    % 3. Perform correction based on this correlation
     
     % Split the image
     
-    % Number of rows and columns in the input image
-    numRows=size(inputImage,2);
-    numColumns=size(inputImage,2);
-    % Number of rows  and columns in the split images
-    halfRow=numRows;
-    halfCol=numColumns/2;
+    splitImage=SplitImage(inputImage ,1);
+    output.leftImage=splitImage.leftImage;
+    output.rightImage=splitImage.rightImage;
     
+    %Dimensions of the splitted images, for further computations
     
-    output.leftImage=inputImage(:,1:halfCol);
-    output.rightImage=inputImage(:,halfCol+1:2*halfCol);
+    halfRow=size(inputImage,1);
+    halfCol=size(inputImage,2)/2;
+    
+    % Perform the correlation    
         
     output.correlation=conv2(output.leftImage,output.rightImage,'same');
-    [maxValue , output.maxIndex]=max(output.correlation(:));
-    [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);
     
+    % Find the index of maximum correlation
+    
+    [maxValue , output.maxIndex]=max(output.correlation(:));
+    [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);  
     rowCorrection=output.rowIndex-halfRow/2;
     colCorrection=output.colIndex-halfCol/2;
      
+    % Perform the correction
+    
     output.rightImageCorrected=output.rightImage;
     output.leftImageCorrected=zeros(size(output.leftImage));
     
@@ -45,8 +49,9 @@ function [ output ] = SplitCorrelation( config, inputImage )
     % Compare the non correlated and correlated images
     
     figure;
-    subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, 10); title('No correlation')
-    subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, 10); title('With correlation')
+    blockSize=config.checkerBoardSize;           % blocksize for the checkerboard pattern
+    subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
+    subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
 
 end
 

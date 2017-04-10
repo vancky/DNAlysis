@@ -10,10 +10,10 @@ function [ output ] = BeamshapeCorrection( config , images )
     % Multiplies the normalized beamshape with the images
     
     numImages=size(images,3);
-    output.image=zeros(config.pixels,config.pixels,numImages, class(images));
+    output=zeros(config.pixels,config.pixels,numImages, class(images));
     
     for i=1:numImages
-       output.image(:,:,i)=double(images(:,:,i)).*beamshape;
+       output(:,:,i)=double(images(:,:,i)).*beamshape;
     end
     fprintf('Beamshape Corrected.\n')
 end

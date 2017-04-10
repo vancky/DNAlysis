@@ -16,8 +16,9 @@ beamshapeCorrection.sum1=BeamshapeCorrection(config, importImages.sum1);
 
 %% 2. Split Image Correlation (cam0)
 
-splitCorrelation=SplitCorrelation(config, beamshapeCorrection.sum0.image );
-
+splitCorrelation=SplitCorrelation(config, beamshapeCorrection.sum0 );
+%% import images
+importedImages = ImportLaserImages(config);
 %% Cam 0/1 correlation
-
-%cameraCorrelation=CameraCorrelation(config, beamshapeCorrection)
+cameraCorrelation=CameraCorrelation( config, importedImages );
+%clear importedImages;
