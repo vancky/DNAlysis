@@ -9,12 +9,15 @@ importImages=ImportImages(config);
 fprintf('Images Imported.\n')
 %% 1. Beamshape Correction
 
-beamshapeCorrection=BeamshapeCorrection(config, importImages.sum0);
-filterImages=FilterImages(config, beamshapeCorrection.image);
+beamshapeCorrection.sum0=BeamshapeCorrection(config, importImages.sum0);
+beamshapeCorrection.sum1=BeamshapeCorrection(config, importImages.sum1);
+
+%filterImages=FilterImages(config, beamshapeCorrection.image);
 
 %% 2. Split Image Correlation (cam0)
 
-splitCorrelation=SplitCorrelation(config, beamshapeCorrection.image );
-
+splitCorrelation=SplitCorrelation(config, beamshapeCorrection.sum0.image );
 
 %% Cam 0/1 correlation
+
+%cameraCorrelation=CameraCorrelation(config, beamshapeCorrection)

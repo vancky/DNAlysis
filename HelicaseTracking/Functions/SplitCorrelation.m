@@ -23,15 +23,23 @@ function [ output ] = SplitCorrelation( config, inputImage )
     
     rowCorrection=output.rowIndex-halfRow/2;
     colCorrection=output.colIndex-halfCol/2;
+     
+    output.rightImageCorrected=output.rightImage;
+    output.leftImageCorrected=zeros(size(output.leftImage));
     
-    output.leftImageCorrected=output.leftImage;
-    for i=1:halfCol-colCorrection
-        output.rightImageCorrected(:,i+colCorrection)=(output.rightImage(:,i));
-        output.rightImageCorrected(:,1:colCorrection)=0;
+    for i=1:halfCol     
+        if i-colCorrection > 0
+            output.leftImageCorrected(:, i-colCorrection )=(output.leftImage(:,i));
+        else
+            output.leftImageCorrected(:, halfCol-i+1)=0;
+        end
     end
-    for j=1:halfRow-rowCorrection
-        output.rightImageCorrected(i+rowCorrection,:)=(output.rightImageCorrected(j,:));
-        output.rightImageCorrected(1:rowCorrection,:)=0;
+    for j=1:halfRow
+        if j-rowCorrection > 0
+            output.leftImageCorrected( j-rowCorrection ,:)=(output.leftImageCorrected(j,:));
+        else
+            output.leftImageCorrected( halfRow-j+1 ,:)=0;
+        end
     end
     
     % Compare the non correlated and correlated images
