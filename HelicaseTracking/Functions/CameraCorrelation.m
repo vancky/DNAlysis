@@ -9,33 +9,29 @@ function [ output ] = CameraCorrelation( config, importedImages )
     % NOTE: TESTCASE ONLY FOR LASER 2, WE CAN LOOP OVER ALL LASERS LATER ON
     
     % Split the image horizontal and make a crop in the vertical direction
-    % to make sure that we can perform proper convolution
+    % to make sure that we can perform proper correlation
     
     splitImage=SplitImage(output.laserImages{2}.cam0 , 1);
     halfRow=size(splitImage.rightImage,1);
     halfCol=size(splitImage.rightImage,2);
     output.croppedImage=splitImage.rightImage( 1+halfRow/4 : 3*halfRow/4 , : );   
 
-    % BEUNFIX!
+    % Remove background noise, otherwise intensity differences cause the
+    % picture to be biased.
     
-    filteredImage=output.laserImages{2}.cam1;
-%     output.croppedImage=RollingBallFilter(output.croppedImage,30);
-%     filteredImage=RollingBallFilter(output.laserImages{2}.cam1,30);
-    filteredImage(filteredImage<1100)=0;
-    filteredImage(:,1:90)=0;
-    filteredImage(:,422:512)=0;
-    output.croppedImage(output.croppedImage<300)=0;
+     output.croppedImage=RollingBallFilter(output.croppedImage,30);
+     filteredImage=RollingBallFilter(output.laserImages{2}.cam1,30);
     
     % Perform the Correlation
     
-    output.correlation=conv2( filteredImage , output.croppedImage , 'valid');
+    output.correlation=xcorr2( filteredImage , output.croppedImage );
    
     % Find the index of maximum correlation
     
     [maxValue , output.maxIndex]=max(output.correlation(:));
     [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);  
-    rowCorrection=output.rowIndex-halfRow/4;
-    colCorrection=output.colIndex;
+    rowCorrection=output.rowIndex-(config.pixels/2+halfRow/4);    % substract config.pixels for the correlation and halfRow/4 for half or the cropped image size
+    colCorrection=output.colIndex-(config.pixels/2+halfCol/2);    % substract config.pixels for the correlation and halfCol/2 for half or the cropped image size
     
    % Perform the correction
     
@@ -43,7 +39,7 @@ function [ output ] = CameraCorrelation( config, importedImages )
     for i=1:halfCol
         for j=1:halfRow
             if (j+rowCorrection > 0 && j+rowCorrection<=config.pixels)
-                output.rightImageCorrected( j+rowCorrection ,i+colCorrection)=(splitImage.rightImage(j,i));
+                output.rightImageCorrected( j+rowCorrection ,i+colCorrection+config.pixels/4)=(splitImage.rightImage(j,i));
             end
         end
     end
@@ -54,20 +50,16 @@ function [ output ] = CameraCorrelation( config, importedImages )
     avgRight=sum(splitImage.rightImage(:))/(halfRow*halfCol);
     avgCam1=sum(output.laserImages{2}.cam1(:))/(config.pixels^2);
     scaleFactor=avgCam1/avgRight;
+
+%     figure;
+%     imshow(output.rightImageCorrected,[])
+%     figure;
+%     imshow(filteredImage,[])
     
     figure;
-    imshow(output.croppedImage,[])
-    figure;
-    imshow(output.rightImageCorrected,[])
-    figure;
-    imshow(filteredImage,[])
-    figure;
-    imshow(output.correlation,[])
+    blockSize=5; %config.checkerBoardSize;           % blocksize for the checkerboard pattern
     
-    figure;
-    blockSize=10; %config.checkerBoardSize;           % blocksize for the checkerboard pattern
-    
-    %CompareSplit( scaleFactor*output.rightImageCorrected , output.laserImages{2}.cam1 , blockSize) ; title('With correlation')
+    CompareSplit( scaleFactor*output.rightImageCorrected , output.laserImages{2}.cam1 , blockSize) ; title('Correlated Images from Cam0 and Cam1')
 
 end
 
