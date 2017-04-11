@@ -31,21 +31,6 @@ function [ output ] = SplitCorrelation( config, inputImage )
     output.rightImageCorrected=output.rightImage;
     output.leftImageCorrected=zeros(size(output.leftImage));
     
-%     for i=1:halfCol     
-%         if i-colCorrection > 0
-%             output.leftImageCorrected(:, i-colCorrection )=(output.leftImage(:,i));
-%         else
-%             output.leftImageCorrected(:, halfCol-i+1)=0;
-%         end
-%     end
-%     for j=1:halfRow
-%         if j-rowCorrection > 0
-%             output.leftImageCorrected( j-rowCorrection ,:)=(output.leftImageCorrected(j,:));
-%         else
-%             output.leftImageCorrected( halfRow-j+1 ,:)=0;
-%         end
-%     end
-    
     for i=1:halfCol
         for j=1:halfRow
             if (j+rowCorrection > 0 && j+rowCorrection<=config.pixels) && (i-colCorrection > 0 && i-colCorrection <=config.pixels)

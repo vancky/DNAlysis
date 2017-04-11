@@ -6,9 +6,9 @@ config=Config(config);
 %% Import Images
 fprintf('Importing Images.\n')
 importImages=ImportImages(config);
-importedLaserImages = ImportMultipleImages( config, config.cameraCorrelationCd );
-importedNoiseImages = ImportMultipleImages( config, config.noiseCd );
-[beamshape, test] =   GenerateBeamshape( config ); 
+importedLaserImages = ImportMultipleImages(config.);
+importedNoiseImages = ImportMultipleImages(config);
+[beamshape, test] =   GenerateBeamshape(config); 
 fprintf('Images Imported.\n')
 %% 1. Beamshape Correction
 

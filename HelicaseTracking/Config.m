@@ -10,9 +10,9 @@ function [ config ] = Config( config )
     config.cameraCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW');
     config.cameraCorrelationCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW');
     config.cameraCorrelationCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW');
-    config.noiseCd{1}={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise300ms'};
-    config.noiseCd{1}={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise300ms'};
-    config.noiseCd{1}={'K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise300ms'};
+    config.noiseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise50ms');
+    config.noiseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise100ms');
+    config.noiseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\Shotnoise300ms');
     
     % Set the parameters
 

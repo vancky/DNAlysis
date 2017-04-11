@@ -1,0 +1,39 @@
+function [ output ] = PoissonFit( inputImage , filterOption )
+    % Poisson Fit - Fits a poisson Distribution to an image
+    % Give as inputs the image and as a second argument you can choose
+    % whether you want to normalise the image,(set the minimum of the image to 0). 
+    % input 0 for no normalisation and 1 for normal
+    % For instance PoissonFit(inputImage , 1) fits a poisson distribution
+    % to the normalised image.
+    
+    switch filterOption
+        case 0
+            
+        case 1    
+            inputImageFiltered=inputImage-min(inputImage);
+        otherwise
+            disp('Please specify a filter Option')
+    end
+    data=inputImageFiltered(:);
+    lamdaHat= poissfit(data);
+    xMin=min(data)+2;
+    xMax=max(data)+2;
+    x=xMin:xMax;
+    y=poisspdf(x, lamdaHat);
+    
+    figure;
+    imshow( inputImageFiltered ,[] )
+    title('The shotnoise image')
+    
+    figure;
+    hold on
+    h=histogram(inputImageFiltered);
+    scaleFactor=max(h.Values)/max(y);
+    plot(x,scaleFactor*y,'-')
+    title('Poisson Fit to normalized Shot Noise')
+    xlabel('Photon Intensity')
+    ylabel('Counts')
+    hold off
+
+end
+

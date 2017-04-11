@@ -1,13 +1,12 @@
-function [ output ] = ImportLaserImages( config )
+function [ output ] = ImportMultipleImages( config, cdName )
     %ImportLaserImage - Simultaneously import images from different cameras
     %Input a structure where the fields contain the directories of the diferent lasers
     
-    laserCd=config.cameraCorrelationCd;    
-    numLasers=size(laserCd,2);
+    numFolders=size(cdName,2);
     
-    for i=1:numLasers
-        fprintf('Importing images from laser %d/%d.\n',i,numLasers);
-        cd(laserCd{i});                                         % Sets image folder
+    for i=1:numFolders
+        fprintf('Importing images from folder %d/%d.\n',i,numFolders);
+        cd(cdName{i});                                          % Sets image folder
         directory0 = dir('*cam0*.tiff');                        % Labels all the tiffFiles with cam0 in the current directory
         directory1 = dir('*cam1*.tiff');                        % Labels all the tiffFiles with cam0 in the current directory
         numFiles0 = length(directory0);                         % Number of individual image
