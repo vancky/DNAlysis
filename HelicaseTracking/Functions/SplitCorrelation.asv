@@ -49,7 +49,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     for i=1:halfCol
         for j=1:halfRow
             if (j+rowCorrection > 0 && j+rowCorrection<=config.pixels) && (i-colCorrection > 0 && i-colCorrection <=config.pixels)
-                output.leftImageCorrected( j-rowCorrection ,i-colCorrection)=(output.leftImage(j,i));
+                output.leftImageCorrected( j+rowCorrection ,i+colCorrection+config.pixels/4)=(splitImage.rightImage(j,i));
             end
         end
     end
@@ -59,7 +59,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     figure;
     subplot(1,2,1); imshow(output.leftImage);   title('Left Image')
     subplot(1,2,2); imshow(output.rightImage);  title('Right Image')
-    blockSize=config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
+    config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
     subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
     subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
 

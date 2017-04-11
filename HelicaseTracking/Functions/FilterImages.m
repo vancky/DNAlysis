@@ -3,6 +3,7 @@ function [ output ] = FilterImages( config, inputImage )
     % Step 1: remove the lowst intensity value
     % Step 2: Rescale
     
+       
     output.backgroundFilter=BackgroundFilter(inputImage);
     
     

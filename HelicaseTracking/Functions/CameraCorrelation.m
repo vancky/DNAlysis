@@ -50,14 +50,9 @@ function [ output ] = CameraCorrelation( config, importedImages )
     avgRight=sum(splitImage.rightImage(:))/(halfRow*halfCol);
     avgCam1=sum(output.laserImages{2}.cam1(:))/(config.pixels^2);
     scaleFactor=avgCam1/avgRight;
-
-%     figure;
-%     imshow(output.rightImageCorrected,[])
-%     figure;
-%     imshow(filteredImage,[])
-    
+  
     figure;
-    blockSize=5; %config.checkerBoardSize;           % blocksize for the checkerboard pattern
+    blockSize=config.checkerBoardSizeCamera;           % blocksize for the checkerboard pattern
     
     CompareSplit( scaleFactor*output.rightImageCorrected , output.laserImages{2}.cam1 , blockSize) ; title('Correlated Images from Cam0 and Cam1')
 

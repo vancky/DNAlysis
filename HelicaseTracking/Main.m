@@ -6,11 +6,14 @@ config=Config(config);
 %% Import Images
 fprintf('Importing Images.\n')
 importImages=ImportImages(config);
+importedLaserImages = ImportLaserImages(config);
+%importedNoiseImages = ImportNoiseImages(config);
+[beamshape, test] =   GenerateBeamshape(config); 
 fprintf('Images Imported.\n')
 %% 1. Beamshape Correction
 
-beamshapeCorrection.sum0=BeamshapeCorrection(config, importImages.sum0);
-beamshapeCorrection.sum1=BeamshapeCorrection(config, importImages.sum1);
+beamshapeCorrection.sum0=BeamshapeCorrection(config, beamshape , importImages.sum0 );
+beamshapeCorrection.sum1=BeamshapeCorrection(config, beamshape , importImages.sum1 );
 
 %filterImages=FilterImages(config, beamshapeCorrection.image);
 
@@ -18,7 +21,7 @@ beamshapeCorrection.sum1=BeamshapeCorrection(config, importImages.sum1);
 
 splitCorrelation=SplitCorrelation(config, beamshapeCorrection.sum0 );
 %% import images
-importedImages = ImportLaserImages(config);
+
 %% Cam 0/1 correlation
-cameraCorrelation=CameraCorrelation( config, importedImages );
+cameraCorrelation=CameraCorrelation( config, importedLaserImages );
 %clear importedImages;

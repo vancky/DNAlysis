@@ -5,7 +5,7 @@ function [ output, test ] =GenerateBeamshape( config )
     % 3. Correct for the dust particles (NOTE: REMOVE THIS STEP LATER)
     
     % Step 1
-    
+    fprintf('Calculating the Beamshape.\n')
     cd(config.beamshapeCd);                         % Sets image folder
     directory = dir('*cam0_273*.tiff');                 % Labels all the tiffFiles with cam0 in the current directory
     numFiles = length(directory);                   % Number of individual image
@@ -35,5 +35,6 @@ function [ output, test ] =GenerateBeamshape( config )
     test.beamshapeFilter(test.beamshapeFilter>limit)=1;  
     
     output=test.beamshapeFilter;
+    fprintf('Beamshape calculated.\n')
 end
 
