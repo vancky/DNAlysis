@@ -25,12 +25,12 @@ function [ output ] = PoissGaussFit( inputImage, filterOption )
     cGuess=max(data)/8;              % guess for sigma as 1/8 of the total domain covered by the data
     x=1:max(data);
     
-    start= [ lambdaGuess , bGuess , cGuess ];
+    start1= [ lambdaGuess , bGuess , cGuess ];
     
-    custpdf= @(data, lambda ,  b , c) (1./(c*sqrt(2*pi)))*exp(-((data-b).^2)./(2*c^2))+exp(-lambda)*(lambda.^data)./factorial(data);
+    custpdf1= @(data, lambda ,  b , c) (1./(c*sqrt(2*pi)))*exp(-((data-b).^2)./(2*c^2))+exp(-lambda)*(lambda.^data)./factorial(data);
     
     output.gaussfit=mle(data, 'distribution', 'Normal');
-    output.phat=mle(data, 'pdf' , custpdf, 'start', start);
+    output.phat=mle(data, 'pdf' , custpdf1, 'start', start1);
     
     lambdaHat=output.phat(1);
     bHat=output.phat(2);
@@ -47,25 +47,29 @@ function [ output ] = PoissGaussFit( inputImage, filterOption )
     h=histogram(inputImageFiltered);
     maxHistogram=max(h.Values);           
     
-    lambdaGuess=mean(data);
+    lambda1Guess=mean(data);
+    lambda2Guess=2*mean(data);
     bGuess=max(data)/4;              % guess for mu as 1/4 of the total domain covered by the data
     cGuess=max(data)/8;              % guess for sigma as 1/8 of the total domain covered by the data
     x=1:max(data);
     
-    start= [ lambdaGuess , bGuess , cGuess ];
+    start2= [ lambda1Guess, lambda2Guess , bGuess , cGuess ];
     
-    custpdf= @(data, lambda ,  b , c) (1./(c*sqrt(2*pi)))*exp(-((data-b).^2)./(2*c^2))+exp(-lambda)*(lambda.^data)./factorial(data);
+    custpdf2= @(data, lambda ,  b , c) (1./(c*sqrt(2*pi)))*exp(-((data-b).^2)./(2*c^2))+exp(-lambda1)*(lambda1.^data)./factorial(data)+exp(-lambda2)*(lambda2.^data)./factorial(data);
     
     output.gaussfit=mle(data, 'distribution', 'Normal');
-    output.phat=mle(data, 'pdf' , custpdf, 'start', start);
+    output.phat=mle(data, 'pdf' , custpdf2, 'start', start);
     
-    lambdaHat=output.phat(1);
-    bHat=output.phat(2);
-    cHat=output.phat(3);
+    lambda1Hat=output.phat(1);
+    lambda2Hat=output.phat(2);
+    bHat=output.phat(3);
+    cHat=output.phat(4);
     
-    y= (1./(cHat*sqrt(2*pi)))*exp(-((x-bHat).^2)./(2*cHat^2))+exp(-lambdaHat)*(lambdaHat.^x)./factorial(x);
+    y= (1./(cHat*sqrt(2*pi)))*exp(-((x-bHat).^2)./(2*cHat^2))+exp(-lambda1Hat)*(lambda1Hat.^x)./factorial(x)+exp(-lambda2Hat)*(lambda2Hat.^data)./factorial(data);;
     scaleValue= maxHistogram/max(y);
     plot(x,scaleValue*y)
+    title('One Gaussian Two Poisson fit')
+
     hold off
     
 end
