@@ -23,9 +23,11 @@ function [ output ] = SplitCorrelation( config, inputImage )
     % Find the index of maximum correlation
     
     [maxValue , output.maxIndex]=max(output.correlation(:));
-    [output.rowIndex, output.colIndex] = ind2sub(size(output.correlation),output.maxIndex);  
-    rowCorrection=output.rowIndex-(halfRow+cropsize(1))/2+64;
-    colCorrection=output.colIndex-(halfCol+cropsize(2))/2;
+    [rowIndex, colIndex] = ind2sub(size(output.correlation),output.maxIndex);  
+    rowCorrection=rowIndex-(halfRow+cropsize(1))/2+64;
+    colCorrection=colIndex-(halfCol+cropsize(2))/2;
+    output.rowCorrection=rowCorrection;
+    output.colCorrection=colCorrection; 
     
     % Perform the correction
     
