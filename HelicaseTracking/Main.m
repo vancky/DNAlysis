@@ -5,20 +5,22 @@ config=Config(config);
 
 %% Import Images
 fprintf('Importing Images.\n')
-importSplitCorrelationImages=ImportMultipleImages( config , config.splitCorrelationCd );
-importedCameraCorrelationImages = ImportMultipleImages( config, config.cameraCorrelationCd );
-importedNoiseImages = ImportMultipleImages( config, config.noiseCd );
-[beamshape.cam0, beamshape.cam0test] =   GenerateBeamshape( config, config.beamshapeDirLabelCam0 ); 
-[beamshape.cam1, beamshape.testcam1test] =        GenerateBeamshape( config, config.beamshapeDirLabelCam1 ); 
+importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd );
+importedCameraCorrelationImages =   ImportTwoCameras( config.cameraCorrelationCd );
+importedNoiseImages =               ImportTwoCameras( config.noiseCd );
+%%
+importedBeamshapeImages =           ImportTwoCameras( config.beamshapeCd);
+%[beamshape.cam0, beamshape.cam0test] =   GenerateBeamshape( config, config.beamshapeDirLabelCam0 ); 
+%[beamshape.cam1, beamshape.testcam1test] =        GenerateBeamshape( config, config.beamshapeDirLabelCam1 ); 
 %% Import the helicase and DNA images
-%importedDnaImages=ImportMultipleImages( config , config.dnaCd , 115 );
-importedHelicaseImages=ImportTwoCameras( config.helicaseCd );
+importedDnaImages=      ImportOneCamera( config.dnaCd );
+importedHelicaseImages= ImportOneCamera( config.helicaseCd );
 
 fprintf('Images Imported.\n')
 %% 1. Beamshape Correction
 
-beamshapeCorrection.sum0=BeamshapeCorrection(config, beamshape.cam0 , importSplitCorrelationImages{1}.cam0 );
-beamshapeCorrection.sum1=BeamshapeCorrection(config, beamshape.cam1 , importSplitCorrelationImages{1}.cam1 );
+beamshapeCorrection.sum0=BeamshapeCorrection(config, beamshape.cam0 , importedSplitCorrelationImages{1}.cam0 );
+beamshapeCorrection.sum1=BeamshapeCorrection(config, beamshape.cam1 , importedSplitCorrelationImages{1}.cam1 );
 
 %filterImages=FilterImages(config, beamshapeCorrection.image);
 
