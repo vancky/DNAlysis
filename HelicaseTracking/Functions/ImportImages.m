@@ -1,4 +1,4 @@
-function [ importImages ] = ImportImages( config )
+function [ importImages ] = ImportImages( config , )
     %ImportImage - Imports all images in Matlab
     %We get a set of roughly 300 individual images per measurements
     %These images are kept in one structure (importImage)

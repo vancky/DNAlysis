@@ -1,4 +1,4 @@
-function [ output, test ] =GenerateBeamshape( config )
+function [ output, test ] =GenerateBeamshape( config , dirLabel)
     % Generate Beamshape - Generates matrix with normalized beamshape
     % 1. Import images with the beamshape
     % 2. Normalize this matrix
@@ -7,7 +7,7 @@ function [ output, test ] =GenerateBeamshape( config )
     % Step 1
     fprintf('Calculating the Beamshape.\n')
     cd(config.beamshapeCd);                         % Sets image folder
-    directory = dir('*cam0_273*.tiff');                 % Labels all the tiffFiles with cam0 in the current directory
+    directory = dir(dirLabel);                 % Labels all the tiffFiles with cam0 in the current directory
     numFiles = length(directory);                   % Number of individual image
     
     image=zeros(config.pixels,config.pixels,numFiles, config.dataType);
@@ -21,7 +21,7 @@ function [ output, test ] =GenerateBeamshape( config )
         test.beamshape=test.beamshape+double(image(:,:,i));           % We use double to make sure that the maximum of uint16 isn't reached
     end
     
-    % Step 2
+    % Step 2 - normalize the matrix
     
     test.beamshapeNorm=max(test.beamshape(:))./test.beamshape;
       

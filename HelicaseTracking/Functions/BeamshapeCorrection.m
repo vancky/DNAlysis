@@ -10,7 +10,12 @@ function [ output ] = BeamshapeCorrection( config , beamshape, images )
     
     for i=1:numImages
        output(:,:,i)=double(images(:,:,i)).*beamshape;
+       figure;
+       subplot(1,2,1); imshow(images(:,:,i),[]); title('Input Image');
+       subplot(1,2,2); imshow(output(:,:,i),[]); title('Beamshape Corrected');
     end
+    
+    
     fprintf('Beamshape Corrected.\n')
 end
 

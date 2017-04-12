@@ -16,22 +16,24 @@ function [ output ] = PoissonFit( inputImage , filterOption )
     end
     
     data=inputImageFiltered(:);
-    lamdaHat= poissfit(data);
-    xMin=min(data);
-    xMax=max(data);
-    x=xMin:xMax;
-    y=poisspdf(x, lamdaHat);
+    lambdaHat= poissfit(data);
+    xMin=floor(min(data));
+    xMax=ceil(max(data));
+    x=linspace( xMin , xMax , (xMax-xMin)+1 );
+    y=exp(-lambdaHat)*(lambdaHat.^x)./factorial(x);
+    
     
     figure;
     subplot(1,2,1)
     imshow( inputImageFiltered ,[] )
-    title('The shotnoise image 50ms Camera 0 ')
+    title('The shotnoise image')
     
     subplot(1,2,2)
     hold on
-    h=histogram(inputImageFiltered);
+    edges=[xMin, linspace( xMin+0.5 , xMax-0.5 , (xMax-xMin))];
+    h=histogram(inputImageFiltered,'BinEdges', edges );
     scaleFactor=max(h.Values)/max(y);
-    plot(x,scaleFactor*y,'-')
+    plot(x,scaleFactor*y,'*')
     title('Poisson Fit to Shot Noise')
     xlabel('Photon Intensity')
     ylabel('Counts')

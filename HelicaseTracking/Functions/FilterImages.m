@@ -7,5 +7,6 @@ function [ output ] = FilterImages( config, inputImage )
     output.backgroundFilter=BackgroundFilter(inputImage);
     
     
+    
 end
 
