@@ -1,15 +1,34 @@
-function [ output ] = ImportMultipleImages( config, cdName , dirLabel )
-    %ImportLaserImage - Simultaneously import images from different cameras
+function [ output ] = ImportTwoCameras( config, cdName )
+    % Import Two Cameras - Imports all the images from cam 0 and cam 1
+    % Give as inputs the cd of the folder to import
+
+    numFolders=size(cdName,2);
+
+    for i=1:numFolders
+        fprintf('Importing images from folder %d/%d.\n',i,numFolders);
+        directory = dir( cdName{i});                        % Labels all the tiffFiles with cam0 in the current directory
+        numFiles = length(directory);                    % Number of individual image
+        output{i}=0;
+        for k = 1:numFiles
+            dirK=sprintf( '%s%s%s%s' , directory(k).folder , '\', , directory(k).name )  % finds the k-th directory
+            image=imread(dirK);             %Import the images from cam 0
+            output{i}=output{i}+double(image);
+        end
+        output{i}=output{i}/numFiles;
+    end
+
+
+
+
+%ImportLaserImage - Simultaneously import images from different cameras
     %Input a structure where the fields contain the directories of the diferent lasers
     
     numFolders=size(cdName,2);
-    dir0Check=sprintf('*cam0_%i*.tiff',dirLabel)
-    dir1Check=sprintf('*cam1_%i*.tiff',dirLabel)
     
     for i=1:numFolders
         fprintf('Importing images from folder %d/%d.\n',i,numFolders);
         cd(cdName{i});                                          % Sets image folder
-        directory0 = dir( dir0Check );                        % Labels all the tiffFiles with cam0 in the current directory
+        directory0 = dir( cdName);                        % Labels all the tiffFiles with cam0 in the current directory
         directory1 = dir( dir1Check );                        % Labels all the tiffFiles with cam0 in the current directory
         numFiles0 = length(directory0);                         % Number of individual image
         numFiles1 = length(directory0);
