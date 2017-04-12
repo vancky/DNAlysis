@@ -12,7 +12,7 @@ importedNoiseImages = ImportMultipleImages( config, config.noiseCd );
 [beamshape.cam1, beamshape.testcam1test] =        GenerateBeamshape( config, config.beamshapeDirLabelCam1 ); 
 %% Import the helicase and DNA images
 %importedDnaImages=ImportMultipleImages( config , config.dnaCd , 115 );
-importedHelicaseImages=ImportOneCamera( config.helicaseCd );
+importedHelicaseImages=ImportTwoCameras( config.helicaseCd );
 
 fprintf('Images Imported.\n')
 %% 1. Beamshape Correction

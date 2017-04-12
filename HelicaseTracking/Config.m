@@ -10,7 +10,7 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*cam0_079*');
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*_079*');
     config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytoxafterMCM488');
     
     
