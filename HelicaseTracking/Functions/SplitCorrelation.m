@@ -4,6 +4,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     % 2. Correlate the image, find where correlation is maximal
     % 3. Perform correction based on this correlation
     
+    
     % Split the image horizontal and get dimensions for later computations    
     
     splitImage=SplitImage(inputImage ,1);

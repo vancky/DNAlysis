@@ -17,17 +17,14 @@ function [ output, test ] =GenerateBeamshape( config , inputImages)
       
     % Step 3 - set the dust particles and dark band correction to 1 instead of being very large
     
-    test.beamshapeFilter.cam0=BallSmooth(test.beamshapeNorm.cam0,5);
-    test.beamshapeFilter.cam1=BallSmooth(test.beamshapeNorm.cam1,5);
+    test.beamshapeFilter.=BallSmooth(test.beamshapeNorm.cam0,5);
     
     %histogram(output.beamshapeNorm) Use a histogram to check which limit to
     %use, later on we can use the shotnoise to just set an automatic limit.
     limit=3;
-    test.beamshapeFilter.cam0(test.beamshapeFilter.cam0>limit)=1;  
-    test.beamshapeFilter.cam1(test.beamshapeFilter.cam1>limit)=1;  
+    test.beamshapeFilter(test.beamshapeFilter>limit)=1;  
     
     output=test.beamshapeFilter;
-    
     fprintf('Beamshape calculated.\n')
 end
 

@@ -19,7 +19,7 @@ function [ output ] = ImportTwoCameras( cdName )
         % Import Camera 0
         
         directory0 = dir( cdName0{i});                        % Labels all the tiffFiles with cam0 in the current directory
-        numFiles0 = length(directory0)                    % Number of individual image
+        numFiles0 = length(directory0);                    % Number of individual image
         output{i}.cam0=0;
         for k = 1:numFiles0
             dirK=sprintf( '%s%s%s' , directory0(k).folder , '\' , directory0(k).name );  % finds the k-th directory
@@ -31,7 +31,7 @@ function [ output ] = ImportTwoCameras( cdName )
         % Import Camera 1
         
         directory1 = dir( cdName1{i});                        % Labels all the tiffFiles with cam0 in the current directory
-        numFiles1 = length(directory1)                    % Number of individual image
+        numFiles1 = length(directory1);                    % Number of individual image
         output{i}.cam1=0;
         for k = 1:numFiles1
             dirK=sprintf( '%s%s%s' , directory1(k).folder , '\' , directory1(k).name );  % finds the k-th directory
