@@ -10,6 +10,11 @@ function [ output, test ] =GenerateBeamshape( config , inputImages)
     test.beamshape.cam0=inputImages.cam0;
     test.beamshape.cam1=inputImages.cam1;
     
+    figure;
+    imshow(inputImages.cam0 , []); title('Beamshape camera 0');
+    figure;
+    imshow(inputImages.cam1 , []); title('Beamshape camera 1');
+    
     % Step 2 - normalize the matrix
     
     test.beamshapeNorm.cam0=max(test.beamshape.cam0(:))./test.beamshape.cam0;
@@ -27,6 +32,11 @@ function [ output, test ] =GenerateBeamshape( config , inputImages)
     test.beamshapeFilter.cam1(test.beamshapeFilter.cam1>limit)=1;  
     
     output=test.beamshapeFilter;
+    
+    figure;
+    imshow(output.cam0 , []); title('Beamshape correction camera 0');
+    figure;
+    imshow(output.cam1 , []); title('Beamshape correction matrix camera 1');
     
     fprintf('Beamshape calculated.\n')
 end

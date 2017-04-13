@@ -1,4 +1,4 @@
-function [ output ] = PoissonFit( inputImage , filterOption )
+function [ output ] = PoissonFit( inputImage , filterOption , expTime , cameraNumber )
     % Poisson Fit - Fits a poisson Distribution to an image
     % Give as inputs the image and as a second argument you can choose
     % whether you want to normalise the image,(set the minimum of the image to 0). 
@@ -26,7 +26,8 @@ function [ output ] = PoissonFit( inputImage , filterOption )
     figure;
     subplot(1,2,1)
     imshow( inputImageFiltered ,[] )
-    title('The shotnoise image')
+    text=sprintf('The shotnoise image %ims camera %i', expTime , cameraNumber);
+    title( text )
     
     subplot(1,2,2)
     hold on
