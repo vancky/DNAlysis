@@ -22,17 +22,13 @@ function [ output, test ] =GenerateBeamshape( config , inputImages)
       
     % Step 3 - correct for the dust particles
     
-    test.beamshapeFilter.cam0.leftImage =  medfilt2( test.beamshapeNorm.cam0.leftImage , [10 10] ,  'symmetric' );
-    test.beamshapeFilter.cam0.rightImage = medfilt2( test.beamshapeNorm.cam0.rightImage , [10 10] , 'symmetric');
-    % No need to do this for cam1
-    test.beamshapeFilter.cam1=test.beamshapeNorm.cam1;
+    test.beamshapeFilter.cam0.leftImage=BallSmooth(test.beamshapeNorm.cam0.leftImage,5);
+    test.beamshapeFilter.cam0.rightImage=BallSmooth(test.beamshapeNorm.cam0.rightImage,5);
+    test.beamshapeFilter.cam1=BallSmooth(test.beamshapeNorm.cam1,5);
 
     
-    output=test.beamshapeFilter;
+    output=test.beamshapeNorm;
     
-    figure;
-    subplot(1,2,1); imshow(test.beamshapeNorm.cam0.leftImage , []); title('Beamshape correction camera 0 left NO FILTER');
-    subplot(1,2,2); imshow(test.beamshapeNorm.cam0.rightImage , []); title('Beamshape correction camera 0 right NO FILTER');
     figure;
     subplot(1,2,1); imshow(output.cam0.leftImage , []); title('Beamshape correction camera 0 left');
     subplot(1,2,2); imshow(output.cam0.rightImage , []); title('Beamshape correction camera 0 right');

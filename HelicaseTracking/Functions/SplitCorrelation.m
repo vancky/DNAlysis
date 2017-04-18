@@ -6,7 +6,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     
     
     % Split the image horizontal and get dimensions for later computations    
-    
+
     splitImage=SplitImage(inputImage ,1);
     output.leftImage=splitImage.leftImage;
     output.rightImage=splitImage.rightImage;

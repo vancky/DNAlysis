@@ -34,9 +34,11 @@ function [ config ] = Config( config )
     config.imageSize=40e-6;                 % Size of the image in m
     config.dataType=('uint16');             % The data type of the images
      
+    
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
     config.checkerBoardSizeCamera=5;                % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
+    config.cropOffset=3;                            % Offset used in cropping images
     % No need to edit anything below here!
       
     % Make sure we can use the functions
