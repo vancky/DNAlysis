@@ -1,4 +1,4 @@
-function [ outputImage ] = GenerateCropCoordinates( inputImage )
+function [ output ] = GenerateCropCoordinates( inputImage )
     % GenerateCropCoordinates - finds the coordinates for the black lines
     % in an image from camera 0.
     % Takes as input an (the beamshape in this case) image from camera 0 
@@ -17,22 +17,12 @@ function [ outputImage ] = GenerateCropCoordinates( inputImage )
        diffRight(i)= rowAvgRight(:,i+1)-rowAvgRight(:,i);
     end
     
-    [ value , indexLeftMax]   = max(diffLeft)
-    [ value , indexLeftMin]   = min(diffLeft)
-    [ value , indexRightMax]  = max(diffRight)
-    [ value , indexRightMin]  = min(diffRight)
+    [ value , indexLeftMax]   = max(diffLeft);
+    [ value , indexLeftMin]   = min(diffLeft);
+    [ value , indexRightMax]  = max(diffRight);
+    [ value , indexRightMin]  = min(diffRight);
     
-    figure; 
-    hold on
-    plot( 1:numCol-1 , diffLeft )
-    plot( 1:numCol-1 , diffRight )
-    legend( 'diffLeft' , 'diffRight' )
-    
-    figure;
-    imshow( splitImage.leftImage , [] )
-    figure;
-    imshow( splitImage.rightImage , [] )
-    
-
+    output.left =  [ indexLeftMax , indexLeftMin];
+    output.right = [ indexRightMax , indexRightMin];
 end
 
