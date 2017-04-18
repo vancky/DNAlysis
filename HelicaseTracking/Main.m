@@ -5,15 +5,16 @@ config=Config(config);
 
 
 %% Import Images
-tic
+
 fprintf('Importing Images.\n')
 importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd );
 importedCameraCorrelationImages =   ImportTwoCameras( config.cameraCorrelationCd );
 importedNoiseImages =               ImportTwoCameras( config.noiseCd );
 importedBeamshapeImages =           ImportTwoCameras( config.beamshapeCd);
-importedDnaImages =                 ImportOneCamera( config.dnaCd );
-importedHelicaseImages =            ImportOneCamera( config.helicaseCd );
-toc
+importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
+%%
+importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'all' );
+%save('.\MatFiles\CleanTests\HelicaseImages' , 'importedHelicaseImages')
 fprintf('Images Imported.\n')
 %% Generate the crop Coordinates from the beamshape image
 config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam0);
@@ -38,3 +39,12 @@ cameraCorrelation=CameraCorrelation( config, importedCameraCorrelationImages );
 %% Match the helicases with DNA
 
 matchDnaHelicase=MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
+
+%% Tests with the clean algorith
+
+load('.\MatFiles\CleanTests\HelicaseImages.mat')
+%%
+[ clean , test ] = Clean( config , importedHelicaseImages{1}(:,:,1) );
+
+
+

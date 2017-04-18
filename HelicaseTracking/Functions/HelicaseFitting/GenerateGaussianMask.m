@@ -1,35 +1,29 @@
-function [ generateGaussianMask ] = GenerateGaussianMask( config, clean , indexCheck )
+function [ output ] = GenerateGaussianMask( config, brightFinder , fitHelicases )
     % GenerateGaussianMask
     % Generates a Gaussian mask based on the fitting parameters.
     % if the fit has failed (can be seen by exitflag) simply replace the
     % patch with background noise (0).
-    brightFinder=clean.brightFinder;
-    fitGaussian=clean.fitGaussian;
     
-    rowIndexCheck=indexCheck(1);
-    colIndexCheck=indexCheck(2);
-    rowIndex=brightFinder.rowIndex;
-    colIndex=brightFinder.colIndex;
-    halfPatchSize=config.brightFinderSize; 
-    domainSize=config.imageSize;
+    rowIndex = brightFinder.rowIndex;
+    colIndex = brightFinder.colIndex;
+    fitSize  = config.fitSize; 
+    domainSize = brightFinder.imageSize;
+    fitParameters(1:2) = fitHelicases.gaussmlev.P(1:2);
+    fitParameters(3) = config.sigma;
+    fitParameters(4) = brightFinder.maxValue-fitHelicases.gaussmlev.P(4);
     
     % make a big mask to make sure that patches near the edge don't cause trouble
-    bigMask=zeros(domainSize+2*halfPatchSize);         % initiate the mask
-    if  rowIndexCheck==rowIndex && colIndex == colIndexCheck      %found spot is the same, reject!
-        generateGaussianMask.gaussian = brightFinder.matrix;
-    else 
-        if fitGaussian.exitflag ==0                     % if the fit has failed, simply set the mask to the patch itself, so that it will be removed.
-            generateGaussianMask.gaussian = brightFinder.matrix;
-        else
-            generateGaussianMask.gaussian=GenerateGaussian(config, fitGaussian.fit);  % generate the Gaussian mask
-        end
-    end
-    bigMask(rowIndex:rowIndex+2*halfPatchSize, colIndex:colIndex+2*halfPatchSize)=generateGaussianMask.gaussian; % add the Gaussian to the big mask
+    bigMask = zeros( domainSize(1)+2*fitSize, domainSize(2)+2*fitSize );         % initiate the mask
+ 
+    output.gaussian = GenerateGaussian( config, fitParameters );  % generate the Gaussian mask
+
+    bigMask( rowIndex : rowIndex+2*fitSize , colIndex : colIndex+2*fitSize ) = output.gaussian; % add the Gaussian to the big mask
     
     % now retrieve the correct mask from the big mask
     
-    generateGaussianMask.mask(1:domainSize , 1:domainSize )=bigMask(1+halfPatchSize:domainSize+halfPatchSize , 1+halfPatchSize:domainSize+halfPatchSize); 
-    generateGaussianMask.mask=uint16(generateGaussianMask.mask);
+    output.mask( 1:domainSize(1) , 1:domainSize(2) )= ...
+        bigMask( 1+fitSize : domainSize(1)+fitSize , 1+fitSize : domainSize(2)+fitSize ); 
+    output.mask = uint16(output.mask);
     
 end
 

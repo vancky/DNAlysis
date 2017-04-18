@@ -16,6 +16,7 @@ function [ output ] = BrightFinder( config, inputImage  )
      % obtain the value of the brightest spot and the index
      [ maxValue , maxIndex ] = max(imageConv(:));        
      [ rowIndex , colIndex ] = ind2sub( imageSize , maxIndex);
+     output.maxValue = inputImage( rowIndex, colIndex );
      
      % We still have to account for when the spot is near the edges!
      % We do this by setting zero value outside
@@ -24,6 +25,7 @@ function [ output ] = BrightFinder( config, inputImage  )
      bigImage( fitSize+1 : fitSize+imageSize(1) , fitSize+1 : fitSize+imageSize(2) )= inputImage;
      
      output.matrix = bigImage( rowIndex : rowIndex+2*fitSize , colIndex : colIndex+2*fitSize );
+     output.imageSize = imageSize;
      output.rowIndex = rowIndex;
      output.colIndex = colIndex;
 end

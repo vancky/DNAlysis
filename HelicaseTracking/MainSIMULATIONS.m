@@ -28,7 +28,7 @@ fprintf('The standard deviation is %d.\n', analysis.std)
 fprintf('The SNR is %d.\n', config.snRatio)
 
 
-    %% Visualisation
+%% Visualisation
 
 post.sigma=analysis.std;
 post.bias=analysis.bias;
