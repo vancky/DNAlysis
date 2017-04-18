@@ -1,4 +1,4 @@
-function [ brightFinder ] = BrightFinder( config, image  )
+function [ output ] = BrightFinder( config, inputImage  )
      % BrightFinder - Finds the brightest spot in an image
      % Finds the brightest spot in an image, then extracts a submatrix 
      % centered around this point from the original image. The size of this
@@ -7,32 +7,24 @@ function [ brightFinder ] = BrightFinder( config, image  )
      % NOTE: We use a convolution of the fitsize to make sure that at low SNR single
      % poisson background dots will not be mistaken for the gaussian profile.
      
-     fitSize=config.fitSize;            % half of the total patch
-     imageSize=config.pixels;
-     C=1/(fitSize^2)*ones(fitSize);             %Matrix for convolution
-     imageConv=conv2( single(image), C , 'same');
-     
-     [brightFinder.value,brightFinder.index]=max(imageConv(:));     % obtain the value of the brightest spot and the index
+     fitSize = config.fitSize;                        % Half of the total patch
+     imageSize = size( inputImage );
+     C = 1/(fitSize^2)*ones(fitSize);                 % Matrix for convolution
+     imageConv = conv2( single( inputImage ), C , 'same');
      
      
-     rowIndex=mod(brightFinder.index,imageSize);      % find the row of the index
-     if rowIndex==0                                             % our numbers range 1-512 so replace 0 by 512
-         rowIndex=imageSize;
-     end
-     colIndex=ceil(brightFinder.index/imageSize);                     % find the column of the index
+     % obtain the value of the brightest spot and the index
+     [ maxValue , maxIndex ] = max(imageConv(:));        
+     [ rowIndex , colIndex ] = ind2sub( imageSize , maxIndex);
      
      % We still have to account for when the spot is near the edges!
-     % We do this by mirroring the edges with the function MirrorImage
+     % We do this by setting zero value outside
      
-     %mirrorImage=MirrorImage(image,imageSize,config.brightFinderSize);
-     %____MIRROR IMAGE CAUSES ERRORS!!! NOW WE USE ZERO VALUE OUTSIDE___
-     halfPatchSize=config.fitSize;         % actually this is half of the patch size
-     domainSize=config.pixels;
-     bigImage=zeros(domainSize+2*halfPatchSize);         % initiate the mask
-     bigImage( halfPatchSize+1:halfPatchSize+domainSize , halfPatchSize+1:halfPatchSize+domainSize)=image;
+     bigImage=zeros( imageSize(1)+2*fitSize , imageSize(2)+2*fitSize );
+     bigImage( fitSize+1 : fitSize+imageSize(1) , fitSize+1 : fitSize+imageSize(2) )= inputImage;
      
-     brightFinder.matrix=bigImage(rowIndex:rowIndex+2*halfPatchSize,colIndex:colIndex+2*halfPatchSize);
-     brightFinder.rowIndex=rowIndex;
-     brightFinder.colIndex=colIndex;
+     output.matrix = bigImage( rowIndex : rowIndex+2*fitSize , colIndex : colIndex+2*fitSize );
+     output.rowIndex = rowIndex;
+     output.colIndex = colIndex;
 end
 

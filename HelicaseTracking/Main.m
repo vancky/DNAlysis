@@ -5,6 +5,7 @@ config=Config(config);
 
 
 %% Import Images
+tic
 fprintf('Importing Images.\n')
 importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd );
 importedCameraCorrelationImages =   ImportTwoCameras( config.cameraCorrelationCd );
@@ -12,7 +13,7 @@ importedNoiseImages =               ImportTwoCameras( config.noiseCd );
 importedBeamshapeImages =           ImportTwoCameras( config.beamshapeCd);
 importedDnaImages =                 ImportOneCamera( config.dnaCd );
 importedHelicaseImages =            ImportOneCamera( config.helicaseCd );
-
+toc
 fprintf('Images Imported.\n')
 %% Generate the crop Coordinates from the beamshape image
 config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam0);

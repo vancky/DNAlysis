@@ -39,6 +39,10 @@ function [ config ] = Config( config )
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
     config.checkerBoardSizeCamera=5;                % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
     config.cropOffset=3;                            % Offset used in cropping images
+    
+    config.fitSize= 5;                       % Half size  of the patch where we are going to fit Gaussians.
+                                             % For instance if the patch is 25x25 choose 12
+                                             % A guideline for this is 3*sigma
     % No need to edit anything below here!
       
     % Make sure we can use the functions
@@ -48,6 +52,7 @@ function [ config ] = Config( config )
     addpath ./Functions/HelicaseFitting
     addpath ./Functions/BeamshapeCorrection
     addpath ./Functions/Filters
+    addpath ./Functions/LuckyImaging
     addpath(genpath('./Functions/gaussmlev2'))
 end
 
