@@ -43,13 +43,15 @@ matchDnaHelicase=MatchDnaHelicase( config, splitCorrelation , importedHelicaseIm
 %% Tests with the clean algorith
 
 N=size( importedHelicaseImages{1} , 3 );
-
+originalImage=0;
 for i=1:N
     crop = CropSplitImage( config , importedHelicaseImages{1}(:,:,i) );
     correctionSmooth = BallSmooth( helicases(:,:,i) , 30);
     correction = max(correctionSmooth(:))./correctionSmooth;
     helicases(:,:,i)= correction.*crop.leftImage;
+    originalImage=originalImage+helicases(:,:,i);
 end
+
 %% Clean and lucky imaging
 tic
 parfor i=1:N
@@ -58,10 +60,9 @@ end
 toc
 %%
 finalImage=0;
-originalImage=0;
+
 for i=1:N
    finalImage=finalImage+clean{i}.newImage;
-   originalImage=originalImage+helicases(:,:,i);
 end
 
 figure; 
