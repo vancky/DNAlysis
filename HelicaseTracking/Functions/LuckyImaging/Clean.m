@@ -6,13 +6,16 @@ function [ output , test ] = Clean( config , inputImage )
     %    original image (IF fit has failed replace with background intensity)
     % 4. Repeat 1-3 until a treshold is reached
     
-    thresholdValue = 150;
-    threshold = 2*thresholdValue;
     
-    %while threshold >= thresholdValue
+    thresholdValue = 180;
+    threshold = 2*thresholdValue;
+    loopImage=inputImage;
+    newImage=0; 
+    
+    while threshold >= thresholdValue
         % Step 1 find the brightest pixels, extract spots    
-        test.brightFinder = BrightFinder( config, inputImage );
-        threshold = test.brightFinder.maxValue                     % update threshold value
+        test.brightFinder = BrightFinder( config, loopImage );
+        threshold = test.brightFinder.maxValue;                     % update threshold value
     
         % Fit the spot!
       
@@ -21,9 +24,18 @@ function [ output , test ] = Clean( config , inputImage )
         test.generateMask = GenerateGaussianMask( config , test.brightFinder , test.fitHelicases );
     
 
-   %          image=image-clean.generateGaussianMask.mask;                                                    % step 3
-  
-    output=3;
+        loopImage=loopImage-test.generateMask.mask;                                                    % step 3
+        newImage=newImage+test.generateMask.mask;
+    end
+    
+    output.loopImage=loopImage;
+    output.newImage=newImage;
+
+    
+    %figure; 
+    %subplot(1,2,1); imshow( output.loopImage , [] ); title('Loop Image')
+    %subplot(1,2,2); imshow( output.newImage , [] ); title('New Image')
+    
 
 end
 

@@ -9,12 +9,12 @@ function [ output ] = BrightFinder( config, inputImage  )
      
      fitSize = config.fitSize;                        % Half of the total patch
      imageSize = size( inputImage );
-     C = 1/(fitSize^2)*ones(fitSize);                 % Matrix for convolution
-     imageConv = conv2( single( inputImage ), C , 'same');
+     %C = 1/(fitSize^2)*ones(fitSize);                 % Matrix for convolution
+     %imageConv = conv2( single( inputImage ), C , 'same');
      
      
      % obtain the value of the brightest spot and the index
-     [ maxValue , maxIndex ] = max(imageConv(:));        
+     [ maxValue , maxIndex ] = max(inputImage(:));        
      [ rowIndex , colIndex ] = ind2sub( imageSize , maxIndex);
      output.maxValue = inputImage( rowIndex, colIndex );
      

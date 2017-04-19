@@ -23,7 +23,7 @@ function [ output ] = GenerateGaussianMask( config, brightFinder , fitHelicases 
     
     output.mask( 1:domainSize(1) , 1:domainSize(2) )= ...
         bigMask( 1+fitSize : domainSize(1)+fitSize , 1+fitSize : domainSize(2)+fitSize ); 
-    output.mask = uint16(output.mask);
+    output.mask = (output.mask);
     
 end
 
