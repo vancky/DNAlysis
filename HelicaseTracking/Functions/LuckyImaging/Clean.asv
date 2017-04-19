@@ -1,4 +1,4 @@
-function [ output , test ] = Clean( config , inputImage )
+function [ output , test ] = Clean( config , inputImage , thresholdValue )
     % CLEAN Algorithm
     % 1. Find brightest pixel in each image, extract nearby patch
     % 2. Fit 2D Gaussian to the patch
@@ -7,14 +7,13 @@ function [ output , test ] = Clean( config , inputImage )
     % 4. Repeat 1-3 until a treshold is reached
     
     
-    thresholdValue = 150;
     threshold = 2*thresholdValue;
     loopImage=inputImage;
     newImage=0; 
-    
+    count = 10;
     while threshold >= thresholdValue
         % Step 1 find the brightest pixels, extract spots    
-        test.brightFinder = BrightFinder( config, inputImage );
+        test.brightFinder = BrightFinder( config, loopImage );
         threshold = test.brightFinder.maxValue                     % update threshold value
     
         % Fit the spot!
@@ -32,9 +31,9 @@ function [ output , test ] = Clean( config , inputImage )
     output.newImage=newImage;
 
     
-    figure; 
-    subplot(1,2,1); imshow( output.loopImage , [] ); title('')
-    sublot()
+    %figure; 
+    %subplot(1,2,1); imshow( output.loopImage , [] ); title('Loop Image')
+    %subplot(1,2,2); imshow( output.newImage , [] ); title('New Image')
     
 
 end

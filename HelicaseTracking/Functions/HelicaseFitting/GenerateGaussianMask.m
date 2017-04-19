@@ -10,7 +10,7 @@ function [ output ] = GenerateGaussianMask( config, brightFinder , fitHelicases 
     domainSize = brightFinder.imageSize;
     fitParameters(1:2) = fitHelicases.gaussmlev.P(1:2);
     fitParameters(3) = config.sigma;
-    fitParameters(4) = brightFinder.maxValue-fitHelicases.gaussmlev.P(4);
+    fitParameters(4) = brightFinder.maxValue;
     
     % make a big mask to make sure that patches near the edge don't cause trouble
     bigMask = zeros( domainSize(1)+2*fitSize, domainSize(2)+2*fitSize );         % initiate the mask

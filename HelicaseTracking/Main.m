@@ -25,19 +25,11 @@ config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam
 
 %filterImages=FilterImages(config, beamshapeCorrection.image);
 
-%% Shot Noise
+%% Correlations
 
-DisplayShotNoise( config, importedNoiseImages);
-
-%% 2. Split Image Correlation (cam0)
-
+%DisplayShotNoise( config, importedNoiseImages);
 splitCorrelation=SplitCorrelation(config, beamshapeCorrection.cam0 );
-
-%% Cam 0/1 correlation
 cameraCorrelation=CameraCorrelation( config, importedCameraCorrelationImages );
-
-%% Match the helicases with DNA
-
 matchDnaHelicase=MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
 
 %% Tests with the clean algorith
@@ -51,11 +43,27 @@ for i=1:N
     helicases(:,:,i)= correction.*crop.leftImage;
     originalImage=originalImage+helicases(:,:,i);
 end
+originalImage=originalImage/300;
+
+%% Stack images to better see helicases
+
+stackSize = 10;
+numStacks = N/stackSize;
+for i=1:numStacks
+    for k=1:stackSize
+        stackHelicases(:,:,i)=helicases(:,:,k+(i-1)*stackSize);
+        stackHelicases(:,:,i)=BackgroundFilter(stackHelicases(:,:,i));
+    end
+end
+
+
 
 %% Clean and lucky imaging
 tic
-parfor i=1:N
-    [ clean{i} , test ] = Clean( config , helicases(:,:,i) ); 
+thresholdFinder= ThresholdFinder(originalImage);
+%%
+parfor i=1:1
+    [ clean{i} , test ] = Clean( config , stackHelicases(:,:,i) , thresholdFinder.threshold ); 
 end
 toc
 %%

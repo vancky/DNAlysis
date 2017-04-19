@@ -37,6 +37,7 @@ function [ output ] = ThresholdFinder( inputImage )
     [minDiff , minIndex] = min(totDiff);
     
     output.threshold = sortedImage(minIndex);
+    output.largeThreshold = (maxImage+output.threshold)/2;
     output.filteredImage = normImage;
     output.filteredImage( normImage < output.threshold ) = 0;
       

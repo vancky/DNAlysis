@@ -37,17 +37,19 @@ function [ output ] = ThresholdFinder( inputImage )
     [minDiff , minIndex] = min(totDiff);
     
     output.threshold = sortedImage(minIndex);
+    output. = (maxImage-output.threshold)/2
     output.filteredImage = normImage;
     output.filteredImage( normImage < output.threshold ) = 0;
       
     
     figure;
     hold on
-    plot(sortedImage)
-    plot(x, y1 , '-' , x, y2 , '-')
+    plot( x ,sortedImage , x, y1 , x, y2 )
+    legend('Sorted Image' , 'Lower Tangent Line' , 'Upper Tangent Line')
     plot(minIndex , output.threshold , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'b', 'MarkerFaceColor' , 'b')
+    plot(intersection(1), intersection(2) , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'k', 'MarkerFaceColor' , 'k')
     ylim([0 maxImage])
-    xlabel('Sorted Pixels')
+    xlabel('Pixels')
     ylabel('Intensity Value')
     title('Threshold Finder')
     hold off
@@ -55,7 +57,9 @@ function [ output ] = ThresholdFinder( inputImage )
     
     figure; 
     subplot(1,2,1); imshow(normImage , [0 maxImage]);
+    title('Normalized Input Image')
     subplot(1,2,2); imshow(output.filteredImage, [0 maxImage]);
+    title('Thresholded Image')
 
 end
 
