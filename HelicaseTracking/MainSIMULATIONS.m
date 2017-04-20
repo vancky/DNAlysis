@@ -17,7 +17,7 @@ importImages=ImportImages(config);
 
 %% Track the Helicases
 
-helicaseFitter=HelicaseFitter(config, simulateImages);
+helicaseFitter=HelicaseFitterSimulations(config, simulateImages);
 
 %% Analysis
 

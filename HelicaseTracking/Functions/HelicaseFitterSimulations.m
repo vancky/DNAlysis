@@ -1,4 +1,4 @@
-function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
+function [ helicaseFitter ] = HelicaseFitterSimulations( config, simulateImages )
     %Helicase Fitter: Fits a gaussian for the different helicases
     % We can use the CLEAN algorithm for this purpose,just with a higher threshold :)
         % CLEAN Algorithm
@@ -33,7 +33,7 @@ function [ helicaseFitter ] = HelicaseFitter( config, simulateImages )
     helicaseFitter.gaussmlev.t=t;
     
     % compute the fitted locations
-    helicaseFitter.fitLocation= helicaseFitter.spotIndex+helicaseFitter.gaussmlev.P(:,1:2)-config.fitSize; %[Y,X]
+    helicaseFitter.fitLocation= helicaseFitter.spotIndex+helicaseFitter.gaussmlev.P(:,1:2)-config.fitSize; %[Y,X] 
         
 end
 

@@ -12,7 +12,7 @@ function [ output , test ] = Clean( config , inputImage , thresholdValue )
     newImage=0; 
     count = 1;
     
-    while (threshold >= thresholdValue) && ( count<19 )
+    while (threshold >= 1.5*thresholdValue) && ( count<4 )
         % Step 1 find the brightest pixels, extract spots    
         test.brightFinder = BrightFinder( config, loopImage );
         threshold = test.brightFinder.maxValue                     % update threshold value
@@ -20,7 +20,6 @@ function [ output , test ] = Clean( config , inputImage , thresholdValue )
         % Fit the spot!
       
         test.fitHelicases = FitHelicases( config , test.brightFinder );
-    
         test.generateMask = GenerateGaussianMask( config , test.brightFinder , test.fitHelicases );
     
 

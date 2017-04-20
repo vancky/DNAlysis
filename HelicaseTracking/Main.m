@@ -28,17 +28,19 @@ config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam
 %% Correlations
 
 %DisplayShotNoise( config, importedNoiseImages);
-splitCorrelation=SplitCorrelation(config, beamshapeCorrection.cam0 );
-cameraCorrelation=CameraCorrelation( config, importedCameraCorrelationImages );
-matchDnaHelicase=MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
+%splitCorrelation  = SplitCorrelation(config, beamshapeCorrection.cam0 );
+cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages );
+matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
 
 %% Tests with the clean algorith
 
-N=size( importedHelicaseImages{1} , 3 );
-originalImage=0;
+N = size( importedHelicaseImages{1} , 3 );
+originalImage = 0;
+imageWidth = config.cropCoordinates.left(2)-config.cropCoordinates.left(1)-2*config.cropOffset+1;
+helicases = zeros( config.pixels , imageWidth , N );
 for i=1:N
     crop = CropSplitImage( config , importedHelicaseImages{1}(:,:,i) );
-    correctionSmooth = BallSmooth( helicases(:,:,i) , 30);
+    correctionSmooth = BallSmooth( crop.leftImage , 30) ;
     correction = max(correctionSmooth(:))./correctionSmooth;
     helicases(:,:,i)= correction.*crop.leftImage;
     originalImage=originalImage+helicases(:,:,i);
@@ -47,11 +49,12 @@ originalImage=originalImage/300;
 
 %% Stack images to better see helicases
 
-stackSize = 10;
+stackSize = 1;
 numStacks = N/stackSize;
+stackHelicases=zeros( config. pixels , imageWidth , numStacks );
 for i=1:numStacks
     for k=1:stackSize
-        stackHelicases(:,:,i)=helicases(:,:,k+(i-1)*stackSize);
+        stackHelicases(:,:,i)=stackHelicases(:,:,i)+helicases(:,:,k+(i-1)*stackSize);
         stackHelicases(:,:,i)=BackgroundFilter(stackHelicases(:,:,i));
     end
 end
@@ -59,11 +62,12 @@ end
 
 
 %% Clean and lucky imaging
-tic
+
 thresholdFinder= ThresholdFinder(originalImage);
 %%
+tic
 parfor i=1:1
-    [ clean{i} , test ] = Clean( config , stackHelicases(:,:,i) , thresholdFinder.threshold ); 
+    [ clean{i} , test{i} ] = Clean( config , stackHelicases(:,:,i) , thresholdFinder.threshold ); 
 end
 toc
 %%
