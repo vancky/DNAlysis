@@ -32,6 +32,7 @@ config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam
 cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages );
 matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
 
+%% DOWN HERE IS TESTING NEED TO PUT IN A BIG FUNCTION LATER ON!!!
 %% Tests with the clean algorith
 
 N = size( importedHelicaseImages{1} , 3 );
@@ -55,28 +56,44 @@ stackHelicases=zeros( config. pixels , imageWidth , numStacks );
 for i=1:numStacks
     for k=1:stackSize
         stackHelicases(:,:,i)=stackHelicases(:,:,i)+helicases(:,:,k+(i-1)*stackSize);
-        stackHelicases(:,:,i)=BackgroundFilter(stackHelicases(:,:,i));
     end
+    stackHelicases(:,:,i)=stackHelicases(:,:,i)/stackSize;
+    stackHelicases(:,:,i)=BackgroundFilter(stackHelicases(:,:,i));
 end
-
 
 
 %% Clean and lucky imaging
 
-thresholdFinder= ThresholdFinder(originalImage);
+thresholdFinder= ThresholdFinder(stackHelicases(:,:,1));
 %%
 tic
-parfor i=1:1
-    [ clean{i} , test{i} ] = Clean( config , stackHelicases(:,:,i) , thresholdFinder.threshold ); 
+parfor i=1:numStacks
+    i
+    [ clean{i} ] = Clean( config , stackHelicases(:,:,i) , thresholdFinder.largeThreshold ); 
 end
 toc
 %%
-finalImage=0;
+cleanImage = 0;
 
-for i=1:N
-   finalImage=finalImage+clean{i}.newImage;
+for i=1:numStacks
+   cleanImage = cleanImage+clean{i}.newImage;
 end
+cleanImage = finalImage/numStacks;
 
 figure; 
 subplot(1,2,1); imshow( originalImage ,[]); title('stacking of individual images')
-subplot(1,2,2); imshow( finalImage ,[]); title('after clean algorithm')
+subplot(1,2,2); imshow( cleanImage ,[]); title('after clean algorithm')
+
+%%  lucky imaging
+tic
+luckyImage=0;
+for i=1:numStacks
+    lucky{i} = Lucky( config , clean{i} );
+    luckyImage = luckyImage+lucky{i}.luckyImage;
+end
+luckyImage = luckyImage/numStacks;
+toc
+
+figure; 
+subplot(1,2,1); imshow( cleanImage ,[]); title('Clean Algorithm')
+subplot(1,2,2); imshow( luckyImage ,[]); title('Lucky Algorithm')

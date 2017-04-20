@@ -11,15 +11,15 @@ function [ output ] = FitHelicases( config , brightFinder )
     
     %   Fit and calculate speed
     
-    [P , CRLB , LL , t]=gaussmlev2( spot , PSFsigma, iterations, fittype);
+    [P , CRLB , LL , t] = gaussmlev2( spot , PSFsigma, iterations, fittype);
     
-    output.gaussmlev.P=P;
-    output.gaussmlev.CRLB=CRLB;
-    output.gaussmlev.LL=LL;
-    output.gaussmlev.t=t;
+    output.gaussmlev.p = P;
+    output.gaussmlev.crlb = CRLB;
+    output.gaussmlev.logLikelihood = LL;
+    output.gaussmlev.t = t;
     
     % compute the fitted locations
-    output.fitLocation= spotIndex+output.gaussmlev.P(:,1:2)-config.fitSize; %[Y,X]
+    output.fitLocation= spotIndex+output.gaussmlev.p(:,1:2)-config.fitSize; %[Y,X]
 
 end
 
