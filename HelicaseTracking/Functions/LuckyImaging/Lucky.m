@@ -9,7 +9,7 @@ function [ output ] = Lucky( config , clean )
     lengthCrlb = size( clean.crlb , 1);
     xyCrlb = sqrt(clean.crlb(:,1).^2+clean.crlb(:,2).^2);
     sortedCrlb = sort(xyCrlb);
-    threshold = sortedCrlb( round(lengthCrlb*0.2) );
+    threshold = sortedCrlb( round(lengthCrlb*config.luckyThreshold) );
     luckyIndexes =  find( xyCrlb < threshold );
     numLuckyGaussians = length(luckyIndexes);
     
@@ -19,7 +19,7 @@ function [ output ] = Lucky( config , clean )
     for i = 1:numLuckyGaussians
         index = luckyIndexes(i);
         generateGaussian = GenerateGaussianMask( config, brightFinder{index} , fitHelicases{index} ) ;
-        output.luckyImage = output.luckyImage+generateGaussian.mask;
+        output.luckyImage = output.luckyImage+uint32(generateGaussian.mask);
     end
         
 end

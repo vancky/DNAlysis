@@ -27,7 +27,7 @@ function [ output ] = Clean( config , inputImage , thresholdValue )
         generateMask = GenerateGaussianMask( config , brightFinder , fitHelicases );
     
 
-        loopImage=loopImage-generateMask.mask;
+        loopImage=loopImage-uint16(generateMask.mask);
         loopImage(loopImage<0)=0;
         newImage=newImage+generateMask.mask;
         count=count+1;

@@ -22,7 +22,7 @@ function [ output ] = ImportOneCamera( cdName , importType )
                 for k = 1:numFiles
                     dirK=sprintf( '%s%s%s' , directory(k).folder , '\' , directory(k).name );  % finds the k-th directory
                     image=imread(dirK);             %Import the images from cam 0
-                    output{i}(:,:,k)=double(image);
+                    output{i}(:,:,k)=(image);
                 end
             otherwise
                 fprintf('Specify importtype.\n')
