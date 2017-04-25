@@ -14,13 +14,13 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*cam0_079_0*');
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytoxafterMCM488*\*cam0_115_0*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\11-device1804B-C1-sytox-02*\*cam0_103_0*');
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\11-device1804B-C1-sytox-02-488only*\*cam0_105_0*');
     
     
     % Directories for correcting Data
     config.beamshapeCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres488AfcontinuiosTrue*\*273_0*');
-    config.splitCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED*\*cam0_193_0*');
+    config.splitCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
     config.cameraCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*184_0*');
     config.cameraCorrelationCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*187_0*');
     config.cameraCorrelationCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*190_0*');

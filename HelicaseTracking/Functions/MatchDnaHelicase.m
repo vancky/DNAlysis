@@ -2,14 +2,7 @@ function [ output ] = MatchDnaHelicase( config, splitCorrelation, helicaseImage 
     %  Helicase Dna Overlay - Stacks two images of Helicases and DNA
     %  Detailed explanation goes here
     
-    % Perform beamshapeCorrection
-    %helicaseImageBeamshape=beamshape.cam0.*helicaseImage;
-    %dnaImageBeamshape=beamshape.cam0.*dnaImage;    
-    
-    %figure; 
-    %subplot(1,2,1);  imshow(helicaseImage, []); title('Helicase Image')
-    %subplot(1,2,2);  imshow(helicaseImageBeamshape, []); title('With beamshape correction')
-    
+
     % Split the images
     
     helicaseSplit = SplitImage(helicaseImage ,1 );
@@ -34,8 +27,8 @@ function [ output ] = MatchDnaHelicase( config, splitCorrelation, helicaseImage 
 
     for i=1:halfCol
         for j=1:halfRow
-            if (j-rowCorrection > 0 && j-rowCorrection<=config.pixels) && (i-colCorrection > 0 && i-colCorrection <=config.pixels)
-                helicaseImageShift( j-rowCorrection ,i-colCorrection)=helicaseImageCorrect(j,i);
+            if (j+rowCorrection > 0 && j+rowCorrection<=config.pixels) && (i+colCorrection > 0 && i+colCorrection <=config.pixels)
+                helicaseImageShift( j+rowCorrection ,i+colCorrection)=helicaseImageCorrect(j,i);
             end
         end
     end
