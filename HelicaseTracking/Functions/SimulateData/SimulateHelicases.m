@@ -29,7 +29,7 @@ function [ output ] = SimulateHelicases( config )
            helicase{i}.parameters(3)=config.sigma;                                   % set sigma and the scaleValue
            helicase{i}.parameters(4)=config.scaleValue;                                   % set sigma and the scaleValue
            helicase{i}.parameters(1:2)=helicase{i}.position(1:2,k);                            % Update the X,Y position
-           gaussian=uint16(GenerateGaussian(config.pixels, helicase{i}.parameters));           % Generate the helicase as gaussians, inputs are (size , [mu_x , mu_y , sigma , scaleValue])
+           gaussian=uint16(GenerateSimulationMask(config, helicase{i}.parameters));           % Generate the helicase as gaussians, inputs are (size , [mu_x , mu_y , sigma , scaleValue])
            sumImage=sumImage+gaussian;
        end
        output.image{k}=sumImage;

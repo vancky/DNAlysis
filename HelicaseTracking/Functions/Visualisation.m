@@ -28,5 +28,20 @@ function [ output_args ] = Visualisation( config, simulateImages , helicaseFitte
        plot(xdot, ydot, 'r.' , 'MarkerSize' , 5);
        hold off
     end
+    
+    figure;
+    subplot(2,2,1); imshow( simulateImages.simulateHelicases.image{1} , [] ); title('Helicase Simulation')
+    subplot(2,2,2); imshow( simulateImages.noiseImage(:,:,1) , [] ); title('Add Noise')
+    ydot=helicaseFitter.fitLocation(1,1);
+    xdot=helicaseFitter.fitLocation(1,2);
+    subplot(2,2,3); imshow( simulateImages.noiseImage(:,:,1) , [] ); title('Track the Helicase')
+    hold on
+    plot(xdot, ydot, 'r.' , 'MarkerSize' , 5);
+    hold off
+    subplot(2,2,4); imshow( simulateImages.noiseImage(:,:,1) , [] ); title('Zoom in')
+    hold on
+    plot(xdot, ydot, 'r.' , 'MarkerSize' , 20);
+    hold off
+    
 end
 
