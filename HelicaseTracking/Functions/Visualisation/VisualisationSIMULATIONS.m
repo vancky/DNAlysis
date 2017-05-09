@@ -1,4 +1,4 @@
-function [ output_args ] = Visualisation( config, simulateImages , helicaseFitter , analysis, post )
+function [ output_args ] = VisualisationSIMULATIONS( config, simulateImages , helicaseFitter , analysis, post )
     %VISUALISATION Summary of this function goes here
     %   Detailed explanation goes here
 

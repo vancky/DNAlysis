@@ -11,10 +11,11 @@ importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd ,
 %%
 importedCameraCorrelationImages =   ImportTwoCameras( config.cameraCorrelationCd );
 importedNoiseImages =               ImportTwoCameras( config.noiseCd );
-importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
-%%
 importedBeamshapeImages =           ImportTwoCameras( config.beamshapeCd);
-importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
+%%
+
+importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
+importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'all' );
 %save('.\MatFiles\CleanTests\HelicaseImages' , 'importedHelicaseImages')
 fprintf('Images Imported.\n')
 %% Generate the crop Coordinates from the beamshape image
@@ -42,10 +43,10 @@ tic
 
 cleanImage = 0;
 
-cleanThreshold = luckyPre.thresholdFinder.largeThreshold;
+cleanThreshold = luckyPre.thresholdFinder.threshold;
 numStacks = luckyPre.numStacks;
 parfor i=1:numStacks
-    i
+    fprintf( 'clean Progress %i/%i.\n', i , numStacks)
     [ clean{i} ] = Clean( config , luckyPre.stackHelicases(:,:,i) , cleanThreshold ); 
     cleanImage = cleanImage+clean{i}.newImage;
 end

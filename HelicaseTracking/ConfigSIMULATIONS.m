@@ -7,7 +7,7 @@ function [ config ] = ConfigSIMULATIONS( config )
     
     % Set the parameters
     
-    config.pixels= 512;                     % Pixels per image
+    config.pixels= 512*4;                     % Pixels per image
     config.imageSize=40e-6;                 % Size of the image in m
     config.exposureTime=50e-3;              % Exposure time in seconds (time per frame)   
     config.dataType=('uint16');             % The data type of the images
@@ -17,7 +17,7 @@ function [ config ] = ConfigSIMULATIONS( config )
     config.numFactor=0.25;                  % Numerical factor which determines the width of the PSF
     config.sigma=config.waveLength/(2*pi*sqrt(2*config.numFactor));      %sigma used to generate the Gaussian, no need to edit!
     config.scaleValue= 100;                 % the maximum pixel intensity used for simulating the helicases
-    config.fitSize= 5;                       % Half size  of the patch where we are going to fit Gaussians.
+    config.fitSize= round(3*config.sigma);                       % Half size  of the patch where we are going to fit Gaussians.
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
     

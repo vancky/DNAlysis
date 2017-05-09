@@ -37,5 +37,5 @@ post.biasAvg=mean(post.bias,2);
 post.sigmaAvg=mean(post.sigma, 2);
 
 %%
-Visualisation(config,simulateImages , helicaseFitter, analysis , post);
+VisualisationSIMULATIONS(config,simulateImages , helicaseFitter, analysis , post);
 
