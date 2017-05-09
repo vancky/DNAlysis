@@ -42,10 +42,10 @@ toc
 tic
 
 cleanImage = 0;
-
-cleanThreshold = luckyPre.thresholdFinder.threshold;
+% maybe get a threshold per image?
+cleanThreshold = 1.5*luckyPre.thresholdFinder.threshold; 
 numStacks = luckyPre.numStacks;
-parfor i=1:numStacks
+parfor i=1:5
     fprintf( 'clean Progress %i/%i.\n', i , numStacks)
     [ clean{i} ] = Clean( config , luckyPre.stackHelicases(:,:,i) , cleanThreshold ); 
     cleanImage = cleanImage+clean{i}.newImage;

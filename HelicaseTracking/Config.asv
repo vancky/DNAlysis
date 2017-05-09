@@ -42,8 +42,7 @@ function [ config ] = Config( config )
     config.cropOffset=3;                            % Offset used in cropping images
     config.waveLength=488e-9;                       % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                          % Numerical factor which determines the width of the PSF
-    config.numericalAperture = 1.4;
-    
+    config
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
