@@ -8,7 +8,7 @@ function [ output ] = LuckyPreProcess( config , importedHelicaseImages , splitCo
     for i=1:N
         crop = CropSplitImage( config , importedHelicaseImages(:,:,i) );
         leftImage = double( crop.leftImage );
-        correctionSmooth = BallSmooth( leftImage , 50) ;
+        correctionSmooth = BallSmooth( leftImage , 30) ;
         correction = max(correctionSmooth(:))./correctionSmooth;
         helicases(:,:,i)= correction.*leftImage;
         originalImage=originalImage+helicases(:,:,i);
@@ -19,7 +19,7 @@ function [ output ] = LuckyPreProcess( config , importedHelicaseImages , splitCo
     % Stack images to better see helicases
     stackSize = config.luckyStackSize;
     numStacks = N/stackSize;
-    stackHelicases = zeros ( size( helicases , 1), size( helicases , 2) , N) ;
+    stac
     for i=1:numStacks
         for k=1:stackSize
             

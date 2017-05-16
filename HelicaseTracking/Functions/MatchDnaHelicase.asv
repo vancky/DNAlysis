@@ -21,9 +21,15 @@ function [ output ] = MatchDnaHelicase( config, helicaseImage , dnaImage )
     % filter images
     
     thresholdfinder = ThresholdFinder( helicaseImageCorrect );
+    =FilterImages(config, helicaseImageShift , 117);
     
-    helicaseImageFilter=helicaseImageCorrect;
-    helicaseImageFilter( helicaseImageFilter < 2*thresholdfinder.threshold )=0;
+    helicaseImageFilter=inputImage;
+    output(output<threshold)=0;
+    
+    figure;
+    subplot(1,2,1); imshow(helicaseImageShift , []); title('Helicase Image')
+    subplot(1,2,2); imshow(helicaseImageFilter , []); title('Filtered Helicases')
+    
     
     figure; 
     imshow(dnaImageCorrect, [],'InitialMag', 'fit')

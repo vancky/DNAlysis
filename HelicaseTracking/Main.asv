@@ -33,7 +33,7 @@ splitCorrelation  = SplitCorrelation( config, importedSplitCorrelationImages{1} 
 config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
 %cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages );
 %%
-matchDnaHelicase  = MatchDnaHelicase( config, luckyPre.originalImage , importedDnaImages{1}  );
+matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1}  );
 
 %% Tests with the clean algorithm
 tic
