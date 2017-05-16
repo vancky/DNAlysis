@@ -14,8 +14,8 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.imageCd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheresLED');
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170502_102440\05-C8-sytox-05-532*\*cam1_185_0');
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170502_102440\05-C8-sytox-05-488*\*cam0_180_0*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170511_130320\03-DNApreMCM*\*cam0_885_0*');
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170511_130320\05 postMCM*\*cam0_914_0*');
     
     
     % Directories for correcting Data
@@ -33,8 +33,8 @@ function [ config ] = Config( config )
     config.pixels= 512;                     % Pixels per image
     config.imageSize=40e-6;                 % Size of the image in m
     config.dataType=('uint16');             % The data type of the images
-    config.luckyStackSize = 20;              % Stack size for the lucky algorithm
-    config.luckyThreshold = 0.3;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
+    config.luckyStackSize = 1;              % Stack size for the lucky algorithm
+    config.luckyThreshold = 0.1;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.

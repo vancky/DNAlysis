@@ -27,7 +27,7 @@ function [ outputImage ] = CropSplitImage( config , inputImage , splitCorrelatio
         rowCropLeft(1) = 1 + abs(splitCorrelation.rowCorrection);
         rowCropLeft(2) = rowLength ;
         rowCropRight(1) = 1;
-        rowCropRight(2) = rowLength - abs(splitCorrelation.rowCorrection);
+        rowCropRight(2) = rowLength - splitCorrelation.rowCorrection;
     end
     
     colCropRight

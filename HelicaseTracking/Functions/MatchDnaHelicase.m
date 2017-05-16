@@ -1,4 +1,4 @@
-function [ output ] = MatchDnaHelicase( config, splitCorrelation, helicaseImage , dnaImage , beamshape )
+function [ output ] = MatchDnaHelicase( config, splitCorrelation, helicaseImage , dnaImage )
     %  Helicase Dna Overlay - Stacks two images of Helicases and DNA
     %  Detailed explanation goes here
     
@@ -39,7 +39,7 @@ function [ output ] = MatchDnaHelicase( config, splitCorrelation, helicaseImage 
     
     % filter images
     
-    
+    ThresholdFinder( helicaseImageShift);
     helicaseImageFilter=FilterImages(config, helicaseImageShift , 117);
     
     figure;

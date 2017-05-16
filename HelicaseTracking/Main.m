@@ -8,12 +8,11 @@ config=Config(config);
 
 fprintf('Importing Images.\n')
 importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd , 'stack' );
-%%
+%
 importedCameraCorrelationImages =   ImportTwoCameras( config.cameraCorrelationCd );
 importedNoiseImages =               ImportTwoCameras( config.noiseCd );
 importedBeamshapeImages =           ImportTwoCameras( config.beamshapeCd);
-%%
-
+%
 importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
 importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'all' );
 %save('.\MatFiles\CleanTests\HelicaseImages' , 'importedHelicaseImages')
@@ -30,11 +29,12 @@ config.cropCoordinates = GenerateCropCoordinates( importedBeamshapeImages{1}.cam
 %% Correlations
 
 %DisplayShotNoise( config, importedNoiseImages);
-%splitCorrelation  = SplitCorrelation(config, importedSplitCorrelationImages{1} );
+splitCorrelation  = SplitCorrelation(config, importedSplitCorrelationImages{1} );
 %cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages );
-matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1} , beamshape );
+%%
+matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1}  );
 
-%% Tests with the clean algorith
+%% Tests with the clean algorithm
 tic
 luckyPre = LuckyPreProcess( config , importedHelicaseImages{1});
 toc
@@ -45,7 +45,7 @@ cleanImage = 0;
 % maybe get a threshold per image?
 cleanThreshold = 1.5*luckyPre.thresholdFinder.threshold; 
 numStacks = luckyPre.numStacks;
-parfor i=1:5
+parfor i=1:numStacks
     fprintf( 'clean Progress %i/%i.\n', i , numStacks)
     [ clean{i} ] = Clean( config , luckyPre.stackHelicases(:,:,i) , cleanThreshold ); 
     cleanImage = cleanImage+clean{i}.newImage;
@@ -55,12 +55,12 @@ toc
 
 figure; 
 subplot(1,2,1); imshow( luckyPre.originalImage ,[]); title('stacking of individual images')
-subplot(1,2,2); imshow( cleanImage ,[]); title('after clean algorithm')
+subplot(1,2,2); imshow( cleanImage ,[0 200]); title('after clean algorithm')
 %%
 %  lucky imaging
 tic
 luckyImage=0;
-parfor i=1:numStacks
+for i=1:numStacks
     lucky{i} = Lucky( config , clean{i} );
     luckyImage = luckyImage+lucky{i}.luckyImage;
 end
@@ -68,5 +68,5 @@ luckyImage = luckyImage/numStacks;
 toc
 
 figure; 
-subplot(1,2,1); imshow( cleanImage ,[]); title('Clean Algorithm')
-subplot(1,2,2); imshow( luckyImage ,[]); title('Lucky Algorithm')
+subplot(1,2,1); imshow( luckyPre.originalImage ,[ 18 50]); title('Stacking of Individual Images'); colorbar
+subplot(1,2,2); imshow( luckyImage ,[ 0 100]); title('Lucky Algorithm'); colorbar
