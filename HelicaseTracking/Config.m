@@ -35,6 +35,10 @@ function [ config ] = Config( config )
     config.dataType=('uint16');             % The data type of the images
     config.luckyStackSize = 1;              % Stack size for the lucky algorithm
     config.luckyThreshold = 0.1;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
+    config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
+    config.areaThreshold = 25;              % Area threshold in pixels for identifying helicases
+    config.eccentricityThreshold = 0.2;      % Eccentricity threshold for identifying helicases
+    
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
@@ -43,6 +47,8 @@ function [ config ] = Config( config )
     config.waveLength=488e-9;                       % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                          % Numerical factor which determines the width of the PSF
     config.numericalAperture = 1.4;
+    
+    
     
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel

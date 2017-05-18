@@ -5,7 +5,9 @@ function [ output ] = ThresholdFinder( inputImage )
     % 3. Find the intersection point of the lines
     % 4. Find the point closest to the intersection point
     
+    inputImage = double(inputImage);
     normImage = BackgroundFilter( inputImage );
+    figure;
     sortedImage = sort( normImage(:) );
     l = length(sortedImage);
     maxImage=max(sortedImage);
@@ -18,6 +20,7 @@ function [ output ] = ThresholdFinder( inputImage )
     g2 = 0.5*maxImage/(l-halfMaxIndex);
     c1 = sortedImage(round(0.1*l))-round(0.1*l)*g1;
     c2 = sortedImage(round(0.5*l))-halfMaxIndex*g2;
+    
     x=1:l;
     y1 = g1*x+c1;
     y2 = g2*x+c2;
@@ -25,7 +28,6 @@ function [ output ] = ThresholdFinder( inputImage )
     % find x and y coordinates of the intersection
     intersection(1) = round((c2-c1)/(g1-g2));
     intersection(2) = y1(intersection(1));
-    output.intersection=intersection;
     
     % find the closest point on the curve to the intersection
     for i=1:l
@@ -38,8 +40,8 @@ function [ output ] = ThresholdFinder( inputImage )
     
     output.threshold = sortedImage(minIndex);
     output.largeThreshold = (maxImage+output.threshold)/2;
-    output.filteredImage = normImage;
-    output.filteredImage( normImage < output.threshold ) = 0;
+    output.thresholdedImage = normImage;
+    output.thresholdedImage( normImage < output.threshold ) = 0;
       
     
 %     figure;
@@ -58,7 +60,7 @@ function [ output ] = ThresholdFinder( inputImage )
 %     figure; 
 %     subplot(1,2,1); imshow(normImage , [0 maxImage]);
 %     title('Normalized Input Image')
-%     subplot(1,2,2); imshow(output.filteredImage, [0 maxImage]);
+%     subplot(1,2,2); imshow(output.thresholdedImage, [0 maxImage]);
 %     title('Thresholded Image')
 
 end

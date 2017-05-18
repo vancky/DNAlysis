@@ -22,7 +22,7 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 
 %% 1. Beamshape Correction
 
-[beamshape , beamshape.test] = GenerateBeamshape( config, importedBeamshapeImages{1} ); 
+%[beamshape , beamshape.test] = GenerateBeamshape( config, importedBeamshapeImages{1} ); 
 
 %filterImages=FilterImages(config, beamshapeCorrection.image);
 
@@ -32,13 +32,20 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 splitCorrelation  = SplitCorrelation( config, importedSplitCorrelationImages{1} );
 config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
 %cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages );
-%%
-matchDnaHelicase  = MatchDnaHelicase( config, splitCorrelation , importedHelicaseImages{1} , importedDnaImages{1}  );
-
 %% Tests with the clean algorithm
 tic
 luckyPre = LuckyPreProcess( config , importedHelicaseImages{1});
 toc
+%%
+for i=1:luckyPre.numStacks
+    spotFinder{i} = SpotFinder( config , luckyPre.stackHelicases(:,:,i));
+end
+spotAnlysis = SpotAnalysis
+
+%%
+matchDnaHelicase  = MatchDnaHelicase( config, luckyPre.originalImage , importedDnaImages{1}  );
+
+
 %%
 tic
 
@@ -53,10 +60,10 @@ parfor i=1:numStacks
 end
 cleanImage = cleanImage/numStacks;
 toc
-
+%%
 figure; 
-subplot(1,2,1); imshow( luckyPre.originalImage ,[]); title('stacking of individual images')
-subplot(1,2,2); imshow( cleanImage ,[0 200]); title('after clean algorithm')
+subplot(1,2,1); imshow( RollingBallFilter(luckyPre.originalImage,30) ,[0 200]); title('stacking of individual images'); colorbar
+subplot(1,2,2); imshow( cleanImage ,[0 200]); title('after clean algorithm'); colorbar
 %%
 %  lucky imaging
 tic
@@ -69,5 +76,5 @@ luckyImage = luckyImage/numStacks;
 toc
 
 figure; 
-subplot(1,2,1); imshow( luckyPre.originalImage ,[ 18 50]); title('Stacking of Individual Images'); colorbar
-subplot(1,2,2); imshow( luckyImage ,[ 0 100]); title('Lucky Algorithm'); colorbar
+subplot(1,2,1); imshow( RollingBallFilter(luckyPre.originalImage,30) ,[0 200 ]); title('Stacking of Individual Images'); colorbar
+subplot(1,2,2); imshow( luckyImage ,[ 0 200]); title('Lucky Algorithm'); colorbar
