@@ -43,6 +43,10 @@ for i=1:luckyPre.numStacks
 end
 figure;
 plot(numSpots)
+title('Number of spots per minute, washing occurs from frame 20 ')
+xlabel('Time (frames)')
+ylabel('Number of spots')
+grid
 
 %%
 matchDnaHelicase  = MatchDnaHelicase( config, luckyPre.originalImage , importedDnaImages{1}  );
