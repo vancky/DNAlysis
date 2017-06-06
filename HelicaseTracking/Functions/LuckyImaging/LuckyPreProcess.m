@@ -1,4 +1,4 @@
-function [ output ] = LuckyPreProcess( config , importedHelicaseImages , splitCorrelation )
+function [ output ] = LuckyPreProcess( config , importedHelicaseImages )
     % Lucky Pre Process - Pre processes data before the lucky algorithm
     % Detailed explanation goes here
 

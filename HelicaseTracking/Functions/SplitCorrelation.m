@@ -48,12 +48,12 @@ function [ output ] = SplitCorrelation( config, inputImage )
     
     % Compare the non correlated and correlated images
     
-    figure;
-    subplot(1,2,1); imshow(output.leftImage);   title('Left Image')
-    subplot(1,2,2); imshow(output.rightImage);  title('Right Image')
-    blockSize = config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
-    subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
-    subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
+%     figure;
+%     subplot(1,2,1); imshow(output.leftImage);   title('Left Image')
+%     subplot(1,2,2); imshow(output.rightImage);  title('Right Image')
+%     blockSize = config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
+%     subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
+%     subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
 
 end
 

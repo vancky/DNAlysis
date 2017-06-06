@@ -11,9 +11,9 @@ function [ outputImage ] = CropSplitImage( config , inputImage )
     offset=config.cropOffset;
     
     colCropLeft(1) = config.cropCoordinates.left(1) + offset;
-    colCropLeft(2) = config.cropCoordinates.left(2) + -offset ;
-    colCropRight = colCropLeft + config.splitCorrelation(2); 
-    
+    colCropLeft(2) = config.cropCoordinates.left(2) + -offset;
+    colCropRight = colCropLeft + config.splitCorrelation(2);
+   
     rowLength = size(inputImage , 1);
     
     if config.splitCorrelation(1) >= 0

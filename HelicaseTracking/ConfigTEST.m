@@ -13,9 +13,9 @@ function [ config ] = Config( config )
     % stack image.
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-    
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt488*\*cam0_054_0*');
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt532*\*cam0_060_0*');    
+  
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt488*\*cam0_054*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt532*\*cam0_060*');   
     
     % Directories for correcting Data
     config.beamshapeCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres488AfcontinuiosTrue*\*273_0*');
