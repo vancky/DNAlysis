@@ -35,8 +35,9 @@ function [ config ] = Config( config )
     config.luckyStackSize = 1;              % Stack size for the lucky algorithm
     config.luckyThreshold = 0.1;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
     config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
-    config.areaThreshold = 25;              % Area threshold in pixels for identifying helicases
-    config.eccentricityThreshold = 0.2;      % Eccentricity threshold for identifying helicases
+    
+    config.diameterThreshold = 6;              % Area threshold in pixels for identifying helicases
+    config.eccentricityThreshold = 0.85;      % Eccentricity threshold for identifying helicases
     
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds

@@ -1,0 +1,15 @@
+function [ output ] = HelicaseIntensityFinder( config, spotFinder , helicaseImage )
+    % Helicase Intensity Finder - Finds the intensity of helicases found by
+    % the SpotFinder.
+    
+    L = length(spotFinder.circle );
+    
+    spotFinder.circle()
+    
+    ase
+    
+    
+
+
+end
+

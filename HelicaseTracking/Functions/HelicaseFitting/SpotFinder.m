@@ -2,25 +2,22 @@ function [ output ] = SpotFinder( config , inputImage )
     % Spot Finder - finds fluorescent spots in an image.
     % Gives as output the number of spots
   
+    meanFilteredImage = MeanThreshold( inputImage );
     watershedImage = WatershedImage( inputImage );
-    
-    figure;
-    subplot(1,2,1); imshow( inputImage , [0 50]); title('Helicase Image'); colorbar
-    subplot(1,2,2); imshow( watershedImage , [0 50]); title('Watershed Helicase Image'); colorbar
     
     %%
    
     binaryImage = watershedImage >0;
-       
+    
     % Then, find grouped pixels (helicases) based on connected region analysis
     %   bwconncomp finds groups of connected pixels
     %   regionprops finds the area and eccentricity of these groups
     %   We assume DNA has a minimum area and eccentricity
     
     cc = bwconncomp(binaryImage); 
-    stats = regionprops(cc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter');  % note different camelcasing due to matlab settings
-        
-    idx = find( [stats.Area] > config.areaThreshold ); 
+    stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');  % note different camelcasing due to matlab settings
+    
+    idx = find( [stats.EquivDiameter] > config.diameterThreshold & [stats.Eccentricity]< config.eccentricityThreshold ); 
     filteredCc = ismember(labelmatrix(cc), idx);
     filteredStats = regionprops(filteredCc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter'); 
     numRegions = length(filteredStats);
@@ -32,7 +29,10 @@ function [ output ] = SpotFinder( config , inputImage )
     end
     
     figure;
+    subplot(1,2,1)
+    imshow( inputImage , [0 50 ]); colorbar
     hold on
+    subplot(1,2,2)
     imshow( inputImage , [0 50]); colorbar
     for i=1:numRegions
         viscircles( circle(i).centers , circle(i).radii );
