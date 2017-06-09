@@ -2,17 +2,13 @@ function [ output ] = SpotFinder( config , inputImage )
    % Spot Finder - finds fluorescent spots in an image.
    % Gives as output the number of spots
 
-   
-HelicaseWatershed(   
+      
+   watershedImage = WatershedImage( inputImage );
    
    %%
-   thresholdFinder = ThresholdFinder( inputImage );
-   binaryImage = thresholdFinder.thresholdedImage>0;
-   figure; subplot (1,2,1); imshow( thresholdFinder.thresholdedImage , [] ); title('thresholded image');
-   subplot(1,2,2); imshow( binaryImage ); title('thresholded image');
    
-   output.thresholdFinder = thresholdFinder;
-   
+   binaryImage = watershedImage >0;
+      
    % Then, find grouped pixels (helicases) based on connected region analysis
    %   bwconncomp finds groups of connected pixels
    %   regionprops finds the area and eccentricity of these groups

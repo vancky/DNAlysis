@@ -24,7 +24,7 @@ preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{
 
 %%
 spotFinder = SpotFinder( config , preProcess.helicaseImage );
-% numSpots = length( spotFinder.circle );
+% numSpots = length( spotFindcloser.circle );
 % 
 % figure;
 % plot(numSpots)
