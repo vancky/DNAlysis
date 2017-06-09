@@ -13,8 +13,8 @@ function [ config ] = Config( config )
     % stack image.
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-    
     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV1-protinrefofus2SYtox488*\*cam0_113_0*');
+    
     config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt532*\*cam0_060_0*');    
     
     % Directories for correcting Data

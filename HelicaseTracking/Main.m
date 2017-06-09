@@ -28,9 +28,9 @@ preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{
 %%
 spotFinder = SpotFinder( config , preProcess.helicaseImage );
 helicaseIntensity = HelicaseIntensityFinder( spotFinder , (preProcess.helicaseImageRaw));
-%%
+%
 fprintf( 'The number of spots is %i.\n' , spotFinder.numSpots )
 
 %%
-%matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );
+matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );
 
