@@ -42,6 +42,7 @@ function [ output ] = SpotFinder( config , inputImage )
     output.circle = circle;
     output.stats = stats;
     output.filteredStats = filteredStats;
-
+    
+    output.numSpots = length(circle);
 end
 

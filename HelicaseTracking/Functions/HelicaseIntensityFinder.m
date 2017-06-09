@@ -20,6 +20,8 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         
         for ii= 1: helicaseSize
             for j=1: helicaseSize 
+                location(2)-radius+1+ii >0
+                location(1)-(radius+1)+j >0
                 if (location(2)-radius+1+ii >0)&& (location(2)-radius+1+ii < size(helicaseImage , 1) ) ...
                    && (location(1)-(radius+1)+j >0) &&  (location(1)-(radius+1)+j < size(helicaseImage , 2))
                 helicase(ii,j) = helicaseImage(location(2) - (radius+1)+ii, location(1)-(radius+1)+j);
@@ -33,7 +35,7 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
     
    
     figure;
-    histogram(intensity , 100)
+    histogram(intensity , 200)
     title('Intensity Distribution of Helicases')
     xlabel('Pixel counts per Helicase')
     ylabel('Number of helicases')
@@ -41,6 +43,5 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
     output.helicase = helicase;
     output.filter = filter;
     output.intensity = intensity;
-
 end
 
