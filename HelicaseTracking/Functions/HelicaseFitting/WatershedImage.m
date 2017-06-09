@@ -7,5 +7,9 @@ function [ outputImage ] = WatershedImage( inputImage )
     watershedImage = watershed(invertImage);
     binary = watershedImage>0;
     outputImage= inputImage.*binary; 
+    
+    figure;
+    subplot(1,2,1); imshow( inputImage , [0 50]); title('Helicase Image'); colorbar
+    subplot(1,2,2); imshow( outputImage , [0 50]); title('Watershed Helicase Image'); colorbar
 end
 
