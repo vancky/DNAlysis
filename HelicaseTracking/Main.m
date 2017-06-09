@@ -23,10 +23,9 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
 
 %%
-% for i=1:luckyPre.numStacks
-%     spotFinder{i} = SpotFinder( config , luckyPre.stackHelicases(:,:,i));
-%     numSpots(i)=length(spotFinder{i}.circle);
-% end
+spotFinder = SpotFinder( config , preProcess.helicaseImage );
+% numSpots = length( spotFinder.circle );
+% 
 % figure;
 % plot(numSpots)
 % title('Number of spots per minute, washing occurs from frame 20 ')
@@ -35,5 +34,5 @@ preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{
 % grid
 
 %%
-matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );
+%matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );
 

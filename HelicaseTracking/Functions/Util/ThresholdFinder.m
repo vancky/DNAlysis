@@ -44,24 +44,24 @@ function [ output ] = ThresholdFinder( inputImage )
     output.thresholdedImage( normImage < output.threshold ) = 0;
       
     
-%     figure;
-%     hold on
-%     plot( x ,sortedImage , x, y1 , x, y2 )
-%     legend('Sorted Image' , 'Lower Tangent Line' , 'Upper Tangent Line')
-%     plot(minIndex , output.threshold , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'b', 'MarkerFaceColor' , 'b')
-%     plot(intersection(1), intersection(2) , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'k', 'MarkerFaceColor' , 'k')
-%     ylim([0 maxImage])
-%     xlabel('Pixels')
-%     ylabel('Intensity Value')
-%     title('Threshold Finder')
-%     hold off
-%     
-%     
-%     figure; 
-%     subplot(1,2,1); imshow(normImage , [0 maxImage]);
-%     title('Normalized Input Image')
-%     subplot(1,2,2); imshow(output.thresholdedImage, [0 maxImage]);
-%     title('Thresholded Image')
+    figure;
+    hold on
+    plot( x ,sortedImage , x, y1 , x, y2 )
+    legend('Sorted Image' , 'Lower Tangent Line' , 'Upper Tangent Line')
+    plot(minIndex , output.threshold , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'b', 'MarkerFaceColor' , 'b')
+    plot(intersection(1), intersection(2) , '.' , 'MarkerSize' , 15 , 'MarkerEdgeColor', 'k', 'MarkerFaceColor' , 'k')
+    ylim([0 maxImage])
+    xlabel('Pixels')
+    ylabel('Intensity Value')
+    title('Threshold Finder')
+    hold off
+    
+    
+    figure; 
+    subplot(1,2,1); imshow(normImage , [0 maxImage]);
+    title('Normalized Input Image')
+    subplot(1,2,2); imshow(output.thresholdedImage, [0 maxImage]);
+    title('Thresholded Image')
 
 end
 
