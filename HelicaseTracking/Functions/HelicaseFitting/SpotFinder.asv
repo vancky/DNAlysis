@@ -1,9 +1,8 @@
 function [ output ] = SpotFinder( config , inputImage )
-    % Spot Finder - finds fluorescent spots in an image.
-    % Gives as output the number of spots
+   % Spot Finder - finds fluorescent spots in an image.
+   % Gives as output the number of spots
   
     watershedImage = WatershedImage( inputImage );
-    
     figure;
     subplot(1,2,1); imshow( inputImage , [0 50]); title('Helicase Image'); colorbar
     subplot(1,2,2); imshow( watershedImage , [0 50]); title('Watershed Helicase Image'); colorbar
