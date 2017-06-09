@@ -23,8 +23,8 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
 
 %%
-spotFinder = SpotFinder( config , preProcess.helicaseImage );
-%helicaseIntensity = HelicaseIntensityFinder( config , spotFinder , preProcess.helicaseImage );
+%spotFinder = SpotFinder( config , preProcess.helicaseImage );
+helicaseIntensity = HelicaseIntensityFinder( spotFinder , preProcess.helicaseImage );
 
 % numSpots = length( spotFindcloser.circle );
 % 

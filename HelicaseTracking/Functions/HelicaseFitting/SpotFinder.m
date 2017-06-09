@@ -25,7 +25,7 @@ function [ output ] = SpotFinder( config , inputImage )
     for i=1:numRegions
         diameters(i) = filteredStats(i).EquivDiameter;
         circle(i).radii = diameters(i)/2;
-        circle(i).centers = filteredStats(i).Centroid;
+        circle(i).centers = filteredStats(i).Centroid;  % note this is [ X , Y ]
     end
     
     figure;
