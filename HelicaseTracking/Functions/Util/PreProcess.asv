@@ -6,12 +6,17 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
     M = size( dnaImageRaw , 3 );
     helicaseImageSmooth = 0;
     dnaImageSmooth = 0;
-    rowCorrect = 430;  % FIX TO CORRECT FOR THE MISALIGNED IMAGE PART, remove this later!
     
+    rowCorrect = 430;  % FIX TO CORRECT FOR THE MISALIGNED IMAGE PART, remove this later!
+   
+    
+     
+     
+     rightImageCorrect = rightImage( 1: rowCorrect , : )
     for i=1:N
         cropHelicase = CropSplitImage( config , helicaseImageRaw(:,:,i) );
-        % Note the fix is also in here should be  helicaseImage=double(cropHelicase.leftImage); 
-        helicaseImage = double( cropHelicase.leftImage( 1:rowCorrect , : )); 
+        helicaseImage = double( cropHelicase.leftImage );
+        helicaseImage leftImageCorrect = leftImage( 1:rowCorrect , : )
 
   
         helicaseSmooth = BallSmooth( helicaseImage , 50) ;
@@ -23,8 +28,7 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
     
     for j=1:M
         cropDna = CropSplitImage( config , dnaImageRaw(:,:,j) );
-        % Note the fix is also in here should be  dnaImage=double(cropDna.rightImage); 
-        dnaImage = double( cropDna.rightImage( 1:rowCorrect , : ));
+        dnaImage = double( cropDna.rightImage );
         
         dnaSmooth = BallSmooth( dnaImage , 50) ;
         dnaCorrection = max(dnaSmooth(:))./dnaSmooth;
@@ -40,6 +44,8 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
     subplot(1,2,1); imshow( helicaseImageFilter , [0 50]); colorbar
     subplot(1,2,2); imshow( dnaImageFilter , []); colorbar
     
+    
+;
      
     output.dnaImage = dnaImageFilter/N;
     output.helicaseImage = helicaseImageFilter/N;

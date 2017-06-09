@@ -20,7 +20,7 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 
 %% Do some pre processing of the data
 
-preProcess = PreProcess( config , importedHelicaseImages{1} ); 
+preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
 
 %%
 % for i=1:luckyPre.numStacks
