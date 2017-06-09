@@ -22,10 +22,10 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 
 preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
 
-%%
+%% The actual analysis part
 
 spotFinder = SpotFinder( config , preProcess.helicaseImage );
-helicaseIntensity = HelicaseIntensityFinder( spotFinder , preProcess.helicaseImageRaw );
+helicaseIntensity = HelicaseIntensityFinder( spotFinder , preProcess.helicaseImage );
 
 %%
 %matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );

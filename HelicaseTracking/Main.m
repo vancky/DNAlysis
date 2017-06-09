@@ -25,7 +25,7 @@ preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{
 %% The actual analysis part
 
 spotFinder = SpotFinder( config , preProcess.helicaseImage );
-helicaseIntensity = HelicaseIntensityFinder( spotFinder , preProcess.helicaseImageRaw );
+helicaseIntensity = HelicaseIntensityFinder( spotFinder , preProcess.helicaseImageRaw);
 
 %%
 %matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );

@@ -14,7 +14,7 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         % use a larger helicase image to make sure that the boundaries dont
         % cause a problem
         
-        helicaseSize = 2*radius+1;
+        helicaseSize = 2*radius+1;;
         helicaseSizeReal = 2*(spotFinder.circle(i).radii)+1;
         helicase= zeros( helicaseSize );
         
@@ -35,7 +35,7 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
     figure;
     histogram(intensity , 100)
     title('Intensity Distribution of Helicases')
-    xlabel('Pixel counts per Helicase')
+    xlabel('Pixel counts')
     ylabel('Number of helicases')
     
     output.helicase = helicase;
