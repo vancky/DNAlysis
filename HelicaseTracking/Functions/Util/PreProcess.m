@@ -12,7 +12,7 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
         cropHelicase = CropSplitImage( config , helicaseImageRaw(:,:,i) );
         % Note the fix is also in here should be  helicaseImage=double(cropHelicase.leftImage); 
         helicaseImage = double( cropHelicase.leftImage( 1:rowCorrect , : )); 
-
+        output.helicaseImageRaw = helicaseImage;
   
         helicaseSmooth = BallSmooth( helicaseImage , 50) ;
         helicaseCorrection = max(helicaseSmooth(:))./helicaseSmooth;
@@ -25,6 +25,7 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
         cropDna = CropSplitImage( config , dnaImageRaw(:,:,j) );
         % Note the fix is also in here should be  dnaImage=double(cropDna.rightImage); 
         dnaImage = double( cropDna.rightImage( 1:rowCorrect , : ));
+        output.dnaImageRaw = helicaseImage;
         
         dnaSmooth = BallSmooth( dnaImage , 50) ;
         dnaCorrection = max(dnaSmooth(:))./dnaSmooth;

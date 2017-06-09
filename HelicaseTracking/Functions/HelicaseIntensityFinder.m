@@ -6,7 +6,7 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
     intensity=zeros(L,1);
     
     for i= 1:L 
-        i
+        
         location = round( spotFinder.circle(i).centers); % note this is [X,Y] so [col , row]
         radius = round( spotFinder.circle(i).radii);
         filter = fspecial('disk' , radius);
@@ -15,6 +15,7 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         % cause a problem
         
         helicaseSize = 2*radius+1;
+        helicaseSizeReal = 2*(spotFinder.circle(i).radii)+1
         helicase= zeros( helicaseSize );
         
         for ii= 1: helicaseSize
@@ -27,13 +28,16 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         end
         
         product = helicase.*filter;
-        intensity(i) = sum( product(:) );
-        
+        intensity(i) = helicaseSizeReal^2*sum( product(:) );
     end
     
    
+    figure;
+    histogram(intensity , 100)
+    title('Intensity Distribution of Helicases')
+    xlabel('Pixel counts')
+    ylabel('Number of helicases')
     
-    histogram(intensity)
     output.helicase = helicase;
     output.filter = filter;
     output.intensity = intensity;
