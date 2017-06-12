@@ -16,18 +16,25 @@ fprintf('Images Imported.\n')
 
 splitCorrelation  = SplitCorrelation( config, importedSplitCorrelationImages{1} );
 config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
-config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,1),[]);
+config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
 
-% Do some pre processing of the data
+%%
+for ii = 1:config.numFovs
+    fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
 
-preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
+    % Do some pre processing of the data
+    
+    preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
 
-%% The actual analysis part
+    % The actual analysis part
 
-spotFinder = SpotFinder( config , preProcess.helicaseImage );
-helicaseIntensity = HelicaseIntensityFinder( spotFinder , (preProcess.helicaseImageRaw));
-matchDnaHelicase  = MatchDnaHelicase( config, preProcess.dnaImage, spotFinder);
+    spotFinder{ii} = SpotFinder( config , preProcess{ii}.helicaseImage );
+    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImageRaw));
+    matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
 
-fprintf( 'The number of spots is %i.\n' , spotFinder.numSpots )
-fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase.match)
+    fprintf( 'The number of spots is %i.\n' , spotFinder{ii}.numSpots )
+    fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase{ii}.match)
+end
 
+%%
+postProcessing = PostProcessing( config , matchDnaHelicase);

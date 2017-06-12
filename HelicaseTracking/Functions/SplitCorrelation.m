@@ -12,11 +12,7 @@ function [ output ] = SplitCorrelation( config, inputImage )
     output.rightImage = BackgroundFilter(splitImage.rightImage);
     halfRow = size(output.leftImage,1);
     halfCol = size(output.leftImage,2);
-    
-    figure;
-    subplot(1,2,1); imshow(output.leftImage , [] ); title('Left Image'); 
-    subplot(1,2,2); imshow(output.rightImage , [] ); title('Right Image');
-    
+      
     % Make a crop in the vertical direction for proper correlation
     output.croppedImage = output.rightImage( 1+halfRow/8 : 7*halfRow/8 , 1+halfCol/8:7*halfCol/8 );   
     cropsize = size(output.croppedImage);

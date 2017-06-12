@@ -14,7 +14,22 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV1-protinrefofus2SYtox488*\*cam0_113_0*');
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt532*\*cam0_060_0*');    
+    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV2-protinrefofus2SYtox488*\*cam0_123_0*');
+    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV3-protinrefofus2SYtox488*\*cam0_137_0*');
+    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV4-protinrefofus2SYtox488*\*cam0_151_0*');
+    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV5-protinrefofus2SYtox488*\*cam0_167_0*');
+    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV6-protinrefofus2SYtox488*\*cam0_181_0*');
+    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV7-protinrefofus2SYtox488*\*cam0_195_0*');
+    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV8-protinrefofus2SYtox488*\*cam0_209_0*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV1-protinrefofus2SYtox532*\*cam0_095_0*');    
+    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV2-protinrefofus2SYtox532*\*cam0_127_0*');    
+    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV3-protinrefofus2SYtox532*\*cam0_141_0*');    
+    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV4-protinrefofus2SYtox532*\*cam0_155_0*');    
+    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV5-protinrefofus2SYtox532*\*cam0_171_0*');    
+    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV6-protinrefofus2SYtox532*\*cam0_185_0*');    
+    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV7-protinrefofus2SYtox532*\*cam0_199_0*');    
+    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV8-protinrefofus2SYtox532*\*cam0_213_0*');    
+    config.numFovs = length( config.helicaseCd);
     
     % Directories for correcting Data
     config.splitCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');

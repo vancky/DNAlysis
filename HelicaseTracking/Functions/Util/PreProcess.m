@@ -14,8 +14,8 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
         helicaseImage = double( cropHelicase.leftImage( 1:rowCorrect , : )); 
         output.helicaseImageRaw = helicaseImage;
   
-        helicaseSmooth = BallSmooth( helicaseImage , 50) ;
-        helicaseCorrection = max(helicaseSmooth(:))./helicaseSmooth;
+        helicaseSmooth = BallSmooth( helicaseImage , 50) ;          % may cause distortions near very intense helicases spots.
+        helicaseCorrection = max(helicaseSmooth(:))./helicaseSmooth;   
         helicases(:,:,i)= helicaseCorrection.*helicaseImage;
         helicaseImageSmooth = helicaseImageSmooth+helicases(:,:,i);
         helicaseImageFilter = BackgroundFilter( helicaseImageSmooth );
@@ -34,16 +34,16 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
         dnaImageFilter = BackgroundFilter( dnaImageSmooth );
     end
     
-    figure;
-    subplot(1,2,1); imshow( helicaseImage , [100 120]); colorbar
-    subplot(1,2,2); imshow( dnaImage , [] ) ; colorbar
-    figure;
-    subplot(1,2,1); imshow( helicaseImageFilter , [0 50]); colorbar
-    subplot(1,2,2); imshow( dnaImageFilter , []); colorbar
+%     figure;
+%     subplot(1,2,1); imshow( helicaseImage , [100 120]); colorbar
+%     subplot(1,2,2); imshow( dnaImage , [] ) ; colorbar
+%     figure;
+%     subplot(1,2,1); imshow( helicaseImageFilter , [0 50]); colorbar
+%     subplot(1,2,2); imshow( dnaImageFilter , []); colorbar
     
      
     output.dnaImage = dnaImageFilter/N;
-    output.helicaseImage = helicaseImageFilter/N;
+    output.helicaseImage = helicaseImageFilter/M;
     
     
 end

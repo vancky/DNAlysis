@@ -1,0 +1,15 @@
+function [ output ] = PostProcessing( config, matchDnaHelicase )
+    % Post Processing - Performs post data analysis
+    %   Detailed explanation goes here
+    
+    matchCount = 0;
+    N = config.numFovs;
+    for ii = 1:N
+        matchCount = matchCount + matchDnaHelicase{1}.match;
+    end
+    matchTotal = matchCount/N;
+    
+    fprintf('The total fraction of helicases located on the DNA is %.2f .\n' , matchTotal)
+    output = matchTotal
+end
+
