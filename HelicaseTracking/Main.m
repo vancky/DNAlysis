@@ -3,7 +3,6 @@ clear all; clc; close all;
 config=struct();
 config=Config(config);
 
-
 %% Import Images
 
 fprintf('Importing Images.\n')
@@ -29,7 +28,7 @@ for ii = 1:config.numFovs
     % The actual analysis part
 
     spotFinder{ii} = SpotFinder( config , preProcess{ii}.helicaseImage );
-    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImageRaw));
+    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImage));
     matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
 
     fprintf( 'The number of spots is %i.\n' , spotFinder{ii}.numSpots )
@@ -37,4 +36,4 @@ for ii = 1:config.numFovs
 end
 
 %%
-postProcessing = PostProcessing( config , matchDnaHelicase);
+postProcessing = PostProcessing( config , matchDnaHelicase , helicaseIntensity);

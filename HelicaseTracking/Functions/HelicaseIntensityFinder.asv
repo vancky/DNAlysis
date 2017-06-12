@@ -1,8 +1,6 @@
 function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
     % Helicase Intensity Finder - Finds the intensity of helicases found by
     % the SpotFinder.
-    % Use a disk with the size of the helicases and multiply that with the
-    % values of the found helicase to find the total intensity.
     
     L = length( spotFinder.circle );
     intensity=zeros(L,1);
@@ -11,7 +9,10 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         
         location = round( spotFinder.circle(i).centers); % note this is [X,Y] so [col , row]
         radius = round( spotFinder.circle(i).radii);
-        filter = fspecial('disk' , radius);     % note that the sum over all values of this filter is 1
+        filter = fspecial('disk' , radius);
+        
+        % use a larger helicase image to make sure that the boundaries dont
+        % cause a problem
         
         helicaseSize = 2*radius+1;
         helicaseSizeReal = 2*(spotFinder.circle(i).radii)+1;
@@ -19,7 +20,8 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         
         for ii= 1: helicaseSize
             for j=1: helicaseSize 
-                % if loop to make sure that it is compatible at the boundary 
+                % if loop to make sure that it is boundary compatible
+                % spots near the boundaries
                 if (location(2)-(radius+1)+ii >0)&& (location(2)-(radius+1)+ii < size(helicaseImage , 1) ) ...
                    && (location(1)-(radius+1)+j >0) &&  (location(1)-(radius+1)+j < size(helicaseImage , 2))
                 helicase(ii,j) = helicaseImage(location(2) - (radius+1)+ii,location(1)-(radius+1)+j);
