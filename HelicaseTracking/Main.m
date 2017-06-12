@@ -28,7 +28,7 @@ for ii = 1:config.numFovs
     % The actual analysis part
 
     spotFinder{ii} = SpotFinder( config , preProcess{ii}.helicaseImage );
-    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImage));
+    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImageNoScale));
     matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
 
     fprintf( 'The number of spots is %i.\n' , spotFinder{ii}.numSpots )

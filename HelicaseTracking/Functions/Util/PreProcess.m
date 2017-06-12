@@ -13,7 +13,9 @@ function [ output ] = PreProcess( config , helicaseImageRaw , dnaImageRaw )
         % Note the fix is also in here should be  helicaseImage=double(cropHelicase.leftImage); 
         helicaseImage = double( cropHelicase.leftImage( 1:rowCorrect , : )); 
         output.helicaseImageRaw = helicaseImage;
-  
+        helicaseImageNoScale = BackgroundFilterNoScale( helicaseImage );
+        output.helicaseImageNoScale = helicaseImageNoScale;
+        
         helicaseSmooth = BallSmooth( helicaseImage , 50) ;          % may cause distortions near very intense helicases spots.
         helicaseCorrection = max(helicaseSmooth(:))./helicaseSmooth;   
         helicases(:,:,i)= helicaseCorrection.*helicaseImage;
