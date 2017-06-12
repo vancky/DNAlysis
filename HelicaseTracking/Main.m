@@ -36,4 +36,4 @@ for ii = 1:config.numFovs
 end
 
 %%
-postProcessing = PostProcessing( config , matchDnaHelicase , helicaseIntensity);
+postProcess = PostProcess( config , matchDnaHelicase , helicaseIntensity);
