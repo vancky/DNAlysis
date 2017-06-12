@@ -14,7 +14,6 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170519_111856\Exp7-Ch7-FOV1-protinrefofus2SYtox488*\*cam0_113_0*');
-    
     config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\01-Exp8r-FOV1-DNA-MCM-reSyt532*\*cam0_060_0*');    
     
     % Directories for correcting Data
@@ -28,6 +27,7 @@ function [ config ] = Config( config )
     config.luckyStackSize = 1;              % Stack size for the lucky algorithm
     config.luckyThreshold = 0.1;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
     config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
+    config.binaryCloseRadius = 4;           % The radius of the disk-shaped element used to close the DNA in the MatchDnaHelicase script
     
     config.diameterThreshold = 6;              % Area threshold in pixels for identifying helicases
     config.eccentricityThreshold = 0.85;      % Eccentricity threshold for identifying helicases

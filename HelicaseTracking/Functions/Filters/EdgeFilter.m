@@ -1,4 +1,4 @@
-function [ output_args ] = EdgeFilter( inputImage  )
+function [ output ] = EdgeFilter( inputImage  )
     % Edge Filter - Detects the edges in an image
     
     
@@ -8,5 +8,6 @@ function [ output_args ] = EdgeFilter( inputImage  )
     imshow(BW1)
     title('Canny Filter');
     
+    output = BW1;
 end
 

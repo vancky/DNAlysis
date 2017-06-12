@@ -1,7 +1,6 @@
 clear all; clc; close all;
 
 config=struct();
-%%
 config=Config(config);
 
 
@@ -10,7 +9,6 @@ config=Config(config);
 fprintf('Importing Images.\n')
 importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd , 'stack' );
 importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
-%%
 importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
 fprintf('Images Imported.\n')
 
@@ -24,13 +22,12 @@ config.cropCoordinates = GenerateCropCoordinates( importedHelicaseImages{1}(:,:,
 
 preProcess = PreProcess( config , importedHelicaseImages{1} , importedDnaImages{1} ); 
 
-% The actual analysis part
-%%
+%% The actual analysis part
+
 spotFinder = SpotFinder( config , preProcess.helicaseImage );
 helicaseIntensity = HelicaseIntensityFinder( spotFinder , (preProcess.helicaseImageRaw));
-%
-fprintf( 'The number of spots is %i.\n' , spotFinder.numSpots )
+matchDnaHelicase  = MatchDnaHelicase( config, preProcess.dnaImage, spotFinder);
 
-%%
-matchDnaHelicase  = MatchDnaHelicase( config, preProcess.originalImage , importedDnaImages{1}  );
+fprintf( 'The number of spots is %i.\n' , spotFinder.numSpots )
+fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase.match)
 

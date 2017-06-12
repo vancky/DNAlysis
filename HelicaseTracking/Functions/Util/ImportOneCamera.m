@@ -15,9 +15,8 @@ function [ output ] = ImportOneCamera( cdName , importType )
                 for k = 1:numFiles
                     dirK=sprintf( '%s%s%s' , directory(k).folder , '\' , directory(k).name );  % finds the k-th directory
                     image=imread(dirK);            %Import the images from cam 0
-                    output{i}=output{i}+double(image);
+                    output{i}=output{i}+double(image)/numFiles;
                 end
-                output{i}=output{i}/numFiles;
             case 'all'
                 for k = 1:numFiles
                     dirK=sprintf( '%s%s%s' , directory(k).folder , '\' , directory(k).name );  % finds the k-th directory

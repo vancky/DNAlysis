@@ -1,40 +1,46 @@
-function [ output ] = MatchDnaHelicase( config, helicaseImage , dnaImage )
+function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     %  Helicase Dna Overlay - Stacks two images of Helicases and DNA
     %  Detailed explanation goes here
-    
 
-    % Split the images
-    
-    %helicaseSplit = CropSplitImage( config, helicaseImage );
-    dnaSplit = CropSplitImage( config, dnaImage );
-    
-    %helicaseImageCorrect =  ( helicaseSplit.leftImage );
-    helicaseImageCorrect = BackgroundFilter(helicaseImage) ;
-    dnaImageCorrect = BackgroundFilter( dnaSplit.rightImage );
-    output = helicaseImageCorrect;
+    dnaEdgeBinary = edge( dnaImage , 'canny' );
+    radius = config.binaryCloseRadius;
+    se = strel('disk' , radius );
+    dnaEdgeClosed= imclose(dnaEdgeBinary , se );
     
     figure;
-    subplot(1,2,1); imshow(helicaseImageCorrect , []); title('Helicases');
-    subplot(1,2,2); imshow(dnaImageCorrect , []) ; title('DNA')
+    subplot(1,3,1); imshow( dnaImage , []) ; title('DNA')
+    subplot(1,3,2); imshow( dnaEdgeBinary, []); title('Dna edges');
+    subplot(1,3,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
+    
+    N = spotFinder.numSpots;
+    circle = spotFinder.circle;
+    count = 0;
+    for i=1:N
+        location= round(circle(i).centers); % [X,Y] center of the helicases
+        check = dnaEdgeClosed (location(2), location(1)); % check whether the helicase is on the DNA (1 is yes 0 no)
+        count = count +check;
+    end
+    match = count/N;
+    
+    output.match = match;
     
     
-    % filter images
-    
-    thresholdfinder = ThresholdFinder( helicaseImageCorrect );
-    
-    helicaseImageFilter=helicaseImageCorrect;
-    helicaseImageFilter( helicaseImageFilter < 2*thresholdfinder.threshold )=0;
-    
-    figure; 
-    imshow(dnaImageCorrect, [],'InitialMag', 'fit')
-    s=size(dnaImageCorrect);
-    
-    green =cat(3 , zeros(s), ones(s) , zeros(s));
+    figure;
     hold on
-    h = imshow(green);
+    subplot(1,2,1)
+    imshow( dnaEdgeClosed);
+    for i=1:N
+        viscircles( circle(i).centers , circle(i).radii );
+    end
     hold off
     
-    set(h,'AlphaData', helicaseImageFilter)
-
+    hold on
+    subplot(1,2,2)
+    imshow( dnaImage, []); colorbar
+    for i=1:N
+        viscircles( circle(i).centers , circle(i).radii );
+    end
+    hold off
+    
 end
 
