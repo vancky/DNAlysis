@@ -8,8 +8,8 @@ function [ output ] = SpotFinder( config , inputImage )
     %%
    
     binaryImage = watershedImage >0;
-    
-    % Then, find grouped pixels (helicases) based on connected region analysis
+        
+    %   Then, find grouped pixels (helicases) based on connected region analysis
     %   bwconncomp finds groups of connected pixels
     %   regionprops finds the area and eccentricity of these groups
     %   We assume DNA has a minimum area and eccentricity

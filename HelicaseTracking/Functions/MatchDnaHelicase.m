@@ -23,7 +23,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     match = count/N;
     
     output.match = match;
-    
+    output.count = count;
     
     figure;
     hold on
