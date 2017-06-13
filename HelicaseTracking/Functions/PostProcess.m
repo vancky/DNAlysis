@@ -25,7 +25,7 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
     output.std = matchStd ; 
     
     fprintf('The total fraction of helicases located on the DNA is %.2f .\n' , matchTotal)
-    fprintf('The standard deviation of the helicase fraction in each FOV is %.3f .\n' , matchStd)
+    fprintf('The standard deviation of the helicase fraction is %.3f .\n' , matchStd)
     
     figure;
     histogram( intensity , 200 , 'BinLimits' , [1 1e4])    
