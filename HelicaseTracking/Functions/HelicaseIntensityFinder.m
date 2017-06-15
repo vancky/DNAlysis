@@ -31,13 +31,13 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
         intensity(i) = helicaseSizeReal^2*sum( product(:) );
     end
     
-   
-    figure;
-    histogram(intensity , 200)
-    title('Intensity Distribution of Helicases')
-    xlabel('Pixel counts per Helicase')
-    ylabel('Number of helicases')
-    
+%    
+%     figure;
+%     histogram(intensity , 200)
+%     title('Intensity Distribution of Helicases')
+%     xlabel('Pixel counts per Helicase')
+%     ylabel('Number of helicases')
+%     
     output.helicase = helicase;
     output.filter = filter;
     output.intensity = intensity;

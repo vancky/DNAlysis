@@ -2,6 +2,7 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
     % Post Processing - Performs post data analysis
     % Computes total number of spots, the fraction of helicases overlapping
     % with the dna and a histogram of the intensity of all helicases.
+    fprintf('Performing Post Processing .\n')
     
     N = config.numFovs;
     % Initialize the sums for the for loop
@@ -9,9 +10,11 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
     count = 0;
     intensity = [];
     match = zeros(N,1);
+    numSpotsArray = [];
     
     for ii = 1:N
         numSpots = numSpots + spotFinder{ii}.numSpots;
+        numSpotsArray = [ numSpotsArray , spotFinder{ii}.numSpots ];
         count = count + matchDnaHelicase{ii}.count;
         match(ii,1) = matchDnaHelicase{ii}.match;
         intensity = [ intensity , helicaseIntensity{ii}.intensity'];
@@ -22,8 +25,12 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
     output.intensity = intensity;
     
     matchStd = sqrt(sum((match-matchTotal).^2 )/(N-1));
-    output.std = matchStd ; 
+    numSpotsStd = std(numSpotsArray);
+    output.matchStd = matchStd ; 
+    output.numSpotsStd = numSpotsStd;
     
+    fprintf('The average number of spots per FOV is %.2f .\n' , numSpots/N)
+    fprintf('The standard deviation of the number of spots per FOV is %.2f .\n' , numSpotsStd)
     fprintf('The total fraction of helicases located on the DNA is %.2f .\n' , matchTotal)
     fprintf('The standard deviation of the helicase fraction is %.3f .\n' , matchStd)
     

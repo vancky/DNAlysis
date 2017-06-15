@@ -11,6 +11,8 @@ importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
 importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
 fprintf('Images Imported.\n')
 
+save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
+
 %% Correlations and calibrations
 
 splitCorrelation  = SplitCorrelation( config, importedSplitCorrelationImages{1} );
@@ -18,7 +20,7 @@ config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.co
 config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
 
 %%
-for ii = 1:config.numFovs
+for ii = 1:1 %config.numFovs
     fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
 
     % Do some pre processing of the data
