@@ -12,7 +12,7 @@ importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack'
 fprintf('Images Imported.\n')
 %% Load or save
 %load ( config.matFileCd );
-%save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
+save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
 
 %% Correlations and calibrations
 
