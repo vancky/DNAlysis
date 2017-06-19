@@ -12,26 +12,30 @@ function [ config ] = Config( config )
     % set cam0_290_0 instead of cam0_290 to make sure you don't import the
     % stack image.
     
-    
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170530Exp13.mat');
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-488*\*cam0_266_0*');
-    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV2-DNA-MCM-reSytox-488*\*cam0_282_0*');
-    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV3-DNA-MCM-reSytox-488*\*cam0_298_0*');
-    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV4-DNA-MCM-reSytox-488*\*cam0_316_0*');
-    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-488*\*cam0_356_0*');
-    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-488*\*cam0_372_0*');
-    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV7-DNA-MCM-reSytox-488*\*cam0_388_0*');
-    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV8-DNA-MCM-reSytox-488*\*cam0_404_0*');
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-532*\*cam0_270_0*');    
-    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV2-DNA-MCM-reSytox-532*\*cam0_286_0*');    
-    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV3-DNA-MCM-reSytox-532*\*cam0_302_0*');    
-    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV4-DNA-MCM-reSytox-532*\*cam0_318_0*');    
-    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
-    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-532*\*cam0_376_0*');    
-    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV7-DNA-MCM-reSytox-532*\*cam0_392_0*');    
-    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV8-DNA-MCM-reSytox-532*\*cam0_408_0*');    
-   
+    
+    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170531C10.mat');
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_091206\05-C10-FOV1-488*\*cam0_155_0*');
+    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_091206\05-C10-FOV2-488*\*cam0_171_0*');
+    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV3-488*\*cam0_015_0*');
+    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV4-488*\*cam0_031_0*');
+    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV5-488*\*cam0_047_0*');
+    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV6-488*\*cam0_065_0*');
+    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV7-488*\*cam0_083_0*');
+    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV8-488*\*cam0_103_0*');
+    config.helicaseCd{9}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV9-488*\*cam0_129_0*');
+    config.helicaseCd{10}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV10-488*\*cam0_145_0*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_091206\05-C10-FOV1-532good*\*cam0_145_0*');
+    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_091206\05-C10-FOV2-532*\*cam0_165_0*');
+    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_091206\05-C10-FOV3-532*\*cam0_185_0*');
+    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV4-532*\*cam0_025_0*');
+    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV5-532*\*cam0_041_0*');
+    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV6-532*\*cam0_059_0*');
+    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV7-532*\*cam0_077_0*');
+    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV8-532*\*cam0_095_0*');
+    config.dnaCd{9}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV9-532*\*cam0_121_0*');
+    config.dnaCd{10}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_140435\05-C10-FOV10-532*\*cam0_139_0*');
+    
     config.numFovs = length( config.helicaseCd);
     
     % Directories for correcting Data
