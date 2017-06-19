@@ -10,7 +10,8 @@ importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd ,
 importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
 importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
 fprintf('Images Imported.\n')
-
+%% Load or save
+% load ( config.matFileCd );
 save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
 
 %% Correlations and calibrations
@@ -20,7 +21,7 @@ config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.co
 config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
 
 %%
-for ii = 1:1 %config.numFovs
+for ii = 1:config.numFovs
     fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
 
     % Do some pre processing of the data
@@ -33,8 +34,9 @@ for ii = 1:1 %config.numFovs
     helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImageNoScale));
     matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
 
-    fprintf( 'The number of spots is %i.\n' , spotFinder{ii}.numSpots )
+    fprintf('The number of spots is %i.\n' , spotFinder{ii}.numSpots )
     fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase{ii}.match)
+    fprintf('The DNA fraction is %.2f .\n' , matchDnaHelicase{ii}.dnaFraction )
 end
 
 %%

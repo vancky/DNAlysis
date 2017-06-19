@@ -6,33 +6,44 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     radius = config.binaryCloseRadius;
     se = strel('disk' , radius );
     dnaEdgeClosed= imclose(dnaEdgeBinary , se );
-    
     output.dnaEdgeClosed = dnaEdgeClosed;
-    
     
     % Refine the dnaEdge Closed Image
     
-    regionIntensity = regionprops( dnaEdgeClosed , dnaImage , 'MeanIntensity');
-    
+    cc = bwconncomp( dnaEdgeClosed );
+    regionIntensity = regionprops( cc , dnaImage , 'MaxIntensity');
+    regionDiameter = regionprops( cc , 'EquivDiameter');
+
     M = length(regionIntensity) ;
     intensity = zeros(M,1);
     for i=1: M
-        intensity(i,1) = regionIntensity(i).MeanIntensity;
+        intensity(i,1) = regionIntensity(i).MaxIntensity;
     end
-    figure; histogram( intensity , 20)
-    % WRITE SOMETHIGN WHICH FILTERS ON THE INTENSITY!
+
+    % Find the Indexes of the real DNA.
+    meanIntensity = mean(intensity) ;
+    idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThreshold ) )); 
+    filteredBinary = ismember(labelmatrix(cc), idx);
+    
+    output.filteredBinary = filteredBinary ;
+    % compute the dna Fraction
+    output.dnaFraction = sum(filteredBinary(:)) / numel(filteredBinary);
     
     figure;
-    subplot(1,3,1); imshow( dnaImage , []) ; title('DNA')
-    subplot(1,3,2); imshow( dnaEdgeBinary, []); title('Dna edges');
-    subplot(1,3,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
+    subplot(1,4,1); imshow( dnaImage , []) ; title('DNA')
+    subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
+    subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
+    subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges')
+
+    
+    % Perform the actual matching of DNA with Helicases
     
     N = spotFinder.numSpots;
     circle = spotFinder.circle;
     count = 0;
     for i=1:N
         location= round(circle(i).centers); % [X,Y] center of the helicases
-        check = dnaEdgeClosed (location(2), location(1)); % check whether the helicase is on the DNA (1 is yes 0 no)
+        check = filteredBinary (location(2), location(1)); % check whether the helicase is on the DNA (1 is yes 0 no)
         count = count +check;
     end
     match = count/N;

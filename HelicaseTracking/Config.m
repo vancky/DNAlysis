@@ -47,8 +47,8 @@ function [ config ] = Config( config )
     config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
     config.binaryCloseRadius = 4;           % The radius of the disk-shaped element used to close the DNA in the MatchDnaHelicase script
     
-    config.diameterThreshold = 6;              % Area threshold in pixels for identifying helicases
-    config.eccentricityThreshold = 0.85;      % Eccentricity threshold for identifying helicases
+    config.diameterThreshold = 4;              % Area threshold in pixels for identifying helicases
+    config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
     
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
