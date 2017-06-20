@@ -40,7 +40,7 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
     fprintf('The average DNA fraction is %.2f .\n' , output.dnaFraction )
     
     figure;
-    histogram( intensity , 100 , 'BinLimits' , [1 5e3])    
+    histogram( intensity , 200 , 'BinLimits' , [1 5e3])    
     title('Intensity Distribution of Helicases')
     xlabel('Pixel counts per Helicase')
     ylabel('Number of helicases')
