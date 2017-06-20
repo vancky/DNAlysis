@@ -1,0 +1,50 @@
+function [ output ] = GaussianMleFit( data , domain , nbins )
+    % Gaussian MLE Fit - Fits 1 and 2 gaussians to a distribution
+    % Input the data, the domain where you want to plot the results 
+    % [xmin , xmax ] , and finally the nbins for the histogram
+   
+    x = linspace( domain(1) , domain(2) , nbins );
+    
+    custpdf1= @(data, mu1 , sigma1) normpdf( data , mu1 , sigma1);
+    custpdf2= @(data, mu1 , mu2 , sigma1 , sigma2) normpdf(data , mu1 , sigma1)+ normpdf(data , mu2 , sigma2);
+    custpdf3= @(data, mu1 , mu2 , mu3 , sigma1 , sigma2 , sigma3) ...
+        normpdf(data , mu1 , sigma1)+ normpdf(data , mu2 , sigma2)+ normpdf(data , mu3 , sigma3);
+    
+    muStart2 = quantile( data , [.25 .75]);
+    sigmaStart2 = sqrt( var(data) - .25*diff(muStart2).^2 );
+    
+    muStart2 = quantile( data , [.25 .75]);
+    sigmaStart2 = sqrt( var(data) - .25*diff(muStart2).^2 );
+    
+    start1= [ max(data)/4, max(data)/8 ];
+    start2 = [ muStart2 , sigmaStart2 , sigmaStart2 ];
+    
+    
+    lb1 = [ -Inf , 0];
+    ub1 = [ Inf , Inf];
+    lb2 = [ -Inf , -Inf , 0 ,  0 ];
+    ub2 = [ Inf , Inf , Inf , Inf ];
+    lb3 = [ -Inf , -Inf, -Inf , 0 , 0 ,  0 ];
+    ub3 = [ Inf , Inf , Inf , Inf , Inf , Inf ];
+    
+    phat1 = mle(data, 'pdf' , custpdf1, 'start', start1 , 'lower' , lb1, 'upper' , ub1);
+    output.fitValues1 = phat1;
+    phat2 = mle(data, 'pdf' , custpdf2, 'start', start2 , 'lower' , lb2, 'upper' , ub2);
+    output.fitValues2 = phat2;
+    phat3 = mle(data, 'pdf' , custpdf3, 'start', start3 , 'lower' , lb3, 'upper' , ub3);
+    output.fitValues2 = phat3;
+        
+    y1 = normpdf( x , phat1(1) , phat1(2) );
+    y2 = normpdf( x , phat2(1) , phat2(3))+ normpdf( x, phat1(2) , phat2(4));
+    y3 = normpdf( x , phat3(1) , phat3(4))+ normpdf( x, phat1(2) , phat2(5)) + normpdf( x, phat1(3) , phat2(6));
+    
+    figure;
+    histogram( data , nbins , 'BinLimits' , domain);
+    hold on
+    plot( x , y1*sum(data)/100 , 'LineWidth' , 1.5)
+    plot( x , y2*sum(data)/100 , 'LineWidth' , 1.5)  
+    plot( x , y3*sum(data)/100 , 'LineWidth' , 1.5) 
+     
+    
+end
+
