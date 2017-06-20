@@ -14,27 +14,25 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     
-    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170523Exp9r.mat');
+    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170530Exp8.mat');
     
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox488b*\*cam0_113_0*');
-    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox488*\*cam0_125_0*');
-    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox488*\*cam0_141_0*');
-    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox488*\*cam0_157_0*');
-    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox488*\*cam0_173_0*');
-    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox488*\*cam0_229_0*');
-    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox488*\*cam0_245_0*');
-    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox488*\*cam0_261_0*');                           
-    
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox532b*\*cam0_109_0*');
-    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox532*\*cam0_129_0*');
-    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox532*\*cam0_145_0*');
-    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox532*\*cam0_161_0*');
-    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox532b*\*cam0_197_0*');
-    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox532*\*cam0_233_0*');
-    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox532*\*cam0_249_0*');
-    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox532*\*cam0_265_0*');
-
-    config.numFovs = length( config.helicaseCd);
+%     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox488b*\*cam0_113_0*');
+%     config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox488*\*cam0_125_0*');
+%     config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox488*\*cam0_141_0*');
+%     config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox488*\*cam0_157_0*');
+%     config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox488*\*cam0_173_0*');
+%     config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox488*\*cam0_229_0*');
+%     config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox488*\*cam0_245_0*');
+%     config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox488*\*cam0_261_0*');                           
+%     
+%     config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox532b*\*cam0_109_0*');
+%     config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox532*\*cam0_129_0*');
+%     config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox532*\*cam0_145_0*');
+%     config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox532*\*cam0_161_0*');
+%     config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox532b*\*cam0_197_0*');
+%     config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox532*\*cam0_233_0*');
+%     config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox532*\*cam0_249_0*');
+%     config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox532*\*cam0_265_0*');
     
     % Directories for correcting Data
     config.splitCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
