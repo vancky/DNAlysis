@@ -26,7 +26,6 @@ for ii = 1: config.numFovs
     preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
 end
 
-config.dnaIntensity =
 
 
 %% Analysis
@@ -40,6 +39,7 @@ for ii = 1:config.numFovs
     matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
     %dnaCount = CountDna( config , preProcess{ii}.dnaImage , matchDnaHelicase{ii} );
     
+    config.dnaIntensity = 
     fprintf('The number of spots is %i.\n' , spotFinder{ii}.numSpots )
     fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase{ii}.match)
     fprintf('The DNA fraction is %.2f .\n' , matchDnaHelicase{ii}.dnaFraction )

@@ -6,7 +6,6 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     radius = config.binaryCloseRadius;
     se = strel('disk' , radius );
     dnaEdgeClosed= imclose(dnaEdgeBinary , se );
-    output.dnaEdgeClosed = dnaEdgeClosed;
     
     % Refine the dnaEdge Closed Image
     
@@ -25,7 +24,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThreshold ) )); 
     filteredBinary = ismember(labelmatrix(cc), idx);
     
-    output.filteredBinary = filteredBinary ;
+    output.binaryDna = filteredBinary ;
     % compute the dna Fraction
     output.dnaFraction = sum(filteredBinary(:)) / numel(filteredBinary);
     
@@ -55,7 +54,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     figure;
     hold on
     subplot(1,2,1)
-    imshow( dnaEdgeClosed);
+    imshow( dnaEdgeClosed );
     for i=1:N
         viscircles( circle(i).centers , circle(i).radii );
     end

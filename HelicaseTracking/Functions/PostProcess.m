@@ -21,6 +21,7 @@ function [ output ] = PostProcess( config, matchDnaHelicase , helicaseIntensity 
         match(ii,1) = matchDnaHelicase{ii}.match;
         intensity = [ intensity , helicaseIntensity{ii}.intensity'];
     end
+    
     output.intensity = intensity;
     output.dnaFraction = mean( dnaFraction );
     

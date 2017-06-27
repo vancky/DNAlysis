@@ -24,6 +24,18 @@ function [ output ] = HelicaseIntensityFinder( spotFinder , helicaseImage )
                    && (location(1)-(radius+1)+j >0) &&  (location(1)-(radius+1)+j < size(helicaseImage , 2))
                 helicase(ii,j) = helicaseImage(location(2) - (radius+1)+ii,location(1)-(radius+1)+j);
                 end
+%                 
+%                 als A en B en C en D en E en F en G en H
+% 
+%                 lock = true
+%                 als niet A
+%                     lock = false
+%                 als niet B
+%                         .....
+% 
+%                 als lock
+%                     dan
+
             end
         end
         

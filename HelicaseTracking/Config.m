@@ -14,29 +14,29 @@ function [ config ] = Config( config )
     
     config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
     
-    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170530Exp8.mat');
-    
-%     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox488b*\*cam0_113_0*');
-%     config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox488*\*cam0_125_0*');
-%     config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox488*\*cam0_141_0*');
-%     config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox488*\*cam0_157_0*');
-%     config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox488*\*cam0_173_0*');
-%     config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox488*\*cam0_229_0*');
-%     config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox488*\*cam0_245_0*');
-%     config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox488*\*cam0_261_0*');                           
-%     
-%     config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV1-DNA-MCM-resSytox532b*\*cam0_109_0*');
-%     config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV2-DNA-MCM-resSytox532*\*cam0_129_0*');
-%     config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV3-DNA-MCM-resSytox532*\*cam0_145_0*');
-%     config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV4-DNA-MCM-resSytox532*\*cam0_161_0*');
-%     config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV5-DNA-MCM-resSytox532b*\*cam0_197_0*');
-%     config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV7-DNA-MCM-resSytox532*\*cam0_233_0*');
-%     config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV8-DNA-MCM-resSytox532*\*cam0_249_0*');
-%     config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170523_110945\Exp9r-Ch9-FOV9-DNA-MCM-resSytox532*\*cam0_265_0*');
-    
-    % Directories for correcting Data
-    config.splitCorrelationCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.matFileCd=('../../../MatFiles/DnaHelicaseImports/170530Exp13.mat');
+    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-488*\*cam0_266_0*');
+    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV2-DNA-MCM-reSytox-488*\*cam0_282_0*');
+    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV3-DNA-MCM-reSytox-488*\*cam0_298_0*');
+    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV4-DNA-MCM-reSytox-488*\*cam0_316_0*');
+    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-488*\*cam0_356_0*');
+    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-488*\*cam0_372_0*');
+    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV7-DNA-MCM-reSytox-488*\*cam0_388_0*');
+    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV8-DNA-MCM-reSytox-488*\*cam0_404_0*');
+    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-532*\*cam0_270_0*');    
+    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV2-DNA-MCM-reSytox-532*\*cam0_286_0*');    
+    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV3-DNA-MCM-reSytox-532*\*cam0_302_0*');    
+    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV4-DNA-MCM-reSytox-532*\*cam0_318_0*');    
+    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
+    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-532*\*cam0_376_0*');    
+    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV7-DNA-MCM-reSytox-532*\*cam0_392_0*');    
+    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV8-DNA-MCM-reSytox-532*\*cam0_408_0*');    
 
+    % Directories for correcting Data
+    config.splitCorrelationCd{1} =('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.dnaCalibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
+
+    
     % Set the parameters
 
     config.pixels= 512;                     % Pixels per image
@@ -49,7 +49,6 @@ function [ config ] = Config( config )
     
     config.diameterThreshold = 4;              % Area threshold in pixels for identifying helicases
     config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
-    
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
@@ -69,14 +68,7 @@ function [ config ] = Config( config )
                                              % A guideline for this is 3*sigma
                                              
     % Make sure we can use the functions
-    addpath ./Functions
-    addpath ./Functions/SimulateData
-    addpath ./Functions/Util
-    addpath ./Functions/HelicaseFitting
-    addpath ./Functions/BeamshapeCorrection
-    addpath ./Functions/Filters
-    addpath ./Functions/LuckyImaging
-    addpath ./Functions/Visualisation
-    addpath(genpath('./Functions/gaussmlev2'))
+    addpath(genpath('./Functions'))
+
 end
 
