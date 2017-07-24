@@ -26,7 +26,7 @@ for ii = 1: config.numFovs
     preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
 end
 
-config.dnaIntensity =
+%config.dnaIntensity =
 
 
 %% Analysis
