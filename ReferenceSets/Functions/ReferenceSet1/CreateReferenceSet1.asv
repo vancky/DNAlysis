@@ -11,18 +11,16 @@ function [ output ] = CreateReferenceSet1( config )
     % Crop the image to a region which you like
     croppedImage = beadImage{1}(:, 45:241);
     
-    % Initialize a cleaned image
-    cleanedImage = zeros(size(croppedImage));
-    
+       
     % Define cleanregions [ XTL, YTL, XBR, YBR]
     % Where TL is top left and BR is bottom right
-    cr(1,:)= [90, 228, 108, 243];
-    cr(2,:)= [103, 17, 121, 32];
-    cr(3,:)= [41, 58, 53, 68];
+    cr(1,:)= [90, 228, 108,243];
+    cr(2,:)= [90, 228, 108,243];
     
     % Manually clean the images
+    cleanedImage = zeros(size(croppedImage));
     
-    numRegions = size(cr,1);
+    numRegions = size(cr,2)
     for i =1:numRegions
         cleanedImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) ) = ...
             croppedImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) );
