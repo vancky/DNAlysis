@@ -1,0 +1,10 @@
+function [ output ] = CreateReferenceSet1( config )
+    % Create Reference Set 1
+    %   Detailed explanation goes here
+
+
+        fprintf('Importing Images.\n')
+    importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd , 'stack' );
+    fprintf('Images Imported.\n')
+end
+
