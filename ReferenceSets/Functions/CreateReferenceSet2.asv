@@ -1,0 +1,17 @@
+function [ output ] = CreateReferenceSet2( config )
+    % Create Reference Set 2
+    % Create the helicase and dna image for reference set 2
+    
+    % 
+    helicaseImages = ImportOneCamera( config.referenceSet2HelicaseCd, 'stack' );
+    dnaImages =      ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
+    
+    for i = 1: length(helicaseImages) 
+        figure; imshow( helicaseImages{i}, []), colorbar , title(sprintf('Helicase Image %i', i))
+        figure; imshow( dnaImages{i}, []), colorbar , title(sprintf('Dna Image %i', i))
+    end
+    
+    output.helicaseImage = CreateHelicaseImage2(helicaseImages);
+    output.dnaImage = CreateDnaImage2(dnaImages);
+end
+

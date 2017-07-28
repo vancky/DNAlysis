@@ -1,11 +1,11 @@
-function [ output ] = CreateReferenceSet1( config )
-    % Create Reference Set 1
-    
-    
+function [ output ] = CreateHelicaseImage1( config )
+    % Create Helicase Image 1
+    % Creates the helicase image for reference set 1
+
     % Imports the relevant bead image for reference set 1
-    fprintf('Importing images for reference set 1.\n')
+    fprintf('Importing the bead image for reference set 1.\n')
     beadImage = ImportOneCamera( config.referenceSet1Cd , 'stack' );
-    fprintf('Images for reference set 1 have been imported.\n')
+    fprintf('The bead image for reference set 1 has been imported.\n')
     
     % Crop the image to a region which you like
     croppedImage = beadImage{1}(:, 45:241);
@@ -50,12 +50,11 @@ function [ output ] = CreateReferenceSet1( config )
     
     output = cleanedImage;
     
-    figure;
-    imshow( beadImage{1}(:, 1:256) , [100 150]);
-    
-    
-    figure;
-    imshow(cleanedImage, [5 50])
-    
+%     figure;
+%     subplot(1,2,1); imshow( beadImage{1}(:, 1:256) , [100 150]); colorbar
+%     title('Raw Image for Reference Set 1')
+%     subplot(1,2,2); imshow(cleanedImage, [5 50]); colorbar
+%     title('Cleaned Image Reference Set 1')
+
 end
 
