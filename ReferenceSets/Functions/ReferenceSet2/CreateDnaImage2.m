@@ -8,7 +8,9 @@ function [ output ] = CreateDnaImage2( dnaImages )
     croppedImage{4} = dnaImages{4}(:, 270:495);
     croppedImage{5} = dnaImages{5}(:, 270:495);
     
-%     % Code to visualise the cropping
+    output = croppedImage;
+    
+    % This code can be uncommented to visualise the cropping
 %     for i = 1:5
 %         figure; 
 %         subplot(1,2,1);
@@ -18,8 +20,5 @@ function [ output ] = CreateDnaImage2( dnaImages )
 %         imshow( dnaImages{i}, []); colorbar;
 %         title( sprintf('Dna Image %i', i)); 
 %     end
-    
-    output = croppedImage;
-
 end
 

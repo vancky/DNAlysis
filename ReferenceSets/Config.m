@@ -30,6 +30,5 @@ function [ config ] = Config( config )
     
     % Make sure we can use the functions
     addpath(genpath('./Functions'))
-
 end
 

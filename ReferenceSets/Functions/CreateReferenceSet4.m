@@ -1,7 +1,11 @@
-function [ output_args ] = CreateReferenceSet4( input_args )
-%CREATEREFERENCESET4 Summary of this function goes here
-%   Detailed explanation goes here
-
-
+function [ output ] = CreateReferenceSet4( config )
+    % Create Reference Set 4
+    % Create the dynamic simulated images at different SNR ratios
+    
+    
+    
+    
+    output.helicaseImage = [];
+    output.dnaImage = [];
 end
 

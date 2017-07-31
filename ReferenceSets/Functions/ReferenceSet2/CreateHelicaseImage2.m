@@ -9,8 +9,10 @@ function [ output ] = CreateHelicaseImage2( helicaseImages )
     croppedImage{3} = helicaseImages{3}(1:430, 35:245);
     croppedImage{4} = helicaseImages{4}(1:430, 35:245);
     croppedImage{5} = helicaseImages{5}(1:430, 35:245);
-     
-    % Code to visualise the cropping
+    
+    output = croppedImage;
+    
+    % This code can be uncommented to visualise the cropping
 %     for i = 1:5
 %         figure; 
 %         subplot(1,2,1);
@@ -20,7 +22,5 @@ function [ output ] = CreateHelicaseImage2( helicaseImages )
 %         imshow( helicaseImages{i}, [100 150]); colorbar;
 %         title( sprintf('Helicase Image %i', i)); 
 %     end
-    
-    output = croppedImage;
 end
 
