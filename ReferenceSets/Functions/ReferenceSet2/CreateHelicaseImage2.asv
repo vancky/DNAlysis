@@ -1,0 +1,15 @@
+function [ output ] = CreateHelicaseImage2( helicaseImages )
+    % Create Helicase Image 2
+    % Creates the helicase image for reference set 2
+
+    % Just do some manual cropping of the images
+    
+    croppedImage{1} = helicaseImages{1}(:, 45:241);
+    croppedImage{1} = helicaseImages{1}(:, 45:241);
+    croppedImage{1} = helicaseImages{1}(:, 45:241);
+    croppedImage{1} = helicaseImages{1}(:, 45:241);
+        
+
+
+end
+
