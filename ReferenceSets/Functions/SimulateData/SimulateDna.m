@@ -12,14 +12,10 @@ function [ output ] = SimulateDna( parameters )
     dnaTlX = parameters(7);
     dnaTlY = parameters(8);
     
-    x = 1:domainSizeX;
-    y = 1:domainSizeY;
-    [X,Y] = meshgrid(x,y);
-    
     dna = zeros( domainSizeY, domainSizeX);
     dna(dnaTlY: dnaTlY+dnaSizeY-1, dnaTlX: dnaTlX+dnaSizeX-1) = dnaIntensity;
     
-    dna= imgaussfilt( dna, blurSize);
+    dna = imgaussfilt( dna, blurSize);
     
     output = dna;
 end
