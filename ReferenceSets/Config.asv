@@ -8,16 +8,11 @@ function [ config ] = Config( config )
     % Directory for saving the reference sets
     config.referenceSetSaveCd =('../../../MatFiles/ReferenceSets/');
     
-    % General specifications of simulated data
-    config.imageSize = [512, 256];
+    % Specifications of simulated data
     
-    % Simulate helicase specs
-    config.sigma = 2;             % The sigma of the Gaussian PSF to simulate helicases
-    config.scaleValue = 50;       % Maximum intensity of the helicase spot
-    % Simulate dna specs
-    config.dnaSize = [60, 1];     % Size of the DNA in pixels before blurring
-    config.dnaIntensity = 1500;   % Intensity of the DNA before blurring
-    config.blurSize = 2;          % Sigma of the Gaussian blur
+    config.sigma = % The sigma of the Gaussian PSF to simulate helicases
+    config.scaleValue = % Maximum intensity of the helicase s
+    
     
     % Directories for correcting Data
     % Reference Set 1

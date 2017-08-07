@@ -1,0 +1,25 @@
+function [ output ] = SimulateDna( parameters )
+    % Simulate Dna - Simulates images with DNA strands
+    % Detailed explanation goes here
+    
+    dnaSizeX = parameters(1);
+    dnaSizeY= parameters(2);
+    dnaIntensity = parameters(3);
+    blurSize = parameters(4);
+    domainSizeX = parameters(5);
+    domainSizeY = parameters(6);
+    % Top leftIndexes of the dna
+    dnaTlX = parameters(7);
+    dnatlY = parameters(8);
+    
+    x = 1:domainSizeX;
+    y = 1:domainSizeY;
+    [X,Y] = meshgrid(x,y);
+    
+    dna = zeros( domainSizeY, domainSizeX);
+    dna(dnaTopLeftY: dnaTopLeftY+ dnaSizeY, dnaTopLeftX: dnaTopLeftX+ dnaSizeX) = 
+    
+    
+    output = dna;
+end
+
