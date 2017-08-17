@@ -1,14 +1,18 @@
-function [ output ] = ImportOneCamera( cdName , importType )
+function [ output, errorCheck ] = ImportOneCamera( cdName , importType, errorCheck )
     % Import One Camera - Imports images from one specific camera
     % Give as inputs the cd of the folder to import
 
     numFolders=size(cdName,2);
-
+    errorCheck = 0;
+    
     for i=1:numFolders
         fprintf('Importing images from folder %d/%d.\n',i,numFolders);
         directory = dir( cdName{i});                        % Labels all the tiffFiles with cam0 in the current directory
         numFiles = length(directory);                       % Number of individual image
-        
+        if numFiles ==0
+            fprintf('You have specified an incorrect directory in folder %i.\n %s \n', i, cdName{i})
+        end
+            
         switch importType
             case 'stack'
                 output{i}=0;

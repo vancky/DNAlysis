@@ -29,7 +29,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     output.dnaFraction = sum(filteredBinary(:)) / numel(filteredBinary);
     
     figure;
-    subplot(1,4,1); imshow( dnaImage , []) ; title('DNA')
+    subplot(1,4,1); imshow( dnaImage , []) ; title('DNA');
     subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
     subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
     subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges')
@@ -59,6 +59,8 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
         viscircles( circle(i).centers , circle(i).radii );
     end
     hold off
+    title('Binary Dna map with located helicases')
+
     
     hold on
     subplot(1,2,2)
@@ -67,6 +69,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
         viscircles( circle(i).centers , circle(i).radii );
     end
     hold off
-    
+    title('Dna Image with located helicases')
+   
 end
 

@@ -12,11 +12,14 @@ function [ output ] = CreateReferenceSet2( config )
       
     output.helicaseImage = CreateHelicaseImage2(helicaseImages);
     output.dnaImage = CreateDnaImage2(dnaImages);
+    output.helicaseRoi = CreateHelicaseRoi2(config, output.helicaseImage);
+    
+    %output.dnaRoi = CreateDnaRoi2()
     
     % This section can be uncommented to see which images are imported
-%     for i = 1: length(helicaseImages) 
-%         figure; imshow( helicaseImages{i}, [100 150]); colorbar; title(sprintf('Helicase Image %i', i))
-%         figure; imshow( dnaImages{i}, []); colorbar; title(sprintf('Dna Image %i', i))
-%     end
+    for i = 1: length(helicaseImages) 
+        figure; imshow( helicaseImages{i}, [100 150]); colorbar; title(sprintf('Helicase Image %i', i))
+        figure; imshow( dnaImages{i}, []); colorbar; title(sprintf('Dna Image %i', i))
+    end
 end
 

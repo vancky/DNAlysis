@@ -12,7 +12,7 @@ function [ config ] = Config( config )
     config.imageSize = [512, 256];
     
     % Simulate helicase specs
-    config.sigma = 2;             % The sigma of the Gaussian PSF to simulate helicases
+    config.sigma = 1.5;             % The sigma of the Gaussian PSF to simulate helicases
     config.scaleValue = 50;       % Maximum intensity of the helicase spot
     % Simulate dna specs
     config.dnaSize = [60, 1];     % Size of the DNA in pixels before blurring
@@ -22,8 +22,12 @@ function [ config ] = Config( config )
     % Directories for correcting Data
     % Reference Set 1
     config.referenceSet1Cd{1} =('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
-      
+    config.helicaseThreshold1 = 12;
+    config.smoothRadius1 = 3;
+    
     % Reference Set 2
+    config.helicaseThreshold2 = 110;
+    config.smoothRadius2 = 3;
     
     % 10mW case
     config.referenceSet2HelicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-488*\*cam0_266_0*');
@@ -39,6 +43,10 @@ function [ config ] = Config( config )
     config.referenceSet2DnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-532*\*cam0_270_0*');    
     config.referenceSet2DnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-532*\*cam0_376_0*');    
     
+    % Reference Set 3
+    config.helicaseThreshold3 = 1;
+    config.dnaThreshold3 = 50;
+
     % Make sure we can use the functions
     addpath(genpath('./Functions'))
 end

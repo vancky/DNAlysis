@@ -45,9 +45,9 @@ function [ output ] = PreProcessReference(  helicaseImageRaw, dnaImageRaw, optio
         
         case 'nofilter'
         
-        output.helicaseImageNoScale = helicaseImageRaw;
-        output.helicaseImage = helicaseImageRaw;
-        output.dnaImage = dnaImageRaw;
+        output.helicaseImageNoScale = double(helicaseImageRaw);
+        output.helicaseImage = double(helicaseImageRaw);
+        output.dnaImage = double(dnaImageRaw);
             
         otherwise
             

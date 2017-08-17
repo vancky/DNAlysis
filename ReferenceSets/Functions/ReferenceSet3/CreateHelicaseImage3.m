@@ -43,6 +43,6 @@ function [ output ] = CreateHelicaseImage3( config )
         helicaseImage = helicaseImage+ SimulateHelicase( parameters );
     end
     
-    output = helicaseImage;
+    output = uint16(helicaseImage);
 end
 

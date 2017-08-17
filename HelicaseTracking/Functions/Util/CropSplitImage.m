@@ -12,7 +12,7 @@ function [ outputImage ] = CropSplitImage( config , inputImage )
     
     colCropLeft(1) = config.cropCoordinates.left(1) + offset;
     colCropLeft(2) = config.cropCoordinates.left(2) -offset;
-    colCropRight = colCropLeft + config.splitCorrelation(2)
+    colCropRight = colCropLeft + config.splitCorrelation(2);
    
     rowLength = size(inputImage , 1);
     

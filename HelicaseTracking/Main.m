@@ -6,17 +6,18 @@ config=Config(config);
 %% Import Images
 
 fprintf('Importing Images.\n')
-importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd , 'stack' );
-%importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
-%importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
-fprintf('Images Imported.\n')
-%% Load or save
-%load ( config.matFileCd );
-load( strcat(config.referenceSetCd, 'ReferenceSet3.mat'));
+importedSplitCorrelationImages=   ImportOneCamera( config.splitCorrelationCd , 'stack');
+importedHelicaseImages=            ImportOneCamera( config.helicaseCd , 'stack');
+importedDnaImages=                 ImportOneCamera( config.dnaCd , 'stack');
 
-importedHelicaseImages{1} = referenceSet3.helicaseImage;
-importedDnaImages{1} = referenceSet3.dnaImage;
-%save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
+fprintf('Images Imported.\n')
+%% Load or save and reference sets
+%load ( config.matFileCd );
+%load( strcat(config.referenceSetCd, 'ReferenceSet3.mat'));
+
+%importedHelicaseImages{1} = referenceSet3.helicaseImage;
+%importedDnaImages{1} = referenceSet3.dnaImage;
+save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
 
 %% Correlations and calibrations
 fprintf('This section performs the correlations and calibrations.\n')
@@ -27,12 +28,9 @@ config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages
 config.numFovs = length( importedHelicaseImages);
 
 for ii = 1: config.numFovs
-    %preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
-    preProcess{ii} = PreProcessReference( importedHelicaseImages{ii} , importedDnaImages{ii}, 'nofilter' ); 
+    preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
+    %preProcess{ii} = PreProcessReference( importedHelicaseImages{ii} , importedDnaImages{ii}, 'nofilter' ); 
 end
-
-%config.dnaIntensity =
-
 
 %% Analysis
 fprintf('This section performs the Analysis.\n')
@@ -52,7 +50,6 @@ end
 
 %%
 postProcess = PostProcess( config , matchDnaHelicase , helicaseIntensity , spotFinder);
-
 
 
 %% Brownian motion

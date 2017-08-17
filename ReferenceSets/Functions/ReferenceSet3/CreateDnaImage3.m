@@ -25,6 +25,6 @@ function [ output ] = CreateDnaImage3( config )
         dnaImage= SimulateDna( parameters)+ dnaImage;
     end
     
-    output = dnaImage;
+    output = uint16(dnaImage);
 end
 

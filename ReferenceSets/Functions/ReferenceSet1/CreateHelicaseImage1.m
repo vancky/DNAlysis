@@ -55,6 +55,5 @@ function [ output ] = CreateHelicaseImage1( config )
 %     title('Raw Image for Reference Set 1')
 %     subplot(1,2,2); imshow(cleanedImage, [5 50]); colorbar
 %     title('Cleaned Image Reference Set 1')
-
 end
 
