@@ -6,9 +6,11 @@ config=Config(config);
 %% Import Images
 
 fprintf('Importing Images.\n')
-importedSplitCorrelationImages=   ImportOneCamera( config.splitCorrelationCd , 'stack');
-importedHelicaseImages=            ImportOneCamera( config.helicaseCd , 'stack');
-importedDnaImages=                 ImportOneCamera( config.dnaCd , 'stack');
+importedCameraCorrelationImages =  ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+%%
+importedSplitCorrelationImages =   ImportOneCamera( config.splitCorrelationCd, 'stack');
+importedHelicaseImages=            ImportOneCamera( config.helicaseCd, 'stack');
+importedDnaImages=                 ImportOneCamera( config.dnaCd, 'stack');
 
 fprintf('Images Imported.\n')
 %% Load or save and reference sets
@@ -17,7 +19,7 @@ fprintf('Images Imported.\n')
 
 %importedHelicaseImages{1} = referenceSet3.helicaseImage;
 %importedDnaImages{1} = referenceSet3.dnaImage;
-save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
+%save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
 
 %% Correlations and calibrations
 fprintf('This section performs the correlations and calibrations.\n')
@@ -26,6 +28,7 @@ splitCorrelation = SplitCorrelation( config, importedSplitCorrelationImages{1} )
 config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
 config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
 config.numFovs = length( importedHelicaseImages);
+cameraCorrelation = CameraCorrelation( config, beamshapeCorrection);
 
 for ii = 1: config.numFovs
     preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
