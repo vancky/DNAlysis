@@ -66,7 +66,7 @@ function [ config ] = Config( config )
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
-    config.checkerBoardSizeCamera=5;                % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
+    config.checkerBoardSizeCamera=3;                % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
     config.cropOffset=5;                            % Offset used in cropping images
     config.waveLength=488e-9;                       % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                          % Numerical factor which determines the width of the PSF

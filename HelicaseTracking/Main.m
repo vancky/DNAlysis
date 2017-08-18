@@ -28,8 +28,11 @@ splitCorrelation = SplitCorrelation( config, importedSplitCorrelationImages{1} )
 config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
 config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
 config.numFovs = length( importedHelicaseImages);
-cameraCorrelation = CameraCorrelation( config, beamshapeCorrection);
-
+cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages);
+config.cameraCorrelation = cameraCorrelation.coordinates;
+%%
+AlignCameraImages( config, importedCameraCorrelationImages.cam0{1}, importedCameraCorrelationImages.cam1{1});
+%%
 for ii = 1: config.numFovs
     preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
     %preProcess{ii} = PreProcessReference( importedHelicaseImages{ii} , importedDnaImages{ii}, 'nofilter' ); 
