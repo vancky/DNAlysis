@@ -25,7 +25,9 @@ fprintf('This section performs the correlations and calibrations.\n')
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-alignCameraImages( config, importImages.cam0{1}, importImages.cam1{1});
+for i =1:config.numFovs
+    AlignCameraImages( config, importImages.cam0{i}, importImages.cam1{i});
+end
 
 
 %%

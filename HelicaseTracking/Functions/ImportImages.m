@@ -21,9 +21,10 @@ function [ output ] = ImportImages( config )
             
         case 'TwoCameras'
             fprintf('Importing Helicase and Dna Images.\n')
-            importedCameraImages =  ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+            importedCameraImages =  ImportTwoCameras( config.multiCamCd, 'stack');
             output.cam0 = importedCameraImages.cam0;
             output.cam1 = importedCameraImages.cam1;
+            
         otherwise
             fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
     end
