@@ -5,12 +5,12 @@ config=Config(config);
 
 %% Import Images
 
-fprintf('Importing Images.\n')
-importedCameraCorrelationImages =  ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+importImages = ImportImages(config);
 %%
-importedSplitCorrelationImages =   ImportOneCamera( config.splitCorrelationCd, 'stack');
-importedHelicaseImages=            ImportOneCamera( config.helicaseCd, 'stack');
-importedDnaImages=                 ImportOneCamera( config.dnaCd, 'stack');
+importedCameraCorrelationImages = importImages.cameraCorrelation;
+importedSplitCorrelationImages = importImages.splitCorrelation;
+importedHelicaseImages = importImages.helicase;
+importedDnaImages = importImages.dna;
 
 fprintf('Images Imported.\n')
 %% Load or save and reference sets
@@ -31,6 +31,7 @@ config.numFovs = length( importedHelicaseImages);
 cameraCorrelation = CameraCorrelation( config, importedCameraCorrelationImages);
 config.cameraCorrelation = cameraCorrelation.coordinates;
 %%
+
 AlignCameraImages( config, importedCameraCorrelationImages.cam0{1}, importedCameraCorrelationImages.cam1{1});
 %%
 for ii = 1: config.numFovs
