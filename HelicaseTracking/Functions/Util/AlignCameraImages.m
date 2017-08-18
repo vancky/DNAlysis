@@ -7,8 +7,8 @@ function [ output ] = AlignCameraImages( config , cam0, cam1 )
     colCorrection = config.cameraCorrelation(2); 
         
     splitImage = SplitImage( cam0, 1);
-    cam0Crop = splitImage.rightImage;
-    cam1Crop = zeros( size(cam0Crop));
+    cam0Crop = splitImage.leftImage;
+    cam1Crop = ones( size(cam0Crop)) * median(cam1(:));
     
     rowSize = size( cam0Crop, 1);
     colSize = size( cam0Crop, 2);
@@ -25,7 +25,7 @@ function [ output ] = AlignCameraImages( config , cam0, cam1 )
     output.cam1 = cam1Crop;
     
     figure;
-    subplot(1,2,1); imshow( cam0Crop, []); colorbar; title('Cam 0 Aligned')
-    subplot(1,2,2); imshow( cam1Crop, []); colorbar; title('Cam 1 Aligned')
+    subplot(1,2,1); imshow( cam0Crop, [100 150]); colorbar; title('Cam 0 Aligned')
+    subplot(1,2,2); imshow( cam1Crop, [100 500]); colorbar; title('Cam 1 Aligned')
 end
 

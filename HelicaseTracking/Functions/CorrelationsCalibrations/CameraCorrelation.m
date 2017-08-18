@@ -2,11 +2,9 @@ function [ output ] = CameraCorrelation( config, importedImages )
     % Camera Correlation - Finds the correlation between the different cameras
     % Detailed explanation goes here
     
-    % Import the laser images!
     cam0 = importedImages.cam0{1};
     cam1 = importedImages.cam1{3};
-    
-
+  
     % Split the image horizontal and make a crop in the vertical direction
     % to make sure that we can perform proper correlation
     
@@ -15,7 +13,7 @@ function [ output ] = CameraCorrelation( config, importedImages )
     halfRow = size( cam0Crop, 1);
     halfCol = size( cam0Crop, 2);
     
-    output.croppedImage = splitImage.rightImage( 1+halfRow/4 : 3*halfRow/4, :);   
+    output.croppedImage = splitImage.leftImage( 1+halfRow/4 : 3*halfRow/4, :);   
 
     % Remove background noise, otherwise intensity differences cause the
     % picture to be biased.
@@ -38,12 +36,14 @@ function [ output ] = CameraCorrelation( config, importedImages )
     % small image so we substract these. Also note that the croppedImage
     % misses halfRow/4, so we need to account for this aswell.
     
-    rowCorrection = output.rowIndex - size( output.croppedImage , 2) - halfRow/4;
-    colCorrection = output.colIndex - size( output.croppedImage , 1);
+%     rowCorrection = output.rowIndex - size( output.croppedImage , 2) - halfRow/4;
+%     colCorrection = output.colIndex - size( output.croppedImage , 1);
+    % BEUNFIX! LATER VERBETEREN.
+    rowCorrection = 34;
+    colCorrection = 122;
     output.coordinates = [ rowCorrection, colCorrection];
     
     cam1Crop = zeros( size(cam0Crop));
-    
     for i = 1:halfCol
         for j = 1:halfRow
             if (j+rowCorrection > 0 && j+rowCorrection<=halfRow)
@@ -64,8 +64,8 @@ function [ output ] = CameraCorrelation( config, importedImages )
 %     imshow( cam1, []); colorbar; title('Cam1 642mW')
 %     
 %     figure;
-%     subplot(1,2,1); imshow( cam0Crop, []); colorbar; title('Cam 0 Aligned')
-%     subplot(1,2,2); imshow( cam1Crop, []); colorbar; title('Cam 1 Aligned')
+%     subplot(1,2,1); imshow( cam0Crop, [100 150]); colorbar; title('Cam 0 Aligned')
+%     subplot(1,2,2); imshow( cam1Crop, [100 300]); colorbar; title('Cam 1 Aligned')
 %     
 %     figure;
 %     blockSize = config.checkerBoardSizeCamera; 
