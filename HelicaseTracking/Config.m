@@ -80,6 +80,11 @@ function [ config ] = Config( config )
     config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
     config.binaryCloseRadius = 4;           % The radius of the disk-shaped element used to close the DNA in the MatchDnaHelicase script
     
+    % threshold for colocalizating in pixel (i.e. if 2, 2px and below
+    % match).
+    config.colocalizationMatch = 3;
+
+    
     config.diameterThreshold = 4;              % Area threshold in pixels for identifying helicases
     config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
     
@@ -90,7 +95,6 @@ function [ config ] = Config( config )
     config.waveLength=488e-9;                       % Wavelength of the emitted light from the fluorophores
     config.numFactor=0.25;                          % Numerical factor which determines the width of the PSF
     config.numericalAperture = 1.4;
-    
     
     
     % No need to edit anything below here!

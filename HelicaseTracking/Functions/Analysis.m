@@ -22,13 +22,16 @@ function [ output ] = Analysis( config, preProcess )
             
         case 'TwoCameras'
             for ii = 1:config.numFovs
-                fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
-                spotFinder{ii}.cam0 = SpotFinder( config , preProcess{ii}.cam0 );
-                spotFinder{ii}.cam1 = SpotFinder( config , preProcess{ii}.cam1 );
+                fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
+                spotFinder{ii}.cam0 = SpotFinder( config , preProcess{ii}.cam0);
+                spotFinder{ii}.cam1 = SpotFinder( config , preProcess{ii}.cam1);
+                matchHelicases{ii} = MatchHelicases( config, spotFinder{ii});
                 
-                fprintf('The number of spots for cam 0 is %i.\n' , spotFinder{ii}.cam0.numSpots )
-                fprintf('The number of spots for cam 1 is %i.\n' , spotFinder{ii}.cam1.numSpots )
+                fprintf('The number of spots for cam 0 is %i.\n' , spotFinder{ii}.cam0.numSpots)
+                fprintf('The number of spots for cam 1 is %i.\n' , spotFinder{ii}.cam1.numSpots)
+                fprintf('The fraction of helicases colocalizing is %.2f .\n' , matchHelicases{ii}.matchFraction)
                 output.spotFinder = spotFinder;
+                output.matchHelicases = matchHelicases;
             end
             
         otherwise
