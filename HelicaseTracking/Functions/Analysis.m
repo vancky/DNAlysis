@@ -1,20 +1,23 @@
-function [ analysis ] = Analysis( config, simulateImages, helicaseFitter  )
-    %ANALYSIS - Post analysis for the helicase fitting
-    %   Detailed explanation goes here
-  
-    % Compare the fitted versus real  locations
-    for i=1:config.numHelicases
-        
-        realLocation=simulateImages.simulateHelicases.position{i};  %[X,Y]
-        fittedLocation=fliplr(helicaseFitter.fitLocation);          %fliplr to get [X,Y]
-        
-        
-        analysis.errorPixels=realLocation-fittedLocation;
-        analysis.errorPixels(:,3)=sqrt(analysis.errorPixels(:,1).^2+analysis.errorPixels(:,2).^2);
-        analysis.errorMeters=analysis.errorPixels*config.pixelSize; 
-    end
-    analysis.std=std(analysis.errorMeters(:,3));
-    analysis.bias=mean(analysis.errorMeters(:,3));
+function [ output ] = Analysis( config, preProcess )
+    % Analysis - This function performs the analysis
+    
+    for ii = 1:config.numFovs
+        fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
 
+        spotFinder{ii} = SpotFinder( config , preProcess{ii}.helicaseImage );
+        helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , ...
+            (preProcess{ii}.helicaseImageNoScale));
+        matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
+        %dnaCount = CountDna( config , preProcess{ii}.dnaImage , matchDnaHelicase{ii} );
+
+        fprintf('The number of spots is %i.\n' , spotFinder{ii}.numSpots )
+        fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase{ii}.match)
+        fprintf('The DNA fraction is %.2f .\n' , matchDnaHelicase{ii}.dnaFraction )
+    end
+    
+    output.spotFinder = spotFinder;
+    output.helicaseIntensity = helicaseIntensity;
+    output.matchDnaHelicase = matchDnaHelicase;
+    
 end
 

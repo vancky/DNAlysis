@@ -6,11 +6,7 @@ function [ output ] = CameraCorrelation( config, importedImages )
     cam0 = importedImages.cam0{1};
     cam1 = importedImages.cam1{3};
     
-    figure;
-    imshow( cam0, []); colorbar; title('Cam0 488mW')
-    figure;
-    imshow( cam1, []); colorbar; title('Cam1 642mW')
-     
+
     % Split the image horizontal and make a crop in the vertical direction
     % to make sure that we can perform proper correlation
     
@@ -56,21 +52,25 @@ function [ output ] = CameraCorrelation( config, importedImages )
         end
     end
     
-    figure;
-    subplot(1,2,1); imshow( cam0Crop, []); colorbar; title('Cam 0 Aligned')
-    subplot(1,2,2); imshow( cam1Crop, []); colorbar; title('Cam 1 Aligned')
+    % Uncomment this section for visualisation of the correlation
     
-    % Visualisation of the correlation
-    
-    avgCam0 = sum( cam0Crop(:)) / (halfRow*halfCol);
-    avgCam1 = sum( cam1(:)) / (config.pixels^2);
-    scaleFactor = avgCam1/avgCam0;
-  
-    figure;
-    blockSize = config.checkerBoardSizeCamera;           % blocksize for the checkerboard pattern
-    
-    CompareSplit( scaleFactor*cam0Crop , cam1Crop, blockSize);
-    title('Correlated Images from Cam0 and Cam1')
+%     avgCam0 = sum( cam0Crop(:)) / (halfRow*halfCol);
+%     avgCam1 = sum( cam1(:)) / (config.pixels^2);
+%     scaleFactor = avgCam1/avgCam0;
+%     
+%     figure;
+%     imshow( cam0, []); colorbar; title('Cam0 488mW')
+%     figure;
+%     imshow( cam1, []); colorbar; title('Cam1 642mW')
+%     
+%     figure;
+%     subplot(1,2,1); imshow( cam0Crop, []); colorbar; title('Cam 0 Aligned')
+%     subplot(1,2,2); imshow( cam1Crop, []); colorbar; title('Cam 1 Aligned')
+%     
+%     figure;
+%     blockSize = config.checkerBoardSizeCamera; 
+%     CompareSplit( scaleFactor*cam0Crop, cam1Crop, blockSize);
+%     title('Correlated Images from Cam0 and Cam1')
 
 end
 

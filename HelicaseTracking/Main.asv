@@ -1,4 +1,4 @@
-clear all; clc; close all;
+clc; close all;
 
 config = struct();
 config = Config(config);
@@ -9,7 +9,6 @@ fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
 
 %% Load or save and reference sets
-
 %load ( config.matFileCd );
 %load( strcat(config.referenceSetCd, 'ReferenceSet3.mat'));
 
@@ -25,9 +24,7 @@ fprintf('This section performs the correlations and calibrations.\n')
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-alignCameraImages( config, importImages.cam0{1}, importImages.cam1{1});
-
-
+AlignCameraImages( config, importImages.cam0{1}, importImages.cam1{1});
 %%
 for ii = 1: config.numFovs
     preProcess{ii} = PreProcess( config, importImages.helicase{ii}, importImages.dna{ii}); 
@@ -35,11 +32,23 @@ for ii = 1: config.numFovs
 end
 
 %% Analysis
-
 fprintf('This section performs the Analysis.\n')
 analysis = Analysis( config, preProcess);
 
 %% Post Processing
-
 fprintf('This section performs the post processing.\n')
 postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
+
+%% Brownian motion
+
+R = 8.314;          % Universal gas constant [J K-1 mol-1]
+T = 293;            % temperature in degrees Kelvin [K]
+eta = 1.002e-3;     % dynamic viscosity [kg m-1 s-1]
+r = 5e-9;           % radius in [m]
+N = 6.022e23;       % Avogadros number (mol-1)
+t = 1.00;           % exposure time in seconds
+
+x2avg = R*T*t/(3*pi*eta*r*N); 
+xtravel = sqrt(x2avg);
+xpix = xtravel / (config.pixelSize);
+
