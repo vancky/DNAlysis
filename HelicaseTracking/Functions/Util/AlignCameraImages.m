@@ -25,7 +25,7 @@ function [ output ] = AlignCameraImages( config , cam0, cam1 )
     output.cam1 = cam1Crop;
     
     figure;
-    subplot(1,2,1); imshow( cam0Crop, [120 200]); colorbar; title('Cam 0 Aligned')
-    subplot(1,2,2); imshow( cam1Crop, [120 200]); colorbar; title('Cam 1 Aligned')
+    subplot(1,2,1); imshow( cam0Crop, []); colorbar; title('Cam 0 Aligned')
+    subplot(1,2,2); imshow( cam1Crop, []); colorbar; title('Cam 1 Aligned')
 end
 

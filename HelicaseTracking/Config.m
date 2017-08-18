@@ -46,20 +46,22 @@ function [ config ] = Config( config )
     config.dnaCd{10}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV10-532*\*cam0_178_0*');    
     
     % In case of importing from both cam 0 and cam 1 use this part
-    config.multiCamCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV1*\*cam0_5532_0*');
-    config.multiCamCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV1*\*cam1_5532_0*');
-    config.multiCamCd.cam0{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV2*\*cam0_5544_0*');
-    config.multiCamCd.cam1{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV2*\*cam1_5544_0*');
-    config.multiCamCd.cam0{3} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV3*\*cam0_5556_0*');
-    config.multiCamCd.cam1{3} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV3*\*cam1_5556_0*');
-    config.multiCamCd.cam0{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV4*\*cam0_5568_0*');
-    config.multiCamCd.cam1{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV4*\*cam1_5568_0*');
-    config.multiCamCd.cam0{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV5*\*cam0_5580_0*');
-    config.multiCamCd.cam1{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170621_124444\C6-after Washing-488-642-FOV5*\*cam1_5580_0*');
+    config.multiCamCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV3-488at30mW*\*cam0_235_0*');
+    config.multiCamCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV3-488at30mW*\*cam1_235_0*');
+    config.multiCamCd.cam0{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV4-488at30mW*\*cam0_247_0*');
+    config.multiCamCd.cam1{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV4-488at30mW*\*cam1_247_0*');
+    config.multiCamCd.cam0{3} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV5-488at30mW*\*cam0_267_0*');
+    config.multiCamCd.cam1{3} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV5-488at30mW*\*cam1_267_0*');
+    config.multiCamCd.cam0{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV6-488at30mW*\*cam0_279_0*');
+    config.multiCamCd.cam1{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV6-488at30mW*\*cam1_279_0*');
+    config.multiCamCd.cam0{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV7-488at30mW*\*cam0_291_0*');
+    config.multiCamCd.cam1{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV7-488at30mW*\*cam1_291_0*');
+    config.multiCamCd.cam0{6} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV8-488at50mW*\*cam0_303_0*');
+    config.multiCamCd.cam1{6} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV8-488at50mW*\*cam1_303_0*');
 
     % Directories for correcting Data
-    config.splitCorrelationCd{1} =('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
-    config.dnaCalibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
+    config.splitCorrelationCd{1}      = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.dnaCalibrationCd{1}        = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
     config.cameraCorrelationCd.cam0{1}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam0_184_0*');
     config.cameraCorrelationCd.cam1{1}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam1_184_0*');
     config.cameraCorrelationCd.cam0{2}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*cam0_187_0*');
