@@ -1,0 +1,28 @@
+function [ output ] = FitHelicases( config, spotStack, spotCenters )
+    % Fit Helicases- fits helicases to an input image
+    % Detailed explanation goes here
+    
+    psfSigma= config.sigma;     
+    fitType = config.fitType;
+    iterations = config.fitIterations;
+    spotIndex = [ brightFinder.rowIndex , brightFinder.colIndex ];
+    
+    %   Fit the helicases using gaussMLEv2
+
+    [fitPosition , crlb, ll, t] = gaussmlev2( spots, psfSigma, iterations, fittype);
+
+    
+    spot = double( brightFinder.matrix );
+
+    % Note that the fitPosition is zero indexed, thus 
+    % fitPosition[ fitSize, fitSize] would be the center
+    
+    
+    fitPositionXY = flip( fitPosition, 2)- fitSize;
+    
+    globalFitPosition = fitPositionXY + spotCenters;
+    
+    output.s  
+    
+end
+

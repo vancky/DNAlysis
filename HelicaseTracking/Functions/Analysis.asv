@@ -25,10 +25,8 @@ function [ output ] = Analysis( config, preProcess )
                 fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
                 spotFinder{ii}.cam0 = SpotFinder( config , preProcess.twoCameras{ii}.cam0);
                 spotFinder{ii}.cam1 = SpotFinder( config , preProcess.twoCameras{ii}.cam1);
-                fitHelicases{ii}.cam0 = FitHelicases( config, ...
-                    spotFinder{ii}.cam0.spots, spotFinder{ii}.cam0.centersFormatted);
-                fitHelicases{ii}.cam1 = FitHelicases( config, ...
-                    spotFinder{ii}.cam1.spots, spotFinder{ii}.cam1.centersFormatted);
+                fitHelicases{ii}.cam0 = FitHelicases( config, spotFinder{ii}.cam0.s);
+                fitHelicases{ii}.cam0 = FitHelicases( config, spotFinder{ii}.cam0);
                 matchHelicases{ii} = MatchHelicases( config, spotFinder{ii});
                 
                 fprintf('The number of spots for cam 0 is %i.\n' , spotFinder{ii}.cam0.numSpots)
@@ -36,7 +34,6 @@ function [ output ] = Analysis( config, preProcess )
                 fprintf('The fraction of helicases colocalizing is %.2f .\n' , matchHelicases{ii}.matchFraction)
                 fprintf('The fraction of helicases colocalizing at random is %.2f .\n' , matchHelicases{ii}.matchFractionRandom)
                 output.spotFinder = spotFinder;
-                output.fitHelicases = fitHelicases;
                 output.matchHelicases = matchHelicases;
             end
             

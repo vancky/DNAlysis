@@ -36,8 +36,8 @@ function [ output ] = SpotFinder( config , inputImage )
         circle(i).radii = diameters(i)/2;
         circle(i).centers = filteredStats(i).Centroid;  % note this is [ X , Y ]
         
-        xSpot = round( circle(i).centers(1)) 
-        ySpot = round( circle(i).centers(2))
+        xSpot = round( circle(i).centers(1));
+        ySpot = round( circle(i).centers(2));
         spots(:,:,i) = spotImage( ySpot:(ySpot+2*fitSize) , xSpot : (xSpot+2*fitSize));
     end
     
@@ -55,6 +55,7 @@ function [ output ] = SpotFinder( config , inputImage )
     hold off
       
     output.circle = circle;
+    output.centersFormatted = vertcat(circle.centers);
     output.stats = stats;
     output.filteredStats = filteredStats;
     output.binary = filteredCc;    
