@@ -30,6 +30,7 @@ function [ output ] = Analysis( config, preProcess )
                 fprintf('The number of spots for cam 0 is %i.\n' , spotFinder{ii}.cam0.numSpots)
                 fprintf('The number of spots for cam 1 is %i.\n' , spotFinder{ii}.cam1.numSpots)
                 fprintf('The fraction of helicases colocalizing is %.2f .\n' , matchHelicases{ii}.matchFraction)
+                fprintf('The fraction of helicases colocalizing at random is %.2f .\n' , matchHelicases{ii}.matchFractionRandom)
                 output.spotFinder = spotFinder;
                 output.matchHelicases = matchHelicases;
             end

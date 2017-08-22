@@ -23,6 +23,7 @@ fprintf('This section performs the correlations and calibrations.\n')
 [config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
 
 %% Pre Processing of relevant Images
+
 fprintf('This section performs the pre processing of the data.\n')
 preProcess = PreProcess( config, importImages);
 

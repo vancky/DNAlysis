@@ -24,8 +24,9 @@ function [ output ] = AlignCameraImages( config , cam0, cam1 )
     output.cam0 = cam0Crop;
     output.cam1 = cam1Crop;
     
-    figure;
-    subplot(1,2,1); imshow( cam0Crop, [100 150]); colorbar; title('Cam 0 Aligned')
-    subplot(1,2,2); imshow( cam1Crop, [100 500]); colorbar; title('Cam 1 Aligned')
+%    figure;
+%     subplot(1,2,1); imshow( cam0Crop, [100 150]); colorbar; title('Cam 0 Aligned')
+%     subplot(1,2,2); imshow( cam1Crop, [100 500]); colorbar; title('Cam 1 Aligned')
+%     suptitle(sprintf(' Use these images to determine the reference points \n for the nonlinear transformation'))
 end
 

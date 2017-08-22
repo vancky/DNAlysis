@@ -83,6 +83,7 @@ function [ config ] = Config( config )
     % threshold for colocalizating in pixel (i.e. if 2, 2px and below
     % match).
     config.colocalizationMatch = 3;
+
     
     config.diameterThreshold = 4;              % Area threshold in pixels for identifying helicases
     config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
@@ -100,21 +101,18 @@ function [ config ] = Config( config )
     % left part of cam0 (green channel) and the fixed points to the cropped
     % image of cam 1 (after applying AlignCameraImages). 
     
-    config.movingPoints(1,:) = [218, 83];  config.movingPoints(6,:) = [54, 237];
-    config.movingPoints(2,:) = [123, 378];  config.movingPoints(7,:) = [201, 461];
-    config.movingPoints(3,:) = [79, 67];  config.movingPoints(8,:) = [153, 61];
-    config.movingPoints(4,:) = [199, 210];  config.movingPoints(9,:) = [241, 243];
-    config.movingPoints(5,:) = [80, 356];  config.movingPoints(10,:) = [112, 84];
+    config.movingPoints(:,1) = [];
+    config.movingPoints(:,2) = [];
+    config.movingPoints(:,3) = [];
+    config.movingPoints(:,4) = [];
+    config.movingPoints(:,5) = [];
+    config.movingPoints(:,5) = [];
+    config.movingPoints(:,5) = [];
+    config.movingPoints(:,5) = [];
+    config.fixedPoints = [];
     
-    config.fixedPoints(1,:) = [214, 82];  config.fixedPoints(6,:) = [55, 238];
-    config.fixedPoints(2,:) = [127, 378];  config.fixedPoints(7,:) = [205, 460];
-    config.fixedPoints(3,:) = [77, 69];  config.fixedPoints(8,:) = [150, 62];
-    config.fixedPoints(4,:) = [197, 209];  config.fixedPoints(9,:) = [240, 241];
-    config.fixedPoints(5,:) = [83, 356];  config.fixedPoints(10,:) = [110, 86];
-    
-    % Region to crop after performing non linear correction 
-    % [minX, maxX, minY, maxY] 
-    config.cropCoordinatesNonLinear = [37, 245, 5, 470]; 
+    % Region to crop after [minX, maxX, minY, maxY] 
+    config.cropPoints = [37, 245, 5, 470]; 
     
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
