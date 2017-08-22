@@ -1,4 +1,4 @@
-function [ output ] = FitHelicases( config , brightFinder )
+function [ output ] = FitHelicasesLucky( config , brightFinder )
     % Fit Helicases - fits a large array of helicase spots
     
     % stacks the fluorecent spots into one big 3D matrix

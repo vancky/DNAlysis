@@ -30,7 +30,7 @@ function [ output ] = Clean( config , inputImage , thresholdValue )
             else
                     % Fit the spot!
 
-                fitHelicases = FitHelicases( config ,brightFinder );
+                fitHelicases = FitHelicasesLucky( config ,brightFinder );
                 output.crlb( count ,1:4) = fitHelicases.gaussmlev.crlb;
                 output.logLikelihood( count ,1) = fitHelicases.gaussmlev.logLikelihood;
                 output.brightFinder{count} =  brightFinder;
@@ -45,7 +45,7 @@ function [ output ] = Clean( config , inputImage , thresholdValue )
             end
         else
             
-            fitHelicases = FitHelicases( config ,brightFinder );
+            fitHelicases = FitHelicasesLucky( config ,brightFinder );
             output.crlb( count ,1:4) = fitHelicases.gaussmlev.crlb;
             output.logLikelihood( count ,1) = fitHelicases.gaussmlev.logLikelihood;
             output.brightFinder{count} =  brightFinder;

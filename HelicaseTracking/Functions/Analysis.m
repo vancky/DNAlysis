@@ -25,6 +25,8 @@ function [ output ] = Analysis( config, preProcess )
                 fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
                 spotFinder{ii}.cam0 = SpotFinder( config , preProcess.twoCameras{ii}.cam0);
                 spotFinder{ii}.cam1 = SpotFinder( config , preProcess.twoCameras{ii}.cam1);
+                fitHelicases{ii}.cam0 = FitHelicases( config, spotFinder{ii}.cam0);
+                fitHelicases{ii}.cam0 = FitHelicases( config, spotFinder{ii}.cam0);
                 matchHelicases{ii} = MatchHelicases( config, spotFinder{ii});
                 
                 fprintf('The number of spots for cam 0 is %i.\n' , spotFinder{ii}.cam0.numSpots)
