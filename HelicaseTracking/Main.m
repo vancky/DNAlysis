@@ -49,4 +49,4 @@ analysis = Analysis( config, preProcess);
 %% Post Processing
 
 fprintf('This section performs the post processing.\n')
-postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
+%postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
