@@ -4,8 +4,7 @@ function [ output ] = PreProcessTwoCameras( config, cam0, cam1 )
     % Detailed explanation goes here
 
     alignedImages = AlignCameraImages( config, cam0, cam1);
-    alignedImagesNonLinear = CorrectCameraImagesNonLinear( config, alignedImages) ;
-    output = alignedImages;
-    % output = alignedImagesNonLinear;
+     = 
+    output = alignedImages
 end
 

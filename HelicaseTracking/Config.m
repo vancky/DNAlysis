@@ -105,7 +105,7 @@ function [ config ] = Config( config )
                                              % A guideline for this is 3*sigma
                                              
     % Make sure we can use the functions
-    addpath(genpath('./Functions'))
+    addpath( genpath('./Functions') )
 
 end
 

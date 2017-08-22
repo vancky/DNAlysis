@@ -5,13 +5,13 @@ function [ output ] = PreProcess( config, importImages )
     switch config.importType
         case 'OneCamera'
             for ii = 1: config.numFovs
-                output{ii} = PreProcessOneCamera( config, importImages.helicase{ii}, importImages.dna{ii}); 
-                %output{ii} = PreProcessReference( importImages.helicase{ii}, importImages.dna{ii}, 'nofilter' ); 
+                output.oneCamera{ii} = PreProcessOneCamera( config, importImages.helicase{ii}, importImages.dna{ii}); 
+                %output.reference{ii} = PreProcessReference( importImages.helicase{ii}, importImages.dna{ii}, 'nofilter' ); 
             end
 
         case 'TwoCameras'        
             for ii =1:config.numFovs
-                output{ii} = PreProcessTwoCameras( config, importImages.cam0{ii}, importImages.cam1{ii});
+                output.twoCameras{ii} = PreProcessTwoCameras( config, importImages.cam0{ii}, importImages.cam1{ii});
             end
 
         otherwise
