@@ -30,11 +30,11 @@ function [ output ] = SpotFinder( config , inputImage )
     
     figure;
     subplot(1,2,1)
-    imshow( inputImage , [0 50 ]); colorbar
+    imshow( inputImage , [100 130]); colorbar
     title('Helicase Image')
     hold on
     subplot(1,2,2)
-    imshow( inputImage , [0 50]); colorbar
+    imshow( inputImage , [100 130]); colorbar
     for i=1:numRegions
         viscircles( circle(i).centers , circle(i).radii );
     end
@@ -44,7 +44,7 @@ function [ output ] = SpotFinder( config , inputImage )
     output.circle = circle;
     output.stats = stats;
     output.filteredStats = filteredStats;
-    
+    output.binary = filteredCc;    
     output.numSpots = numRegions;
 end
 

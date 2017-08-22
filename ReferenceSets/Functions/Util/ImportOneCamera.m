@@ -28,5 +28,4 @@ function [ output ] = ImportOneCamera( cdName , importType )
         end
     end
 
-end
-
+end 

@@ -1,25 +1,34 @@
-function [ importImages ] = ImportImages( config , )
-    %ImportImage - Imports all images in Matlab
-    %We get a set of roughly 300 individual images per measurements
-    %These images are kept in one structure (importImage)
+function [ output ] = ImportImages( config )
+    % Import Images - Imports all relevant images
+    % Specify an importType 'OneCamera' or 'TwoCameras'. Depending on the
+    % type of images you are analyzing.
 
-    cd(config.splitCorrelationCd);                           % Sets image folder
-    directory0 = dir('*cam0*.tiff');                        % Labels all the tiffFiles with cam0 in the current directory
-    directory1 = dir('*cam1*.tiff');                        % Labels all the tiffFiles with cam0 in the current directory
-    numFiles0 = length(directory0);                         % Number of individual image
-    numFiles1 = length(directory0);
-    importImages.sum0=0;
-    importImages.sum1=0;
+    fprintf('Importing Camera Correlation Images.\n')
+    importedCameraCorrelationImages =  ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+    fprintf('Importing Split Correlation Images.\n')
+    importedSplitCorrelationImages =   ImportOneCamera( config.splitCorrelationCd, 'stack');
+    output.cameraCorrelation = importedCameraCorrelationImages;
+    output.splitCorrelation = importedSplitCorrelationImages;
     
-    for k = 1:numFiles0
-        importImages.image0(:,:,k)=imread(directory0(k).name);             %Import the images from cam 0
-        importImages.sum0=importImages.sum0+double(importImages.image0(:,:,k));
+    switch config.importType
+        case 'OneCamera'
+            fprintf('Importing Helicase Images.\n')
+            importedHelicaseImages=            ImportOneCamera( config.helicaseCd, 'stack');
+            fprintf('Importing Dna Images.\n')
+            importedDnaImages=                 ImportOneCamera( config.dnaCd, 'stack');
+            output.helicase = importedHelicaseImages;
+            output.dna = importedDnaImages;
+            
+        case 'TwoCameras'
+            fprintf('Importing Helicase and Dna Images.\n')
+            importedCameraImages =  ImportTwoCameras( config.multiCamCd, 'stack');
+            output.cam0 = importedCameraImages.cam0;
+            output.cam1 = importedCameraImages.cam1;
+            
+        otherwise
+            fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
     end
     
-    for j = 1:numFiles1
-        importImages.image1(:,:,j)=imread(directory1(j).name);             %Import the images from cam 1
-        importImages.sum1=importImages.sum1+double(importImages.image1(:,:,j));
-    end
-        
-    cd(config.matlabCd)                                  %Resets the cd to the matlab script location
+    fprintf('Images Imported.\n')
 end
+

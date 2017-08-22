@@ -1,39 +1,52 @@
 clear all; clc; close all;
 
-config=struct();
-config=Config(config);
+config = struct();
+config = Config(config);
 
 %% Import Images
 
-fprintf('Importing Images.\n')
-importedSplitCorrelationImages=     ImportOneCamera( config.splitCorrelationCd , 'stack' );
-importedDnaImages =                 ImportOneCamera( config.dnaCd , 'stack' );
-importedHelicaseImages =            ImportOneCamera( config.helicaseCd , 'stack' );
-fprintf('Images Imported.\n')
+fprintf('This section imports all the relevant images.\n')
+importImages = ImportImages(config);
+
+%% Load or save and reference sets
+
+%load ( config.matFileCd );
+%load( strcat(config.referenceSetCd, 'ReferenceSet3.mat'));
+
+%importedHelicaseImages{1} = referenceSet3.helicaseImage;
+%importedDnaImages{1} = referenceSet3.dnaImage;
+%save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
 
 %% Correlations and calibrations
 
-splitCorrelation  = SplitCorrelation( config, importedSplitCorrelationImages{1} );
-config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
-config.cropCoordinates = GenerateCropCoordinates( importedSplitCorrelationImages{1},[]);
+fprintf('This section performs the correlations and calibrations.\n')
+[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
 
-%%
-for ii = 1:config.numFovs
-    fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
+%% Pre Processing of relevant Images
+fprintf('This section performs the pre processing of the data.\n')
 
-    % Do some pre processing of the data
-    
-    preProcess{ii} = PreProcess( config , importedHelicaseImages{ii} , importedDnaImages{ii} ); 
-
-    % The actual analysis part
-
-    spotFinder{ii} = SpotFinder( config , preProcess{ii}.helicaseImage );
-    helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , (preProcess{ii}.helicaseImageNoScale));
-    matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess{ii}.dnaImage, spotFinder{ii} );
-
-    fprintf( 'The number of spots is %i.\n' , spotFinder{ii}.numSpots )
-    fprintf('The fraction of helicases located on the DNA is %.2f .\n' , matchDnaHelicase{ii}.match)
+switch config.importType
+    case 'OneCamera'
+        for ii = 1: config.numFovs
+            preProcess{ii} = PreProcess( config, importImages.helicase{ii}, importImages.dna{ii}); 
+            %preProcess{ii} = PreProcessReference( importImages.helicase{ii}, importImages.dna{ii}, 'nofilter' ); 
+        end
+        
+    case 'TwoCameras'        
+        for ii =1:config.numFovs
+            preProcess{ii} = AlignCameraImages( config, importImages.cam0{ii}, importImages.cam1{ii});
+        end
+        
+    otherwise
+        fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
 end
 
-%%
-postProcess = PostProcess( config , matchDnaHelicase , helicaseIntensity , spotFinder);
+%% Analysis
+
+fprintf('This section performs the Analysis.\n')
+analysis = Analysis( config, preProcess);
+
+%% Post Processing
+
+fprintf('This section performs the post processing.\n')
+%postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
