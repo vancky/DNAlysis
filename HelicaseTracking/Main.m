@@ -24,22 +24,7 @@ fprintf('This section performs the correlations and calibrations.\n')
 
 %% Pre Processing of relevant Images
 fprintf('This section performs the pre processing of the data.\n')
-
-switch config.importType
-    case 'OneCamera'
-        for ii = 1: config.numFovs
-            preProcess{ii} = PreProcess( config, importImages.helicase{ii}, importImages.dna{ii}); 
-            %preProcess{ii} = PreProcessReference( importImages.helicase{ii}, importImages.dna{ii}, 'nofilter' ); 
-        end
-        
-    case 'TwoCameras'        
-        for ii =1:config.numFovs
-            preProcess{ii} = AlignCameraImages( config, importImages.cam0{ii}, importImages.cam1{ii});
-        end
-        
-    otherwise
-        fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
-end
+preProcess = PreProcess( config, importImages);
 
 %% Analysis
 
