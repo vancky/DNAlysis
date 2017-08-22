@@ -119,7 +119,7 @@ function [ config ] = Config( config )
     % No need to edit anything below here!
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
-    config.fitIterations = 5;
+    config.fitIterations = 10;
     % FitType for GaussMLEv2
     config.fitType = 2;
     config.fitSize=  10; % ceil(3*config.sigma);    % Half size  of the patch where we are going to fit Gaussians.

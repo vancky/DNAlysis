@@ -12,7 +12,7 @@ function [ output ] = FitHelicases( config, spotStack, spotCenters )
     fitType = config.fitType;
     iterations = config.fitIterations;
     spotStack = single(spotStack);
-    %   Fit the helicases using gaussMLEv2
+    % Fit the helicases using gaussMLEv2
     
     [p , crlb, ll, t] = gaussmlev2( spotStack, psfSigma, iterations, fitType);
 

@@ -1,35 +1,36 @@
-function [ output ] = MatchHelicases( config, spotFinder )
+function [ output ] = MatchHelicases( config, spotsCam0, spotsCam1 )
     % Match Helicases - checks colocalization of cam 0 and cam 1 helicases
     %   Detailed explanation goes here
+     
     
-    circle0 = spotFinder.cam0.circle;
-    circle1 = spotFinder.cam1.circle;    
-    numSpots0 = spotFinder.cam0.numSpots;
-    numSpots1 = spotFinder.cam1.numSpots;
+    
+    numSpots0 = size( spotsCam0, 1);
+    numSpots1 = size( spotsCam1, 1);
     
     % for simulating random helicases next to the actual measurements
+    spotsRandom = zeros(size(spotsCam1));
     for i = 1:numSpots1
-        circle1Random(i).centers= [ unifrnd(1,256), unifrnd(1,512)];
+        spotsRandom(i,:)= [ unifrnd(1,256), unifrnd(1,512)];
     end
     
-    match = zeros(numSpots0, 1);
-    matchRandom = zeros(numSpots0, 1);
+    match = zeros( numSpots0, 1);
+    matchRandom = zeros( numSpots0, 1);
     
     for i = 1:numSpots0
-        center0 = circle0(i).centers;
-        check =0;
+        center0 = spotsCam0(i,1:2);
+        check = 0;
         checkRandom =0;
         
         for j = 1:numSpots1
-            center1 = circle1(j).centers;
+            center1 = spotsCam1(j,1:2);
             dx= abs( center0(2)-center1(2) );
             dy= abs( center0(1)-center1(1) );
             dist = sqrt(dx^2+dy^2);
             
-            center1Random = circle1Random(j).centers;
-            dxRandom= abs( center0(2)-center1Random(2) );
-            dyRandom= abs( center0(1)-center1Random(1) );
-            distRandom = sqrt(dxRandom^2+dyRandom^2);
+            centerRandom = spotsRandom(j,1:2);
+            dxRandom= abs( center0(2)-centerRandom(2) );
+            dyRandom= abs( center0(1)-centerRandom(1) );
+            distRandom = sqrt( dxRandom^2 + dyRandom^2 );
             
             if dist <= config.colocalizationMatch
                 check = check + 1;
@@ -70,4 +71,3 @@ function [ output ] = MatchHelicases( config, spotFinder )
     output.matchRandom = matchRandom;
     output.matchFractionRandom = matchFractionRandom;
 end
-
