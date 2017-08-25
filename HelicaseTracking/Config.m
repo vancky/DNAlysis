@@ -122,7 +122,7 @@ function [ config ] = Config( config )
     config.fitIterations = 10;
     % FitType for GaussMLEv2
     config.fitType = 2;
-    config.fitSize=  10; % ceil(3*config.sigma);    % Half size  of the patch where we are going to fit Gaussians.
+    config.fitSize=  1+ceil(3*config.sigma);    % Half size  of the patch where we are going to fit Gaussians.
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
                                              

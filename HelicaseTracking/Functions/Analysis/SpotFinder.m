@@ -42,16 +42,28 @@ function [ output ] = SpotFinder( config , inputImage )
     end
     
     figure;
-    subplot(1,2,1)
-    imshow( inputImage , [100 130]); colorbar
+    subplot(1,3,1)
+    imshow( inputImage , [100 300]); colorbar
     title('Helicase Image')
     hold on
-    subplot(1,2,2)
-    imshow( inputImage , [100 130]); colorbar
-    for i=1:numRegions
-        viscircles( circle(i).centers , circle(i).radii );
+    subplot(1,3,2)
+    imshow( inputImage , [100 300]); colorbar
+    for i = 1:numRegions
+        viscircles( circle(i).centers , circle(i).radii, 'LineWidth', 1 );
     end
+    hold off
     title('The SpotFinder Algorithm')
+    
+    subplot(1,3,3)
+    imshow( inputImage, [100 300]); colorbar;
+    for i = 1:numRegions
+        x = circle(i).centers(1)-fitSize;
+        y = circle(i).centers(2)-fitSize;
+        width = 2*fitSize+1;
+        pos = [ x, y, width, width];
+        rectangle('Position', pos, 'Edgecolor', 'r')
+    end
+    title('Regions for Helicase Fitting')
     hold off
       
     output.circle = circle;

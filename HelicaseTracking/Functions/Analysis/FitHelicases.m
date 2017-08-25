@@ -25,5 +25,7 @@ function [ output ] = FitHelicases( config, spotStack, spotCenters )
     globalFitPosition = fitPositionXY + spotCenters;
     
     output.fitPosition = globalFitPosition;  
+    output.logLikelihood = ll;
+    output.sigma = p(3);
 end
 
