@@ -41,3 +41,4 @@ fprintf('This section performs the post processing.\n')
 
 %% Visualisations for poster september
 
+PosterSeptember( config, preProcess, analysis )

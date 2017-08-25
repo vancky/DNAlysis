@@ -63,9 +63,15 @@ function [ output ] = MatchHelicases( config, spotsCam0, spotsCam1 )
         
     end    
     
+    locations = match.*spotsCam0;
+    matchLocations(:,1) = nonzeros( locations(:,1));
+    matchLocations(:,2) = nonzeros( locations(:,2));
+    
+    
     matchFraction = sum(match) / numSpots0;
     output.match = match;
     output.matchFraction = matchFraction;
+    output.matchLocations = matchLocations;
     
     matchFractionRandom = sum(matchRandom) / numSpots0;
     output.matchRandom = matchRandom;
