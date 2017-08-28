@@ -8,14 +8,8 @@ config = Config(config);
 fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
 
-%% Load or save and reference sets
-
-%load ( config.matFileCd );
-%load( strcat(config.referenceSetCd, 'ReferenceSet3.mat'));
-
-%importedHelicaseImages{1} = referenceSet3.helicaseImage;
-%importedDnaImages{1} = referenceSet3.dnaImage;
-%save( config.matFileCd , 'importedHelicaseImages' , 'importedDnaImages');
+% save( config.saveMatFileCd , 'importImages');
+% load ( config.loadMatFileCd );
 
 %% Correlations and calibrations
 

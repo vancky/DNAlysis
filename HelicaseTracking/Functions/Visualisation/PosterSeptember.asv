@@ -1,28 +1,16 @@
 function [ output ] = PosterSeptember( config, preProcess, analysis )
     % Poster September - Visualizes results for the september poster
     
-    % This section visualizes the gaussian fitting
-    
-    xy = analysis.fitHelicases{1}.cam1.fitPosition(160,:)-...
-        analysis.spotFinder{1}.cam1.centersFormatted(160,:)+config.fitSize+1;
-    
-    figure; 
-    imshow(analysis.spotFinder{1}.cam1.spots(:,:,160), [100 300]);
-    hold on
-    plot( xy(1), xy(2), '.r', 'MarkerSize', 10)
-    hold off
-   % This section visualizes the helicase DNA colocalization
+    % This section visualizes the helicase DNA colocalization
     
     for i = 1:8
         dna = preProcess.oneCamera{i}.dnaImage;
         helicase = preProcess.oneCamera{i}.helicaseImage;
         
-        green = GreyscaleToColor( helicase, [5 35], 'green'); 
-        red =  GreyscaleToColor( dna, [700 2400], 'red');
+        green = GreyscaleToColor( helicase, [6 50], 'green'); 
+        red =  GreyscaleToColor( dna, [1000 250], 'red');
          
-        figure;
-        image( green+red );
-        axis equal, axis tight
+        
     end
     
     
@@ -40,14 +28,12 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %         fontSize = 20;
 %         figure; 
 %         subplot(1,3,1); image(green); title('Green channel', 'FontSize', fontSize)
-%         
 %         hold on
 %         for j = 1:numMatches
 %             plot( matchLocations(j,1), matchLocations(j,2), 'wx', ...
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %         
 %         subplot(1,3,2); image(red); title('Red channel', 'FontSize', fontSize)
 %         hold on
@@ -56,7 +42,6 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %         
 %         subplot(1,3,3); image(green+red); title('Overlay', 'FontSize', fontSize)
 %         hold on
@@ -65,7 +50,6 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %         
 %         % Creates the annotation
 %         dim = [ 0.13, 0, 0.5, 0.1]; % x,y,w,h
@@ -92,7 +76,6 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %         
 %         figure; image(red);
 %         hold on
@@ -101,7 +84,6 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %         
 %         figure; image(green+red);
 %         hold on
@@ -110,7 +92,6 @@ function [ output ] = PosterSeptember( config, preProcess, analysis )
 %                 'MarkerSize', markerSize);
 %         end
 %         hold off
-%         axis equal, axis tight
 %     end
 end
 

@@ -29,11 +29,10 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     output.dnaFraction = sum(filteredBinary(:)) / numel(filteredBinary);
     
     figure;
-    subplot(1,4,1); imshow( dnaImage , []) ; title('DNA');
+    subplot(1,4,1); imshow( dnaImage , [400 3000]) ; title('DNA');
     subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
     subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
-    subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges')
-
+    subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges') 
     
     % Perform the actual matching of DNA with Helicases
     

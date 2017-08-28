@@ -16,8 +16,8 @@ function [ config ] = Config( config )
     config.referenceSetCd = ('../../../MatFiles/ReferenceSets/');
     % The matfile Cd, note that we can load images by specifying the
     % correct .mat file name, if saving, specify the new relevant name
+    config.loadMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
     config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-    config.loadMatFileCd=('../../../MatFiles/DnaHelicaseImports/170530_orc');
     
     % Specify the import type here, either 'OneCamera' or 'TwoCameras'
     config.importType = 'TwoCameras';
