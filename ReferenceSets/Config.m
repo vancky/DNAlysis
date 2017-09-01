@@ -44,7 +44,7 @@ function [ config ] = Config( config )
     config.referenceSet2DnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV6-DNA-MCM-reSytox-532*\*cam0_376_0*');    
     
     % Reference Set 3
-    config.helicaseThreshold3 = 1;
+    config.helicaseThreshold3 = 8;
     config.dnaThreshold3 = 50;
 
     % Make sure we can use the functions
