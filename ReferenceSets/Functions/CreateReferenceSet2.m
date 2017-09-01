@@ -18,8 +18,8 @@ function [ output ] = CreateReferenceSet2( config )
     
     % This section can be uncommented to see which images are imported
     for i = 1: length(helicaseImages) 
-        figure; imshow( helicaseImages{i}, [100 150]); colorbar; title(sprintf('Helicase Image %i', i))
-        figure; imshow( dnaImages{i}, []); colorbar; title(sprintf('Dna Image %i', i))
+        figure; imshow( output.helicaseImage{i}, [0 50]); colorbar; title(sprintf('Helicase Image %i', i))
+        figure; imshow( output.dnaImage{i}, []); colorbar; title(sprintf('Dna Image %i', i))
     end
 end
 

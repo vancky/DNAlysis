@@ -14,7 +14,7 @@ function [ output ] = CreateHelicaseImage1( config )
     filteredImage = BackgroundFilterNoScale(croppedImage);
     
     % Initialize a cleaned image
-    cleanedImage = zeros(size(filteredImage));
+    cleanedImage = ones(size(filteredImage))*median(filteredImage(:));
     
     % Define cleanregions [ XTL, YTL, XBR, YBR]
     % Where TL is top left and BR is bottom right

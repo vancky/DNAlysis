@@ -4,13 +4,13 @@ function [ output ] = CreateHelicaseImage2( helicaseImages )
 
     % Just do some manual cropping of the images
     
-    croppedImage{1} = helicaseImages{1}(1:430, 35:245);
-    croppedImage{2} = helicaseImages{2}(1:430, 35:245);
-    croppedImage{3} = helicaseImages{3}(1:430, 35:245);
-    croppedImage{4} = helicaseImages{4}(1:430, 35:245);
-    croppedImage{5} = helicaseImages{5}(1:430, 35:245);
-    
-    output = croppedImage;
+    numImages = size(helicaseImages,2);
+    for i = 1: numImages
+        croppedImage{i} = helicaseImages{i}(1:430, 35:245);
+        filteredImage{i} = BackgroundFilterNoScale( croppedImage{i});
+    end
+
+    output = filteredImage;
     
     % This code can be uncommented to visualise the cropping
 %     for i = 1:5
