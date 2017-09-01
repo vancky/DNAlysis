@@ -8,9 +8,11 @@ function [ output ] = CreateHelicaseImage2( helicaseImages )
     for i = 1: numImages
         croppedImage{i} = helicaseImages{i}(1:430, 35:245);
         filteredImage{i} = BackgroundFilterNoScale( croppedImage{i});
+        cleaningCoordinates = GetCleaningCoordinates2(i);
+        cleanedImage{i} = CleanHelicaseImage( filteredImage{i}, cleaningCoordinates);
     end
 
-    output = filteredImage;
+    output = cleanedImage;
     
     % This code can be uncommented to visualise the cropping
 %     for i = 1:5

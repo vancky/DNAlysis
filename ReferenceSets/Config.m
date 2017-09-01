@@ -26,7 +26,7 @@ function [ config ] = Config( config )
     config.smoothRadius1 = 3;
     
     % Reference Set 2
-    config.helicaseThreshold2 = 110;
+    config.helicaseThreshold2 = 8;
     config.smoothRadius2 = 3;
     
     % 10mW case

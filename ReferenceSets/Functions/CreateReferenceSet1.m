@@ -4,7 +4,7 @@ function [ output ] = CreateReferenceSet1( config )
     
     output.helicaseImage{1} = CreateHelicaseImage1(config);
     output.helicaseRoi{1} = CreateHelicaseRoi1( config, output.helicaseImage{1});
-    output.roiCenters{1} = FindRoiCenters( output.helicaseRoi{1});
+    output.roiCenters = FindRoiCenters( output.helicaseRoi);
     
     output.dnaImage{1} = []; %CreateDnaImage1(config)
     

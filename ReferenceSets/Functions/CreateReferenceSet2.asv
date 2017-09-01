@@ -13,25 +13,16 @@ function [ output ] = CreateReferenceSet2( config )
     output.helicaseImage = CreateHelicaseImage2(helicaseImages);
     output.dnaImage = CreateDnaImage2(dnaImages);
     output.helicaseRoi = CreateHelicaseRoi2(config, output.helicaseImage);
-    output.roiCenters = FindRoiCenters( output.helicaseRoi);
     
     %output.dnaRoi = CreateDnaRoi2()
     
+    % This section can be uncommented to see which images are imported
     for i = 1: length(output.helicaseImage) 
         figure; 
-        subplot(1,3,1);
-        imshow( output.helicaseImage{i}, [0 40]); colorbar; title(sprintf('Helicase Image %i', i))
-        subplot(1,3,2);
-        imshow( output.helicaseRoi{i}); 
-        PlotCenters( output.roiCenters{i}, 10)
-        title('Helicase ROI with centers')
-        subplot(1,3,3);
-        imshow( output.helicaseImage{i}, [0 40]); colorbar;
-        PlotCenters( output.roiCenters{i}, 10)
-        title('Helicase Image with centers')
-    
-        figure; 
-        imshow( output.dnaImage{i}, []); colorbar; title(sprintf('Dna Image %i', i))
+        subplot(1,2,1); imshow( output.helicaseImage{i}, [0 40]); colorbar; title(sprintf('Helicase Image %i', i))
+        subplot(1,3,2); imshow( 
+        subplot(1,3,3); imshow( 
+        figure; imshow( output.dnaImage{i}, []); colorbar; title(sprintf('Dna Image %i', i))
     end
 end
 
