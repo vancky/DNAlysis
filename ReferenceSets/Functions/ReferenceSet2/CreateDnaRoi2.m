@@ -1,7 +1,13 @@
-function [ output_args ] = CreateDnaRoi2( input_args )
-%CREATEDNAROI2 Summary of this function goes here
-%   Detailed explanation goes here
+function [ output ] = CreateDnaRoi2( config, dnaImages )
+    % Create DNA ROI 2 
+    % Detailed explanation goes here
 
-
+    numImages = length( dnaImages);
+    threshold = config.dnaThreshold2;
+    
+    for i = 1:numImages
+        output{i} = ThresholdToBinary( dnaImages{i}, threshold);
+    end
+    
 end
 

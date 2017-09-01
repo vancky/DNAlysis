@@ -28,6 +28,8 @@ function [ config ] = Config( config )
     % Reference Set 2
     config.helicaseThreshold2 = 8;
     config.smoothRadius2 = 3;
+    config.dnaThreshold2 = 50;
+
     
     % 10mW case
     config.referenceSet2HelicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV1-DNA-MCM-reSytox-488*\*cam0_266_0*');

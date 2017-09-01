@@ -1,4 +1,4 @@
-function [ outputImage ] = CleanHelicaseImage( inputImage, cr )
+function [ outputImage ] = CleanImage( inputImage, cr )
     % Clean a Helicase Image using predefined cleaning regions
 
     % Initialize a cleaned image with background noise

@@ -10,12 +10,12 @@ function [ output ] = CreateReferenceSet2( config )
     dnaImages = ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
     fprintf('The dna images for reference set 2 have been imported.\n')
       
-    output.helicaseImage = CreateHelicaseImage2(helicaseImages);
-    output.dnaImage = CreateDnaImage2(dnaImages);
-    output.helicaseRoi = CreateHelicaseRoi2(config, output.helicaseImage);
+    output.helicaseImage = CreateHelicaseImage2( helicaseImages);
+    output.helicaseRoi = CreateHelicaseRoi2( config, output.helicaseImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);
-    
-    %output.dnaRoi = CreateDnaRoi2()
+
+    output.dnaImage = CreateDnaImage2( dnaImages);
+    output.dnaRoi = CreateDnaRoi2( config, output.dnaImage);
     
     for i = 1: length(output.helicaseImage) 
         figure; 
@@ -31,7 +31,10 @@ function [ output ] = CreateReferenceSet2( config )
         title('Helicase Image with centers')
     
         figure; 
-        imshow( output.dnaImage{i}, []); colorbar; title(sprintf('Dna Image %i', i))
+        subplot(1,2,1)
+        imshow( output.dnaImage{i}, [0 1500]); colorbar; title(sprintf('Dna Image %i', i))
+        subplot(1,2,2)
+        imshow( output.dnaRoi{i}); colorbar; title(sprintf('Dna ROI %i', i))
     end
 end
 

@@ -1,6 +1,6 @@
-function [ output ] = GetCleaningCoordinates2( index )
-    % Cleaning Coordinates 2 - creates the helicase cleaning coordinates 
-    % for reference set 2.
+function [ output ] = GetHelicaseCleaningCoordinates2( index )
+    % Helicase Cleaning Coordinates 2 - creates the helicase cleaning 
+    % coordinates for reference set 2.
   
     % Define cleanregions [ XTL, YTL, XBR, YBR]
     % Where TL is top left and BR is bottom right    
