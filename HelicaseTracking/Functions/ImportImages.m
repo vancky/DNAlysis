@@ -4,18 +4,18 @@ function [ output ] = ImportImages( config )
     % type of images you are analyzing.
 
     fprintf('Importing Camera Correlation Images.\n')
-    importedCameraCorrelationImages =  ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+    importedCameraCorrelationImages = ImportTwoCameras( config.cameraCorrelationCd, 'stack');
     fprintf('Importing Split Correlation Images.\n')
-    importedSplitCorrelationImages =   ImportOneCamera( config.splitCorrelationCd, 'stack');
+    importedSplitCorrelationImages =  ImportOneCamera( config.splitCorrelationCd, 'stack');
     output.cameraCorrelation = importedCameraCorrelationImages;
     output.splitCorrelation = importedSplitCorrelationImages;
     
     switch config.importType
         case 'OneCamera'
             fprintf('Importing Helicase Images.\n')
-            importedHelicaseImages=            ImportOneCamera( config.helicaseCd, 'stack');
+            importedHelicaseImages = ImportOneCamera( config.helicaseCd, 'stack');
             fprintf('Importing Dna Images.\n')
-            importedDnaImages=                 ImportOneCamera( config.dnaCd, 'stack');
+            importedDnaImages = ImportOneCamera( config.dnaCd, 'stack');
             output.helicase = importedHelicaseImages;
             output.dna = importedDnaImages;
             

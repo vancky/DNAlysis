@@ -7,11 +7,11 @@ function [ output ] = CreateDnaImage2( dnaImages )
         croppedImage{i} = dnaImages{i}( :, 270:495);
         filteredImage{i} = BackgroundFilterNoScale( croppedImage{i});
         
-        NEED TO IMPLEMENT A STEP HERE WHICH CORRECTS FOR UNEVEN BACKGROUND, 
-        SIMILAR TO PREPROCESS!!!! Otherwise the masking will not make sense.
+%         NEED TO IMPLEMENT A STEP HERE WHICH CORRECTS FOR UNEVEN BACKGROUND, 
+%         SIMILAR TO PREPROCESS!!!! Otherwise the masking will not make sense.
         
-        %cleaningCoordinates = GetDnaCleaningCoordinates2(i);
-        %cleanedImage{i} = CleanHelicaseImage( filteredImage{i}, cleaningCoordinates);
+%         cleaningCoordinates = GetDnaCleaningCoordinates2(i);
+%         cleanedImage{i} = CleanHelicaseImage( filteredImage{i}, cleaningCoordinates);
     end
     
     output = filteredImage;
