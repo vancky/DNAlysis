@@ -1,5 +1,5 @@
 # DNAlysis
-aaMATLAB Analysis tool for the Nynke Dekker lab at Delft University of Technology
+MATLAB Analysis tool for the Nynke Dekker lab at Delft University of Technology
 
 Lucky Imaging
 
