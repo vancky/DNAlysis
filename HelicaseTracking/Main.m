@@ -7,8 +7,8 @@ config = Config(config);
 
 fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
-
-% save( config.saveMatFileCd , 'importImages');
+%%
+save( config.saveMatFileCd , 'importImages');
 % load ( config.loadMatFileCd );
 
 %% Correlations and calibrations
@@ -35,4 +35,4 @@ fprintf('This section performs the post processing.\n')
 
 %% Visualisations for poster september
 
-PosterSeptember( config, preProcess, analysis )
+%PosterSeptember( config, preProcess, analysis )

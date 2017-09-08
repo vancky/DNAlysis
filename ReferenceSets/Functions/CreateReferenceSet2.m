@@ -9,7 +9,7 @@ function [ output ] = CreateReferenceSet2( config )
     fprintf('Importing the dna Images for reference set 2.\n')
     dnaImages = ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
     fprintf('The dna images for reference set 2 have been imported.\n')
-      
+        
     output.helicaseImage = CreateHelicaseImage2( helicaseImages);
     output.helicaseRoi = CreateHelicaseRoi2( config, output.helicaseImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);

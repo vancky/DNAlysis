@@ -3,6 +3,13 @@ clear all; clc; close all;
 config=struct();
 config=Config(config);
 
+%% Import images
+
+importImages.beadImage = ImportOneCamera( config.referenceSet1Cd , 'stack' );
+importImages.referenceSet2.helicaseImages = ImportOneCamera( config.referenceSet2HelicaseCd, 'stack' );
+importImages.referenceSet2.dnaImages =    ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
+
+save( strcat(config.referenceSetSaveCd, 'importImagesReference.mat') , 'importImages');
 %% Create and save the reference sets
 
 %Reference Set 1
