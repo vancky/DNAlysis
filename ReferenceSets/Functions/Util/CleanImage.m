@@ -16,7 +16,8 @@ function [ outputImage ] = CleanImage( inputImage, cr, backgroundOption )
         case 'true'
             % Use a rolling background of the original image
             cleanedImage = BallSmooth( inputImage, 50);
-            cleanedImage = imgaussfilt( cleanedImage, 15);
+            cleanedImage = BallSmooth( cleanedImage, 35);
+            cleanedImage = BallSmooth( cleanedImage, 25);
         case 'minimum'
             % Otherwise, initialize the real cleaned image with the mimnimum 
             cleanedImage = ones(size(inputImage))* min(testImage(:));    

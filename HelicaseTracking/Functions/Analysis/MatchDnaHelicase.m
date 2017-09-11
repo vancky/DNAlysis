@@ -4,6 +4,8 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
 
     dnaEdgeBinary = edge( dnaImage , 'canny' );
     radius = config.binaryCloseRadius;
+    
+    
     se = strel('disk' , radius );
     dnaEdgeClosed= imclose(dnaEdgeBinary , se );
     
@@ -21,7 +23,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
 
     % Find the Indexes of the real DNA.
     meanIntensity = mean(intensity) ;
-    idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThreshold ) )); 
+    idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThresholdDna ) )); 
     filteredBinary = ismember(labelmatrix(cc), idx);
     
     output.binaryDna = filteredBinary ;

@@ -17,7 +17,7 @@ function [ output ] = SpotFinder( config , inputImage )
     cc = bwconncomp(binaryImage); 
     stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');  % note different camelcasing due to matlab settings
     
-    idx = find( [stats.EquivDiameter] > config.diameterThreshold & [stats.Eccentricity]< config.eccentricityThreshold ); 
+    idx = find( [stats.EquivDiameter] > config.diameterThresholdHelicase & [stats.Eccentricity]< config.eccentricityThreshold ); 
     filteredCc = ismember(labelmatrix(cc), idx);
     filteredStats = regionprops(filteredCc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter'); 
     numRegions = length(filteredStats);

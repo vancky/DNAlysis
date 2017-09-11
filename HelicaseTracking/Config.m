@@ -85,8 +85,11 @@ function [ config ] = Config( config )
     % match).
     config.colocalizationMatch = 3;
     
-    config.diameterThreshold = 4;              % Area threshold in pixels for identifying helicases
+    config.diameterThresholdHelicase = 4;              % Area threshold in pixels for identifying helicases
+    config.diameterThresholdDna = 4;              % Area threshold in pixels for identifying dna
+
     config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
+    
     
     config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
     config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.

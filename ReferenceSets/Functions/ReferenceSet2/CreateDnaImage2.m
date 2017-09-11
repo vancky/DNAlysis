@@ -12,7 +12,7 @@ function [ output ] = CreateDnaImage2( dnaImages )
         
         cleaningCoordinates = GetDnaCleaningCoordinates2(i);
         cleanedImage{i} = CleanImage( filteredImage{i}, cleaningCoordinates, 'true');
-        smoothedImage{i} = imgaussfilt( cleanedImage{i}, 2);
+        smoothedImage{i} = imgaussfilt( cleanedImage{i}, 3);
     end
     
     output = smoothedImage;

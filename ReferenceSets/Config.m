@@ -29,6 +29,8 @@ function [ config ] = Config( config )
     config.helicaseThreshold2 = 5;
     config.smoothRadius2 = 3;
     config.dnaThreshold2 = 200;
+    config.binaryCloseRadius = 4; 
+    config.diameterThreshold = 4;
 
     
     % 10mW case
