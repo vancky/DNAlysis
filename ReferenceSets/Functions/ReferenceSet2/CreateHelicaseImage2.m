@@ -9,7 +9,7 @@ function [ output ] = CreateHelicaseImage2( helicaseImages )
         croppedImage{i} = helicaseImages{i}(1:430, 35:245);
         filteredImage{i} = BackgroundFilterNoScale( croppedImage{i});
         cleaningCoordinates = GetHelicaseCleaningCoordinates2(i);
-        cleanedImage{i} = CleanImage( filteredImage{i}, cleaningCoordinates);
+        cleanedImage{i} = CleanImage( filteredImage{i}, cleaningCoordinates, 'minimum');
     end
 
     output = cleanedImage;

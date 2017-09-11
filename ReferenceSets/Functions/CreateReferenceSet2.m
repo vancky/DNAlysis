@@ -20,21 +20,26 @@ function [ output ] = CreateReferenceSet2( config )
     for i = 1: length(output.helicaseImage) 
         figure; 
         subplot(1,3,1);
-        imshow( output.helicaseImage{i}, [0 40]); colorbar; title(sprintf('Helicase Image %i', i))
+        imshow( output.helicaseImage{i}, [0 30]); colorbar; title(sprintf('Helicase Image %i', i))
+        axis equal; axis tight;
         subplot(1,3,2);
         imshow( output.helicaseRoi{i}); 
+        axis equal; axis tight;
         PlotCenters( output.roiCenters{i}, 10)
         title('Helicase ROI with centers')
         subplot(1,3,3);
-        imshow( output.helicaseImage{i}, [0 40]); colorbar;
+        imshow( output.helicaseImage{i}, [0 30]); colorbar;
+        axis equal; axis tight;
         PlotCenters( output.roiCenters{i}, 10)
         title('Helicase Image with centers')
     
         figure; 
         subplot(1,2,1)
         imshow( output.dnaImage{i}, [0 1500]); colorbar; title(sprintf('Dna Image %i', i))
+        axis equal; axis tight;
         subplot(1,2,2)
         imshow( output.dnaRoi{i}); colorbar; title(sprintf('Dna ROI %i', i))
+        axis equal; axis tight;
     end
 end
 

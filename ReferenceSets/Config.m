@@ -22,13 +22,13 @@ function [ config ] = Config( config )
     % Directories for correcting Data
     % Reference Set 1
     config.referenceSet1Cd{1} =('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
-    config.helicaseThreshold1 = 12;
+    config.helicaseThreshold1 = 7;
     config.smoothRadius1 = 3;
     
     % Reference Set 2
-    config.helicaseThreshold2 = 8;
+    config.helicaseThreshold2 = 5;
     config.smoothRadius2 = 3;
-    config.dnaThreshold2 = 50;
+    config.dnaThreshold2 = 200;
 
     
     % 10mW case

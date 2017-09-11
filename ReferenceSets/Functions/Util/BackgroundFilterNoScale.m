@@ -6,10 +6,10 @@ function [ outputImage ] = BackgroundFilterNoScale( inputImage )
        
     inputImage = double(inputImage);
     
-    minInput=min(inputImage(:));
-    maxInput=max(inputImage(:));
+    minInput = min(inputImage(:));
+    maxInput = max(inputImage(:));
     
-    minFilter=inputImage - minInput;
-    outputImage= minFilter;
+    minFilter = inputImage - minInput;
+    outputImage = minFilter;
     
 end
