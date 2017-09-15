@@ -5,11 +5,11 @@ function [ output ] = CreateDnaRoi2( config, dnaImages )
     numImages = length(dnaImages);
     closeRadius = config.binaryCloseRadius;
 
-     filterObjects{1} = [ 13];
-     filterObjects{2} = [ 2, 4, 5, 6, 8, 9, 10 , 13 , 15, 16, 18];
-     filterObjects{3} = [];
-     filterObjects{4} = [ 1, 5, 7, 8, 16];
-     filterObjects{5} = [3];
+     filterObjects{1} = []; %[ 13];
+     filterObjects{2} = []; %[ 2, 4, 5, 6, 8, 9, 10 , 13 , 15, 16, 18];
+     filterObjects{3} = []; %[];
+     filterObjects{4} = []; %[ 1, 5, 7, 8, 16];
+     filterObjects{5} = []; %[3];
     
     for ii = 1:numImages
         dnaImage{ii} = dnaImages{ii};
@@ -44,7 +44,7 @@ function [ output ] = CreateDnaRoi2( config, dnaImages )
         filteredBinary{ii} = ismember(labelmatrix(cc), idx);
 
         figure;
-        subplot(1,4,1); imshow( dnaImage{ii} , [400 3000]) ; title('DNA');
+        subplot(1,4,1); imshow( dnaImage{ii} , [200 2000]) ; title('DNA');
         subplot(1,4,2); imshow( dnaEdgeBinary{ii}, []); title('Dna edges');
         subplot(1,4,3); imshow( dnaEdgeClosed{ii}, [] ); title('Connected edges')
         subplot(1,4,4); imshow( dnaEdgeFilled{ii}, [] ); title('Holes Filled')

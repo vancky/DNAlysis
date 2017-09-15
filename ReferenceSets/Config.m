@@ -26,7 +26,7 @@ function [ config ] = Config( config )
     config.smoothRadius1 = 3;
     
     % Reference Set 2
-    config.helicaseThreshold2 = 5;
+    config.helicaseThreshold2 = 6;
     config.smoothRadius2 = 3;
     config.dnaThreshold2 = 200;
     config.binaryCloseRadius = 4; 
