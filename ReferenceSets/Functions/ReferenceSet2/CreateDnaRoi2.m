@@ -5,15 +5,15 @@ function [ output ] = CreateDnaRoi2( config, dnaImages )
     numImages = length(dnaImages);
     closeRadius = config.binaryCloseRadius;
 
-    filterObjects{1} =[16];%  [ 17 ]; 
+    filterObjects{1} = [ 16];
     filterObjects{2} = [ 2, 6, 10, 11]; 
     filterObjects{3} = [ 4 ,7]; 
     
     for ii = 1:numImages
         dnaImage{ii} = dnaImages{ii};
         dnaEdgeBinary{ii} = edge( dnaImage{ii} , 'canny' );
-        se = strel('disk' , closeRadius );
-        
+        %se = strel('disk' , closeRadius );
+        se = strel('rectangle', [4,10]);
         b = bwconncomp( dnaEdgeBinary{ii});
         
         for j = 1:length( filterObjects{ii})
