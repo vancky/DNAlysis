@@ -1,14 +1,9 @@
-function [ output ] = CreateHelicaseImage1( config )
+function [ output ] = CreateHelicaseImage1( rawHelicaseImage )
     % Create Helicase Image 1
     % Creates the helicase image for reference set 1
-
-    % Imports the relevant bead image for reference set 1
-    fprintf('Importing the bead image for reference set 1.\n')
-    beadImage = ImportOneCamera( config.referenceSet1Cd , 'stack' );
-    fprintf('The bead image for reference set 1 has been imported.\n')
     
     % Crop the image to a region which you like
-    croppedImage = beadImage{1}(:, 45:241);
+    croppedImage = rawHelicaseImage{1}(:, 45:241);
     
     % Filter the image
     filteredImage = BackgroundFilterNoScale(croppedImage);
@@ -42,7 +37,7 @@ function [ output ] = CreateHelicaseImage1( config )
     
     cleanedImage = CleanImage( filteredImage, cr, 'minimum');
     
-    output = cleanedImage;
+    output{1} = cleanedImage;
     
 %     figure;
 %     subplot(1,2,1); imshow( beadImage{1}(:, 1:256) , [100 150]); colorbar

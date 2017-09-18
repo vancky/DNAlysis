@@ -7,7 +7,7 @@ function [ output ] = SpotFinder( config , inputImage )
     
     %%
    
-    binaryImage = watershedImage >0;
+    binaryImage = watershedImage > 0;
         
     %   Then, find grouped pixels (helicases) based on connected region analysis
     %   bwconncomp finds groups of connected pixels
@@ -15,7 +15,7 @@ function [ output ] = SpotFinder( config , inputImage )
     %   We assume DNA has a minimum area and eccentricity
     
     cc = bwconncomp(binaryImage); 
-    stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');  % note different camelcasing due to matlab settings
+    stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');
     
     idx = find( [stats.EquivDiameter] > config.diameterThresholdHelicase & [stats.Eccentricity]< config.eccentricityThreshold ); 
     filteredCc = ismember(labelmatrix(cc), idx);

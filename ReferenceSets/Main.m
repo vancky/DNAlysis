@@ -5,20 +5,19 @@ config=Config(config);
 
 %% Import images
 
-importImages.beadImage = ImportOneCamera( config.referenceSet1Cd , 'stack' );
-importImages.referenceSet2.helicaseImages = ImportOneCamera( config.referenceSet2HelicaseCd, 'stack' );
-importImages.referenceSet2.dnaImages =    ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
+importImages = ImportImages( config);
+%load( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'));
+save( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'), 'importImages');
 
-save( strcat(config.referenceSetSaveCd, 'importImagesReference.mat') , 'importImages');
 %% Create and save the reference sets
 
 %Reference Set 1
-referenceSet1 = CreateReferenceSet1( config );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet1.mat') , 'referenceSet1');
+referenceSet1 = CreateReferenceSet1( config, importImages.referenceSet1 );
+save( strcat(config.referenceSetSaveCd, 'ReferenceSet1.mat'), 'referenceSet1');
 %%
 % Reference Set 2
-referenceSet2 = CreateReferenceSet2( config );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet2.mat') , 'referenceSet2');
+referenceSet2 = CreateReferenceSet2( config, importImages.referenceSet2 );
+save( strcat(config.referenceSetSaveCd, 'ReferenceSet2.mat'), 'referenceSet2');
 %%
 % Reference Set 3
 referenceSet3 = CreateReferenceSet3( config );

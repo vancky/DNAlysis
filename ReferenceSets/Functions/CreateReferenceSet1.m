@@ -1,12 +1,13 @@
-function [ output ] = CreateReferenceSet1( config )
+function [ output ] = CreateReferenceSet1( config, rawImages )
     % Create Reference Set 1
     % Create the helicase and dna image for reference set 1
     
-    output.helicaseImage{1} = CreateHelicaseImage1(config);
-    output.helicaseRoi{1} = CreateHelicaseRoi1( config, output.helicaseImage{1});
+    
+    output.helicaseImage = CreateHelicaseImage1( rawImages.helicase);
+    output.helicaseRoi = CreateHelicaseRoi1( config, output.helicaseImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);
     
-    output.dnaImage{1} = []; %CreateDnaImage1(config)
+    output.dnaImage{1} = []; %CreateDnaImage1(config, rawImages.dna)
     
     % This section can be uncommented to see which images are imported
     figure;

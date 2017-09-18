@@ -1,4 +1,4 @@
-function [ output, errorCheck ] = ImportOneCamera( cdName , importType )
+function [ output ] = ImportOneCamera( cdName , importType )
     % Import One Camera - Imports images from one specific camera
     % Give as inputs the cd of the folder to import
 

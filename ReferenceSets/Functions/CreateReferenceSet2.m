@@ -1,14 +1,9 @@
-function [ output ] = CreateReferenceSet2( config )
+function [ output ] = CreateReferenceSet2( config, rawImages )
     % Create Reference Set 2
     % Create the helicase and dna image for reference set 2
     
-    fprintf('Importing the helicase Images for reference set 2.\n')
-    helicaseImages = ImportOneCamera( config.referenceSet2HelicaseCd, 'stack' );
-    fprintf('The helicase images for reference set 2 have been imported.\n')
-    
-    fprintf('Importing the dna Images for reference set 2.\n')
-    dnaImages = ImportOneCamera( config.referenceSet2DnaCd, 'stack' );
-    fprintf('The dna images for reference set 2 have been imported.\n')
+    helicaseImages = rawImages.helicase;
+    dnaImages = rawImages.dna;
         
     output.helicaseImage = CreateHelicaseImage2( helicaseImages);
     output.helicaseRoi = CreateHelicaseRoi2( config, output.helicaseImage);
