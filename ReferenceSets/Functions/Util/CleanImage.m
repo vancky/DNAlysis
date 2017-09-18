@@ -18,6 +18,11 @@ function [ outputImage ] = CleanImage( inputImage, cr, backgroundOption )
             cleanedImage = BallSmooth( inputImage, 50);
             cleanedImage = BallSmooth( cleanedImage, 35);
             cleanedImage = BallSmooth( cleanedImage, 25);
+            for i =1:numRegions
+                cleanedImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) ) = ...
+                    inputImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) );
+            end
+            cleanedImage = BallSmooth( cleanedImage , 3);
         case 'minimum'
             % Otherwise, initialize the real cleaned image with the mimnimum 
             cleanedImage = ones(size(inputImage))* min(testImage(:));    
@@ -29,7 +34,7 @@ function [ outputImage ] = CleanImage( inputImage, cr, backgroundOption )
         cleanedImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) ) = ...
             inputImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) );
     end
-    
+   
     filteredImage = BackgroundFilterNoScale( cleanedImage);
     outputImage = filteredImage;
 end
