@@ -44,5 +44,6 @@ function [ output ] = CreateHelicaseImage3( config )
     end
     
     output = uint16(helicaseImage);
+    output = double(output);
 end
 

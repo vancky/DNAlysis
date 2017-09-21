@@ -1,0 +1,15 @@
+function [ output ] = PerformanceCriteria( config )
+    % Performance Criteria - Computes the performance criteria of the 
+    % algorithm by evaluating the reference sets.
+    % Detailed explanation goes here
+
+   nargin
+   
+   referenceSets = load( sprintf('%sReferenceSets.mat',  config.referenceSetCd));
+    
+   analysis = Analysis( config, referenceSet, 'ReferenceSets');
+
+   output = referenceSets;
+    
+end
+

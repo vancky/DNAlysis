@@ -26,5 +26,6 @@ function [ output ] = CreateDnaImage3( config )
     end
     
     output = uint16(dnaImage);
+    output = double(dnaImage);
 end
 
