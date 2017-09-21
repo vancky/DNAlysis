@@ -7,7 +7,7 @@ function [ output ] = CreateReferenceSet1( config, rawImages )
     output.helicaseRoi = CreateHelicaseRoi1( config, output.helicaseImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);
     
-    output.dnaImage{1} = []; %CreateDnaImage1(config, rawImages.dna)
+    output.dnaImage = []; %CreateDnaImage1(config, rawImages.dna)
     
     % This section can be uncommented to see which images are imported
     figure;

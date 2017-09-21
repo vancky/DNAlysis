@@ -16,12 +16,12 @@ referenceSets{1} = CreateReferenceSet1( config, importImages.referenceSet1 );
 
 % Reference Set 2
 referenceSets{2} = CreateReferenceSet2( config, importImages.referenceSet2 );
-%%
+
 % Reference Set 3
 referenceSets{3} = CreateReferenceSet3( config );
-%%
+
 % Reference Set4
 referenceSets{4} = CreateReferenceSet4( config );
-%%
+
 save( sprintf('%sReferenceSets.mat', config.referenceSetSaveCd), 'referenceSets' );
 

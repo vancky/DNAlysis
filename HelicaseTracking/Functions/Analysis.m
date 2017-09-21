@@ -53,8 +53,8 @@ function [ output ] = Analysis( config, inputImages, option)
         case 'ReferenceSets'
             helicaseImages = inputImages.helicaseImage;
             dnaImages = inputImages.dnaImage;
-            numHelicaseImages = length( helicaseImages)
-            numDnaImages = length( dnaImages)
+            numHelicaseImages = length( helicaseImages);
+            numDnaImages = length( dnaImages);
             
             % Analyse the helicase images
             if numHelicaseImages == 0
@@ -71,9 +71,8 @@ function [ output ] = Analysis( config, inputImages, option)
                 output.dnaRoi{1} = [];
             else
                 for jj = 1:numDnaImages
-                    jj
                     dnaFinder = DnaFinder( config, dnaImages{jj});
-                    output.dnaRoiFound = dnaFinder.dnaRoi;
+                    output.dnaRoi{jj}= dnaFinder.dnaRoi;
                 end
             end
             
