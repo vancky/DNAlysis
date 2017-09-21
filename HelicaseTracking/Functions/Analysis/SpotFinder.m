@@ -30,7 +30,7 @@ function [ output ] = SpotFinder( config , inputImage )
     ySizeSpot = ySizeInput+2*fitSize;
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
-    helicaseIntensity = [100 300];
+    helicaseIntensity = [0 100];
     
     for i = 1:numRegions
         diameters(i) = filteredStats(i).EquivDiameter;

@@ -1,15 +1,24 @@
-function [ output ] = Analysis( config, preProcess )
+function [ output ] = Analysis( config, inputImages, option)
     % Analysis - This function performs the analysis
     
-    switch config.importType
+    switch nargin
+        case 2
+            analysisOption = config.importType;
+        case 3
+            analysisOption = option;
+        otherwise
+            fprintf('Please specify enough input arguments for the analysis')            
+    end
+    
+    switch analysisOption
         case 'OneCamera'
             for ii = 1:config.numFovs
                 fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs )    
 
-                spotFinder{ii} = SpotFinder( config , preProcess.oneCamera{ii}.helicaseImage );
+                spotFinder{ii} = SpotFinder( config , inputImages.oneCamera{ii}.helicaseImage );
                 helicaseIntensity{ii} = HelicaseIntensityFinder( spotFinder{ii} , ...
-                    (preProcess.oneCamera{ii}.helicaseImageNoScale));
-                matchDnaHelicase{ii}  = MatchDnaHelicase( config, preProcess.oneCamera{ii}.dnaImage, spotFinder{ii} );
+                    (inputImages.oneCamera{ii}.helicaseImageNoScale));
+                matchDnaHelicase{ii}  = MatchDnaHelicase( config, inputImages.oneCamera{ii}.dnaImage, spotFinder{ii} );
                 %dnaCount = CountDna( config , preProcess.oneCamera{ii}.dnaImage , matchDnaHelicase{ii} );
 
                 fprintf('The number of spots is %i.\n' , spotFinder{ii}.numSpots )
@@ -23,8 +32,8 @@ function [ output ] = Analysis( config, preProcess )
         case 'TwoCameras'
             for ii = 1:config.numFovs
                 fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
-                spotFinder{ii}.cam0 = SpotFinder( config , preProcess.twoCameras{ii}.cam0);
-                spotFinder{ii}.cam1 = SpotFinder( config , preProcess.twoCameras{ii}.cam1);
+                spotFinder{ii}.cam0 = SpotFinder( config , inputImages.twoCameras{ii}.cam0);
+                spotFinder{ii}.cam1 = SpotFinder( config , inputImages.twoCameras{ii}.cam1);
                 fitHelicases{ii}.cam0 = FitHelicases( config, ...
                     spotFinder{ii}.cam0.spots, spotFinder{ii}.cam0.centersFormatted);
                 fitHelicases{ii}.cam1 = FitHelicases( config, ...
@@ -40,6 +49,17 @@ function [ output ] = Analysis( config, preProcess )
                 output.fitHelicases = fitHelicases;
                 output.matchHelicases = matchHelicases;
             end
+            
+        case 'ReferenceSets'
+            helicaseImages = inputImages.helicaseImage;
+            numHelicaseImages = length( helicaseImages);
+            
+            for ii = 1:numHelicaseImages
+                spotFinder{ii} = SpotFinder( config, helicaseImages{ii});
+                output.helicaseLocation{ii} = spotFinder{ii}.centersFormatted;
+            end
+            
+            
             
         otherwise
             fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')

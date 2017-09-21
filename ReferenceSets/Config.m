@@ -3,7 +3,7 @@ function [ config ] = Config( config )
     
     
     % The matlab directory
-    config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\PerformanceCriteria');
+    config.matlabCd = ('D:\jvanderauweraert\git\DNAlysis\PerformanceCriteria');
     
     % Directory for saving the reference sets
     config.referenceSetSaveCd =('../../../MatFiles/ReferenceSets/');
@@ -21,7 +21,8 @@ function [ config ] = Config( config )
     
     % Directories for correcting Data
     % Reference Set 1
-    config.referenceSet1Cd{1} =('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.referenceSet1HelicaseCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.referenceSet1DnaCd{1}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170613_153838\PEG-Ch8_DNAYOYO-Incubation*\*cam0_058_0*');
     config.helicaseThreshold1 = 7;
     config.smoothRadius1 = 3;
     

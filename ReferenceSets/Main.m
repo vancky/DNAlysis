@@ -7,22 +7,21 @@ config = Config(config);
 
 importImages = ImportImages( config);
 %load( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'));
-save( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'), 'importImages');
+save( sprintf('%simportImagesReference.mat', config.referenceSetSaveCd), 'importImages');
 
 %% Create and save the reference sets
 
-%Reference Set 1
-referenceSet1 = CreateReferenceSet1( config, importImages.referenceSet1 );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet1.mat'), 'referenceSet1');
-%%
+% Reference Set 1
+referenceSets{1} = CreateReferenceSet1( config, importImages.referenceSet1 );
+
 % Reference Set 2
-referenceSet2 = CreateReferenceSet2( config, importImages.referenceSet2 );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet2.mat'), 'referenceSet2');
-%%
+referenceSets{2} = CreateReferenceSet2( config, importImages.referenceSet2 );
+
 % Reference Set 3
-referenceSet3 = CreateReferenceSet3( config );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet3.mat') , 'referenceSet3');
-%%
+referenceSets{3} = CreateReferenceSet3( config );
+
 % Reference Set4
-referenceSet4 = CreateReferenceSet4( config );
-save( strcat(config.referenceSetSaveCd, 'ReferenceSet4.mat') , 'referenceSet4');
+referenceSets{4} = CreateReferenceSet4( config );
+%%
+save( sprintf('%sReferenceSets.mat', config.referenceSetSaveCd), 'referenceSets' );
+

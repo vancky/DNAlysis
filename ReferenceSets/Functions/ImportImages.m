@@ -2,11 +2,11 @@ function [ output ] = ImportImages( config )
     % Import Images - Imports all relevant images
     
     fprintf('Importing the bead image for reference set 1.\n')
-    output.referenceSet1.helicase = ImportOneCamera( config.referenceSet1Cd , 'stack' );
+    output.referenceSet1.helicase = ImportOneCamera( config.referenceSet1HelicaseCd , 'stack' );
     fprintf('The bead image for reference set 1 has been imported.\n')
     
     fprintf('Importing the dna image for reference set 1.\n')
-    output.referenceSet1.dna = [];
+    output.referenceSet1.dna = []; %ImportOneCamera( config.referenceSet1DnaCd, 'stack');
     fprintf('The dna image for reference set 1 has been imported.\n')
     
     fprintf('Importing the helicase Images for reference set 2.\n')

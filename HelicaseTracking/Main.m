@@ -32,6 +32,9 @@ fprintf('This section performs the post processing.\n')
 
 %postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
 
+%% Performance Criteria
+
+performanceCriteria = PerformanceCriteria( config);
 
 %% Visualisations for poster september
 
