@@ -3,13 +3,32 @@ function [ output ] = PerformanceCriteria( config )
     % algorithm by evaluating the reference sets.
     % Detailed explanation goes here
 
-   nargin
+   % Load the reference sets
+   load( sprintf('%sReferenceSets.mat',  config.referenceSetCd));
+   config.numReferenceSets = length( referenceSets);
    
-   referenceSets = load( sprintf('%sReferenceSets.mat',  config.referenceSetCd));
-    
-   analysis = Analysis( config, referenceSet, 'ReferenceSets');
-
-   output = referenceSets;
+   for ii = 1:config.numReferenceSets
+       analysis = Analysis( config, referenceSets{ii}, 'ReferenceSets');
+       output.helicaseLocation{ii} = analysis.helicaseLocation;
+   end
+   
+   
+   for jj =1:config.numReferenceSets
+       if ~isempty( output.helicaseLocation{jj}{1})       
+           output.helicasePerformance{jj} = PerformanceHelicases( referenceSets{jj}.roiCenters, output.helicaseLocation{jj});
+       else
+           output.helicasePerformance{jj} = {[]};
+       end
+       
+   end
+   
+ 
+   output.helicasePerformance
+   
+   for kk = 1:3
+      fprintf( 'Results for reference set %i\n', kk)
+      fprintf( 'The T%.2f', output.helicasePerormance.trackingSuccesAvg)
+   end
     
 end
 

@@ -1,40 +1,9 @@
 function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     %  Helicase Dna Overlay - Stacks two images of Helicases and DNA
     %  Detailed explanation goes here
-
-    dnaEdgeBinary = edge( dnaImage , 'canny' );
-    radius = config.binaryCloseRadius;
     
-    
-    se = strel('disk' , radius );
-    dnaEdgeClosed= imclose(dnaEdgeBinary , se );
-    
-    % Refine the dnaEdge Closed Image
-    
-    cc = bwconncomp( dnaEdgeClosed );
-    regionIntensity = regionprops( cc , dnaImage , 'MaxIntensity');
-    regionDiameter = regionprops( cc , 'EquivDiameter');
-
-    M = length(regionIntensity) ;
-    intensity = zeros(M,1);
-    for i=1: M
-        intensity(i,1) = regionIntensity(i).MaxIntensity;
-    end
-
-    % Find the Indexes of the real DNA.
-    meanIntensity = mean(intensity) ;
-    idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThresholdDna ) )); 
-    filteredBinary = ismember(labelmatrix(cc), idx);
-    
-    output.binaryDna = filteredBinary ;
-    % compute the dna Fraction
-    output.dnaFraction = sum(filteredBinary(:)) / numel(filteredBinary);
-    
-    figure;
-    subplot(1,4,1); imshow( dnaImage , [400 3000]) ; title('DNA');
-    subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
-    subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
-    subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges') 
+    % Finds the DNA roi from a dna image.
+    dnaFinder = DnaFinder( config, dnaImage);
     
     % Perform the actual matching of DNA with Helicases
     
@@ -43,7 +12,7 @@ function [ output ] = MatchDnaHelicase( config, dnaImage , spotFinder )
     count = 0;
     for i=1:N
         location= round(circle(i).centers); % [X,Y] center of the helicases
-        check = filteredBinary (location(2), location(1)); % check whether the helicase is on the DNA (1 is yes 0 no)
+        check = dnaFinder.dnaRoi(location(2), location(1)); % check whether the helicase is on the DNA (1 is yes 0 no)
         count = count +check;
     end
     match = count/N;

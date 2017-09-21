@@ -52,14 +52,30 @@ function [ output ] = Analysis( config, inputImages, option)
             
         case 'ReferenceSets'
             helicaseImages = inputImages.helicaseImage;
-            numHelicaseImages = length( helicaseImages);
+            dnaImages = inputImages.dnaImage;
+            numHelicaseImages = length( helicaseImages)
+            numDnaImages = length( dnaImages)
             
-            for ii = 1:numHelicaseImages
-                spotFinder{ii} = SpotFinder( config, helicaseImages{ii});
-                output.helicaseLocation{ii} = spotFinder{ii}.centersFormatted;
+            % Analyse the helicase images
+            if numHelicaseImages == 0
+                output.helicaseLocation{1} = [];
+            else
+                for ii = 1:numHelicaseImages
+                    spotFinder = SpotFinder( config, helicaseImages{ii});
+                    output.helicaseLocation{ii} = spotFinder.centers;
+                end
             end
+            % Analyse the dna images
             
-            
+            if numDnaImages == 0
+                output.dnaRoi{1} = [];
+            else
+                for jj = 1:numDnaImages
+                    jj
+                    dnaFinder = DnaFinder( config, dnaImages{jj});
+                    output.dnaRoiFound = dnaFinder.dnaRoi;
+                end
+            end
             
         otherwise
             fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
