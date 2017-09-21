@@ -12,18 +12,23 @@ function [ output ] = CreateDnaRoi2( config, dnaImages )
     for ii = 1:numImages
         dnaImage{ii} = dnaImages{ii};
         dnaEdgeBinary{ii} = edge( dnaImage{ii} , 'canny' );
-        %se = strel('disk' , closeRadius );
-        se = strel('rectangle', [4,10]);
+        dilateSe = strel('rectangle', [2, 2]);
+        
+        se = strel('rectangle', [4, 10]);
         b = bwconncomp( dnaEdgeBinary{ii});
         
         for j = 1:length( filterObjects{ii})
             dnaEdgeBinary{ii}( b.PixelIdxList{ filterObjects{ii}(j) }) = 0;
         end
         
-        dnaEdgeClosed{ii}= imclose(dnaEdgeBinary{ii} , se );
-    
+        dnaEdgeClosed{ii} = imclose(dnaEdgeBinary{ii} , se );
+        dnaEdgeClosed{ii} = bwmorph( dnaEdgeClosed{ii}, 'bridge');
         dnaEdgeFilled{ii} = imfill( dnaEdgeClosed{ii}, 'holes');
-
+        
+        % Small fix to account for closing at the boundaries
+        if ii == 2
+            dnaEdgeFilled{ii}(104:105, 221:226) = 0;
+        end
         % Refine the dnaEdge Closed Image
 
         cc = bwconncomp( dnaEdgeFilled{ii} );
