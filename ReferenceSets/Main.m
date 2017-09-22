@@ -5,8 +5,8 @@ config = Config(config);
 
 %% Import images
 
-importImages = ImportImages( config);
-%load( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'));
+%importImages = ImportImages( config);
+load( strcat(config.referenceSetSaveCd, 'importImagesReference.mat'));
 save( sprintf('%simportImagesReference.mat', config.referenceSetSaveCd), 'importImages');
 
 %% Create and save the reference sets

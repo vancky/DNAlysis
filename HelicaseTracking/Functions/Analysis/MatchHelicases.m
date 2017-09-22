@@ -2,8 +2,6 @@ function [ output ] = MatchHelicases( config, spotsCam0, spotsCam1 )
     % Match Helicases - checks colocalization of cam 0 and cam 1 helicases
     %   Detailed explanation goes here
      
-    
-    
     numSpots0 = size( spotsCam0, 1);
     numSpots1 = size( spotsCam1, 1);
     
