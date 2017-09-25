@@ -33,6 +33,7 @@ function [ output ] = GetDnaCleaningCoordinates2( index )
         otherwise
             fprintf('There are no cleaning regions defined for this index.\n')
     end
+    
     output = cr;
 
 end

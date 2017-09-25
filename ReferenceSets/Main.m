@@ -1,7 +1,8 @@
 clear all; clc; close all;
 
+user = 'home';
 config = struct();
-config = Config(config);
+config = Config( config, user);
 
 %% Import images
 
@@ -12,10 +13,10 @@ save( sprintf('%simportImagesReference.mat', config.referenceSetSaveCd), 'import
 %% Create and save the reference sets
 
 % Reference Set 1
-referenceSets{1} = CreateReferenceSet1( config, importImages.referenceSet1 );
+referenceSets{1} = CreateReferenceSet1( config );
 
 % Reference Set 2
-referenceSets{2} = CreateReferenceSet2( config, importImages.referenceSet2 );
+referenceSets{2} = CreateReferenceSet2( config, importImages.referenceSet2);
 
 % Reference Set 3
 referenceSets{3} = CreateReferenceSet3( config );

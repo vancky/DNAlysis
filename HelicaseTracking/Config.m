@@ -1,4 +1,4 @@
-function [ config ] = Config( config )
+function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
     
     
@@ -12,13 +12,22 @@ function [ config ] = Config( config )
     % set cam0_290_0 instead of cam0_290 to make sure you don't import the
     % stack image.
     
-    config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-    config.referenceSetCd = ('../../../MatFiles/ReferenceSets/');
-    
-    % The matfile Cd, note that we can load images by specifying the
-    % correct .mat file name, if saving, specify the new relevant name
-    config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-    config.loadMatFileCd=('../../../MatFiles/DnaHelicaseImports/170530_orc');
+    switch user
+        case 'tudelft'
+                
+            config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
+            config.referenceSetCd = ('../../../MatFiles/ReferenceSets/');
+            % The matfile Cd, note that we can load images by specifying the
+            % correct .mat file name, if saving, specify the new relevant name
+            config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
+            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170530_orc');
+        case 'home'
+            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
+            config.referenceSetCd = ('../../MatFiles/ReferenceSets/');
+        otherwise
+            fprintf('Please specify a correct user.\n')
+    end
+
     
     % Specify the import type here, either 'OneCamera' or 'TwoCameras'
     config.importType = 'TwoCameras';

@@ -1,12 +1,25 @@
-function [ config ] = Config( config )
+function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
     
     
-    % The matlab directory
-    config.matlabCd = ('D:\jvanderauweraert\git\DNAlysis\PerformanceCriteria');
+    switch user
+        case 'tudelft'
+            % The matlab directory
+            config.matlabCd = ('D:\jvanderauweraert\git\DNAlysis\PerformanceCriteria');
+            % Directory for saving the reference sets
+            config.referenceSetSaveCd =('../../../MatFiles/ReferenceSets/');        
+            
+        case 'home'
+            % The matlab directory
+            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
+            % Directory for saving the reference sets
+            config.referenceSetSaveCd =('../../MatFiles/ReferenceSets/');        
+            
+        otherwise
+            fprintf('Please specify a correct user.\n')
+    end
     
-    % Directory for saving the reference sets
-    config.referenceSetSaveCd =('../../../MatFiles/ReferenceSets/');
+    
     
     % General specifications of simulated data
     config.imageSize = [512, 256];
@@ -18,13 +31,6 @@ function [ config ] = Config( config )
     config.dnaSize = [60, 1];     % Size of the DNA in pixels before blurring
     config.dnaIntensity = 1500;   % Intensity of the DNA before blurring
     config.blurSize = 2;          % Sigma of the Gaussian blur
-    
-    % Directories for correcting Data
-    % Reference Set 1
-    config.referenceSet1HelicaseCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
-    config.referenceSet1DnaCd{1}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170613_153838\PEG-Ch8_DNAYOYO-Incubation*\*cam0_058_0*');
-    config.helicaseThreshold1 = 7;
-    config.smoothRadius1 = 3;
     
     % Reference Set 2
     config.helicaseThreshold2 = 6;
