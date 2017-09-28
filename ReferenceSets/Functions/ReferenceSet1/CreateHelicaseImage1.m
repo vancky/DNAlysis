@@ -1,48 +1,52 @@
-function [ output ] = CreateHelicaseImage1( rawHelicaseImage )
+function [ output ] = CreateHelicaseImage1( config )
     % Create Helicase Image 1
-    % Creates the helicase image for reference set 1
-    
-    % Crop the image to a region which you like
-    croppedImage = rawHelicaseImage{1}(:, 45:241);
-    
-    % Filter the image
-    filteredImage = BackgroundFilterNoScale(croppedImage);
-    
+    % Creates the static helicase image
 
-    % Define cleanregions [ XTL, YTL, XBR, YBR]
-    % Where TL is top left and BR is bottom right
+    % Specify the locations of the helicases to be simulated [x,y]
+    locations(1,:) = [ 32, 20];
+    locations(2,:) = [ 56, 20];
+    locations(3,:) = [ 63, 100];
+    locations(4,:) = [ 97, 100];
+    locations(5,:) = [ 126, 180];
+    locations(6,:) = [ 154, 180];
+    locations(7,:) = [ 146, 260];
+    locations(8,:) = [ 189, 260];
+    locations(9,:) = [ 203, 340];
+    locations(10,:) = [ 214, 340];
+    locations(11,:) = [ 50, 50];
+    locations(12,:) = [ 20, 70];
+    locations(13,:) = [ 164, 100];
+    locations(14,:) = [ 62, 130];
+    locations(15,:) = [ 228, 150];
+    locations(16,:) = [ 52, 160];
+    locations(17,:) = [ 143, 160];
+    locations(18,:) = [ 255, 190];
+    locations(19,:) = [ 128, 190];
+    locations(20,:) = [ 24, 220];
+    locations(21,:) = [ 133, 270];
+    locations(22,:) = [ 75, 320];
+    locations(23,:) = [ 100, 360];
+    locations(24,:) = [ 148, 410];
+    locations(25,:) = [ 162, 450]; 
     
-    cr(1,:)= [103, 17, 121, 32];
-    cr(2,:)= [41, 58, 53, 68];
-    cr(3,:)= [127, 101, 143, 115];
-    cr(4,:)= [88, 134, 105, 150];
-    cr(5,:)= [42, 166, 53, 176];
-    cr(6,:)= [28, 175, 40, 186];
-    cr(7,:)= [90, 228, 108, 243];
-    cr(8,:)= [58, 233, 71, 244];
-    cr(9,:)= [139, 252, 149, 261];
-    cr(10,:)= [33, 258, 44, 268];
-    cr(11,:)= [20, 279, 32, 288];
-    cr(12,:)= [156, 317, 175, 334];
-    cr(13,:)= [4, 338, 18, 350];
-    cr(14,:)= [73, 353, 86, 365];
-    cr(15,:)= [46, 431, 60, 443];
-    cr(16,:)= [127, 430, 145, 446];
-    cr(17,:)= [27, 14, 39, 24];
-    cr(18,:)= [9, 104, 22, 115];
-    cr(19,:)= [145, 106, 156, 117];
-    cr(20,:)= [90, 257, 101, 265];
+    % Simulate the helicases 
+    helicaseImage = zeros( config.imageSize);
+    numHelicases = size( locations, 1);
+    parameters(3) = config.sigma;
+    parameters(4) = config.scaleValue1;
+    parameters(5) = config.imageSize(2); % x
+    parameters(6) = config.imageSize(1); % y
+        
+    for i = 1 : numHelicases
+        parameters(1) = locations(i,1);
+        parameters(2) = locations(i,2);
+        helicaseImage = helicaseImage+ SimulateHelicase( parameters );
+    end
     
-    % Manually clean the images
+    integerImage = uint16(helicaseImage);
+    doubleImage = double(integerImage);
     
-    cleanedImage = CleanImage( filteredImage, cr, 'minimum');
+    output = doubleImage;
     
-    output{1} = cleanedImage;
-    
-%     figure;
-%     subplot(1,2,1); imshow( beadImage{1}(:, 1:256) , [100 150]); colorbar
-%     title('Raw Image for Reference Set 1')
-%     subplot(1,2,2); imshow(cleanedImage, [5 50]); colorbar
-%     title('Cleaned Image Reference Set 1')
 end
 

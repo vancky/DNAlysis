@@ -35,8 +35,26 @@ function [ output ] = CreateReferenceSet2( config, rawImages )
         imshow( output.dnaImage{j}, [0 1500]); colorbar; title(sprintf('Dna Image %i', j))
         axis equal; axis tight;
         subplot(1,2,2)
-        imshow( output.dnaRoi{j}); colorbar; title(sprintf('Dna ROI %i', j))
+        imshow( output.dnaRoi{j}); title(sprintf('Dna ROI %i', j))
         axis equal; axis tight;
     end
+    
+    figure; 
+    imshow( output.dnaImage{3}, [0 1500]); colorbar;
+    axis equal; axis tight;
+    
+    figure; 
+    imshow( output.dnaRoi{3});
+    axis equal; axis tight;
+    
+    figure; 
+    imshow( output.helicaseImage{1}, [0 30]); colorbar;
+    axis equal; axis tight;
+    
+    figure;
+    imshow( output.helicaseRoi{1}); 
+    axis equal; axis tight;
+    PlotCenters( output.roiCenters{1}, 10)
+        
 end
 

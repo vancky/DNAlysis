@@ -26,10 +26,11 @@ function [ config ] = Config( config, user )
     
     % Simulate helicase specs
     config.sigma = 1.5;             % The sigma of the Gaussian PSF to simulate helicases
-    config.scaleValue = 50;       % Maximum intensity of the helicase spot
+    config.scaleValue1 = 50;       % Maximum intensity of the helicase spot
     % Simulate dna specs
     config.dnaSize = [60, 1];     % Size of the DNA in pixels before blurring
-    config.dnaIntensity = 1500;   % Intensity of the DNA before blurring
+    config.dnaIntensity1 = 1500;   % Intensity of the DNA before blurring
+    config.dnaIntensity3 = 150;   % Intensity of the DNA before blurring
     config.blurSize = 2;          % Sigma of the Gaussian blur
     
     % Reference Set 2
@@ -55,7 +56,12 @@ function [ config ] = Config( config, user )
     % Reference Set 3
     config.helicaseThreshold3 = 4;
     config.dnaThreshold3 = 50;
-
+    config.scaleValue3 = 25;       % Maximum intensity of the helicase spot
+    config.backgroundNoise = 25;
+    config.backgroundNoiseDna = 25;
+    config.signal = config.scaleValue3 + config.backgroundNoise;
+    config.snr = config.scaleValue3/ sqrt(config.signal+config.backgroundNoise);
+    
     % Make sure we can use the functions
     addpath(genpath('./Functions'))
 end

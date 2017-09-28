@@ -14,7 +14,7 @@ function [ output ] = CreateDnaImage3( config )
     dnaImage = zeros( config.imageSize);
     parameters(1) = config.dnaSize(1);
     parameters(2) = config.dnaSize(2);
-    parameters(3) = config.dnaIntensity;
+    parameters(3) = config.dnaIntensity3;
     parameters(4) = config.blurSize;
     parameters(5) = config.imageSize(2); % x
     parameters(6) = config.imageSize(1); % y
@@ -25,7 +25,13 @@ function [ output ] = CreateDnaImage3( config )
         dnaImage= SimulateDna( parameters)+ dnaImage;
     end
     
-    output = uint16(dnaImage);
-    output = double(dnaImage);
+    dnaImage = dnaImage + config.backgroundNoiseDna;
+    integerImage = uint16(dnaImage);
+    
+    noiseImage = imnoise( integerImage, 'poisson');
+    
+    doubleImage = double( noiseImage);
+    output.noiseImage = doubleImage;
+    output.cleanImage = double( integerImage - config.backgroundNoiseDna);    
 end
 

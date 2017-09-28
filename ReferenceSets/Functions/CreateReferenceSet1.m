@@ -3,11 +3,11 @@ function [ output ] = CreateReferenceSet1( config)
     % Create the static simulated images at different SNR ratios.
    
     fprintf('Simulating the helicase images for reference set 1.\n')
-    output.helicaseImage{1} = CreateHelicaseImage3(config);
+    output.helicaseImage{1} = CreateHelicaseImage1(config);
     fprintf('The helicase images for reference set 1 have been simulated.\n')
     
     fprintf('Simulating the dna images for reference set 1.\n')
-    output.dnaImage{1} = CreateDnaImage3(config);
+    output.dnaImage{1} = CreateDnaImage1(config);
     fprintf('The dna images for reference set 1 have been simulated.\n')
     
     output.helicaseRoi{1} = CreateHelicaseRoi3( config, output.helicaseImage{1});

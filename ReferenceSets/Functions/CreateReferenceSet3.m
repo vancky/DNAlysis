@@ -3,16 +3,20 @@ function [ output ] = CreateReferenceSet3( config )
     % Create the static simulated images at different SNR ratios.
    
     fprintf('Simulating the helicase images for reference set 3.\n')
-    output.helicaseImage{1} = CreateHelicaseImage3(config);
+    helicaseImages{1} = CreateHelicaseImage3(config);
+    output.helicaseImage{1} = helicaseImages{1}.noiseImage;
+    
     fprintf('The helicase images for reference set 3 have been simulated.\n')
     
     fprintf('Simulating the dna images for reference set 3.\n')
-    output.dnaImage{1} = CreateDnaImage3(config);
+    dnaImages{1} = CreateDnaImage3(config);
+    output.dnaImage{1} = dnaImages{1}.noiseImage;
+
     fprintf('The dna images for reference set 3 have been simulated.\n')
     
-    output.helicaseRoi{1} = CreateHelicaseRoi3( config, output.helicaseImage{1});
+    output.helicaseRoi{1} = CreateHelicaseRoi3( config, helicaseImages{1}.cleanImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);
-    output.dnaRoi{1} = CreateDnaRoi3( config, output.dnaImage{1});
+    output.dnaRoi{1} = CreateDnaRoi3( config, dnaImages{1}.cleanImage);
 
     figure; 
     subplot(1,3,1);

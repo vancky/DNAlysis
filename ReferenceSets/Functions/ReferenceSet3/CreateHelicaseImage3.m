@@ -33,7 +33,7 @@ function [ output ] = CreateHelicaseImage3( config )
     helicaseImage = zeros( config.imageSize);
     numHelicases = size( locations, 1);
     parameters(3) = config.sigma;
-    parameters(4) = config.scaleValue;
+    parameters(4) = config.scaleValue3;
     parameters(5) = config.imageSize(2); % x
     parameters(6) = config.imageSize(1); % y
         
@@ -43,7 +43,13 @@ function [ output ] = CreateHelicaseImage3( config )
         helicaseImage = helicaseImage+ SimulateHelicase( parameters );
     end
     
-    output = uint16(helicaseImage);
-    output = double(output);
+    helicaseImage = helicaseImage + config.backgroundNoise;
+    integerImage = uint16(helicaseImage);
+    
+    noiseImage = imnoise( integerImage, 'poisson');
+    
+    doubleImage = double( noiseImage);
+    output.noiseImage = doubleImage;
+    output.cleanImage = double( integerImage - config.backgroundNoise);    
 end
 
