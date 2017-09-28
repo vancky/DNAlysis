@@ -18,18 +18,18 @@ function [ output ] = PerformanceDna( referenceRois, estimatedRois)
         correctPixels = sum( correctPixelMap(:));
         incorrectPixels = sum( incorrectPixelMap(:));
         
-        figure; 
-        subplot(1,3,1); imshow(~referenceRoi, []);
-        subplot(1,3,2); imshow( estimatedRoi, []);
-        subplot(1,3,3); imshow( incorrectPixelMap, []);
-        
-        trackingFraction(ii) = correctPixels / referenceDnaPixels;
-        trackingError(ii) = incorrectPixels / referenceNoDnaPixels;
+%         figure; 
+%         subplot(1,3,1); imshow(~referenceRoi, []);
+%         subplot(1,3,2); imshow( estimatedRoi, []);
+%         subplot(1,3,3); imshow( incorrectPixelMap, []);
+%         
+        trackingFraction(ii) = (correctPixels+incorrectPixels)/ referenceDnaPixels;
+        trackingSucces(ii) = correctPixels / referenceDnaPixels;
     end
     
     output.trackingFraction = trackingFraction;
-    output.trackingError = trackingError;
+    output.trackingSucces = trackingSucces;
     output.trackingFractionAvg = mean( trackingFraction);
-    output.trackingErrorAvg = mean( trackingError);
+    output.trackingSuccesAvg = mean( trackingSucces);
 end
 

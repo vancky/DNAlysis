@@ -1,7 +1,8 @@
 clear all; clc; close all;
 
+user = 'tudelft';
 config = struct();
-config = Config(config);
+config = Config( config, user);
 
 %% Import Images
 
@@ -29,7 +30,6 @@ analysis = Analysis( config, preProcess);
 %% Post Processing
 
 fprintf('This section performs the post processing.\n')
-
 %postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
 
 %% Performance Criteria
@@ -38,4 +38,4 @@ performanceCriteria = PerformanceCriteria( config);
 
 %% Visualisations for poster september
 
-%PosterSeptember( config, preProcess, analysis )
+PosterSeptember( config, preProcess, analysis )

@@ -13,8 +13,7 @@ function [ config ] = Config( config, user )
     % stack image.
     
     switch user
-        case 'tudelft'
-                
+        case 'tudelft'                
             config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
             config.referenceSetCd = ('../../../MatFiles/ReferenceSets/');
             % The matfile Cd, note that we can load images by specifying the

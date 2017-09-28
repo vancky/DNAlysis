@@ -1,6 +1,6 @@
 clear all; clc; close all;
 
-user = 'home';
+user = 'tudelft';
 config = struct();
 config = Config( config, user);
 

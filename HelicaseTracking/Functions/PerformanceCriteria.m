@@ -36,10 +36,10 @@ function [ output ] = PerformanceCriteria( config )
     fprintf('Results of the Performance Criteria\n')
     for ll = 2:3
         fprintf( '\nResults for reference set %i\n\n', ll)
-        fprintf( 'The helicase tracking fraction is %.2f\n', output.helicasePerformance{ll}.trackingFractionAvg);
         fprintf( 'The helicase tracking succes is %.2f\n', output.helicasePerformance{ll}.trackingSuccesAvg);
+        fprintf( 'The helicase tracking fraction is %.2f\n', output.helicasePerformance{ll}.trackingFractionAvg);
+        fprintf( 'The dna tracking succes is %.2f\n', output.dnaPerformance{ll}.trackingSuccesAvg);
         fprintf( 'The dna tracking fraction is %.2f\n', output.dnaPerformance{ll}.trackingFractionAvg);
-        fprintf( 'The dna tracking error is %.2f\n', output.dnaPerformance{ll}.trackingErrorAvg);
     end
     
 end
