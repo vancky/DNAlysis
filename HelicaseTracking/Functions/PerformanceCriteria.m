@@ -34,7 +34,7 @@ function [ output ] = PerformanceCriteria( config )
     output.helicasePerformance;
    
     fprintf('Results of the Performance Criteria\n')
-    for ll = 2:3
+    for ll = 1:3
         fprintf( '\nResults for reference set %i\n\n', ll)
         fprintf( 'The helicase tracking succes is %.2f\n', output.helicasePerformance{ll}.trackingSuccesAvg);
         fprintf( 'The helicase tracking fraction is %.2f\n', output.helicasePerformance{ll}.trackingFractionAvg);
