@@ -10,6 +10,7 @@ function [ output ] = Analysis( config, inputImages, option)
             fprintf('Please specify enough input arguments for the analysis')            
     end
     
+    
     switch analysisOption
         case 'OneCamera'
             for ii = 1:config.numFovs

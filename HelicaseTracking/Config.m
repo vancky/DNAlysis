@@ -1,7 +1,6 @@
 function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
     
-    
     % Set the Matlab directories, note if you want to specify only a
     % certain camera or measurement set use \folder*\*specificextension*
     % For instance for camera 0 with extension 079 Cd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*cam0_079*')
@@ -19,10 +18,12 @@ function [ config ] = Config( config, user )
             % The matfile Cd, note that we can load images by specifying the
             % correct .mat file name, if saving, specify the new relevant name
             config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170530_orc');
+            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
         case 'home'
             config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
             config.referenceSetCd = ('../../MatFiles/ReferenceSets/');
+            config.saveMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
+            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
         otherwise
             fprintf('Please specify a correct user.\n')
     end
@@ -30,6 +31,10 @@ function [ config ] = Config( config, user )
     
     % Specify the import type here, either 'OneCamera' or 'TwoCameras'
     config.importType = 'TwoCameras';
+    
+    % Specify the option for importing the images, either import for 
+    % getting them from the K drive or load from the saved MatFile
+    config.importOption = 'load';
     
     % When only using one camera this is the part to edit.
     

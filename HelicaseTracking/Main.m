@@ -1,6 +1,7 @@
 clear all; clc; close all;
 
-user = 'tudelft';
+% Choose a user, tudelft or home
+user = 'home';
 config = struct();
 config = Config( config, user);
 
@@ -8,9 +9,6 @@ config = Config( config, user);
 
 fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
-%%
-save( config.saveMatFileCd , 'importImages');
-% load ( config.loadMatFileCd );
 
 %% Correlations and calibrations
 
