@@ -24,16 +24,3 @@ preProcess = PreProcess( config, importImages);
 
 fprintf('This section performs the Analysis.\n')
 analysis = Analysis( config, preProcess);
-
-%% Post Processing
-
-fprintf('This section performs the post processing.\n')
-%postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
-
-%% Performance Criteria
-
-performanceCriteria = PerformanceCriteria( config);
-
-%% Visualisations for poster september
-
-PosterSeptember( config, preProcess, analysis )

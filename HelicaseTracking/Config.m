@@ -18,7 +18,7 @@ function [ config ] = Config( config, user )
             % The matfile Cd, note that we can load images by specifying the
             % correct .mat file name, if saving, specify the new relevant name
             config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
+            config.loadMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
         case 'home'
             config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
             config.referenceSetCd = ('../../MatFiles/ReferenceSets/');

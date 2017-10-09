@@ -30,7 +30,6 @@ function [ output ] = ImportImages( config )
                 otherwise
                     fprintf('Please specify a correct importType, either ''OneCamera'' or ''TwoCameras''.\n')
             end
-            importImages = ImportImages(config);
             save( config.saveMatFileCd , 'importImages');
             
         case 'load'
