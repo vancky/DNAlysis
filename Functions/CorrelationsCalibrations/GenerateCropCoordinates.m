@@ -13,13 +13,13 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
             'crop coordinates need to be generated.']);
     end
     
-    splitImage=SplitImage(inputImage , 1);
+    splitImage = SplitImage(inputImage , 'vertical');
     
-    numCol=size( splitImage.leftImage , 2);
-    rowAvgLeft=mean(splitImage.leftImage,1);   % Averaged over all rows
-    rowAvgRight=mean(splitImage.rightImage,1);  % Averaged over all row
-    diffLeft=zeros(1 , numCol-1); 
-    diffRight=zeros(1 , numCol-1);
+    numCol = size( splitImage.leftImage , 2);
+    rowAvgLeft = mean(splitImage.leftImage,1);   % Averaged over all rows
+    rowAvgRight = mean(splitImage.rightImage,1);  % Averaged over all row
+    diffLeft = zeros(1 , numCol-1); 
+    diffRight = zeros(1 , numCol-1);
     
     for i=1:numCol-1
        diffLeft(i) = rowAvgLeft(:,i+1)-rowAvgLeft(:,i);

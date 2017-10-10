@@ -59,6 +59,8 @@ function [ config ] = Config( config, user )
     
     % In what direction where the images captured? Horizontal or vertical
     config.imageDirection = 'horizontal';
+    % How much offset do you want when cropping the optosplit images?
+    config.cropOffset = 5;
     
     
     % Make sure we can use the functions

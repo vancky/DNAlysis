@@ -4,7 +4,7 @@ function [ config , output ] = CorrelationsCalibrations( config, importImages )
     
     splitCorrelation = SplitCorrelation( config, importImages.splitCorrelation{1} );
     config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
-    config.cropCoordinates = GenerateCropCoordinates( importImages.splitCorrelation{1},[]);
+    config.cropCoordinates = GenerateCropCoordinates( importImages.splitCorrelation{1}, 'vertical');
     
     cameraCorrelation = CameraCorrelation( config, importImages.cameraCorrelation);
     config.cameraCorrelation = cameraCorrelation.coordinates;

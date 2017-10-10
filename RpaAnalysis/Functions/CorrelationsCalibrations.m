@@ -7,13 +7,14 @@ function [ config , output ] = CorrelationsCalibrations( config, importImages )
     %config.splitCorrelation = [ splitCorrelation.rowCorrection , splitCorrelation.colCorrection ];
     config.cropCoordinates = GenerateCropCoordinates( importImages.beamshape.cam0{1}, config.imageDirection);
     
-%     cameraCorrelation = CameraCorrelation( config, importImages.cameraCorrelation);
-%     config.cameraCorrelation = cameraCorrelation.coordinates;
+    
+    
+    cameraCorrelation = CameraCorrelation( config, importImages.cameraCorrelation);
+    config.cameraCorrelation = cameraCorrelation.coordinates;
 
-    config.numFovs = length( importImages.cam0);
     
     output = [];
-    %output.splitCorrelation = splitCorrelation;
+%     output.splitCorrelation = splitCorrelation;
 %     output.cameraCorrelation = cameraCorrelation;
 end
 

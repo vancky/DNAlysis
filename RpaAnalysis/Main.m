@@ -13,7 +13,8 @@ importImages = ImportImages(config);
 %% Correlations and calibrations
 
 fprintf('This section performs the correlations and calibrations.\n')
-[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
+[config, beamshapeCorrection] = BeamshapeCorrection( config, importImages);
+%[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
 
 %% Pre Processing of relevant Images
 
