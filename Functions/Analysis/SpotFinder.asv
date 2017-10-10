@@ -5,10 +5,9 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     % Parses the optional input arguments
     p = inputParser;
     addOptional( p, 'diameterThreshold', 0);
-    addOptional( p, 'eccentricityThreshold', 1 );
-    addOptional( p, 'fitSize', 10);
+    addOptional( p, 'eccentricityTreshold', 1 );
     parse( p, varargin{:})
-    
+
     % Performs the watershed algorithm
     meanFilteredImage = MeanThreshold( inputImage );
     watershedImage = WatershedImage( inputImage );
@@ -17,19 +16,21 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     % Then, find grouped pixels based on connected region analysis.
     % For this, bw bwconncomp finds groups of connected pixels.
     % Then, regionprops finds the area and eccentricity of these groups.
-    % The relevant regions are found based on optional filtering criteria.    
+    % The relevant regions are found based on the ree
+    % optional
+    
     
     cc = bwconncomp(binaryImage); 
     stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');
     
-    idx = find( [stats.EquivDiameter] > p.Results.diameterThreshold & [stats.Eccentricity]<= p.Results.eccentricityThreshold ); 
+    idx = find( [stats.EquivDiameter] > config.diameterThresholdHelicase & [stats.Eccentricity]<= config.eccentricityThreshold ); 
     
     filteredCc = ismember(labelmatrix(cc), idx);
     filteredStats = regionprops(filteredCc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter'); 
     numRegions = length(filteredStats);
 
     % Creates a Spot Image from where we can extract spots
-    fitSize = p.Results.fitSize;
+    fitSize = config.fitSize;
     xSizeInput = size( inputImage, 2);
     ySizeInput = size( inputImage, 1);
     xSizeSpot = xSizeInput+2*fitSize;

@@ -3,8 +3,7 @@ function [ config, output ] = BeamshapeCorrection( config, importImages )
     % Please input the images as a 3D matrix, i.e. images(:,:,N) where N is
     % the total number of images
 
-    
-    % Calcultaes the crop coordinates for cam0
+    % Calculates the crop coordinates for cam0
     config.cropCoordinates = GenerateCropCoordinates( importImages.beamshape.cam0{1}, config.imageDirection);
     % Amount of field of views for analysis.
     config.numFovs = length( importImages.cam0);
@@ -19,8 +18,8 @@ function [ config, output ] = BeamshapeCorrection( config, importImages )
             cam1 = importImages.cam1{ii}(:,:,j);
             
             % Multplies with the beamshape matrix            
-            correctedImage0 = BeamshapeCorrectionSelf( cam1, [50, 50]);
-            correctedImage1 = BeamshapeCorrectionSelf( cam0, [50, 50]);       
+            correctedImage0 = BeamshapeCorrectionSelf( cam0, [50, 50]);
+            correctedImage1 = BeamshapeCorrectionSelf( cam1, [50, 50]);       
             
             correctedCam0{ii}(:,:,j)= uint16(correctedImage0);
             correctedCam1{ii}(:,:,j)= uint16(correctedImage1);

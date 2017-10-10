@@ -62,6 +62,9 @@ function [ config ] = Config( config, user )
     % How much offset do you want when cropping the optosplit images?
     config.cropOffset = 5;
     
+    % Options for the SpotFinder Script
+    % Lower bound on the diameter
+    config.diameterThreshold = 3;
     
     % Make sure we can use the functions
     addpath( genpath('../Functions') )

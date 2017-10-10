@@ -19,9 +19,9 @@ fprintf('This section performs the correlations and calibrations.\n')
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-preProcess = PreProcess( config, importImages);
+%preProcess = PreProcess( config, importImages);
 
 %% Analysis
 
 fprintf('This section performs the Analysis.\n')
-analysis = Analysis( config, preProcess);
+analysis = Analysis( config, beamshapeCorrection);
