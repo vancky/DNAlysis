@@ -5,13 +5,15 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     % Parses the optional input arguments
     p = inputParser;
     addOptional( p, 'diameterThreshold', 0);
-    addOptional( p, 'eccentricityThreshold', 1 );
+    addOptional( p, 'eccentricityThreshold', 1);
     addOptional( p, 'fitSize', 10);
+    addOptional( p, 'watershedSmooth', 0.00001);
     parse( p, varargin{:})
     
+    % Smooths the image so that it is ready for watershedding
+    smoothImage = imgaussfilt( inputImage, p.Results.watershedSmooth);
     % Performs the watershed algorithm
-    meanFilteredImage = MeanThreshold( inputImage );
-    watershedImage = WatershedImage( inputImage );
+    watershedImage = WatershedImage( smoothImage);
     binaryImage = watershedImage > 0;
     
     % Then, find grouped pixels based on connected region analysis.
@@ -28,7 +30,8 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     filteredStats = regionprops(filteredCc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter'); 
     numRegions = length(filteredStats);
 
-    % Creates a Spot Image from where we can extract spots
+    % Creates a Spot Image from where we can extract spots, note the lines
+    % below are neccesary to correctly handle spots near the boundary.
     fitSize = p.Results.fitSize;
     xSizeInput = size( inputImage, 2);
     ySizeInput = size( inputImage, 1);
@@ -36,7 +39,8 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     ySizeSpot = ySizeInput+2*fitSize;
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
-    helicaseIntensity = [100 150];
+    
+    
     
     for i = 1:numRegions
         diameters(i) = filteredStats(i).EquivDiameter;
@@ -48,52 +52,7 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
         spots(:,:,i) = spotImage( ySpot:(ySpot+2*fitSize) , xSpot : (xSpot+2*fitSize));
     end
     
-    figure;
-    subplot(1,3,1)
-    imshow( inputImage , helicaseIntensity); colorbar
-    title('Helicase Image')
-    hold on
-    subplot(1,3,2)
-    imshow( inputImage , helicaseIntensity); colorbar
-    for i = 1:numRegions
-        viscircles( circle(i).centers , circle(i).radii, 'Color', 'w', 'LineWidth', 0.5 );
-    end
-    hold off
-    title('The SpotFinder Algorithm')
-    
-    subplot(1,3,3)
-    imshow( inputImage, helicaseIntensity); colorbar;
-    hold on
-    for i = 1:numRegions
-        x = circle(i).centers(1)-fitSize;
-        y = circle(i).centers(2)-fitSize;
-        width = 2*fitSize+1;
-        pos = [ x, y, width, width];
-        rectangle('Position', pos, 'Edgecolor', 'r')
-    end
-    title('Regions for Helicase Fitting')
-    hold off
-      
-    %% Plot for the poster :)
-    
-%     figure;
-%     imshow( inputImage , helicaseIntensity); colorbar
-%     for i = 1:numRegions
-%         viscircles( circle(i).centers , circle(i).radii, 'Color', 'w', 'LineWidth', 0.5 );
-%     end
-%     
-%     figure;
-%     imshow( inputImage, helicaseIntensity); colorbar;
-%     hold on
-%     for i = 1:numRegions
-%         x = circle(i).centers(1)-fitSize;
-%         y = circle(i).centers(2)-fitSize;
-%         width = 2*fitSize+1;
-%         pos = [ x, y, width, width];
-%         rectangle('Position', pos, 'Edgecolor', 'r')
-%     end
-%     hold off
-    
+       
     output.circle = circle;
     output.centers = vertcat(circle.centers);
     output.centersFormatted = round(vertcat(circle.centers));

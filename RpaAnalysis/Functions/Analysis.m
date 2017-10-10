@@ -10,10 +10,16 @@ function [ output ] = Analysis( config, beamshapeCorrection )
         % noise in our analysis.
         for j = 2:2%numFrames
         
-            cam0 = beamshapeCorrection.cam0{ii}(:,:,j);
+            cam0 = double( beamshapeCorrection.cam0{ii}(:,:,j));
+            
             %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
-            spotFinder{ii}.cam0 = SpotFinder( config ,double(cam0), ...
-                'diameterThreshold', config.diameterThreshold);
+            spotFinder{ii}.cam0 = SpotFinder( config ,cam0, ...
+                'diameterThreshold', config.diameterThreshold, ...
+                'watershedSmooth', config.watershedSmooth, ...
+                'eccentricityThreshold', config.eccentricityThreshold);
+            SpotFinderVisualisation( cam0, spotFinder{ii}.cam0.circle, []);
+            fitHelicases{ii}.cam0 = FitHelicases( config, ...
+                spotFinder{ii}.cam0.spots, spotFinder{ii}.cam0.centersFormatted);
         
         end
         
