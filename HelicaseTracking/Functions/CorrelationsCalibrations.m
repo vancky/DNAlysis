@@ -20,6 +20,5 @@ function [ config , output ] = CorrelationsCalibrations( config, importImages )
     
     output.splitCorrelation = splitCorrelation;
     output.cameraCorrelation = cameraCorrelation;
-    
 end
 

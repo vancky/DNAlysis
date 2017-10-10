@@ -3,14 +3,9 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
     % in an image from camera 0.
     % Takes as input an (the beamshape in this case) image from camera 0 
     % and finds the coordinates of the black lines.
-
-    if direction == 'horizontal'
-        inputImage = inputImage';
-    elseif direction == 'vertical'
-        inputImage = inputImage;
-    else
-        fprintf(['Please specify the direction of the image for which' ...
-            'crop coordinates need to be generated.']);
+    
+    if horizontal
+        inputImage = inputImage'
     end
     
     splitImage=SplitImage(inputImage , 1);
@@ -31,16 +26,9 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
     [ value , indexRightMax]  = max(diffRight);
     [ value , indexRightMin]  = min(diffRight);
     
-    if direction == 'horizontal'
-        output.top = [ indexLeftMax, indexLeftMin];
-        output.bottom = [ indexRightMax, indexRightMin];
-    elseif direction == 'vertical'
-        output.left =  [ indexLeftMax , indexLeftMin];
-        output.right = [ indexRightMax , indexRightMin];
-    else
-        fprintf(['Please specify the direction of the image for which' ...
-            'crop coordinates need to be generated.']);
-    end
-
+    output.left =  [ indexLeftMax , indexLeftMin];
+    output.right = [ indexRightMax , indexRightMin];
+    
+    if 
 end
 

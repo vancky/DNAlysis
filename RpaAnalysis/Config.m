@@ -4,7 +4,7 @@ function [ config ] = Config( config, user )
     
     % Specify whether you want to import images from the K drive or load
     % saved images from the MatFileCd
-    config.importOption = 'import';
+    config.importOption = 'load';
     
     switch user
         case 'tudelft'                
@@ -43,7 +43,23 @@ function [ config ] = Config( config, user )
     config.multiCamCd.cam1{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171004\c8\ddK 7*\image1*');
 %     config.multiCamCd.cam0{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170920\C7L 2*\*image0*');
 %     config.multiCamCd.cam1{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170920\C7L 2*\*image1*');
-   
+
+    % Directories for correcting Data
+    config.splitCorrelationCd{1}         = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
+    config.dnaCalibrationCd{1}           = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');    
+    config.cameraCorrelationCd.cam0{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam0_184_0*');
+    config.cameraCorrelationCd.cam1{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam1_184_0*');
+    config.cameraCorrelationCd.cam0{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*cam0_187_0*');
+    config.cameraCorrelationCd.cam1{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*cam1_187_0*');
+    config.cameraCorrelationCd.cam0{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam0_190_0*');
+    config.cameraCorrelationCd.cam1{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam1_190_0*');
+    config.beamshapeCorrectionCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\DyeAf488\TestAF488 5*\*image0*');
+    config.beamshapeCorrectionCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\DyeAf488\TestAF488 5*\*image1*');
+
+    
+    % In what direction where the images captured? Horizontal or vertical
+    config.imageDirection = 'horizontal';
+    
     
     % Make sure we can use the functions
     addpath( genpath('../Functions') )

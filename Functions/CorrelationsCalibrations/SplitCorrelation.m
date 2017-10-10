@@ -4,6 +4,13 @@ function [ output ] = SplitCorrelation( config, inputImage )
     % 2. Correlate the image, find where correlation is maximal
     % 3. Perform correction based on this correlation
     
+    horizontal = true;
+    
+    if horizontal
+        inputImage = inputImage';
+    end
+        
+    
     % Split the image horizontal and get dimensions for later computations    
 
     splitImage = SplitImage(inputImage , 1 );
@@ -43,11 +50,11 @@ function [ output ] = SplitCorrelation( config, inputImage )
     
     % Compare the non correlated and correlated images
     
-%     figure;
-%     subplot(1,2,1); imshow(output.leftImage);   title('Left Image')
-%     subplot(1,2,2); imshow(output.rightImage);  title('Right Image')
-%     blockSize = config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
-%     subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
-%     subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
+    figure;
+    subplot(1,2,1); imshow(output.leftImage, []);   title('Left Image')
+    subplot(1,2,2); imshow(output.rightImage, []);  title('Right Image')
+    blockSize = config.checkerBoardSizeSplit;           % blocksize for the checkerboard pattern
+    subplot(1,2,1); CompareSplit(output.leftImage, output.rightImage, blockSize); title('No correlation')
+    subplot(1,2,2); CompareSplit(output.leftImageCorrected, output.rightImageCorrected, blockSize); title('With correlation')
 end
 

@@ -6,27 +6,30 @@ function [ output ] = ImportImages( config )
     switch config.importOption
         case 'import'
             %fprintf('Importing Camera Correlation Images.\n')
-            %importedCameraCorrelationImages = ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+            %importImages.cameraCorrelation = ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+
             %fprintf('Importing Split Correlation Images.\n')
-            %importedSplitCorrelationImages =  ImportOneCamera( config.splitCorrelationCd, 'stack');
-            %output.cameraCorrelation = importedCameraCorrelationImages;
-            %output.splitCorrelation = importedSplitCorrelationImages;
+            %importImages.splitCorelation=  ImportOneCamera( config.splitCorrelationCd, 'stack');
+            
+            fprintf('Importing Beamshape Correction Images.\n')
+            importImages.beamshape = ImportTwoCameras( config.beamshapeCorrectionCd, 'stack');
             
             fprintf('Importing Helicase and Dna Images.\n')
             importedCameraImages =  ImportTwoCameras( config.multiCamCd, 'all');
-            output.cam0 = importedCameraImages.cam0;
-            output.cam1 = importedCameraImages.cam1;
+            importImages.cam0 = importedCameraImages.cam0;
+            importImages.cam1 = importedCameraImages.cam1;
 
-            importImages = output;
+            output = importImages;
             save( config.saveMatFileCd , 'importImages');
-            
+            fprintf('Images have been imported and saved to %s.\n', config.saveMatFileCd)
         case 'load'
             load( config.loadMatFileCd );
             output = importImages;
+            fprintf('Images have been loaded from %s.\n', config.loadMatFileCd)
         otherwise
             fprintf('Please specify a correcect option for importing the images.\n')
     end
     
-    fprintf('Images Imported.\n')
+    
 end
 
