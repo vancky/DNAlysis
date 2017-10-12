@@ -24,4 +24,11 @@ fprintf('This section performs the pre processing of the data.\n')
 %% Analysis
 
 fprintf('This section performs the Analysis.\n')
+
 analysis = Analysis( config, beamshapeCorrection);
+
+%% Post Processing
+
+fprintf('This section performs the Post Processing.\n')
+
+postProcess = PostProcess( config, analysis);

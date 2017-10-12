@@ -1,0 +1,61 @@
+function [ output ] = PostProcess( config, analysis)
+    % Post Process - Performs the post processing.
+    
+    
+    
+    for ii = 1:config.numFovs
+        
+        numSpots = size( analysis.roiStatistics{ii}, 1);
+        numFrames = size( analysis.roiStatistics{ii}, 2);
+
+        averageGlobalIntensity = [analysis.globalStatistics{ii}.averageIntensity];
+        medianGlobalIntensity = [ analysis.globalStatistics{ii}.medianIntensity];
+        normGlobalIntensity = medianGlobalIntensity/ medianGlobalIntensity(1);
+
+        % Visualize global statistics
+        
+        figure;
+        title('Intensity over time for the total image')
+        xlabel('Number of frames')
+        ylabel('Pixel Counts')
+        plot( 1:numFrames, averageGlobalIntensity, 1:numFrames, medianGlobalIntensity)
+        legend('Average value', 'Median value')
+
+        
+        % Visualise local statistics
+        figure;
+        title('Intensity over time for different ROIs')
+        xlabel('Number of frames')
+        ylabel('Pixel Counts')
+        hold on
+        for j = 1:numSpots
+            averageRoiIntensity = [analysis.roiStatistics{ii}(j,:).averageIntensity];
+            if sum(averageRoiIntensity) > 0
+                plot( 1:numFrames, averageRoiIntensity)
+            end
+        end
+        hold off
+        
+        % Visualise normalized statistics
+        figure;
+        title('Corrected Intensity over time for different ROIs')
+        xlabel('Number of frames')
+        ylabel('Pixel Counts')
+        hold on
+        for j = 1:numSpots
+            averageRoiIntensity = [analysis.roiStatistics{ii}(j,:).averageIntensity];
+            normRoiIntensity = averageRoiIntensity/ averageRoiIntensity(1);
+            
+            correctedRoiIntensity = normRoiIntensity/ normGlobalIntensity;
+            if sum(averageIntensity) > 0
+                plot( 1:numFrames, correctedRoiIntensity)
+            end
+        end
+        hold off
+       
+        
+        
+    end
+
+end
+

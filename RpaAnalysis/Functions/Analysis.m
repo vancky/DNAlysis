@@ -6,24 +6,45 @@ function [ output ] = Analysis( config, beamshapeCorrection )
         fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
         numFrames = size( beamshapeCorrection.cam0{ii}, 3);
         
-        % Note: we skip the first frame in the analysis, because this is
-        % noise in our analysis.
-        for j = 2:2%numFrames
         
-            cam0 = double( beamshapeCorrection.cam0{ii}(:,:,j));
-            
-            %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
-            spotFinder{ii}.cam0 = SpotFinder( config ,cam0, ...
-                'diameterThreshold', config.diameterThreshold, ...
-                'watershedSmooth', config.watershedSmooth, ...
-                'eccentricityThreshold', config.eccentricityThreshold);
-            SpotFinderVisualisation( cam0, spotFinder{ii}.cam0.circle, []);
-            fitHelicases{ii}.cam0 = FitHelicases( config, ...
+        
+        % This section finds the center coordinates of the ROIS
+        cam0Start = double( beamshapeCorrection.cam0{ii}(:,:,5));
+        spotFinder{ii}.cam0 = SpotFinder( config ,cam0Start, ...
+            'diameterThreshold', config.diameterThreshold, ...
+            'watershedSmooth', config.watershedSmooth, ...
+            'eccentricityThreshold', config.eccentricityThreshold, ...
+            'fitSize', config.fitSize);
+        SpotFinderVisualisation( cam0Start, spotFinder{ii}.cam0.circle, []);
+        fitHelicases{ii}.cam0 = FitHelicases( config, ...
                 spotFinder{ii}.cam0.spots, spotFinder{ii}.cam0.centersFormatted);
+
+        % This section evaluates every frame.
+        % Note: we skip the first frames in the analysis, because this is
+        % noise in our analysis.
+        
+        roiLocations = CentersToCoordinates( fitHelicases{ii}.cam0.fitPosition, config.roiSize);
+        numRois = length( roiLocations);
+        
+        idx = 0;
+        for j = 5:numFrames 
+            idx= idx + 1;
+            cam0 = double( beamshapeCorrection.cam0{ii}(:,:,j));
+            %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
+            
+            for k = 1:numRois
+                roiStatistics{ii}(k,idx) = RoiIntensity( cam0, roiLocations(k,:));
+            end
+            cam0Size= [1, size(cam0,2), 1, size(cam0,1)];
+            globalStatistics{ii}(idx) = RoiIntensity( cam0, cam0Size);
         
         end
         
     output.spotFinder = spotFinder;
+    output.fitHelicases = fitHelicases;
+    output.roiStatistics = roiStatistics;
+    output.globalStatistics = globalStatistics;
+    
     end
     
     

@@ -4,9 +4,9 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     
     % Parses the optional input arguments
     p = inputParser;
+    addRequired( p, 'fitSize');
     addOptional( p, 'diameterThreshold', 0);
     addOptional( p, 'eccentricityThreshold', 1);
-    addOptional( p, 'fitSize', 10);
     addOptional( p, 'watershedSmooth', 0.00001);
     parse( p, varargin{:})
     
@@ -39,7 +39,6 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     ySizeSpot = ySizeInput+2*fitSize;
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
-    
     
     
     for i = 1:numRegions

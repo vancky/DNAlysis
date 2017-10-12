@@ -91,8 +91,11 @@ function [ config ] = Config( config, user )
     config.fitType = 2;
     % Half size  of the patch where we are going to fit Gaussians. For 
     % instance if the patch is 25x25 choose 12. A guideline for this is 3*sigma
-    config.fitSize=  1+ceil(3*config.sigma);    
+    config.fitSize =  1+ceil(3*config.sigma);    
     
+    % ANALYSIS OPTIONS
+    % Half of the square size for getting roi statistics.
+    config.roiSize = 10;
     
     % Make sure we can use the functions
     addpath( genpath('../Functions') )
