@@ -14,7 +14,6 @@ function [ output ] = CentersToCoordinates( centers, halfSquareSize )
     yMin = centers(:,2)-halfSquareSize;
     yMax = centers(:,2)+halfSquareSize;
 
-
     output = [xMin, xMax, yMin, yMax];
 end
 

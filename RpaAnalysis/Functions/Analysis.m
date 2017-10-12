@@ -33,20 +33,20 @@ function [ output ] = Analysis( config, beamshapeCorrection )
             %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
             
             for k = 1:numRois
-                roiStatistics{ii}(k,idx) = RoiIntensity( cam0, roiLocations(k,:));
+                roiStatistics(k,idx) = RoiIntensity( cam0, roiLocations(k,:));
             end
             cam0Size= [1, size(cam0,2), 1, size(cam0,1)];
-            globalStatistics{ii}(idx) = RoiIntensity( cam0, cam0Size);
-        
+            globalStatistics(idx) = RoiIntensity( cam0, cam0Size);
         end
         
-    output.spotFinder = spotFinder;
-    output.fitHelicases = fitHelicases;
-    output.roiStatistics = roiStatistics;
-    output.globalStatistics = globalStatistics;
-    
+    stats{ii}.roi = roiStatistics;
+	stats{ii}.global = globalStatistics;
+ 
     end
     
+    output.spotFinder = spotFinder;
+    output.fitHelicases = fitHelicases;
+    output.stats = stats;
     
 end
 

@@ -5,16 +5,21 @@ function [ output ] = PostProcess( config, analysis)
     
     for ii = 1:config.numFovs
         
-        numSpots = size( analysis.roiStatistics{ii}, 1);
-        numFrames = size( analysis.roiStatistics{ii}, 2);
+        numSpots = size( analysis.stats{ii}.roi, 1);
+        numFrames = size( analysis.stats{ii}.roi, 2);
 
-        averageGlobalIntensity = [analysis.globalStatistics{ii}.averageIntensity];
-        medianGlobalIntensity = [ analysis.globalStatistics{ii}.medianIntensity];
+        % Compute normalized global statistics
+        averageGlobalIntensity = [analysis.stats{ii}.global.averageIntensity];
+        medianGlobalIntensity = [analysis.stats{ii}.global.averageIntensity];
         normMedianGlobalIntensity = medianGlobalIntensity/ medianGlobalIntensity(1);
         normMeanGlobalIntensity = averageGlobalIntensity/ averageGlobalIntensity(1);
 
-        averageRoiIntensities = [analysis.roiStatistics{ii}(:,:).averageIntensity];
-
+        % Compute normalized roi statistics
+        averageRoiIntensities = [analysis.stats{ii}.roi.averageIntensity];
+        size(averageRoiIntensities)
+        size(analysis.stats{ii}.roi)
+        averageRoiIntensities = reshape( averageRoiIntensities, size(analysis.stats{ii}.roi));
+        normRoiIntensities = averageRoiIntensities./ averageRoiIntensities(:,1);
         
         % Visualize global statistics
         
@@ -35,29 +40,19 @@ function [ output ] = PostProcess( config, analysis)
         ylabel('Normalized pixel counts')
         hold on
         for j = 1:numSpots
-            averageRoiIntensity = averageRoiIntensities;
-            normRoiIntensity = averageRoiIntensity/ averageRoiIntensity(1);
-
-            if sum(averageRoiIntensity(j,:) > 0
-                plot( 1:numFrames, normRoiIntensity)
-            end
+            plot( 1:numFrames, normRoiIntensities(j,:))
         end
         hold off
         
-        % Visualise normalized statistics
+        % Visualise corrected statistics
         figure;
         title('Corrected Intensity over time for different ROIs')
         xlabel('Number of frames')
         ylabel('Normalized Pixel Counts')
         hold on
         for j = 1:numSpots
-            averageRoiIntensity = [analysis.roiStatistics{ii}(j,:).averageIntensity];
-            normRoiIntensity = averageRoiIntensity/ averageRoiIntensity(1);
-            
-            correctedRoiIntensity = normRoiIntensity./ normMeanGlobalIntensity;
-            if sum(averageRoiIntensity(j,:)) > 0
-                plot( 1:numFrames, correctedRoiIntensity)
-            end
+            correctedRoiIntensity = normRoiIntensities(j,:)./ normMeanGlobalIntensity;
+            plot( 1:numFrames, correctedRoiIntensity)
         end
         hold off
         
