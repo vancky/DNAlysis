@@ -7,7 +7,6 @@ function [ output ] = Analysis( config, beamshapeCorrection )
         numFrames = size( beamshapeCorrection.cam0{ii}, 3);
         
         
-        
         % This section finds the center coordinates of the ROIS
         cam0Start = double( beamshapeCorrection.cam0{ii}(:,:,5));
         spotFinder{ii}.cam0 = SpotFinder( config ,cam0Start, ...
@@ -39,7 +38,7 @@ function [ output ] = Analysis( config, beamshapeCorrection )
             cam0Size= [1, size(cam0,2), 1, size(cam0,1)];
             [averageGlobalIntensity, medianGlobalIntensity] = RoiIntensity( cam0, cam0Size);
             stats{ii}.global.averageIntensity(idx) = averageGlobalIntensity;
-            stats{ii}.global.mediaIntensity(idx) = medianGlobalIntensity;
+            stats{ii}.global.medianIntensity(idx) = medianGlobalIntensity;
         end
     end
     

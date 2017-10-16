@@ -31,7 +31,6 @@ function [ config ] = Config( config, user )
     % set cam0_290_0 instead of cam0_290 to make sure you don't import the
     % stack image.
     
-    config.importType = 'twoCameras';
     % In case of importing from both cam 0 and cam 1 use this part
     config.multiCamCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170919\C1L\Firing 3*\*image0*');
     config.multiCamCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170919\C1L\Firing 3*\*image1*');

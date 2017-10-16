@@ -2,7 +2,7 @@ function [ config, output ] = BeamshapeCorrection( config, importImages )
     % Beamshape Correction - Corrects for the beamshape profile
     % Please input the images as a 3D matrix, i.e. images(:,:,N) where N is
     % the total number of images
-
+    fprintf('Correcting the beamshape...\n')
     % Calculates the crop coordinates for cam0
     config.cropCoordinates = GenerateCropCoordinates( importImages.beamshape.cam0{1}, config.imageDirection);
     % Amount of field of views for analysis.
