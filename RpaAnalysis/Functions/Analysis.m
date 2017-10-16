@@ -33,15 +33,14 @@ function [ output ] = Analysis( config, beamshapeCorrection )
             %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
             
             for k = 1:numRois
-                roiStatistics(k,idx) = RoiIntensity( cam0, roiLocations(k,:));
+                [averageIntensity, medianIntensity] = RoiIntensity( cam0, roiLocations(k,:));
+                stats{ii}.roi.averageIntensity(k,idx) = averageIntensity;
             end
             cam0Size= [1, size(cam0,2), 1, size(cam0,1)];
-            globalStatistics(idx) = RoiIntensity( cam0, cam0Size);
+            [averageGlobalIntensity, medianGlobalIntensity] = RoiIntensity( cam0, cam0Size);
+            stats{ii}.global.averageIntensity(idx) = averageGlobalIntensity;
+            stats{ii}.global.mediaIntensity(idx) = medianGlobalIntensity;
         end
-        
-    stats{ii}.roi = roiStatistics;
-	stats{ii}.global = globalStatistics;
- 
     end
     
     output.spotFinder = spotFinder;

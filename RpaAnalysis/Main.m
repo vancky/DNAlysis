@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 % Choose a user, tudelft or home
-user = 'tudelft';
+user = 'home';
 config = struct();
 config = Config( config, user);
 
@@ -24,7 +24,6 @@ fprintf('This section performs the pre processing of the data.\n')
 %% Analysis
 
 fprintf('This section performs the Analysis.\n')
-
 analysis = Analysis( config, beamshapeCorrection);
 
 %% Post Processing

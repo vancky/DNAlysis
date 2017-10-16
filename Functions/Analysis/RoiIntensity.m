@@ -1,4 +1,4 @@
-function [ output ] = RoiIntensity( inputImage, roiLocation)
+function [ averageIntensity, medianIntensity ] = RoiIntensity( inputImage, roiLocation)
     % Roi Intensity - Gets the intensity of an area in an image
     % Give as inputs the image to be analysed and a vector with the
     % ROI location coefficients, [ xMin, xMax, yMin, yMax] 
@@ -15,17 +15,17 @@ function [ output ] = RoiIntensity( inputImage, roiLocation)
     if (xMin >= 1) && (yMin >=1) && (xMax <= xSize) && (yMax <=ySize)
         roi = inputImage( yMin:yMax, xMin:xMax);
     else
-        roi = 0;
+        roi = [0];
     end
     
     
     totalIntensity = sum( roi(:));
     averageIntensity = totalIntensity/ numel(roi);
     medianIntensity = median( roi(:));
-
-    if averageIntten
-    output.averageIntensity = averageIntensity;
-    output.medianIntensity = medianIntensity;
+    
+    
+    averageIntensity = averageIntensity;
+    medianIntensity = medianIntensity;
     
 end
 
