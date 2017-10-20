@@ -41,10 +41,11 @@ function [ output ] = PostProcess( config, analysis )
         allSteps = [ allSteps, steps{ii}];
     end
     
-    figure; histogram( allSteps, 30); title('Photobleaching Steps in intensity')
+    plotTitle = 'Intensity distribution of Photobleaching Steps';
+    figure; histogram( allSteps, 25); title( plotTitle)
     ylabel('Counts'); xlabel('StepSize')
     
-    GaussianMleFit( allSteps, [0, 700], 30)
+    GaussianMleFit( allSteps, [0, 700], 25, plotTitle)
     
     output.levels = levels;
     output.steps = steps;
