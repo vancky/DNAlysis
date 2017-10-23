@@ -4,14 +4,13 @@ function [ output ] = DnaAnalysis( config, dnaImages )
     numDnaImages = length( dnaImages);
 
     if numDnaImages == 0
-        dnaRoi{1} = [];
+        output.dnaRoi{1} = [];
     else
         for jj = 1:numDnaImages
             dnaFinder = DnaFinder( config, dnaImages{jj});
-            dnaRoi{jj}= dnaFinder.dnaRoi;
+            output.dnaRoi{jj}= dnaFinder.dnaRoi;
         end
     end
     
-    output = dnaRoi;
 end
 

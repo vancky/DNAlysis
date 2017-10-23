@@ -8,21 +8,20 @@ function [ output ] = HelicaseAnalysis( config, helicaseImages )
     % Make sure that the analysis outputs something in the case that the
     % reference set is empty.
     if numHelicaseImages == 0
-        helicaseLocation{1} = [];
-        
+        output.helicaseLocation = {[]};
+        output.stats = {[]};
     % Perform the actual analysis
     else
         for jj = 1:numHelicaseImages
-            spotFinder = SpotFinder( config, helicaseImages{jj}, ...
+            spotFinder = SpotFinder( helicaseImages{jj}, 'fitSize', config.fitSize, 'mexiHatSigma', config.mexiHatSigma, ...
                 'diameterThreshold', config.diameterThreshold, ...
-                'mexiHatSigma', config.mexiHatSigma, ...
-                'eccentricityThreshold', config.eccentricityThreshold, ...
-                'fitSize', config.fitSize);
+                'eccentricityThreshold', config.eccentricityThreshold);
             
-            helicaseLocation{jj} = spotFinder.centers;
+            SpotFinderVisualisation( helicaseImages{jj}, spotFinder.circle, []);
+            output.helicaseLocation{jj} = spotFinder.centers;
+            output.stats{jj} = spotFinder.filteredStats;
         end
     end
     
-    output = helicaseLocation;
 end
 

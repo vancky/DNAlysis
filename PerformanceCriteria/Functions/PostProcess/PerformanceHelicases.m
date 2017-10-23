@@ -19,11 +19,11 @@ function [ output ] = PerformanceHelicases( referenceLocations, helicaseLocation
             difference = helicaseLocation - correctLocation;
             
             distances = sqrt( sum( difference.^2, 2));
-            minDistance = min( distances);
+            minDistance = min( distances)
             if minDistance < 2
-                correctCount = correctCount + 1;
+                correctCount = correctCount + 1
             else
-                incorrectCount = incorrectCount + 1;
+                incorrectCount = incorrectCount + 1
             end  
             
         end

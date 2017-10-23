@@ -12,7 +12,7 @@ function [ outputImage ] = WatershedImage( inputImage )
 %     function is performing as you expect. 
 % 
 %     figure;
-    subplot(1,2,1); imshow( inputImage , []); title('Helicase Image'); colorbar
-    subplot(1,2,2); imshow( outputImage , []); title('Watershed Helicase Image'); colorbar
+%     subplot(1,2,1); imshow( inputImage , []); title('Helicase Image'); colorbar
+%     subplot(1,2,2); imshow( outputImage , []); title('Watershed Helicase Image'); colorbar
 end
 

@@ -7,16 +7,17 @@ function [ output ] = Analysis( config, inputImages )
         dnaImages = inputImages{ii}.dnaImage;
  
         % Performs the actual analysis
-        helicaseLocation = HelicaseAnalysis( config, helicaseImages);
-        dnaRoi = DnaAnalysis( config, dnaImages);
+        helicaseAnalysis = HelicaseAnalysis( config, helicaseImages);
+        dnaAnalysis= DnaAnalysis( config, dnaImages);
         
         % Saves the results in an array format
-        helicaseLocation{ii} = helicaseLocation;
-        dnaRoiEstimated{ii} = dnaRoi;
+        helicaseLocation{ii} = helicaseAnalysis.helicaseLocation;
+        dnaRoiEstimated{ii} = dnaAnalysis.dnaRoi;
+        stats{ii} = helicaseAnalysis.stats;
     end
     
     output.helicaseLocation = helicaseLocation;
     output.dnaRoiEstimated = dnaRoiEstimated;
-
+    output.helicaseStats = stats;
 end
 

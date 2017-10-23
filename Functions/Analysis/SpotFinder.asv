@@ -11,6 +11,8 @@ function [ output ] = SpotFinder( inputImage, varargin )
     addOptional( p, 'medianThreshold', 1.2);
     
     parse( p, varargin{:})
+    
+    fitSize = p.Results.fitSize*3
 
     % Smooths the image so that it is ready for watershedding
     filter = GenerateMexicanHat( p.Results.mexiHatSigma);
@@ -30,7 +32,9 @@ function [ output ] = SpotFinder( inputImage, varargin )
     stats2 = regionprops( cc , smoothImage, 'MeanIntensity');
 
     medianImage = median( inputImage(:));
-       
+    
+    p.Results.diameterThreshold
+    
     idx = find( ([stats.EquivDiameter] > p.Results.diameterThreshold) & ...
                 ([stats.Eccentricity]<= p.Results.eccentricityThreshold) & ...
                 ([stats2.MeanIntensity] >= 1.1*medianImage ));
@@ -42,11 +46,10 @@ function [ output ] = SpotFinder( inputImage, varargin )
 
     % Creates a Spot Image from where we can extract spots, note the lines
     % below are neccesary to correctly handle spots near the boundary.
-    fitSize = p.Results.fitSize;
-    xSizeInput = size( inputImage, 2);
-    ySizeInput = size( inputImage, 1);
-    xSizeSpot = xSizeInput+2*fitSize;
-    ySizeSpot = ySizeInput+2*fitSize;
+    xSizeInput = size( inputImage, 2)
+    ySizeInput = size( inputImage, 1)
+    xSizeSpot = xSizeInput+2*fitSize
+    ySizeSpot = ySizeInput+2*fitSize
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
     

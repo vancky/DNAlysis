@@ -21,7 +21,7 @@ function [ config ] = Config( config, user)
     
     % SPOTFINDER OPTIONS
     % Lower bound on the diameter
-    config.diameterThreshold = 4;
+    config.diameterThreshold = 6;
     % The sigma for smoothing the image with a gaussian before watershedding 
     config.watershedSmooth = 0.5;
     % Eccentricity threshold to filter out very noncircular particles
