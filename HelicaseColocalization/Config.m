@@ -22,30 +22,6 @@ function [ config ] = Config( config, user )
     % In what direction where the images captured? Horizontal or vertical
     config.imageDirection = 'vertical';
     
-    % When only using one camera this is the part to edit.
-    
-    config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch2-FSpostMCM01preWash*\*cam0_031_0*');
-    config.helicaseCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV4-DNA-MockMCMreSyttox488MCMWashresytox488noflow*\*cam0_381_0*');
-    config.helicaseCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV5-DNA-MockMCMreSyttox488MCMWashresytox488noflow*\*cam0_397_0*');
-    config.helicaseCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV6-DNA-MockMCMreSyttox488MCMWashresytox488noflow*\*cam0_413_0*');
-    config.helicaseCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV7-DNA-MockMCMreSyttox488MCMWashresytox488noflow*\*cam0_429_0*');
-    config.helicaseCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV8-DNA-MockMCMreSyttox488MCMWashresytox488noflow*\*cam0_445_0*');
-    config.helicaseCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV7-488*\*cam0_134_0*');
-    config.helicaseCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV8-488*\*cam0_150_0*');
-    config.helicaseCd{9}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV9-488*\*cam0_168_0*');
-    config.helicaseCd{10}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV10-488*\*cam0_184_0*');
-    
-    config.dnaCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV3-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_365_0*');
-    config.dnaCd{2}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV4-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_385_0*');
-    config.dnaCd{3}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV5-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_401_0*');
-    config.dnaCd{4}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV6-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_417_0*');
-    config.dnaCd{5}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV7-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_433_0*');
-    config.dnaCd{6}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\Exp12-Ch3-FOV8-DNA-MockMCMreSyttox488MCMWashresytox532noflow*\*cam0_449_0*');
-    config.dnaCd{7}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV7-532*\*cam0_128_0*');    
-    config.dnaCd{8}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV8-532*\*cam0_144_0*');    
-    config.dnaCd{9}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV9-532*\*cam0_162_0*');    
-    config.dnaCd{10}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170531_162419\09-C11-FOV10-532*\*cam0_178_0*');    
-    
     % In case of importing from both cam 0 and cam 1 use this part
     config.multiCamCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV3-488at30mW*\*cam0_235_0*');
     config.multiCamCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch4MIX-DNApostMCMFOV1-AFTERwashingFOV3-488at30mW*\*cam1_235_0*');
@@ -73,11 +49,6 @@ function [ config ] = Config( config, user )
     
     % Set the parameters
 
-    config.pixels= 512;                     % Pixels per image
-    config.imageSize=40e-6;                 % Size of the image in m
-    config.dataType=('uint16');             % The data type of the images
-    config.luckyStackSize = 1;              % Stack size for the lucky algorithm
-    config.luckyThreshold = 0.1;            % Best fraction of gaussians allowed by the algorithm (0.2 equals 20%)
     config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
     config.binaryCloseRadius = 4;           % The radius of the disk-shaped element used to close the DNA in the MatchDnaHelicase script
     
@@ -124,13 +95,12 @@ function [ config ] = Config( config, user )
     config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
     config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
     config.fitIterations = 10;
+    
     % FitType for GaussMLEv2
     config.fitType = 2;
     config.fitSize=  1+ceil(3*config.sigma);    % Half size  of the patch where we are going to fit Gaussians.
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
-                                             
-
 
 end
 

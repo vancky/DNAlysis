@@ -6,7 +6,7 @@ function [ output ] = AlignCameraImages( config , cam0, cam1 )
     rowCorrection = config.cameraCorrelation(1);
     colCorrection = config.cameraCorrelation(2); 
         
-    splitImage = SplitImage( cam0, 1);
+    splitImage = SplitImage( cam0, config.imageDirection);
     cam0Crop = splitImage.leftImage;
     cam1Crop = ones( size(cam0Crop)) * median(cam1(:));
     
