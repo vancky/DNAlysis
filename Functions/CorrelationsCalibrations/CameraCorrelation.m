@@ -8,7 +8,7 @@ function [ output ] = CameraCorrelation( config, importedImages )
     % Split the image horizontal and make a crop in the vertical direction
     % to make sure that we can perform proper correlation
     
-    splitImage = SplitImage( cam0, 1);
+    splitImage = SplitImage( cam0, config.imageDirection);
     cam0Crop = splitImage.rightImage;
     halfRow = size( cam0Crop, 1);
     halfCol = size( cam0Crop, 2);

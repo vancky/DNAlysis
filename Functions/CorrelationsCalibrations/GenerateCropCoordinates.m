@@ -4,16 +4,17 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
     % Takes as input an (the beamshape in this case) image from camera 0 
     % and finds the coordinates of the black lines.
 
-    if direction == 'horizontal'
-        inputImage = inputImage';
-    elseif direction == 'vertical'
-        inputImage = inputImage;
-    else
-        fprintf(['Please specify the direction of the image for which' ...
-            'crop coordinates need to be generated.']);
+    switch direction
+        case 'horizontal'
+            inputImage = inputImage';
+        case 'vertical'
+            inputImage = inputImage;
+        otherwise
+            fprintf(['Please specify the direction of the image for' ...
+            ' which crop coordinates need to be generated.']);
     end
     
-    splitImage = SplitImage(inputImage , 'vertical');
+    splitImage = SplitImage(inputImage , direction);
     
     numCol = size( splitImage.leftImage , 2);
     rowAvgLeft = mean(splitImage.leftImage,1);   % Averaged over all rows
@@ -31,15 +32,13 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
     [ value , indexRightMax]  = max(diffRight);
     [ value , indexRightMin]  = min(diffRight);
     
-    if direction == 'horizontal'
-        output.top = [ indexLeftMax, indexLeftMin];
-        output.bottom = [ indexRightMax, indexRightMin];
-    elseif direction == 'vertical'
-        output.left =  [ indexLeftMax , indexLeftMin];
-        output.right = [ indexRightMax , indexRightMin];
-    else
-        fprintf(['Please specify the direction of the image for which' ...
-            'crop coordinates need to be generated.']);
+    switch direction 
+        case 'horizontal'
+            output.top = [ indexLeftMax, indexLeftMin];
+            output.bottom = [ indexRightMax, indexRightMin];
+        case 'vertical'
+            output.left =  [ indexLeftMax , indexLeftMin];
+            output.right = [ indexRightMax , indexRightMin];
     end
 
 end

@@ -36,6 +36,9 @@ function [ config ] = Config( config, user )
     % getting them from the K drive or load from the saved MatFile
     config.importOption = 'load';
     
+    % In what direction where the images captured? Horizontal or vertical
+    config.imageDirection = 'vertical';
+    
     % When only using one camera this is the part to edit.
     
     config.helicaseCd{1}=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170620_132228\Ch2-FSpostMCM01preWash*\*cam0_031_0*');
@@ -146,6 +149,7 @@ function [ config ] = Config( config, user )
                                              
     % Make sure we can use the functions
     addpath( genpath('./Functions') )
+    addpath( genpath('../Functions') )
 
 end
 

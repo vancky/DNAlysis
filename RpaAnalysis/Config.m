@@ -1,26 +1,17 @@
-function [ config ] = Config( config, user )
+function [ config ] = Config( config )
     % Config - File where the user can specify his/her preferences
 
+    % Make sure we can use the functions
+    addpath( genpath('../Functions') )
+    addpath( genpath('./Functions') )
     
     % Specify whether you want to import images from the K drive or load
     % saved images from the MatFileCd
     config.importOption = 'load';
     
-    switch user
-        case 'tudelft'                
-            config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-            % The matfile Cd, note that we can load images by specifying the
-            % correct .mat file name, if saving, specify the new relevant name
-            config.saveMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
-            config.loadMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
-        case 'home'
-            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
-            config.saveMatFileCd=('../../MatFiles/RpaAnalysis/octNovData');
-            config.loadMatFileCd=('../../MatFiles/RpaAnalysis/octNovData');
-        otherwise
-            fprintf('Please specify a correct user.\n')
-    end
-
+    config.saveMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
+    config.loadMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
+    
     % Set the Matlab directories, note if you want to specify only a
     % certain camera or measurement set use \folder*\*specificextension*
     % For instance for camera 0 with extension 079 Cd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*cam0_079*')
@@ -96,8 +87,5 @@ function [ config ] = Config( config, user )
     % Half of the square size for getting roi statistics.
     config.roiSize = 10;
     
-    % Make sure we can use the functions
-    addpath( genpath('../Functions') )
-    addpath( genpath('./Functions') )
 end
 

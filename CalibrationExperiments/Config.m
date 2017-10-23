@@ -1,39 +1,28 @@
-function [ config ] = Config( config, user )
+function [ config ] = Config( config, user)
     % Config - File where the user can specify his/her preferences
 
+    % Make sure we can use the functions 
+    addpath( genpath('../Functions'))
+    addpath( genpath('./Functions'))
+    
+    % Get the general configuration files
+    config = GeneralConfig( config, user);
     
     % Specify whether you want to import images from the K drive or load
     % saved images from the MatFileCd
     config.importOption = 'load';
     
-    switch user
-        case 'tudelft'                
-            config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-            % The matfile Cd, note that we can load images by specifying the
-            % correct .mat file name, if saving, specify the new relevant name
-            config.saveMatFileCd=('../../../MatFiles/Calibrations/mcm646');
-            config.loadMatFileCd=('../../../MatFiles/Calibrations/mcm646');
-        case 'home'
-            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
-            config.saveMatFileCd=('../../MatFiles/Calibrations/mcm646');
-            config.loadMatFileCd=('../../MatFiles/Calibrations/mcm646');
-        otherwise
-            fprintf('Please specify a correct user.\n')
-    end
+    % The directory for loading/saving matlab files in your matfiles
+    % folder
+    config.matFileCd = 'Calibrations/mcm646';
+    config.matFileCdComplete = sprintf('%s%s', config.matFilePath, config.matFileCd);
     
+    % Directory to get the images to analyse from
     config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171010\C6\FOV1 2*\*image1*');
 
     % GENERAL SETTINGS
-    % Pixels per image
-    config.pixels= 512;                     
-    % Size of the image in m
-    config.imageSize=40e-6;                 
     % Wavelength of the emitted light from the fluorophores
     config.waveLength = 646e-9;                       
-    % Numerical factor which determines the width of the PSF (from literature)
-    config.numFactor = 0.25;                          
-    % Size in meters per pixel
-    config.pixelSize = config.imageSize/config.pixels;    
     % Sigma of the diffraction limited spot
     config.sigma = config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         
  
@@ -60,8 +49,6 @@ function [ config ] = Config( config, user )
     % Half of the square size for getting roi statistics.
     config.roiSize = 5;
     
-    % Make sure we can use the functions
-    addpath( genpath('../Functions') )
-    addpath( genpath('./Functions') )
+
 end
 
