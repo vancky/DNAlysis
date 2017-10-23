@@ -11,8 +11,8 @@ function [ outputImage ] = WatershedImage( inputImage )
 %     The lines below can be uncommented to visualise if the WatershedImage
 %     function is performing as you expect. 
 % 
-%     figure;
-%     subplot(1,2,1); imshow( inputImage , []); title('Helicase Image'); colorbar
-%     subplot(1,2,2); imshow( outputImage , []); title('Watershed Helicase Image'); colorbar
+    figure;
+    subplot(1,2,1); imshow( inputImage , [100 130]); title('Helicase Image'); colorbar
+    subplot(1,2,2); imshow( outputImage , [100 130]); title('Watershed Helicase Image'); colorbar
 end
 

@@ -8,7 +8,7 @@ function [ output ] = SpotFinder( inputImage, varargin )
     addOptional( p, 'mexiHatSigma', 1);
     addOptional( p, 'diameterThreshold', 0);
     addOptional( p, 'eccentricityThreshold', 1);
-    addOptional( p, 'meanThreshold', 1.2);
+    addOptional( p, 'meanThreshold', 1.01);
     
     parse( p, varargin{:})
 
@@ -27,9 +27,9 @@ function [ output ] = SpotFinder( inputImage, varargin )
     cc = bwconncomp(binaryImage); 
     stats = regionprops( cc, 'Eccentricity' , 'Centroid', ...
                         'EquivDiameter');
-    stats2 = regionprops( cc , smoothImage, 'MeanIntensity');
+    stats2 = regionprops( cc , inputImage, 'MeanIntensity');
 
-    medianImage = median( inputImage(:));
+    medianImage = median( inputImage(:))
        
     idx = find( ([stats.EquivDiameter] > p.Results.diameterThreshold) & ...
                 ([stats.Eccentricity]<= p.Results.eccentricityThreshold) & ...
@@ -49,7 +49,6 @@ function [ output ] = SpotFinder( inputImage, varargin )
     ySizeSpot = ySizeInput+2*fitSize;
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
-    
     
     for i = 1:numRegions
         diameters(i) = filteredStats(i).EquivDiameter;

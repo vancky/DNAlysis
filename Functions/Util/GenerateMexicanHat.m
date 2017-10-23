@@ -3,7 +3,7 @@ function [ output ] = GenerateMexicanHat( sigma )
     % The only input required is sigma, the mexican hat will be normalized
     % and have a size large enough to capture the function ~(10*sigma)
     
-    halfSize = round(5*sigma);
+    halfSize =  round(5*sigma);
     domainSize = 1+2*halfSize; 
     mu = halfSize;
    

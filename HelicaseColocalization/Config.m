@@ -46,29 +46,65 @@ function [ config ] = Config( config, user )
     config.cameraCorrelationCd.cam0{3}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam0_190_0*');
     config.cameraCorrelationCd.cam1{3}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam1_190_0*');
 
+    % GENERAL SETTINGS
+    % Wavelength of the emitted light from the fluorophores
+    config.waveLength = 488e-9;                       
+    % Sigma of the diffraction limited spot
+    config.sigma = config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         
+ 
     
-    % Set the parameters
-
-    config.rollingBallConstant = 30;        % The radius of the rolling ball filter used throughout the scripts
-    config.binaryCloseRadius = 4;           % The radius of the disk-shaped element used to close the DNA in the MatchDnaHelicase script
+    % CALIBRATION AND CORRELATION SETTINGS
     
+    % The radius of the rolling ball filter used throughout the scripts
+    config.rollingBallConstant = 30;      
+    % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
+    config.checkerBoardSizeSplit=5;                 
+    % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
+    config.checkerBoardSizeCamera=3;                
+    % Offset used in cropping images
+    config.cropOffset=5;                            
+    
+    
+    % SPOTFINDER OPTIONS
+    % Lower bound on the diameter
+    config.diameterThreshold.cam0 = 5;
+    config.diameterThreshold.cam1 = 5;
+    % The sigma for smoothing the image with a gaussian before watershedding 
+    config.mexiHatSigma.cam0 = config.sigma;
+    config.mexiHatSigma.cam1 = config.sigma;
+    % Eccentricity threshold to filter out very noncircular particles
+    config.eccentricityThreshold = 1;
+    % Factor how much larger the intensity of the spots has to be compared 
+    % to the mean intensity
+    config.meanThreshold.cam0 = 0.9;
+    config.meanThreshold.cam1 = 1.1;
+    
+      
+    % FITHELICASES OPTIONS
+    % Sigma used as an estimation
+    config.fitSigma = config.sigma;
+    % Amount of iterations for fitting (usually 5 is enough)
+    config.fitIterations = 10;
+    % FitType for GaussMLEv2
+    config.fitType = 2;
+    % Half size  of the patch where we are going to fit Gaussians. For 
+    % instance if the patch is 25x25 choose 12. A guideline for this is 3*sigma
+    config.fitSize =  1+ceil(3*config.sigma);    
+ 
+    % COLOCALIZATION ANALYSIS OPTIONS
+    % Half of the square size for getting roi statistics.
+    config.roiSize = 5;
     % threshold for colocalizating in pixel (i.e. if 2, 2px and below
     % match).
     config.colocalizationMatch = 3;
     
-    config.diameterThresholdHelicase = 4;              % Area threshold in pixels for identifying helicases
-    config.diameterThresholdDna = 4;              % Area threshold in pixels for identifying dna
-
-    config.eccentricityThreshold = 0.9;      % Eccentricity threshold for identifying helicases
     
     
-    config.shotnoiseExposureTime= [50 100 300] ;    % Exposure time in miliseconds
-    config.checkerBoardSizeSplit=5;                 % Size for the blocks in the checkerboard pattern used to check if the split correlation works.
-    config.checkerBoardSizeCamera=3;                % Size for the blocks in the checkerboard pattern used to check if the camera correlation works.
-    config.cropOffset=5;                            % Offset used in cropping images
-    config.waveLength=488e-9;                       % Wavelength of the emitted light from the fluorophores
-    config.numFactor=0.25;                          % Numerical factor which determines the width of the PSF
-    config.numericalAperture = 1.4;
+    
+    
+    % Region to crop after performing non linear correction 
+    % [minX, maxX, minY, maxY] 
+    config.cropCoordinatesNonLinear = [37, 245, 5, 470]; 
     
     % Determine reference points from the camera correlation images for the
     % nonlinear transformation. Note that the moving points belong to the 
@@ -87,20 +123,6 @@ function [ config ] = Config( config, user )
     config.fixedPoints(4,:) = [197, 209];  config.fixedPoints(9,:) = [240, 241];
     config.fixedPoints(5,:) = [83, 356];  config.fixedPoints(10,:) = [110, 86];
     
-    % Region to crop after performing non linear correction 
-    % [minX, maxX, minY, maxY] 
-    config.cropCoordinatesNonLinear = [37, 245, 5, 470]; 
-    
-    % No need to edit anything below here!
-    config.pixelSize=config.imageSize/config.pixels;                                         % size in meters per pixel
-    config.sigma=config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         % sigma used to generate the Gaussian in pixels
-    config.fitIterations = 10;
-    
-    % FitType for GaussMLEv2
-    config.fitType = 2;
-    config.fitSize=  1+ceil(3*config.sigma);    % Half size  of the patch where we are going to fit Gaussians.
-                                             % For instance if the patch is 25x25 choose 12
-                                             % A guideline for this is 3*sigma
-
+ 
 end
 
