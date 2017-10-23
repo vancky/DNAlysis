@@ -3,15 +3,14 @@ function [ outputImage ] = CleanImage( inputImage, cr, backgroundOption )
 
     % Initialize a test image with background noise
     testImage = ones(size(inputImage))*median(inputImage(:));
-
+       
     % Manually clean the images  
     numRegions = size(cr,1);
     for i =1:numRegions
         testImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) ) = ...
             inputImage( cr(i,2):cr(i,4), cr(i,1):cr(i,3) );
     end
-    
-    
+       
     switch backgroundOption 
         case 'true'
             % Use a rolling background of the original image
@@ -24,8 +23,10 @@ function [ outputImage ] = CleanImage( inputImage, cr, backgroundOption )
             end
             cleanedImage = BallSmooth( cleanedImage , 3);
         case 'minimum'
-            % Otherwise, initialize the real cleaned image with the mimnimum 
+            % Otherwise, initialize the real cleaned image with the minimum 
             cleanedImage = ones(size(inputImage))* min(testImage(:));    
+        case 'none'
+            cleanedImage = testImage;
         otherwise
             fprintf('Please specify a correct background option for cleaning the image')
     end

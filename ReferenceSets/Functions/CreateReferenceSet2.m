@@ -6,7 +6,8 @@ function [ output ] = CreateReferenceSet2( config, rawImages )
     dnaImages = rawImages.dna;
         
     output.helicaseImage = CreateHelicaseImage2( helicaseImages);
-    output.helicaseRoi = CreateHelicaseRoi2( config, output.helicaseImage);
+    helicaseRoiImage = CreateHelicaseRoiImage2( helicaseImages);
+    output.helicaseRoi = CreateHelicaseRoi2( config, helicaseRoiImage);
     output.roiCenters = FindRoiCenters( output.helicaseRoi);
 
     output.dnaImage = CreateDnaImage2( dnaImages);
