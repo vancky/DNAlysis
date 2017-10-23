@@ -19,4 +19,3 @@ analysis = Analysis( config, importImages);
 
 fprintf('This section performs the post processing.\n')
 postProcess = PostProcess( config, importImages, analysis);
-

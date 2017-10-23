@@ -30,13 +30,12 @@ function [ config, output ] = Analysis( config, inputImages )
             stats.roi.maxIntensity(k,j) = roiStats.intensity.max;
         end
         imageSize= [1, size(helicaseImage,2), 1, size(helicaseImage,1)];
-        roiStats = RoiStats( helicaseImage, imageSize);
-        stats.global.meanIntensity(j) = roiStats.intensity.mean;
-        stats.global.medianIntensity(j) = roiStats.intensity.median;
+        [averageGlobalIntensity, medianGlobalIntensity] = RoiIntensity( helicaseImage, imageSize);
+        stats.global.meanIntensity(j) = averageGlobalIntensity;
+        stats.global.medianIntensity(j) = medianGlobalIntensity;
     end
     
     stats.roi.meanIntensity = RemoveZeros( stats.roi.meanIntensity, 'row');
-    stats.roi.maxIntensity = RemoveZeros( stats.roi.maxIntensity, 'row');
     config.numRois = size( stats.roi.meanIntensity, 1); 
     output.spotFinder = spotFinder;
     output.fitHelicases = fitHelicases;

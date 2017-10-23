@@ -8,7 +8,7 @@ function [ output ] = SpotFinder( inputImage, varargin )
     addOptional( p, 'mexiHatSigma', 1);
     addOptional( p, 'diameterThreshold', 0);
     addOptional( p, 'eccentricityThreshold', 1);
-    addOptional( p, 'medianThreshold', 1.2);
+    addOptional( p, 'meanThreshold', 1.2);
     
     parse( p, varargin{:})
 
@@ -33,7 +33,7 @@ function [ output ] = SpotFinder( inputImage, varargin )
        
     idx = find( ([stats.EquivDiameter] > p.Results.diameterThreshold) & ...
                 ([stats.Eccentricity]<= p.Results.eccentricityThreshold) & ...
-                ([stats2.MeanIntensity] >= 1.1*medianImage ));
+                ([stats2.MeanIntensity] >= p.Results.meanThreshold*medianImage ));
             
     
     filteredCc = ismember(labelmatrix(cc), idx);

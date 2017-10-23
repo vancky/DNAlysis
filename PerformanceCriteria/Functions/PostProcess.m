@@ -18,7 +18,7 @@ function [ output ] = PostProcess( config, importImages, analysis )
         else
             output.dnaPerformance{kk} = {[]};
         end
-        endf
+    end
 
     fprintf('Results of the Performance Criteria\n')
     for ll = 1:3

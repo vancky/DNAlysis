@@ -6,7 +6,7 @@ function [ config, output ] = PreProcess( config, inputImages )
     
     % The first image is noise, so we start at the second one
     startFrame = 150;
-    endFrame = 300;
+    endFrame = 400;
     % The right part of the image is distorted, so we only use the image up
     % to this pixel
     xCrop = 360;

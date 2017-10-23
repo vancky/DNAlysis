@@ -14,7 +14,7 @@ function [ config ] = Config( config, user)
     
     % The directory for loading/saving matlab files in your matfiles folder
     config.matFileCd = 'Calibrations/mcm646';
-    config.matFileCdComplete = sprintf('%s%s', config.matFilePath, config.matFileCd);
+    config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
     
     % Directory to get the images to analyse from
     config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171010\C6\FOV1 2*\*image1*');
@@ -29,9 +29,12 @@ function [ config ] = Config( config, user)
     % Lower bound on the diameter
     config.diameterThreshold = 7;
     % The sigma for smoothing the image with a gaussian before watershedding 
-    config.mexiHatSigma = config.sigma;
+    config.mexiHatSigma = config.sigma/2;
     % Eccentricity threshold to filter out very noncircular particles
     config.eccentricityThreshold = 0.9;
+    % Factor how much larger the intensity of the spots has to be compared 
+    % to the mean intensity
+    config.meanThreshold = 1.2;
       
     % FITHELICASES OPTIONS
     % Sigma used as an estimation

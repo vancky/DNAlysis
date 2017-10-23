@@ -6,15 +6,11 @@ function [ output ] = PostProcess( config, analysis )
     maxIntensities = analysis.stats.roi.maxIntensity;
     meanIntensities = analysis.stats.roi.meanIntensity;
     
-    % Initialize all cells and matrices
     levelsMax = cell( 1,config.numRois);
     stepsMax= cell( 1,config.numRois);
-    levelsMean = cell( 1,config.numRois);
-    stepsMean= cell( 1,config.numRois);
-    allLevelsMax = [];
-    allStepsMax = [];
-    allLevelsMean = [];
-    allStepsMean = [];
+    allLevels = [];
+    allSteps = [];
+    
     
     for ii = 51:55
         maxIntensity = maxIntensities( ii, :);
@@ -58,36 +54,29 @@ function [ output ] = PostProcess( config, analysis )
 
             levelsMax{idx} = round(levelsMax{idx});
             stepsMax{idx} = abs( diff( levelsMax{idx}));
+            
             levelsMean{idx} = round(levelsMean{idx});
             stepsMean{idx} = abs( diff( levelsMean{idx}));
             
-            % Get all the levels and steps in one vector
-            allLevelsMax = [ allLevelsMax, levelsMax{idx}];
-            allStepsMax = [ allStepsMax, stepsMax{idx}];
-            allLevelsMean = [ allLevelsMean, levelsMean{idx}];
-            allStepsMean = [ allStepsMean, stepsMean{idx}];
+
+            allLevels = [ allLevels, levelsMax{idx}];
+            allSteps = [ allSteps, stepsMax{idx}];
+            allLevels = [ allLevels, levelsMax{idx}];
+            allSteps = [ allSteps, stepsMax{idx}];
             
         end
     end
     
-    plotTitle = 'Intensity distribution of Photobleaching Steps (max value)';
-    figure; histogram( allStepsMax, 20); title( plotTitle)
+    plotTitle = 'Intensity distribution of Photobleaching Steps';
+    figure; histogram( allSteps, 20); title( plotTitle)
     ylabel('Counts'); xlabel('StepSize')
 
-    plotTitle = 'Intensity distribution of Photobleaching Steps (mean value)';
-    figure; histogram( allStepsMean, 20); title( plotTitle)
-    ylabel('Counts'); xlabel('StepSize')
     %GaussianMleFit( allSteps, [0, 700], 50, plotTitle)
     
-    output.levelsMax = levelsMax;
-    output.stepsMax = stepsMax;
-    output.allStepsMax = allStepsMax;
-    output.allLevelsMax = allLevelsMax;
-    
-    output.levelsMean = levelsMean;
-    output.stepsMean = stepsMean;
-    output.allStepsMean = allStepsMean;
-    output.allLevelsMean = allLevelsMean;
+    output.levels = levelsMax;
+    output.steps = stepsMax;
+    output.allSteps = allSteps;
+    output.allLevels = allLevels;
     
 end
 
