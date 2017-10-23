@@ -3,8 +3,7 @@ function [ outputImage ] = WatershedImage( inputImage )
     % the watershed lines distinguishing different local maxima in the
     % picture and will set these lines to 0 in the original image
     
-%     invertImage = abs(inputImage - max(inputImage(:)));
-    invertImage = inputImage;
+    invertImage = abs(inputImage - max(inputImage(:)));
     watershedImage = watershed(invertImage);
     binary = watershedImage>0;
     outputImage= inputImage.*binary; 

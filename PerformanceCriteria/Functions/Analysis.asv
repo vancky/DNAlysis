@@ -1,0 +1,44 @@
+function [ output ] = Analysis( inputImages )
+
+
+    analysis = Analysis( config, referenceSets{ii}, 'ReferenceSets');
+        
+    for ii = 1:config.numReferenceSets
+        
+        helicaseImages = inputImages.helicaseImage;
+        dnaImages = inputImages.dnaImage;
+        numHelicaseImages = length( helicaseImages);
+        numDnaImages = length( dnaImages);
+
+        % Analyse the helicase images
+        if numHelicaseImages == 0
+            helicaseLocation{1} = [];
+        else
+            for ii = 1:numHelicaseImages
+                spotFinder = SpotFinder( config, helicaseImages{ii});
+                helicaseLocation{ii} = spotFinder.centers;
+            end
+        end
+        % Analyse the dna images
+
+        if numDnaImages == 0
+            dnaRoi{1} = [];
+        else
+            for jj = 1:numDnaImages
+                dnaFinder = DnaFinder( config, dnaImages{jj});
+                dnaRoi{jj}= dnaFinder.dnaRoi;
+            end
+        end
+        
+        
+        
+        helicaseLocation{ii} = analysis.helicaseLocation;
+        dnaRoiEstimated{ii} = analysis.dnaRoi;
+    end
+    % Analysis - Performs the analysis for the performance criteria
+    %   Detailed explanation goes here
+    
+    analysi
+
+end
+

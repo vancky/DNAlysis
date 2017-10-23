@@ -10,6 +10,7 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     addOptional( p, 'eccentricityThreshold', 1);
     parse( p, varargin{:})
     
+    figure; imshow( inputImage, [])
     % Smooths the image so that it is ready for watershedding
     filter = GenerateMexicanHat( p.Results.mexiHatSigma);
     smoothImage = imfilter( inputImage, filter, 'symmetric');

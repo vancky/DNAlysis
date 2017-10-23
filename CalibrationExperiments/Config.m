@@ -12,8 +12,7 @@ function [ config ] = Config( config, user)
     % saved images from the MatFileCd
     config.importOption = 'load';
     
-    % The directory for loading/saving matlab files in your matfiles
-    % folder
+    % The directory for loading/saving matlab files in your matfiles folder
     config.matFileCd = 'Calibrations/mcm646';
     config.matFileCdComplete = sprintf('%s%s', config.matFilePath, config.matFileCd);
     
