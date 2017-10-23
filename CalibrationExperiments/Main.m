@@ -19,7 +19,6 @@ fprintf('This section performs the pre processing of the data.\n')
 
 fprintf('This section performs the Analysis.\n')
 [ config, analysis] = Analysis( config, preProcess);
-
 %% Post Processing
 
 fprintf('This section performs the Post Processing.\n')

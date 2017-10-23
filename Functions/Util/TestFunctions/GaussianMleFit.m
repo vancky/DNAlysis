@@ -84,8 +84,8 @@ function [ output ] = GaussianMleFit( data , plotDomain , nbins, plotTitle )
     
     % Plot for 3 gaussians
     figure;
-    histogram( data , nbins );
     hold on
+    histogram( data , nbins );
     plot( x , scaleFactor*y31 , 'LineWidth' , 2)
     plot( x , scaleFactor*y32 , 'LineWidth' , 2)  
     plot( x , scaleFactor*y33 , 'LineWidth' , 2)  
@@ -97,9 +97,8 @@ function [ output ] = GaussianMleFit( data , plotDomain , nbins, plotTitle )
 
     % Plot for 4 gaussians
     figure;
-    histogram( data , nbins) ;
-
     hold on
+    histogram( data , nbins) ;
     plot( x , scaleFactor*y41 , 'LineWidth' , 2)
     plot( x , scaleFactor*y42 , 'LineWidth' , 2)  
     plot( x , scaleFactor*y43 , 'LineWidth' , 2)  
@@ -115,9 +114,8 @@ function [ output ] = GaussianMleFit( data , plotDomain , nbins, plotTitle )
     % Plot for 5 gaussians
     
     figure;
-    histogram( data , nbins) ;
-
     hold on
+    histogram( data , nbins) ;
     plot( x , scaleFactor*y51 , 'LineWidth' , 2)
     plot( x , scaleFactor*y52 , 'LineWidth' , 2)  
     plot( x , scaleFactor*y53 , 'LineWidth' , 2)  

@@ -4,7 +4,7 @@ function [ outputImage ] = WatershedImage( inputImage )
     % picture and will set these lines to 0 in the original image
     
 %     invertImage = abs(inputImage - max(inputImage(:)));
-    invertImage = inputImage;
+invertImage = inputIm
     watershedImage = watershed(invertImage);
     binary = watershedImage>0;
     outputImage= inputImage.*binary; 

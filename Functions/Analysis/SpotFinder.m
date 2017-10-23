@@ -5,13 +5,14 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     % Parses the optional input arguments
     p = inputParser;
     addRequired( p, 'fitSize');
+    addOptional( p, 'mexiHatSigma', 1);
     addOptional( p, 'diameterThreshold', 0);
     addOptional( p, 'eccentricityThreshold', 1);
-    addOptional( p, 'watershedSmooth', 0.00001);
     parse( p, varargin{:})
     
     % Smooths the image so that it is ready for watershedding
-    smoothImage = imgaussfilt( inputImage, p.Results.watershedSmooth);
+    filter = GenerateMexicanHat( p.Results.mexiHatSigma);
+    smoothImage = imfilter( inputImage, filter, 'symmetric');
     % Performs the watershed algorithm
     watershedImage = WatershedImage( smoothImage);
     binaryImage = watershedImage > 0;

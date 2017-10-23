@@ -11,17 +11,23 @@ function [ output ] = PostProcess( config, analysis )
     allSteps = [];
     
     
-%     for ii = 200:205
-%         intensity = intensities( ii, :);
-%         figure;
-%         findchangepts( intensity, 'MinThreshold', 1e5, 'Statistic', 'mean');
-%     end
+    for ii = 51:61
+        intensity = intensities( ii, :);
+        figure;
+        findchangepts( intensity, 'MinThreshold', 5e4, 'Statistic', 'mean');
+    end
+    
+    for ii = 81:91
+        intensity = intensities( ii, :);
+        figure;
+        findchangepts( intensity, 'MinThreshold', 5e4, 'Statistic', 'mean');
+    end
     
     for ii = 1:config.numRois
         
         intensity = intensities( ii, :);
         
-        pts = findchangepts( intensity, 'MinThreshold', 1e5, 'Statistic', 'mean');
+        pts = findchangepts( intensity, 'MinThreshold', 5e4, 'Statistic', 'mean');
 
         numPts= length( pts);
         
@@ -41,11 +47,11 @@ function [ output ] = PostProcess( config, analysis )
         allSteps = [ allSteps, steps{ii}];
     end
     
-    plotTitle = 'Intensity distribution of Photobleaching Steps';
-    figure; histogram( allSteps, 25); title( plotTitle)
-    ylabel('Counts'); xlabel('StepSize')
-    
-    GaussianMleFit( allSteps, [0, 700], 25, plotTitle)
+   plotTitle = 'Intensity distribution of Photobleaching Steps';
+   figure; histogram( allSteps, 50); title( plotTitle)
+   ylabel('Counts'); xlabel('StepSize')
+%     
+%    GaussianMleFit( allSteps, [0, 700], 50, plotTitle)
     
     output.levels = levels;
     output.steps = steps;
