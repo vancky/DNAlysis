@@ -1,16 +1,17 @@
-function [ output ] = MatchHelicases( config, spotsCam0, spotsCam1, cam0Size )
+function [ output ] = MatchHelicases( config, spotsCam0, spotsCam1,imageSize )
     % Match Helicases - checks colocalization of cam 0 and cam 1 helicases
     %   Detailed explanation goes here
      
     numSpots0 = size( spotsCam0, 1);
     numSpots1 = size( spotsCam1, 1);
+    
     % for simulating random helicases next to the actual measurements
-
-    numRandom = 50;
-    spotsRandom = zeros( numRandom, numSpots1, 2);
+    spotsRandom = zeros(size(spotsCam1));
+    numRandom= 10;
+    
     for k = 1:numRandom
         for i = 1:numSpots1
-            spotsRandom(k,i,:)= [ unifrnd(1, cam0Size(2)), unifrnd(1, cam0Size(1))];
+            spotsRandom(k,i,:)= [ unifrnd(1,imageSize(1)), unifrnd(1,512)];
         end
     end
     
