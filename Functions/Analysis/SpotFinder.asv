@@ -14,14 +14,23 @@ function [ output ] = SpotFinder( inputImage, varargin )
 
     % Smooths the image so that it is ready for watershedding
     filter = GenerateMexicanHat( p.Results.mexiHatSigma);
+    
+    figure; 
+    subplot(1,2,1); imshow( inputImage, []); colorbar
     smoothImage = imfilter( inputImage, filter, 'symmetric');
-    
+    subplot(1,2,2); imshow( smoothImage, []); colorbar
     % Performs the watershed algorithm
-    
     watershedImage = WatershedImage( smoothImage);
+    
     medianImage = median( inputImage(:));
-    binaryImage = (watershedImage > 0)& (smoothImage > median(smoothImage(:)));
-        
+    
+    binaryImage = (watershedImage > 0)& (inputImage > medianImage);
+    
+    figure;
+    subplot(1,3,1); watershed
+    subplot(1,3,2);
+    subplot(1,3,3);
+    
     % Then, find grouped pixels based on connected region analysis.
     % For this, bw bwconncomp finds groups of connected pixels.
     % Then, regionprops finds the area and eccentricity of these groups.
@@ -71,5 +80,4 @@ function [ output ] = SpotFinder( inputImage, varargin )
     output.binary = filteredCc;    
     output.numSpots = numRegions;
     output.spots = spots;
-    output.smoothImage = smoothImage;
 end

@@ -14,15 +14,14 @@ function [ output ] = PreProcess( config, importImages )
         cam1Cropped{ii} = CropImage( cropCoordinates, alignedImagesNonLinear.cam1);
         
         
-        cam0Corrected{ii} = BeamshapeCorrectionSelf( cam0Cropped{ii}, [30 30]);
-        cam1Corrected{ii} = BeamshapeCorrectionSelf( cam1Cropped{ii}, [30 30]);
+        cam0Corrected{BeamshapeCorrectionSelf( cam0Cropped{ii}, [30 30])
+        BeamshapeCorrectionSelf( cam1Cropped{ii}, [30 30])
         
-        cam0Normalized{ii} = BackgroundFilterNoScale( cam0Corrected{ii});
-        cam1Normalized{ii} = BackgroundFilterNoScale( cam1Corrected{ii});
+        
         
     end
     
-    output.cam0 = cam0Normalized;
-    output.cam1 = cam1Normalized;
+    output.cam0 = cam0Cropped;
+    output.cam1 = cam1Cropped;
 end
 

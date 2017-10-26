@@ -67,17 +67,17 @@ function [ config ] = Config( config, user )
     
     % SPOTFINDER OPTIONS
     % Lower bound on the diameter
-    config.diameterThreshold.cam0 = 5;
-    config.diameterThreshold.cam1 = 5;
+    config.diameterThreshold.cam0 = 7;
+    config.diameterThreshold.cam1 = 7;
     % The sigma for smoothing the image with a gaussian before watershedding 
     config.mexiHatSigma.cam0 = config.sigma;
     config.mexiHatSigma.cam1 = config.sigma;
     % Eccentricity threshold to filter out very noncircular particles
-    config.eccentricityThreshold = 1;
+    config.eccentricityThreshold = 0.9;
     % Factor how much larger the intensity of the spots has to be compared 
     % to the mean intensity
-    config.meanThreshold.cam0 = 0.9;
-    config.meanThreshold.cam1 = 1.1;
+    config.medianThreshold.cam0 = 1.2;
+    config.medianThreshold.cam1 = 1.2;
     
       
     % FITHELICASES OPTIONS
