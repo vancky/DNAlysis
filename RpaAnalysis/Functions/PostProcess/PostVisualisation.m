@@ -1,4 +1,4 @@
-function [ output ] = PostVisualisation( config, postProcess )
+function [ ] = PostVisualisation( config, postProcess )
     % Post Visualisation - visualizes results of post processing
 
     for kk = 1:config.numFovs
@@ -7,29 +7,27 @@ function [ output ] = PostVisualisation( config, postProcess )
         numSpots = postProcess.numSpots{kk};
         
         % Visualize global statistics 
-        y1 = postProcess.stats{kk}.global.mean;
-        y2 = postProcess.stats{kk}.global.median;
-        figure;
-        hold on
-        plot( 1:numFrames, y1, 1:numFrames, y2)
-        hold off
-        title('Intensity over time for the total image')
-        xlabel('Number of frames')
-        ylabel('Pixel Counts')
-        legend('Average value', 'Median value')
-        
-        
-        % Visualize global statistics 
-        y1 = postProcess.stats{kk}.global.normMean;
-        y2 = postProcess.stats{kk}.global.normMedian;
-        figure;
-        hold on
-        plot( 1:numFrames, y1, 1:numFrames, y2)
-        hold off
-        title('Normalized intensity over time for the total image')
-        xlabel('Number of frames')
-        ylabel('Normalized Pixel Counts')
-        legend('Average value', 'Median value')
+%         y1 = postProcess.stats{kk}.global.mean;
+%         y2 = postProcess.stats{kk}.global.median;
+%         figure;
+%         hold on
+%         plot( 1:numFrames, y1, 1:numFrames, y2)
+%         hold off
+%         title('Intensity over time for the total image')
+%         xlabel('Number of frames')
+%         ylabel('Pixel Counts')
+%         legend('Average value', 'Median value')
+%         
+%         y1 = postProcess.stats{kk}.global.normMean;
+%         y2 = postProcess.stats{kk}.global.normMedian;
+%         figure;
+%         hold on
+%         plot( 1:numFrames, y1, 1:numFrames, y2)
+%         hold off
+%         title('Normalized intensity over time for the total image')
+%         xlabel('Number of frames')
+%         ylabel('Normalized Pixel Counts')
+%         legend('Average value', 'Median value')
         
         % Visualize local statistics
         figure;

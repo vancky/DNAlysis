@@ -9,21 +9,12 @@ function [ output ] = PostProcess( config, analysis)
         % Compute normalized global statistics
         meanGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,:);
         medianGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,:);
-        
-        if ii == 4
-            numFrames = 45;
-            meanGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,1:45);
-            medianGlobalIntensity = analysis.stats{ii}.global.medianIntensity(:,1:45);    
-        end
         normMedianGlobalIntensity = medianGlobalIntensity/ medianGlobalIntensity(1);
         normMeanGlobalIntensity = meanGlobalIntensity/ meanGlobalIntensity(1);
         
         
         % Compute normalized roi statistics
         meanRoiIntensities = analysis.stats{ii}.roi.meanIntensity(:,:);
-        if ii == 4
-            meanRoiIntensities = analysis.stats{ii}.roi.meanIntensity(:,1:45);
-        end
         normRoiIntensities = meanRoiIntensities./ meanRoiIntensities(:,1);
         
         

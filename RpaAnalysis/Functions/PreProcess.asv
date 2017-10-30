@@ -3,9 +3,7 @@ function [ output ] = PreProcess( config, inputImages )
     % Detailed explanation goes here
 
     startFrame = 5;
-    endFrameFix = cell(1, config.numFovs);
     endFrameFix{4} = 40;
-
     
     for ii = 1:config.numFovs
         numFrames = size( inputImages.cam0{ii}, 3);
@@ -14,11 +12,12 @@ function [ output ] = PreProcess( config, inputImages )
             endFrame = endFrameFix{ii};
         else
             endFrame = numFrames;
-        end      
-
+        end
+        endFrame
+      
+        cam0Filtered = [];
+        cam1Filtered = [];
         idx = 0;
-        correctCam0 = [];
-        correctCam1 = [];
         
         for j = startFrame:endFrame
             idx = idx+1;

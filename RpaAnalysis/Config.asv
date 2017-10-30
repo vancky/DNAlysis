@@ -80,7 +80,7 @@ function [ config ] = Config( config, user )
     config.eccentricityThreshold = 0.9;
     % Factor how much larger the intensity of the spots has to be compared
     % to the mean intensity
-    config.medianThreshold.cam0 = 1.25;
+    config.medianThreshold.cam0 = 1.1;
     config.medianThreshold.cam1 = 1.2;
 
 

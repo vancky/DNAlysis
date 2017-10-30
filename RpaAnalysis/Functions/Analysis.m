@@ -1,14 +1,14 @@
-function [ output ] = Analysis( config, beamshapeCorrection )
+function [ output ] = Analysis( config, inputImages)
     % Analysis - Detects the relevant region of interests
     %   Detailed explanation goes here
     
     for ii = 1:config.numFovs
         fprintf('Data analysis progress %i/%i.\n' , ii , config.numFovs)    
-        numFrames = size( beamshapeCorrection.cam0{ii}, 3);
+        numFrames = size( inputImages{ii}.cam0, 3);
         
         
         % This section finds the center coordinates of the ROIS
-        cam0Start = double( beamshapeCorrection.cam0{ii}(:,:,5));
+        cam0Start = double( inputImages{ii}.cam0(:,:,1));
         spotFinder{ii}.cam0 = SpotFinder( cam0Start, ...
             'fitSize', config.fitSize, ...
             'mexiHatSigma', config.mexiHatSigma.cam0, ...
@@ -29,7 +29,7 @@ function [ output ] = Analysis( config, beamshapeCorrection )
         idx = 0;
         for j = 5:numFrames 
             idx= idx + 1;
-            cam0 = double( beamshapeCorrection.cam0{ii}(:,:,j));
+            cam0 = double( inputImages{ii}.cam0(:,:,j));
             %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
             
             for k = 1:numRois
