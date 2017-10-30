@@ -11,7 +11,7 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
             inputImage = inputImage;
         otherwise
             fprintf(['Please specify the direction of the image for' ...
-            ' which crop coordinates need to be generated.']);
+                      ' which crop coordinates need to be generated.']);
     end
     
     splitImage = SplitImage(inputImage , 'vertical');

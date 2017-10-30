@@ -1,18 +1,22 @@
-function [ output ] = PostProcess( config, analysis )
+function [ output ] = PostProcess( config, stats, idx )
     % Post Process - Performs the post processing
     %   Detailed explanation goes here
-
     
-    maxIntensities = analysis.stats.roi.maxIntensity;
-    meanIntensities = analysis.stats.roi.meanIntensity;
+    numRois = config.numRois{idx};
+    maxIntensities = stats.roi.maxIntensity;
+    meanIntensities = stats.roi.meanIntensity;
     
-    levelsMax = cell( 1,config.numRois);
-    stepsMax= cell( 1,config.numRois);
-    allLevels = [];
-    allSteps = [];
+    % Initialize all cells and matrices
+    levelsMax = cell( 1, numRois);
+    stepsMax= cell( 1, numRois);
+    levelsMean = cell( 1, numRois);
+    stepsMean= cell( 1, numRois);
+    allLevelsMax = [];
+    allStepsMax = [];
+    allLevelsMean = [];
+    allStepsMean = [];
     
-    
-    for ii = 51:55
+    for ii = 10:14
         maxIntensity = maxIntensities( ii, :);
         figure;
         findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
@@ -25,7 +29,7 @@ function [ output ] = PostProcess( config, analysis )
     end
     
     idx = 0;
-    for ii = 1:config.numRois
+    for ii = 1:numRois
         
         maxIntensity = maxIntensities( ii, :);
         meanIntensity = meanIntensities( ii, :);
@@ -54,29 +58,36 @@ function [ output ] = PostProcess( config, analysis )
 
             levelsMax{idx} = round(levelsMax{idx});
             stepsMax{idx} = abs( diff( levelsMax{idx}));
-            
             levelsMean{idx} = round(levelsMean{idx});
             stepsMean{idx} = abs( diff( levelsMean{idx}));
             
-
-            allLevels = [ allLevels, levelsMax{idx}];
-            allSteps = [ allSteps, stepsMax{idx}];
-            allLevels = [ allLevels, levelsMax{idx}];
-            allSteps = [ allSteps, stepsMax{idx}];
+            % Get all the levels and steps in one vector
+            allLevelsMax = [ allLevelsMax, levelsMax{idx}];
+            allStepsMax = [ allStepsMax, stepsMax{idx}];
+            allLevelsMean = [ allLevelsMean, levelsMean{idx}];
+            allStepsMean = [ allStepsMean, stepsMean{idx}];
             
         end
     end
     
-    plotTitle = 'Intensity distribution of Photobleaching Steps';
-    figure; histogram( allSteps, 20); title( plotTitle)
+    plotTitle = 'Intensity distribution of Photobleaching Steps (max value)';
+    figure; histogram( allStepsMax, 20); title( plotTitle)
     ylabel('Counts'); xlabel('StepSize')
 
+    plotTitle = 'Intensity distribution of Photobleaching Steps (mean value)';
+    figure; histogram( allStepsMean, 20); title( plotTitle)
+    ylabel('Counts'); xlabel('StepSize')
     %GaussianMleFit( allSteps, [0, 700], 50, plotTitle)
     
-    output.levels = levelsMax;
-    output.steps = stepsMax;
-    output.allSteps = allSteps;
-    output.allLevels = allLevels;
+    output.levelsMax = levelsMax;
+    output.stepsMax = stepsMax;
+    output.allStepsMax = allStepsMax;
+    output.allLevelsMax = allLevelsMax;
+    
+    output.levelsMean = levelsMean;
+    output.stepsMean = stepsMean;
+    output.allStepsMean = allStepsMean;
+    output.allLevelsMean = allLevelsMean;
     
 end
 

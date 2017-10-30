@@ -2,19 +2,20 @@ function [ config, output ] = Analysis( config, inputImages )
     % ANALYSIS Summary of this function goes here
     %   Detailed explanation goes here
 
-    
-    % This section finds the center coordinates of the ROIS 
-    
-    startImage = double( inputImages(:,:,1));
-    spotFinder = SpotFinder( startImage, ...
-        'meanThreshold' , config.meanThreshold, ...
-        'diameterThreshold', config.diameterThreshold, ...
-        'mexiHatSigma', config.mexiHatSigma, ...
-        'eccentricityThreshold', config.eccentricityThreshold, ...
-        'fitSize', config.fitSize);
-    SpotFinderVisualisation( startImage, spotFinder.circle, []);
-    fitHelicases = FitHelicases( config, spotFinder.spots, ...
-                                    spotFinder.centersFormatted);
+    for ll = 1: config.numFrames
+        imagesFov = inputImages{ll};
+        % This section finds the center coordinates of the ROIS 
+
+        startImage = double( imagesFov(:,:,1));
+        spotFinder = SpotFinder( startImage, ...
+            'meanThreshold' , config.meanThreshold, ...
+            'diameterThreshold', config.diameterThreshold, ...
+            'mexiHatSigma', config.mexiHatSigma, ...
+            'eccentricityThreshold', config.eccentricityThreshold, ...
+            'fitSize', config.fitSize);
+        SpotFinderVisualisation( startImage, spotFinder.circle, []);
+        fitHelicases = FitHelicases( config, spotFinder.spots, ...
+                                        spotFinder.centersFormatted);
 
     % This section evaluates every frame.
 
@@ -30,12 +31,13 @@ function [ config, output ] = Analysis( config, inputImages )
             stats.roi.maxIntensity(k,j) = roiStats.intensity.max;
         end
         imageSize= [1, size(helicaseImage,2), 1, size(helicaseImage,1)];
-        [averageGlobalIntensity, medianGlobalIntensity] = RoiIntensity( helicaseImage, imageSize);
-        stats.global.meanIntensity(j) = averageGlobalIntensity;
-        stats.global.medianIntensity(j) = medianGlobalIntensity;
+        roiStats = RoiStats( helicaseImage, imageSize);
+        stats.global.meanIntensity(j) = roiStats.intensity.mean;
+        stats.global.medianIntensity(j) = roiStats.intensity.median;
     end
     
     stats.roi.meanIntensity = RemoveZeros( stats.roi.meanIntensity, 'row');
+    stats.roi.maxIntensity = RemoveZeros( stats.roi.maxIntensity, 'row');
     config.numRois = size( stats.roi.meanIntensity, 1); 
     output.spotFinder = spotFinder;
     output.fitHelicases = fitHelicases;

@@ -1,35 +1,36 @@
-function [ output ] = PostProcess( config, analysis )
+function [ output ] = PostProcess( config, stats, iter )
     % Post Process - Performs the post processing
     %   Detailed explanation goes here
-
     
-    maxIntensities = analysis.stats.roi.maxIntensity;
-    meanIntensities = analysis.stats.roi.meanIntensity;
+    numFrames = config.numFrames{iter};
+    numRois = config.numRois{iter};
+    maxIntensities = stats.roi.maxIntensity;
+    meanIntensities = stats.roi.meanIntensity;
     
     % Initialize all cells and matrices
-    levelsMax = cell( 1,config.numRois);
-    stepsMax= cell( 1,config.numRois);
-    levelsMean = cell( 1,config.numRois);
-    stepsMean= cell( 1,config.numRois);
+    levelsMax = cell( 1, numRois);
+    stepsMax= cell( 1, numRois);
+    levelsMean = cell( 1, numRois);
+    stepsMean= cell( 1, numRois);
     allLevelsMax = [];
     allStepsMax = [];
     allLevelsMean = [];
     allStepsMean = [];
     
-    for ii = 51:55
+    for ii = 10:14
         maxIntensity = maxIntensities( ii, :);
         figure;
         findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
     end
     
-    for ii = 81:85
+    for ii = 31:35
         maxIntensity = maxIntensities( ii, :);
         figure;
         findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
     end
     
     idx = 0;
-    for ii = 1:config.numRois
+    for ii = 1:numRois
         
         maxIntensity = maxIntensities( ii, :);
         meanIntensity = meanIntensities( ii, :);
@@ -42,7 +43,7 @@ function [ output ] = PostProcess( config, analysis )
 
             levelsMax{idx} = zeros( 1, numPts);
             levelsMax{idx}(1) = mean( maxIntensity( 1:(pts(1)-1) ));
-            levelsMax{idx}(numPts+1) = mean( maxIntensity( pts(numPts):config.numFrames ));
+            levelsMax{idx}(numPts+1) = mean( maxIntensity( pts(numPts):numFrames));
             
             for j = 1:(numPts-1)
                 levelsMax{idx}(j+1) = mean( maxIntensity( pts(j) : (pts(j+1)-1) ));
@@ -50,7 +51,7 @@ function [ output ] = PostProcess( config, analysis )
             
             levelsMean{idx} = zeros( 1, numPts);
             levelsMean{idx}(1) = mean( meanIntensity( 1:(pts(1)-1) ));
-            levelsMean{idx}(numPts+1) = mean( meanIntensity( pts(numPts):config.numFrames ));
+            levelsMean{idx}(numPts+1) = mean( meanIntensity( pts(numPts):numFrames ));
             
             for j = 1:(numPts-1)
                 levelsMean{idx}(j+1) = mean( meanIntensity( pts(j) : (pts(j+1)-1) ));

@@ -10,17 +10,25 @@ config = Config( config, user);
 fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
 
+%% Correlations and Calibrations
+
+fprintf('This section performs the correlations and calibrations.\n')
+[ config ] = CorrelationsCalibrations( config, importImages);
+
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-[ config, preProcess] = PreProcess( config, importImages.helicase{1});
+[ config, preProcess] = PreProcess( config, importImages);
 
 %% Analysis
 
 fprintf('This section performs the Analysis.\n')
 [ config, analysis] = Analysis( config, preProcess);
+
 %% Post Processing
 
 fprintf('This section performs the Post Processing.\n')
 
-postProcess = PostProcess( config, analysis);
+for ll = 1:config.numFovs
+    postProcess = PostProcess( config, analysis.stats{ll}, ll);
+end

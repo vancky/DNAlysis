@@ -1,21 +1,21 @@
 function [ config, output ] = PreProcess( config, inputImages )
-    %PREPROCESS Summary of this function goes here
-    %   Detailed explanation goes here
+    % Pre Process - Performs pre processing either for the mcm or rpa
+    % calibrations
     
-    numInputFrames = size( inputImages, 3);
-    
-    % The first image is noise, so we start at the second one
-    startFrame = 150;
-    endFrame = 400;
-    % The right part of the image is distorted, so we only use the image up
-    % to this pixel
-    xCrop = 360;
-    
-    images = inputImages( :, 1:xCrop, startFrame:endFrame);
-    %images = BeamshapeCorrectionSelf( images(), [30 30]);
-    
-    output = images;
-    config.numFrames = size( output, 3);
+    switch config.calibrationExperiment
+        case 'mcm'
+            [config, output] = PreProcessMcm( config, inputImages.helicase{1});
+            
+        case 'rpa'
+            for jj = 1:config.numFovs
+                output{jj} = PreProcessRpa( config, inputImages.helicase{jj});
+                config.numFrames{jj} = size( output{jj}, 3);
+            end
+            
+        otherwise
+            fprintf( ['Please specify a correct calibration experiment' ...
+                       'either mcm or rpa.\n']);
+    end
     
 end
 

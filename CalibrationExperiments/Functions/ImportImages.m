@@ -1,7 +1,7 @@
 function [ output ] = ImportImages( config )
     % Import Images - Imports all relevant images
-    % Specify an importType 'OneCamera' or 'TwoCameras'. Depending on the
-    % type of images you are analyzing.
+    % Either imports images from experiments and saves these as a matlab or it
+    % loads previously saved images.
 
     switch config.importOption
         case 'import'
@@ -19,7 +19,6 @@ function [ output ] = ImportImages( config )
         otherwise
             fprintf('Please specify a correcect option for importing the images.\n')
     end
-    
+
 
 end
-
