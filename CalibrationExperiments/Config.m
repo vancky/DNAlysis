@@ -13,20 +13,30 @@ function [ config ] = Config( config, user)
     config.importOption = 'load';
 
     % The directory for loading/saving matlab files in your matfiles folder
-    config.matFileCd = 'Calibrations/mcm646';
+    config.matFileCd = 'Calibrations/rpa';
     config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
 
-    % In what direction were the images captured? Horizontal or vertical
-    config.imageDirection = 'horizontal';
-    
     % For what experiment do you want to perform calibrations? Input rpa or
     % mcm.
     config.calibrationExperiment = 'rpa';
+    
+    % In what direction were the images captured? Horizontal or vertical
+    config.imageDirection = 'horizontal';
+
 
     % Directory to get the images to analyse from
-    config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 2*\*image0*');
-    config.calibrationCd{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 3*\*image0*');
-    %config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171010\C6\FOV1 2*\*image1*');
+%     config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 2*\*image0*');
+%     config.calibrationCd{2} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 3*\*image0*');
+%     config.calibrationCd{3} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 4*\*image0*');
+%     config.calibrationCd{4} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 5*\*image0*');
+%     config.calibrationCd{5} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 6*\*image0*');
+%     config.calibrationCd{6} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 7*\*image0*');
+%     config.calibrationCd{7} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 8*\*image0*');
+%     config.calibrationCd{8} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 9*\*image0*');
+%     config.calibrationCd{9} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 10*\*image0*');
+%     config.calibrationCd{10} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171012\C5\GFP 11*\*image0*');
+
+    config.calibrationCd{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\171010\C6\FOV1 2*\*image1*');
 
     % GENERAL SETTINGS
     % Wavelength of the emitted light from the fluorophores
@@ -38,7 +48,7 @@ function [ config ] = Config( config, user)
 
     % How much offset do you want when cropping the optosplit images?
     config.cropOffset = 5;
-    
+
     % SPOTFINDER OPTIONS
     % Lower bound on the diameter
     config.diameterThreshold = 7;

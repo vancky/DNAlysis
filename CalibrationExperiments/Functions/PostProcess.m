@@ -17,18 +17,18 @@ function [ output ] = PostProcess( config, stats, iter )
     allLevelsMean = [];
     allStepsMean = [];
     
-    for ii = 10:14
-        maxIntensity = maxIntensities( ii, :);
-        figure;
-        findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
-    end
-    
-    for ii = 31:35
-        maxIntensity = maxIntensities( ii, :);
-        figure;
-        findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
-    end
-    
+%     for ii = 10:14
+%         maxIntensity = maxIntensities( ii, :);
+%         figure;
+%         findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
+%     end
+%     
+%     for ii = 31:35
+%         maxIntensity = maxIntensities( ii, :);
+%         figure;
+%         findchangepts( maxIntensity, 'MinThreshold', 5e5, 'Statistic', 'mean');
+%     end
+%     
     idx = 0;
     for ii = 1:numRois
         

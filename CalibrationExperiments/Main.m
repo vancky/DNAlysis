@@ -29,6 +29,19 @@ fprintf('This section performs the Analysis.\n')
 
 fprintf('This section performs the Post Processing.\n')
 
+allStepsMean = [];
+allStepsMax = [];
 for ll = 1:config.numFovs
-    postProcess = PostProcess( config, analysis.stats{ll}, ll);
+    postProcess{ll} = PostProcess( config, analysis.stats{ll}, ll);
+    allStepsMean = [ allStepsMean, postProcess{ll}.allStepsMean];
+    allStepsMax = [ allStepsMax, postProcess{ll}.allStepsMax];
+    
 end
+
+%% Visualisation
+
+plotTitle = 'Intensity distribution of Photobleaching Steps (max value)';
+figure; histogram( allStepsMax, 100); title( plotTitle)
+ylabel('Counts'); xlabel('StepSize')
+
+GaussianMleFit( allStepsMax, [0, 6000], 100, plotTitle)

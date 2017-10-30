@@ -15,7 +15,7 @@ function [ output ] = PreProcessRpa( config, inputImages )
     end
     
     % The first frame is noise, so start at frame 2
-    startFrame = 2;
+    startFrame = 5;
     endFrame = numInputFrames - 5;
     
     images = cropImage( :, :, startFrame:endFrame);
