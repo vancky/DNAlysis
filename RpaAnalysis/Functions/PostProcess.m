@@ -3,28 +3,28 @@ function [ output ] = PostProcess( config, analysis)
     
     for ii = 1:config.numFovs
         
-        numSpots = size( analysis.stats{ii}.roi.averageIntensity, 1);
-        numFrames = size( analysis.stats{ii}.roi.averageIntensity, 2);
+        numSpots = size( analysis.stats{ii}.roi.meanIntensity, 1);
+        numFrames = size( analysis.stats{ii}.roi.meanIntensity, 2);
 
         % Compute normalized global statistics
-        averageGlobalIntensity = analysis.stats{ii}.global.averageIntensity(:,:);
-        medianGlobalIntensity = analysis.stats{ii}.global.medianIntensity(:,:);
+        meanGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,:);
+        medianGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,:);
         
         if ii == 4
             numFrames = 45;
-            averageGlobalIntensity = analysis.stats{ii}.global.averageIntensity(:,1:45);
+            meanGlobalIntensity = analysis.stats{ii}.global.meanIntensity(:,1:45);
             medianGlobalIntensity = analysis.stats{ii}.global.medianIntensity(:,1:45);    
         end
         normMedianGlobalIntensity = medianGlobalIntensity/ medianGlobalIntensity(1);
-        normMeanGlobalIntensity = averageGlobalIntensity/ averageGlobalIntensity(1);
+        normMeanGlobalIntensity = meanGlobalIntensity/ meanGlobalIntensity(1);
         
         
         % Compute normalized roi statistics
-        averageRoiIntensities = analysis.stats{ii}.roi.averageIntensity(:,:);
+        meanRoiIntensities = analysis.stats{ii}.roi.meanIntensity(:,:);
         if ii == 4
-            averageRoiIntensities = analysis.stats{ii}.roi.averageIntensity(:,1:45);
+            meanRoiIntensities = analysis.stats{ii}.roi.meanIntensity(:,1:45);
         end
-        normRoiIntensities = averageRoiIntensities./ averageRoiIntensities(:,1);
+        normRoiIntensities = meanRoiIntensities./ meanRoiIntensities(:,1);
         
         
         % Extra statistics!
@@ -32,11 +32,11 @@ function [ output ] = PostProcess( config, analysis)
         correctedRoiIntensities = normRoiIntensities./ normMeanGlobalIntensity;
         
     output.stats{ii}.global.median = medianGlobalIntensity;
-    output.stats{ii}.global.mean = averageGlobalIntensity;
+    output.stats{ii}.global.mean = meanGlobalIntensity;
     output.stats{ii}.global.normMedian = normMedianGlobalIntensity;
     output.stats{ii}.global.normMean = normMeanGlobalIntensity;
     output.stats{ii}.roi.normMean = normRoiIntensities;
-    output.stats{ii}.roi.mean = averageRoiIntensities;
+    output.stats{ii}.roi.mean = meanRoiIntensities;
     output.results{ii}.test = summedRoiIntensities;
     output.results{ii}.corrected = correctedRoiIntensities;
     output.numFrames{ii} = numFrames;

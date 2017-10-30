@@ -14,7 +14,7 @@ function [ output ] = GenerateCropCoordinates( inputImage, direction )
             ' which crop coordinates need to be generated.']);
     end
     
-    splitImage = SplitImage(inputImage , direction);
+    splitImage = SplitImage(inputImage , 'vertical');
     
     numCol = size( splitImage.leftImage , 2);
     rowAvgLeft = mean(splitImage.leftImage,1);   % Averaged over all rows

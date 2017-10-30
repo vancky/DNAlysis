@@ -1,16 +1,23 @@
-function [ config ] = Config( config )
+function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
 
     % Make sure we can use the functions
     addpath( genpath('../Functions') )
     addpath( genpath('./Functions') )
+   
+    % Get the general configuration files
+    config = GeneralConfig( config, user);
     
     % Specify whether you want to import images from the K drive or load
     % saved images from the MatFileCd
     config.importOption = 'load';
     
-    config.saveMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
-    config.loadMatFileCd=('../../../MatFiles/RpaAnalysis/octNovData');
+    % The directory for loading/saving matlab files in your matfiles folder
+    config.matFileCd = 'RpaAnalysis/octNovData';
+    config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
+    
+    % In what direction were the images captured? Horizontal or vertical
+    config.imageDirection = 'horizontal';
     
     % Set the Matlab directories, note if you want to specify only a
     % certain camera or measurement set use \folder*\*specificextension*
@@ -47,20 +54,38 @@ function [ config ] = Config( config )
     config.beamshapeCorrectionCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\DyeAf488\TestAF488 5*\*image1*');
 
     
-    % In what direction where the images captured? Horizontal or vertical
-    config.imageDirection = 'horizontal';
+   
+    % GENERAL SETTINGS
+    
+    % Wavelength of the emitted light from the fluorophores
+    config.waveLength = 488e-9;                       
+    % Sigma of the diffraction limited spot
+    config.sigma = config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));  
+    
+    % CALIBRATION AND CORRELATION SETTINGS
+    
     % How much offset do you want when cropping the optosplit images?
     config.cropOffset = 5;
     
+    
     % SPOTFINDER OPTIONS
+    
     % Lower bound on the diameter
-    config.diameterThreshold = 6;
+    config.diameterThreshold.cam0 = 7;
+    config.diameterThreshold.cam1 = 7;
     % The sigma for smoothing the image with a gaussian before watershedding 
-    config.watershedSmooth = 0.5;
+    config.mexiHatSigma.cam0 = config.sigma;
+    config.mexiHatSigma.cam1 = config.sigma;
     % Eccentricity threshold to filter out very noncircular particles
     config.eccentricityThreshold = 0.9;
+    % Factor how much larger the intensity of the spots has to be compared 
+    % to the mean intensity
+    config.medianThreshold.cam0 = 1.1;
+    config.medianThreshold.cam1 = 1.2;
+    
     
     % GENERAL SETTINGS
+    
     % Pixels per image
     config.pixels= 512;                     
     % Size of the image in m
@@ -73,6 +98,7 @@ function [ config ] = Config( config )
     config.pixelSize = config.imageSize/config.pixels;                                         
     
     % FITHELICASES OPTIONS
+    
     % Sigma used as an estimation
     config.sigma = config.waveLength/(2*pi*config.pixelSize*sqrt(2*config.numFactor));         
     % Amount of iterations for fitting (usually 5 is enough)
@@ -84,6 +110,7 @@ function [ config ] = Config( config )
     config.fitSize =  1+ceil(3*config.sigma);    
     
     % ANALYSIS OPTIONS
+    
     % Half of the square size for getting roi statistics.
     config.roiSize = 10;
     

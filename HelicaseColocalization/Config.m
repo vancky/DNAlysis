@@ -15,11 +15,8 @@ function [ config ] = Config( config, user )
     % The directory for loading/saving matlab files in your matfiles folder
     config.matFileCd = 'DnaHelicaseImports/170621_orc';
     config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
-    
-    % Specify the import type here, either 'OneCamera' or 'TwoCameras'
-    config.importType = 'TwoCameras';
         
-    % In what direction where the images captured? Horizontal or vertical
+    % In what direction were the images captured? Horizontal or vertical
     config.imageDirection = 'vertical';
     
     % In case of importing from both cam 0 and cam 1 use this part
@@ -47,6 +44,7 @@ function [ config ] = Config( config, user )
     config.cameraCorrelationCd.cam1{3}= ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam1_190_0*');
 
     % GENERAL SETTINGS
+    
     % Wavelength of the emitted light from the fluorophores
     config.waveLength = 488e-9;                       
     % Sigma of the diffraction limited spot
@@ -66,6 +64,7 @@ function [ config ] = Config( config, user )
     
     
     % SPOTFINDER OPTIONS
+    
     % Lower bound on the diameter
     config.diameterThreshold.cam0 = 7;
     config.diameterThreshold.cam1 = 7;
@@ -81,6 +80,7 @@ function [ config ] = Config( config, user )
     
       
     % FITHELICASES OPTIONS
+    
     % Sigma used as an estimation
     config.fitSigma = config.sigma;
     % Amount of iterations for fitting (usually 5 is enough)
@@ -92,13 +92,12 @@ function [ config ] = Config( config, user )
     config.fitSize =  1+ceil(3*config.sigma);    
  
     % COLOCALIZATION ANALYSIS OPTIONS
+    
     % Half of the square size for getting roi statistics.
     config.roiSize = 5;
     % threshold for colocalizating in pixel (i.e. if 2, 2px and below
     % match).
     config.colocalizationMatch = 3;
-    
-    
     
     
     
