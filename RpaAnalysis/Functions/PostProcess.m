@@ -12,26 +12,33 @@ function [ output ] = PostProcess( config, analysis)
         normMedianGlobalIntensity = medianGlobalIntensity/ medianGlobalIntensity(1);
         normMeanGlobalIntensity = meanGlobalIntensity/ meanGlobalIntensity(1);
         
-        
         % Compute normalized roi statistics
         meanRoiIntensities = analysis.stats{ii}.roi.meanIntensity(:,:);
         normRoiIntensities = meanRoiIntensities./ meanRoiIntensities(:,1);
-        
         
         % Extra statistics!
         summedRoiIntensities = mean(normRoiIntensities, 1);
         correctedRoiIntensities = normRoiIntensities./ normMeanGlobalIntensity;
         
-    output.stats{ii}.global.median = medianGlobalIntensity;
-    output.stats{ii}.global.mean = meanGlobalIntensity;
-    output.stats{ii}.global.normMedian = normMedianGlobalIntensity;
-    output.stats{ii}.global.normMean = normMeanGlobalIntensity;
-    output.stats{ii}.roi.normMean = normRoiIntensities;
-    output.stats{ii}.roi.mean = meanRoiIntensities;
-    output.results{ii}.test = summedRoiIntensities;
-    output.results{ii}.corrected = correctedRoiIntensities;
-    output.numFrames{ii} = numFrames;
-    output.numSpots{ii} = numSpots;
+        % Max Intensity statistics 
+        
+        maxIntensityNorm = analysis.stats{ii}.roi.maxIntensity - ...
+                            analysis.stats{ii}.roi.maxIntensity(:,1);
+                        
+        output.stats{ii}.global.median = medianGlobalIntensity;
+        output.stats{ii}.global.mean = meanGlobalIntensity;
+        output.stats{ii}.global.normMedian = normMedianGlobalIntensity;
+        output.stats{ii}.global.normMean = normMeanGlobalIntensity;
+
+        output.stats{ii}.roi.normMean = normRoiIntensities;
+        output.stats{ii}.roi.mean = meanRoiIntensities;
+        output.stats{ii}.roi.normMax = maxIntensityNorm;
+        output.stats{ii}.roi.max = analysis.stats{ii}.roi.maxIntensity;
+
+        output.results{ii}.test = summedRoiIntensities;
+        output.results{ii}.corrected = correctedRoiIntensities;
+        output.numFrames{ii} = numFrames;
+        output.numSpots{ii} = numSpots;
     end
 
     PostVisualisation( config, output)

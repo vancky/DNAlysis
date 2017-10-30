@@ -31,23 +31,25 @@ function [ ] = PostVisualisation( config, postProcess )
         
         % Visualize local statistics
         figure;
-        title('Intensity over time for different ROIs')
+        title('Maximum pixel count over time normalized')
         hold on
         for j = 1:numSpots
-            plot( 1:numFrames, postProcess.stats{kk}.roi.mean(j,:) )
+            plot( 1:numFrames, postProcess.stats{kk}.roi.normMax(j,:))
         end
         hold off
         xlabel('Number of frames')
         ylabel('Normalized pixel counts')
         
+        
         % Visualise corrected statistics
         figure; 
-        title('Corrected Intensity over time for different ROIs')
+        title('Maximum pixel count over time averaged')
         xlabel('Number of frames')
         ylabel('Normalized Pixel Counts')
         hold on
+        averageIntensity = mean(postProcess.stats{kk}.roi.normMax, 1);
         for j = 1:numSpots
-            plot( 1:numFrames, postProcess.results{kk}.corrected)
+            plot( 1:numFrames, averageIntensity)
         end
         hold off
     end

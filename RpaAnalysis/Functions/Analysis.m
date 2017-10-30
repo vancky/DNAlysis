@@ -26,26 +26,32 @@ function [ output ] = Analysis( config, inputImages)
         roiLocations = CentersToCoordinates( fitHelicases{ii}.cam0.fitPosition, config.roiSize);
         numRois = length( roiLocations);
         
-        idx = 0;
-        for j = 5:numFrames 
-            idx= idx + 1;
+        for j = 1:numFrames 
             cam0 = double( inputImages{ii}.cam0(:,:,j));
             %cam1 = beamshapeCorrection.cam1{ii}(:,:,j);
             
+            roiCount = 0;
             for k = 1:numRois
                 roiStats = RoiStats( cam0, roiLocations(k,:));
-                stats{ii}.roi.meanIntensity(k,idx) = roiStats.intensity.mean;
+                
+                
+                if sum(sum(roiStats.image)) > 0
+                    roiCount = roiCount + 1;
+                    stats{ii}.roi.meanIntensity(roiCount,j) = roiStats.intensity.mean;
+                    stats{ii}.roi.maxIntensity(roiCount,j) = roiStats.intensity.max;
+                    roi{ii}(:,:,j,roiCount) = roiStats.image;
+                end
             end
             cam0Size= [1, size(cam0,2), 1, size(cam0,1)];
             roiStatsGlobal = RoiStats( cam0, cam0Size);
-            stats{ii}.global.meanIntensity(idx) = roiStatsGlobal.intensity.mean;
-            stats{ii}.global.medianIntensity(idx) = roiStatsGlobal.intensity.median;
+            stats{ii}.global.meanIntensity(j) = roiStatsGlobal.intensity.mean;
+            stats{ii}.global.medianIntensity(j) = roiStatsGlobal.intensity.median;
         end
     end
     
     output.spotFinder = spotFinder;
     output.fitHelicases = fitHelicases;
     output.stats = stats;
-    
+    output.roi = roi;
 end
 

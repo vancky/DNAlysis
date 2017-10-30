@@ -27,6 +27,6 @@ function [ output ] = RoiStats( inputImage, roiLocation)
     output.intensity.max = maxIntensity;
     output.intensity.mean = meanIntensity;
     output.intensity.median = medianIntensity;
-    
+    output.image = roi;
 end
 

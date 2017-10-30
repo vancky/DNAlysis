@@ -22,9 +22,7 @@ function [ output ] = RemoveZeros( inputMatrix, zeroDirection )
     
     outputMatrix = inputMatrix;
     outputMatrix( inputMatrix==0) = [];
-       
-
-    
+           
     outputMatrix = reshape( outputMatrix, matrixSize(1)-numZeros, matrixSize(2));
     
     switch zeroDirection

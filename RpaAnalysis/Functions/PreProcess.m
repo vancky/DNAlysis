@@ -2,7 +2,7 @@ function [ output ] = PreProcess( config, inputImages )
     % Pre Process - Pre processes the relevant images
     % Detailed explanation goes here
 
-    startFrame = 5;
+    startFrame = 10;
     endFrameFix = cell(1, config.numFovs);
     endFrameFix{4} = 40;
 
