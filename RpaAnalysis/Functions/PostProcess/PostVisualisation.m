@@ -5,6 +5,7 @@ function [ ] = PostVisualisation( config, postProcess )
         
         numFrames = postProcess.numFrames{kk};
         numSpots = postProcess.numSpots{kk};
+        numGrowSpots = postProcess.numGrowSpots{kk};
         
         % Visualize global statistics 
 %         y1 = postProcess.stats{kk}.global.mean;
@@ -50,6 +51,26 @@ function [ ] = PostVisualisation( config, postProcess )
         averageIntensity = mean(postProcess.stats{kk}.roi.normMax, 1);
         for j = 1:numSpots
             plot( 1:numFrames, averageIntensity)
+        end
+        hold off
+        
+        figure;
+        title('Most growing spots, growth in maximum pixel counts')
+        xlabel('Number of frames')
+        ylabel('Normalized Pixel Counts')
+        hold on
+        for j = 1:numGrowSpots
+            plot( 1:numFrames, postProcess.growStats{kk}.max(j,:))
+        end
+        hold off
+        
+        figure;
+        title('Most growing spots, growth in mean pixel counts')
+        xlabel('Number of frames')
+        ylabel('Normalized Pixel Counts')
+        hold on
+        for j = 1:numGrowSpots
+            plot( 1:numFrames, postProcess.growStats{kk}.mean(j,:)) 
         end
         hold off
     end

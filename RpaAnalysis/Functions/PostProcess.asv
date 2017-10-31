@@ -46,20 +46,18 @@ function [ output ] = PostProcess( config, analysis)
         count = 0;
         growSpots = [];
         growStats = [];
+        size( output.stats{ii}.roi.normMax)
         for jj = 1:output.numSpots{ii}
             if growIndex(jj)
                 count = count+1;
                 growSpots(:,:,:,count) = analysis.roi{ii}(:,:,:,jj);
                 growStats.max(count,:) = output.stats{ii}.roi.normMax(jj,:);
-                growStats.mean(count,:) = output.stats{ii}.roi.mean(jj,:)- ...
-                    output.stats{ii}.roi.mean(jj,1);
+                growStats.mean(count,:) = output.stats{ii}.roi.mean(jj,:);
             end        
         end
-        numGrowSpots = count;
         
         output.growSpots{ii} = growSpots;
         output.growStats{ii} = growStats;
-        output.numGrowSpots{ii} = numGrowSpots;
         
     end
         

@@ -4,17 +4,13 @@ function [ ] = ShowSequence( inputSequence , greyScale, pauseTime )
     % seconds between each image
     % For instance ShowSequence( imageSequence, [ 100, 150], 0.1)
     
-%     figure( 'units', 'normalized', 'outerposition', [ 0 0 1 1]);
+    figure( 'units', 'normalized', 'outerposition', [ 0 0 1 1]);
     
-    figure
+    pause( 0.1);
     
-    numFrames = size( inputSequence, 3);
-    
-    imshow( inputSequence(:,:,1) , greyScale );
-    set(gcf, 'units','normalized','outerposition',[0 0 1 1]);
-    pause( pauseTime )
+    numFrames = size( inputSequence , 3 );
     hold on
-    for i = 2:numFrames
+    for i=1:numFrames
         imshow( inputSequence(:,:,i) , greyScale );
         pause( pauseTime )
     end

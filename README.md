@@ -1,5 +1,5 @@
 # DNAlysis
-#### Jasper van der Auweraert, October 2016
+#### Jasper van der Auweraert, October 2017
 
 ## General Information
 

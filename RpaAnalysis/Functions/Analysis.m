@@ -34,7 +34,6 @@ function [ output ] = Analysis( config, inputImages)
             for k = 1:numRois
                 roiStats = RoiStats( cam0, roiLocations(k,:));
                 
-                
                 if sum(sum(roiStats.image)) > 0
                     roiCount = roiCount + 1;
                     stats{ii}.roi.meanIntensity(roiCount,j) = roiStats.intensity.mean;
@@ -47,6 +46,7 @@ function [ output ] = Analysis( config, inputImages)
             stats{ii}.global.meanIntensity(j) = roiStatsGlobal.intensity.mean;
             stats{ii}.global.medianIntensity(j) = roiStatsGlobal.intensity.median;
         end
+        
     end
     
     output.spotFinder = spotFinder;
