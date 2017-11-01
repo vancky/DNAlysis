@@ -44,16 +44,13 @@ function [ config ] = Config( config, user )
     % Directories for correcting Data
     config.splitCorrelationCd{1}         = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170424_104237\00-beads-05*\*cam0_015_0*');
     config.dnaCalibrationCd{1}           = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170530_104553\02-Exp13-FOV5-DNA-MCM-reSytox-532*\*cam0_360_0*');
-    config.cameraCorrelationCd.cam0{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam0_184_0*');
-    config.cameraCorrelationCd.cam1{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres48840mW*\*cam1_184_0*');
-    config.cameraCorrelationCd.cam0{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*cam0_187_0*');
-    config.cameraCorrelationCd.cam1{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres53220mW*\*cam1_187_0*');
-    config.cameraCorrelationCd.cam0{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam0_190_0*');
-    config.cameraCorrelationCd.cam1{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170321_103054\FSspheres64240mW*\*cam1_190_0*');
-    config.beamshapeCorrectionCd.cam0{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\DyeAf488\TestAF488 5*\*image0*');
-    config.beamshapeCorrectionCd.cam1{1} = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\DyeAf488\TestAF488 5*\*image1*');
-
-
+    config.cameraCorrelationCd.cam0{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 2*\*image0*');
+    config.cameraCorrelationCd.cam1{1}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 2*\*image1*');
+    config.cameraCorrelationCd.cam0{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 3*\*image0*');
+    config.cameraCorrelationCd.cam1{2}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 3*\*image1*');
+    config.cameraCorrelationCd.cam0{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 4*\*image0*');
+    config.cameraCorrelationCd.cam1{3}   = ('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170927\Illumination correction\Beads\TestBEads 4*\*image1*');
+    
 
     % GENERAL SETTINGS
 

@@ -5,15 +5,9 @@ function [ output ] = ImportImages( config )
 
     switch config.importOption
         case 'import'
-            %fprintf('Importing Camera Correlation Images.\n')
-            %importImages.cameraCorrelation = ImportTwoCameras( config.cameraCorrelationCd, 'stack');
-
-            %fprintf('Importing Split Correlation Images.\n')
-            %importImages.splitCorelation=  ImportOneCamera( config.splitCorrelationCd, 'stack');
-            
-            fprintf('Importing Beamshape Correction Images.\n')
-            importImages.beamshape = ImportTwoCameras( config.beamshapeCorrectionCd, 'stack');
-            
+            fprintf('Importing Camera Correlation Images.\n')
+            importImages.cameraCorrelation = ImportTwoCameras( config.cameraCorrelationCd, 'stack');
+         
             fprintf('Importing Helicase and Dna Images.\n')
             importedCameraImages =  ImportTwoCameras( config.multiCamCd, 'all');
             importImages.cam0 = importedCameraImages.cam0;
