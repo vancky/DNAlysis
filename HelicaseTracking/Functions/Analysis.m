@@ -1,15 +1,8 @@
-function [ output ] = Analysis( config, inputImages, option)
+function [ output ] = Analysis( config, inputImages)
     % Analysis - This function performs the analysis
     
-    switch nargin
-        case 2
-            analysisOption = config.importType;
-        case 3
-            analysisOption = option;
-        otherwise
-            fprintf('Please specify enough input arguments for the analysis')            
-    end
-    
+
+    analysisOption = config.importType;
     
     switch analysisOption
         case 'OneCamera'
@@ -49,32 +42,6 @@ function [ output ] = Analysis( config, inputImages, option)
                 output.spotFinder = spotFinder;
                 output.fitHelicases = fitHelicases;
                 output.matchHelicases = matchHelicases;
-            end
-            
-        case 'ReferenceSets'
-            helicaseImages = inputImages.helicaseImage;
-            dnaImages = inputImages.dnaImage;
-            numHelicaseImages = length( helicaseImages);
-            numDnaImages = length( dnaImages);
-            
-            % Analyse the helicase images
-            if numHelicaseImages == 0
-                output.helicaseLocation{1} = [];
-            else
-                for ii = 1:numHelicaseImages
-                    spotFinder = SpotFinder( config, helicaseImages{ii});
-                    output.helicaseLocation{ii} = spotFinder.centers;
-                end
-            end
-            % Analyse the dna images
-            
-            if numDnaImages == 0
-                output.dnaRoi{1} = [];
-            else
-                for jj = 1:numDnaImages
-                    dnaFinder = DnaFinder( config, dnaImages{jj});
-                    output.dnaRoi{jj}= dnaFinder.dnaRoi;
-                end
             end
             
         otherwise

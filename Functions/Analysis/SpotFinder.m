@@ -1,30 +1,42 @@
-function [ output ] = SpotFinder( config , inputImage, varargin )
+function [ output ] = SpotFinder( inputImage, varargin )
     % Spot Finder - finds fluorescent spots in an image.
     % Gives as output the number of spots
     
     % Parses the optional input arguments
     p = inputParser;
-    addRequired( p, 'fitSize');
+    addOptional( p, 'fitSize', 5);
+    addOptional( p, 'mexiHatSigma', 1);
     addOptional( p, 'diameterThreshold', 0);
     addOptional( p, 'eccentricityThreshold', 1);
-    addOptional( p, 'watershedSmooth', 0.00001);
+    addOptional( p, 'medianThreshold', 1.01);
+    
     parse( p, varargin{:})
-    
+
     % Smooths the image so that it is ready for watershedding
-    smoothImage = imgaussfilt( inputImage, p.Results.watershedSmooth);
-    % Performs the watershed algorithm
-    watershedImage = WatershedImage( smoothImage);
-    binaryImage = watershedImage > 0;
+    filter = GenerateMexicanHat( p.Results.mexiHatSigma);
+    smoothImage = imfilter( inputImage, filter, 'symmetric');
     
+    % Performs the watershed algorithm
+    
+    watershedImage = WatershedImage( smoothImage);
+    medianImage = median( inputImage(:));
+    binaryImage = (watershedImage > 0)& (smoothImage > median(smoothImage(:)));
+        
     % Then, find grouped pixels based on connected region analysis.
     % For this, bw bwconncomp finds groups of connected pixels.
     % Then, regionprops finds the area and eccentricity of these groups.
     % The relevant regions are found based on optional filtering criteria.    
     
     cc = bwconncomp(binaryImage); 
-    stats = regionprops(cc, 'Eccentricity' , 'Centroid', 'EquivDiameter');
-    
-    idx = find( [stats.EquivDiameter] > p.Results.diameterThreshold & [stats.Eccentricity]<= p.Results.eccentricityThreshold ); 
+    stats = regionprops( cc, 'Eccentricity' , 'Centroid', ...
+                        'EquivDiameter');
+    stats2 = regionprops( cc , inputImage, 'MeanIntensity');
+
+       
+    idx = find( ([stats.EquivDiameter] > p.Results.diameterThreshold) & ...
+                ([stats.Eccentricity]<= p.Results.eccentricityThreshold) & ...
+                ([stats2.MeanIntensity] >= p.Results.medianThreshold*medianImage ));
+            
     
     filteredCc = ismember(labelmatrix(cc), idx);
     filteredStats = regionprops(filteredCc, 'Area' , 'Eccentricity' , 'Centroid', 'EquivDiameter'); 
@@ -39,7 +51,6 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     ySizeSpot = ySizeInput+2*fitSize;
     spotImage = ones( ySizeSpot, xSizeSpot) * median( inputImage(:) );
     spotImage( fitSize+1: ySizeInput+fitSize, fitSize+1 : xSizeInput+fitSize) = inputImage;
-    
     
     for i = 1:numRegions
         diameters(i) = filteredStats(i).EquivDiameter;
@@ -60,4 +71,5 @@ function [ output ] = SpotFinder( config , inputImage, varargin )
     output.binary = filteredCc;    
     output.numSpots = numRegions;
     output.spots = spots;
+    output.smoothImage = smoothImage;
 end

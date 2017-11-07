@@ -1,40 +1,26 @@
 function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
     
-    % Set the Matlab directories, note if you want to specify only a
-    % certain camera or measurement set use \folder*\*specificextension*
-    % For instance for camera 0 with extension 079 Cd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*cam0_079*')
-    % For camera 1 and 0 with extension 079: Cd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\*_079*')
-    % For all files in the folder Cd=('K:\bn\nd\Shared\Humberto Sanchez\G0.181\170407_094257\DNASytox*\**')
-    % 
-    % Note if there are other images such as cam0_290_stack, simply adjust
-    % set cam0_290_0 instead of cam0_290 to make sure you don't import the
-    % stack image.
+    % Make sure we can use the functions 
+    addpath( genpath('../Functions'))
+    addpath( genpath('./Functions'))
     
-    switch user
-        case 'tudelft'                
-            config.matlabCd=('D:\jvanderauweraert\git\DNAlysis\HelicaseTracking');
-            config.referenceSetCd = ('../../../MatFiles/ReferenceSets/');
-            % The matfile Cd, note that we can load images by specifying the
-            % correct .mat file name, if saving, specify the new relevant name
-            config.saveMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-            config.loadMatFileCd=('../../../MatFiles/DnaHelicaseImports/170621_orc');
-        case 'home'
-            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
-            config.referenceSetCd = ('../../MatFiles/ReferenceSets/');
-            config.saveMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
-            config.loadMatFileCd=('../../MatFiles/DnaHelicaseImports/170621_orc');
-        otherwise
-            fprintf('Please specify a correct user.\n')
-    end
-
+    % Get the general configuration files
+    config = GeneralConfig( config, user);
+    
+    % Specify whether you want to import images from the K drive or load
+    % saved images from the MatFileCd
+    config.importOption = 'load';
+    
+    % The directory for loading/saving matlab files in your matfiles folder
+    config.matFileCd = 'DnaHelicaseImports/170621_orc';
+    config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
     
     % Specify the import type here, either 'OneCamera' or 'TwoCameras'
     config.importType = 'TwoCameras';
-    
-    % Specify the option for importing the images, either import for 
-    % getting them from the K drive or load from the saved MatFile
-    config.importOption = 'load';
+        
+    % In what direction where the images captured? Horizontal or vertical
+    config.imageDirection = 'vertical';
     
     % When only using one camera this is the part to edit.
     
@@ -144,8 +130,7 @@ function [ config ] = Config( config, user )
                                              % For instance if the patch is 25x25 choose 12
                                              % A guideline for this is 3*sigma
                                              
-    % Make sure we can use the functions
-    addpath( genpath('./Functions') )
+
 
 end
 

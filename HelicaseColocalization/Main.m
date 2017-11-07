@@ -13,13 +13,12 @@ importImages = ImportImages(config);
 %% Correlations and calibrations
 
 fprintf('This section performs the correlations and calibrations.\n')
-[config, beamshapeCorrection] = BeamshapeCorrection( config, importImages);
-%[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
+[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
 
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-preProcess = PreProcess( config, beamshapeCorrection);
+preProcess = PreProcess( config, importImages);
 
 %% Analysis
 
@@ -28,6 +27,9 @@ analysis = Analysis( config, preProcess);
 
 %% Post Processing
 
-fprintf('This section performs the Post Processing.\n')
+fprintf('This section performs the post processing.\n')
+%postProcess = PostProcess( );
 
-postProcess = PostProcess( config, analysis);
+%% Visualisations for poster september
+
+PosterSeptember( config, preProcess, analysis )

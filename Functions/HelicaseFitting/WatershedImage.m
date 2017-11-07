@@ -5,7 +5,7 @@ function [ outputImage ] = WatershedImage( inputImage )
     
     invertImage = abs(inputImage - max(inputImage(:)));
     watershedImage = watershed(invertImage);
-    binary = watershedImage>0;
+    binary = watershedImage > 0;
     outputImage= inputImage.*binary; 
     
 %     The lines below can be uncommented to visualise if the WatershedImage

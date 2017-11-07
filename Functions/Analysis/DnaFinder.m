@@ -24,11 +24,11 @@ function [ output ] = DnaFinder( config, dnaImage )
     idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThresholdDna ) )); 
     filteredBinary = ismember(labelmatrix(cc), idx);
     
-    figure;
-    subplot(1,4,1); imshow( dnaImage , [400 3000]) ; title('DNA');
-    subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
-    subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
-    subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges')
+%     figure;
+%     subplot(1,4,1); imshow( dnaImage , [400 3000]) ; title('DNA');
+%     subplot(1,4,2); imshow( dnaEdgeBinary, []); title('Dna edges');
+%     subplot(1,4,3); imshow( dnaEdgeClosed, [] ); title('Connected edges')
+%     subplot(1,4,4); imshow( filteredBinary, [] ); title('Filtered connected edges')
     
     output.dnaRoi= filteredBinary ;
     %compute the dna Fraction

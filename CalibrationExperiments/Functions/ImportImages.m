@@ -1,7 +1,7 @@
 function [ output ] = ImportImages( config )
     % Import Images - Imports all relevant images
-    % Specify an importType 'OneCamera' or 'TwoCameras'. Depending on the
-    % type of images you are analyzing.
+    % Either imports images from experiments and saves these as a matlab or it
+    % loads previously saved images.
 
     switch config.importOption
         case 'import'
@@ -10,16 +10,15 @@ function [ output ] = ImportImages( config )
             importImages.helicase = importedCameraImages;
 
             output = importImages;
-            save( config.saveMatFileCd , 'importImages');
-            fprintf('Images have been imported and saved to %s.\n', config.saveMatFileCd)
+            save( config.matFileCd , 'importImages');
+            fprintf('Images have been imported and saved to %s.\n', config.matFileCd)
         case 'load'
-            load( config.loadMatFileCd );
+            load( config.matFileCd );
             output = importImages;
-            fprintf('Images have been loaded from %s.\n', config.loadMatFileCd)
+            fprintf('Images have been loaded from %s.\n', config.matFileCd)
         otherwise
             fprintf('Please specify a correcect option for importing the images.\n')
     end
-    
+
 
 end
-

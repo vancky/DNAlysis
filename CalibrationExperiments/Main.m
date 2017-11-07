@@ -10,24 +10,38 @@ config = Config( config, user);
 fprintf('This section imports all the relevant images.\n')
 importImages = ImportImages(config);
 
-%% Correlations and calibrations
+%% Correlations and Calibrations
 
 fprintf('This section performs the correlations and calibrations.\n')
-[config, beamshapeCorrection] = BeamshapeCorrection( config, importImages);
-%[config, correlationsCalibrations] = CorrelationsCalibrations( config, importImages);
+[ config ] = CorrelationsCalibrations( config, importImages);
 
 %% Pre Processing of relevant Images
 
 fprintf('This section performs the pre processing of the data.\n')
-%preProcess = PreProcess( config, importImages);
+[ config, preProcess] = PreProcess( config, importImages);
 
 %% Analysis
 
 fprintf('This section performs the Analysis.\n')
-analysis = Analysis( config, beamshapeCorrection);
+[ config, analysis] = Analysis( config, preProcess);
 
 %% Post Processing
 
 fprintf('This section performs the Post Processing.\n')
 
-postProcess = PostProcess( config, analysis);
+allStepsMean = [];
+allStepsMax = [];
+for ll = 1:config.numFovs
+    postProcess{ll} = PostProcess( config, analysis.stats{ll}, ll);
+    allStepsMean = [ allStepsMean, postProcess{ll}.allStepsMean];
+    allStepsMax = [ allStepsMax, postProcess{ll}.allStepsMax];
+    
+end
+
+%% Visualisation
+
+plotTitle = 'Intensity distribution of Photobleaching Steps (max value)';
+figure; histogram( allStepsMax, 100); title( plotTitle)
+ylabel('Counts'); xlabel('StepSize')
+
+GaussianMleFit( allStepsMax, [0, 6000], 100, plotTitle)

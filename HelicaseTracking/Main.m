@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 % Choose a user, tudelft or home
-user = 'home';
+user = 'tudelft';
 config = struct();
 config = Config( config, user);
 
@@ -29,10 +29,6 @@ analysis = Analysis( config, preProcess);
 
 fprintf('This section performs the post processing.\n')
 %postProcess = PostProcess( config , analysis.matchDnaHelicase , analysis.helicaseIntensity , analysis.spotFinder);
-
-%% Performance Criteria
-
-performanceCriteria = PerformanceCriteria( config);
 
 %% Visualisations for poster september
 
