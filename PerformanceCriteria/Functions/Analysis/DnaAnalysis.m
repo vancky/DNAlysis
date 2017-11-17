@@ -7,7 +7,8 @@ function [ output ] = DnaAnalysis( config, dnaImages )
         output.dnaRoi{1} = [];
     else
         for jj = 1:numDnaImages
-            dnaFinder = DnaFinder( config, dnaImages{jj});
+            dnaImage = double( dnaImages{jj});
+            dnaFinder = DnaFinder( config, dnaImage);
             output.dnaRoi{jj}= dnaFinder.dnaRoi;
         end
     end

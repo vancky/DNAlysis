@@ -6,7 +6,7 @@ function [ output ] = PerformanceDna( referenceRois, estimatedRois)
     
     for ii = 1:numImages
         estimatedRoi = estimatedRois{ii};
-        referenceRoi = referenceRois{ii};
+        referenceRoi = double(referenceRois{ii});
         
         totalPixels = numel( referenceRoi);
         referenceDnaPixels = sum( referenceRoi(:));
@@ -23,13 +23,14 @@ function [ output ] = PerformanceDna( referenceRois, estimatedRois)
 %         subplot(1,3,2); imshow( estimatedRoi, []);
 %         subplot(1,3,3); imshow( incorrectPixelMap, []);
 %         
-        trackingFraction(ii) = (correctPixels+incorrectPixels)/ referenceDnaPixels;
         trackingSucces(ii) = correctPixels / referenceDnaPixels;
+        trackingError(ii) = incorrectPixels / referenceDnaPixels;
     end
     
-    output.trackingFraction = trackingFraction;
+    
     output.trackingSucces = trackingSucces;
-    output.trackingFractionAvg = mean( trackingFraction);
+    output.trackingError = trackingError;
     output.trackingSuccesAvg = mean( trackingSucces);
+    output.trackingErrorAvg = mean(trackingError);
 end
 

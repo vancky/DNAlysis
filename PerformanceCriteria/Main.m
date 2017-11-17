@@ -1,7 +1,7 @@
 clear all; close all; clc; 
 
 % Choose a user, tudelft or home
-user = 'tudelft';
+user = 'home';
 config = struct();
 config = Config( config, user);
 
@@ -19,3 +19,5 @@ analysis = Analysis( config, importImages);
 
 fprintf('This section performs the post processing.\n')
 postProcess = PostProcess( config, importImages, analysis);
+                
+                       

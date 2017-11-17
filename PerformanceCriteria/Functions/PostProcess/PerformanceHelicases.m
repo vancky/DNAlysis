@@ -14,32 +14,44 @@ function [ output ] = PerformanceHelicases( referenceLocations, helicaseLocation
         correctCount = 0;
         incorrectCount = 0;
         
-        for jj = 1:numHelicasesReference
-            correctLocation = referenceLocation( jj, :);
-            difference = helicaseLocation - correctLocation;
+        for jj = 1:numHelicasesFound
+            location = helicaseLocation( jj, :);
+            difference = referenceLocation - location;
             
             distances = sqrt( sum( difference.^2, 2));
             minDistance = min( distances);
+            
             if minDistance < 2
                 correctCount = correctCount + 1;
             else
                 incorrectCount = incorrectCount + 1;
             end  
-            
+
         end
         
-        trackingFraction(ii) = (numHelicasesFound / numHelicasesReference);
+%         for jj = 1:numHelicasesReference
+%             correctLocation = referenceLocation( jj, :);
+%             difference = helicaseLocation - correctLocation;
+%             
+%             distances = sqrt( sum( difference.^2, 2));
+%             minDistance = min( distances);
+%             if minDistance < 2
+%                 correctCount = correctCount + 1;
+%             else
+%                 incorrectCount = incorrectCount + 1;
+%             end  
+% 
+%         end
+        
         trackingSucces(ii) = correctCount / numHelicasesReference;
-        trackingError(ii) = incorrectCount / numHelicasesReference;
+        trackingError(ii) = (numHelicasesFound-correctCount) / numHelicasesReference;
     end
     
     output.trackingSucces = trackingSucces;
-    output.trackingError = trackingError;
-    output.trackingFraction = trackingFraction;
+    output.trackingError = trackingError;    
     
     output.trackingSuccesAvg = mean( trackingSucces);
     output.trackingErrorAvg = mean( trackingError);
-    output.trackingFractionAvg = mean( trackingFraction);
     
 end
 

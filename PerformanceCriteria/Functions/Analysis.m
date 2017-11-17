@@ -7,7 +7,7 @@ function [ output ] = Analysis( config, inputImages )
         dnaImages = inputImages{ii}.dnaImage;
  
         % Performs the actual analysis
-        helicaseAnalysis = HelicaseAnalysis( config, helicaseImages);
+        helicaseAnalysis = HelicaseAnalysis( config, helicaseImages, ii);
         dnaAnalysis= DnaAnalysis( config, dnaImages);
         
         % Saves the results in an array format

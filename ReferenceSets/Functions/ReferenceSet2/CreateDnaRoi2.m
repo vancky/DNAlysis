@@ -46,12 +46,11 @@ function [ output ] = CreateDnaRoi2( config, dnaImages )
         idx = find(( ( [regionIntensity.MaxIntensity] > meanIntensity) | ([regionDiameter.EquivDiameter] > 1.5*config.diameterThreshold ) )); 
         filteredBinary{ii} = ismember(labelmatrix(cc), idx);
 
-        figure;
-        subplot(1,4,1); imshow( dnaImage{ii} , [100 1500]) ; title('DNA');
-        subplot(1,4,2); imshow( dnaEdgeBinary{ii}, []); title('Dna edges');
-        subplot(1,4,3); imshow( dnaEdgeClosed{ii}, [] ); title('Connected edges')
-        subplot(1,4,4); imshow( dnaEdgeFilled{ii}, [] ); title('Holes Filled')
-        %subplot(1,4,4); imshow( filteredBinary{ii}, [] ); title('Filtered connected edges') 
+%         figure;
+%         subplot(1,4,1); imshow( dnaImage{ii} , [100 1500]) ; title('DNA');
+%         subplot(1,4,2); imshow( dnaEdgeBinary{ii}, []); title('Dna edges');
+%         subplot(1,4,3); imshow( dnaEdgeClosed{ii}, [] ); title('Connected edges')
+%         subplot(1,4,4); imshow( dnaEdgeFilled{ii}, [] ); title('Holes Filled')
     end
     
     

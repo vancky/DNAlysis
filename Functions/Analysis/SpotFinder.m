@@ -16,6 +16,10 @@ function [ output ] = SpotFinder( inputImage, varargin )
     filter = GenerateMexicanHat( p.Results.mexiHatSigma);
     smoothImage = imfilter( inputImage, filter, 'symmetric');
     
+%     figure; 
+%     subplot(1,2,1); imshow( inputImage, []); colorbar; title('Input Image');
+%     subplot(1,2,2); imshow( smoothImage, []); colorbar; title('Smooth Image');
+    
     % Performs the watershed algorithm
     
     watershedImage = WatershedImage( smoothImage);
@@ -32,7 +36,6 @@ function [ output ] = SpotFinder( inputImage, varargin )
                         'EquivDiameter');
     stats2 = regionprops( cc , inputImage, 'MeanIntensity');
 
-       
     idx = find( ([stats.EquivDiameter] > p.Results.diameterThreshold) & ...
                 ([stats.Eccentricity]<= p.Results.eccentricityThreshold) & ...
                 ([stats2.MeanIntensity] >= p.Results.medianThreshold*medianImage ));

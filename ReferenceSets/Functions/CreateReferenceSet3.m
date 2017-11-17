@@ -2,32 +2,29 @@ function [ output ] = CreateReferenceSet3( config )
     % Create Reference Set 3
     % Create the static simulated images at different SNR ratios.
    
-    fprintf('Simulating the helicase images for reference set 3.\n')
-    helicaseImages{1} = CreateHelicaseImage3(config);
-    output.helicaseImage{1} = helicaseImages{1}.noiseImage;
-    
-    fprintf('The helicase images for reference set 3 have been simulated.\n')
-    
-    fprintf('Simulating the dna images for reference set 3.\n')
-    dnaImages{1} = CreateDnaImage3(config);
-    output.dnaImage{1} = dnaImages{1}.noiseImage;
+    numSimulations = 1000;
+    fprintf('Simulating the images for reference set 3.\n')
 
-    fprintf('The dna images for reference set 3 have been simulated.\n')
+    for ii = 1:numSimulations
+        fprintf( 'Progress %i/%i.\n', ii, numSimulations)
+        helicaseImages{ii} = CreateHelicaseImage3(config);
+        output.helicaseImage{ii} = uint16( helicaseImages{ii}.noiseImage);
+        output.roiCenters{ii} = helicaseImages{ii}.roiCenters;
+        
+        dnaImages{ii} = CreateDnaImage3(config);
+        output.dnaImage{ii} = uint16( dnaImages{ii}.noiseImage);
+        output.dnaRoi{ii} = CreateDnaRoi3( config, dnaImages{ii}.cleanImage);
+        output.dnaRoi{ii} = uint16( output.dnaRoi{ii});
+        
+    end
     
-    output.helicaseRoi{1} = CreateHelicaseRoi3( config, helicaseImages{1}.cleanImage);
-    output.roiCenters = FindRoiCenters( output.helicaseRoi);
-    output.dnaRoi{1} = CreateDnaRoi3( config, dnaImages{1}.cleanImage);
-
+    fprintf('The images for reference set 3 have been simulated.\n')
+    
     figure; 
-    subplot(1,3,1);
+    subplot(1,2,1);
     imshow( output.helicaseImage{1}, []); colorbar; title('Helicase Image 3')
     
-    subplot(1,3,2); 
-    imshow( output.helicaseRoi{1}, []); 
-    PlotCenters( output.roiCenters{1}, 10)
-    title('Helicase ROI with centers')
-    
-    subplot(1,3,3); 
+    subplot(1,2,2); 
     imshow( output.helicaseImage{1}, []); colorbar; title('Helicase Image 3')
     PlotCenters( output.roiCenters{1}, 10)
     title('Helicase Image with centers')

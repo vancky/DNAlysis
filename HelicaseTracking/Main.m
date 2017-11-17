@@ -1,7 +1,7 @@
 clear all; clc; close all;
 
 % Choose a user, tudelft or home
-user = 'tudelft';
+user = 'home';
 config = struct();
 config = Config( config, user);
 

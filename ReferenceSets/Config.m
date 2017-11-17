@@ -1,23 +1,23 @@
 function [ config ] = Config( config, user )
     % Config - File where the user can specify his/her preferences
     
+    % Make sure we can use the functions
+    addpath(genpath('./Functions'))
+    addpath(genpath('../Functions'))
     
-    switch user
-        case 'tudelft'
-            % The matlab directory
-            config.matlabCd = ('D:\jvanderauweraert\git\DNAlysis\PerformanceCriteria');
-            % Directory for saving the reference sets
-            config.referenceSetSaveCd =('../../../MatFiles/ReferenceSets/');        
-            
-        case 'home'
-            % The matlab directory
-            config.matlabCd=('/home/private/thesisCode/DNAlysis/HelicaseTracking');
-            % Directory for saving the reference sets
-            config.referenceSetSaveCd =('../../MatFiles/ReferenceSets/');        
-            
-        otherwise
-            fprintf('Please specify a correct user.\n')
-    end
+    config = GeneralConfig( config, user);
+    
+    % Specify whether you want to import images from the K drive or load
+    % saved images from the MatFileCd
+    config.importOption = 'load';
+
+    % The directory for loading/saving importimages 
+    config.matFileCd = 'ReferenceSets/importImagesReference.mat';
+    config.matFileCd = sprintf('%s%s', config.matFilePath, config.matFileCd);
+    
+    % The directory for loading/saving the reference sets
+    config.referenceCd = 'ReferenceSets/ReferenceSets.mat';
+    config.referenceCd = sprintf('%s%s', config.matFilePath, config.referenceCd);
     
     
     
@@ -62,7 +62,6 @@ function [ config ] = Config( config, user )
     config.signal = config.scaleValue3 + config.backgroundNoise;
     config.snr = config.scaleValue3/ sqrt(config.signal+config.backgroundNoise);
     
-    % Make sure we can use the functions
-    addpath(genpath('./Functions'))
+
 end
 

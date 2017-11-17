@@ -24,9 +24,9 @@ function [ output ] = PostProcess( config, importImages, analysis )
     for ll = 1:3
         fprintf( '\nResults for reference set %i\n\n', ll)
         fprintf( 'The helicase tracking succes is %.2f\n', output.helicasePerformance{ll}.trackingSuccesAvg);
-        fprintf( 'The helicase tracking fraction is %.2f\n', output.helicasePerformance{ll}.trackingFractionAvg);
+        fprintf( 'The helicase overtracking error is %.2f\n', output.helicasePerformance{ll}.trackingErrorAvg);
         fprintf( 'The dna tracking succes is %.2f\n', output.dnaPerformance{ll}.trackingSuccesAvg);
-        fprintf( 'The dna tracking fraction is %.2f\n', output.dnaPerformance{ll}.trackingFractionAvg);
+        fprintf( 'The dna overtracking error is %.2f\n', output.dnaPerformance{ll}.trackingErrorAvg);
     end
 
 

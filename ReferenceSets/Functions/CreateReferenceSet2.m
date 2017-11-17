@@ -2,13 +2,13 @@ function [ output ] = CreateReferenceSet2( config, rawImages )
     % Create Reference Set 2
     % Create the helicase and dna image for reference set 2
     
-    helicaseImages = rawImages.helicase;
-    dnaImages = rawImages.dna;
+    helicaseImages = rawImages.helicaseImages;
+    dnaImages = rawImages.dnaImages;
         
     output.helicaseImage = CreateHelicaseImage2( helicaseImages);
     helicaseRoiImage = CreateHelicaseRoiImage2( helicaseImages);
     output.helicaseRoi = CreateHelicaseRoi2( config, helicaseRoiImage);
-    output.roiCenters = FindRoiCenters( output.helicaseRoi);
+    output.roiCenters = FindRoiCenters2( output.helicaseRoi, helicaseRoiImage);
 
     output.dnaImage = CreateDnaImage2( dnaImages);
     output.dnaRoi = CreateDnaRoi2( config, output.dnaImage);
@@ -40,22 +40,22 @@ function [ output ] = CreateReferenceSet2( config, rawImages )
         axis equal; axis tight;
     end
     
-    figure; 
-    imshow( output.dnaImage{3}, [0 1500]); colorbar;
-    axis equal; axis tight;
-    
-    figure; 
-    imshow( output.dnaRoi{3});
-    axis equal; axis tight;
-    
-    figure; 
-    imshow( output.helicaseImage{1}, [0 30]); colorbar;
-    axis equal; axis tight;
-    
-    figure;
-    imshow( output.helicaseRoi{1}); 
-    axis equal; axis tight;
-    PlotCenters( output.roiCenters{1}, 10)
-        
+%     figure; 
+%     imshow( output.dnaImage{3}, [0 1500]); colorbar;
+%     axis equal; axis tight;
+%     
+%     figure; 
+%     imshow( output.dnaRoi{3});
+%     axis equal; axis tight;
+%     
+%     figure; 
+%     imshow( output.helicaseImage{1}, [0 30]); colorbar;
+%     axis equal; axis tight;
+%     
+%     figure;
+%     imshow( output.helicaseRoi{1}); 
+%     axis equal; axis tight;
+%     PlotCenters( output.roiCenters{1}, 10)
+%         
 end
 
