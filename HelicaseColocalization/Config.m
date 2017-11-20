@@ -75,8 +75,8 @@ function [ config ] = Config( config, user )
     config.eccentricityThreshold = 0.9;
     % Factor how much larger the intensity of the spots has to be compared 
     % to the mean intensity
-    config.medianThreshold.cam0 = 1.2;
-    config.medianThreshold.cam1 = 1.2;
+    config.medianThreshold.cam0 = 1.1;
+    config.medianThreshold.cam1 = 1.15;
     
       
     % FITHELICASES OPTIONS
@@ -98,7 +98,6 @@ function [ config ] = Config( config, user )
     % threshold for colocalizating in pixel (i.e. if 2, 2px and below
     % match).
     config.colocalizationMatch = 3;
-    
     
     
     % Region to crop after performing non linear correction 

@@ -20,8 +20,10 @@ function [ output ] = ImportImages( config )
         case 'load'
             load( config.matFileCd );
             output = importImages;
+            
         otherwise
             fprintf('Please specify a correct option for importing the images.\n')
+            
     end
     
     fprintf('Images Imported.\n')

@@ -20,6 +20,8 @@ function [ output ] = PreProcess( config, importImages )
         cam0Normalized{ii} = BackgroundFilterNoScale( cam0Corrected{ii});
         cam1Normalized{ii} = BackgroundFilterNoScale( cam1Corrected{ii});
         
+        cam0Normalized{ii}= cam0Normalized{ii}';
+        cam1Normalized{ii}= cam1Normalized{ii}';
     end
     
     output.cam0 = cam0Normalized;
